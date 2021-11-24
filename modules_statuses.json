@@ -1,4 +1,5 @@
 {
     "Pterodactyl": true,
-    "VirtualMachine": true
+    "VirtualMachine": true,
+    "SharedWindows": true
 }

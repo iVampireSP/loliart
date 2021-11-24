@@ -1,0 +1,13 @@
+{
+    "name": "SharedWindows",
+    "alias": "sharedwindows",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\SharedWindows\\Providers\\SharedWindowsServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}
