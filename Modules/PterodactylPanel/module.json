@@ -1,0 +1,13 @@
+{
+    "name": "PterodactylPanel",
+    "alias": "pterodactylpanel",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\PterodactylPanel\\Providers\\PterodactylPanelServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}
