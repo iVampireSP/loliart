@@ -22,7 +22,8 @@
         integrity="sha384-gCMZcshYKOGRX9r6wbDrvF+TcCCswSHFucUzUPwka+Gr+uHgjlYvkABr95TCOz3A" crossorigin="anonymous">
     </script>
 
-    @livewireStyles
+    <livewire:styles />
+    <livewire:scripts />
 </head>
 
 <body class="mdui-appbar-with-toolbar mdui-theme-primary-blue mdui-theme-accent-blue mdui-theme-layout-auto">
@@ -63,8 +64,6 @@
             @yield('content')
         </div>
     </div>
-
-    @livewireScripts
 
     <div class="mdui-m-t-5 mdui-m-b-5"></div>
 </body>
