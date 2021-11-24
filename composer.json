@@ -14,6 +14,8 @@
         "laravel/framework": "^8.65",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
+        "livewire/livewire": "^2.8",
+        "mhmiton/laravel-modules-livewire": "^1.3",
         "nwidart/laravel-modules": "^8.2"
     },
     "require-dev": {
