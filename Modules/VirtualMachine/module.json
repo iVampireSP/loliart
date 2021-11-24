@@ -1,0 +1,13 @@
+{
+    "name": "VirtualMachine",
+    "alias": "virtualmachine",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\VirtualMachine\\Providers\\VirtualMachineServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}
