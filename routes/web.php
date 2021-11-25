@@ -12,3 +12,13 @@ Route::domain('www.' . config('app.domain'))->prefix('/')->name('www.')->group(f
 Route::domain('app.' . config('app.domain'))->prefix('/')->name('app.')->group(function () {
     Route::get('/', [Controllers\AppController::class, 'index'])->name('index');
 });
+
+Route::domain(config('app.domain'))->prefix('/')->name('main.')->group(function () {
+    Route::get('/', function () {
+        return view('index');
+    })->name('index');
+});
+
+Route::fallback(function () {
+    //
+});

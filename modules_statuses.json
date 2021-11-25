@@ -1,5 +1,6 @@
 {
     "Pterodactyl": true,
     "VirtualMachine": true,
-    "SharedWindows": true
+    "SharedWindows": true,
+    "LightAppEngine": true
 }

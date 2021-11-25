@@ -1,0 +1,13 @@
+{
+    "name": "LightAppEngine",
+    "alias": "lightappengine",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\LightAppEngine\\Providers\\LightAppEngineServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}
