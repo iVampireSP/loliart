@@ -27,9 +27,11 @@
 </head>
 
 <body class="mdui-appbar-with-toolbar mdui-theme-primary-blue mdui-theme-accent-blue mdui-theme-layout-auto">
-
+    <div class="mdui-progress top-progress">
+        <div class="mdui-progress-indeterminate"></div>
+    </div>
     <header class="mdui-appbar mdui-appbar-fixed" id="top-appbar">
-        <div class="mdui-toolbar mdui-color-theme">
+        <div class="mdui-toolbar mdui-color-white">
             <span class="mdui-btn mdui-btn-icon mdui-ripple mdui-ripple-white"
                 mdui-drawer="{target: '#main-drawer', swipe: true, overlay:true}"><i
                     class="mdui-icon material-icons-outlined">menu</i></span>
