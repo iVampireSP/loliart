@@ -19,6 +19,11 @@ Route::domain(config('app.domain'))->prefix('/')->name('main.')->group(function 
     })->name('index');
 });
 
+Route::domain('login.' . config('app.domain'))->prefix('/')->name('login.')->group(function () {
+    Route::get('redirect', [Controllers\AuthController::class, 'redirect'])->name('redirect');
+    Route::get('callback', [Controllers\AuthController::class, 'callback'])->name('callback');
+});
+
 Route::fallback(function () {
-    //
+    return 0;
 });
