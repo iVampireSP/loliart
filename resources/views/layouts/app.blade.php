@@ -27,7 +27,7 @@
 </head>
 
 <body class="mdui-appbar-with-toolbar mdui-theme-primary-blue mdui-theme-accent-blue mdui-theme-layout-auto">
-    <div class="mdui-progress top-progress">
+    <div class="mdui-progress top-progress" style="display: none">
         <div class="mdui-progress-indeterminate"></div>
     </div>
     <header class="mdui-appbar mdui-appbar-fixed" id="top-appbar">
