@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'namespace' => 'Modules',
+    'namespace' => 'App\Modules',
 
     /*
     |--------------------------------------------------------------------------
@@ -100,23 +100,23 @@ return [
         | Set the generate key to false to not generate that folder
         */
         'generator' => [
-            'config' => ['path' => 'config', 'generate' => true],
-            'command' => ['path' => 'console', 'generate' => true],
-            'migration' => ['path' => 'database/migrations', 'generate' => true],
-            'seeder' => ['path' => 'database/seeders', 'generate' => true],
-            'factory' => ['path' => 'database/factories', 'generate' => true],
-            'model' => ['path' => 'entities', 'generate' => true],
-            'routes' => ['path' => 'routes', 'generate' => true],
+            'config' => ['path' => 'Config', 'generate' => true],
+            'command' => ['path' => 'Console', 'generate' => true],
+            'migration' => ['path' => 'Database/Migrations', 'generate' => true],
+            'seeder' => ['path' => 'Database/Seeders', 'generate' => true],
+            'factory' => ['path' => 'Database/factories', 'generate' => true],
+            'model' => ['path' => 'Entities', 'generate' => true],
+            'routes' => ['path' => 'Routes', 'generate' => true],
             'controller' => ['path' => 'Http/Controllers', 'generate' => true],
             'filter' => ['path' => 'Http/Middleware', 'generate' => true],
             'request' => ['path' => 'Http/Requests', 'generate' => true],
             'provider' => ['path' => 'Providers', 'generate' => true],
-            'assets' => ['path' => 'resources/assets', 'generate' => true],
-            'lang' => ['path' => 'resources/lang', 'generate' => true],
-            'views' => ['path' => 'resources/views', 'generate' => true],
-            'test' => ['path' => 'tests/Unit', 'generate' => true],
-            'test-feature' => ['path' => 'tests/Feature', 'generate' => true],
-            'repository' => ['path' => 'repositories', 'generate' => false],
+            'assets' => ['path' => 'Resources/assets', 'generate' => true],
+            'lang' => ['path' => 'Resources/lang', 'generate' => true],
+            'views' => ['path' => 'Resources/views', 'generate' => true],
+            'test' => ['path' => 'Tests/Unit', 'generate' => true],
+            'test-feature' => ['path' => 'Tests/Feature', 'generate' => true],
+            'repository' => ['path' => 'Repositories', 'generate' => false],
             'event' => ['path' => 'Events', 'generate' => false],
             'listener' => ['path' => 'Listeners', 'generate' => false],
             'policies' => ['path' => 'Policies', 'generate' => false],
@@ -125,8 +125,10 @@ return [
             'emails' => ['path' => 'Emails', 'generate' => false],
             'notifications' => ['path' => 'Notifications', 'generate' => false],
             'resource' => ['path' => 'Transformers', 'generate' => false],
-            'component-view' => ['path' => 'resources/views/components', 'generate' => false],
-            'component-class' => ['path' => 'view/Component', 'generate' => false],
+            'component-view' => ['path' => 'Resources/views/components', 'generate' => false],
+            'component-class' => [
+                'path' => 'View/Component', 'generate' => false
+            ],
         ],
     ],
 
