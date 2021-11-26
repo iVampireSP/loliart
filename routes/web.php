@@ -5,7 +5,7 @@ use App\Http\Controllers;
 
 Route::domain('www.' . config('app.domain'))->prefix('/')->name('www.')->group(function () {
     Route::get('/', function () {
-        return 1;
+        return view('index');
     })->name('index');
 });
 
@@ -21,6 +21,7 @@ Route::domain(config('app.domain'))->prefix('/')->name('main.')->group(function 
 
 Route::domain('login.' . config('app.domain'))->prefix('/')->name('login.')->group(function () {
     Route::get('redirect', [Controllers\AuthController::class, 'redirect'])->name('redirect');
+    Route::get('/', [Controllers\AuthController::class, 'redirect'])->name('root_redirect');
     Route::get('callback', [Controllers\AuthController::class, 'callback'])->name('callback');
 });
 
