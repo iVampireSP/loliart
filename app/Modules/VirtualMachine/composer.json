@@ -1,0 +1,23 @@
+{
+    "name": "nwidart/virtualmachine",
+    "description": "",
+    "authors": [
+        {
+            "name": "LoliArt",
+            "email": "inbox@lo-li.art"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\Modules\\VirtualMachine\\": ""
+        }
+    }
+}
