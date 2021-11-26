@@ -47,10 +47,12 @@
                     <span class="mdui-list-item-icon mdui-icon material-icons-outlined">home</span>
                     <div class="mdui-list-item-content">{{ config('app.name') }}</div>
                 </a>
-                <a class="mdui-list-item mdui-rippl umami--click--guest-login" href="#">
-                    <span class="mdui-list-item-icon mdui-icon material-icons-outlined">login</span>
-                    <div class="mdui-list-item-content">登录或注册</div>
-                </a>
+                @guest
+                    <a class="mdui-list-item mdui-rippl umami--click--guest-login" href="{{ route('login.redirect') }}">
+                        <span class="mdui-list-item-icon mdui-icon material-icons-outlined">login</span>
+                        <div class="mdui-list-item-content">登录或注册</div>
+                    </a>
+                @endguest
                 <a class="mdui-list-item mdui-ripple umami--click--why-begin" href="#">
                     <span class="mdui-list-item-icon mdui-icon material-icons-outlined">volunteer_activism</span>
                     <div class="mdui-list-item-content">我们的初心</div>
