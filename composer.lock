@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "41cc302e6d3e2e16977c8fac71297882",
+    "content-hash": "8b2a3d966f44a4e439a399f2a9299988",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -9400,6 +9400,59 @@
                 }
             ],
             "time": "2021-09-24T13:30:14+00:00"
+        },
+        {
+            "name": "theanik/laravel-more-command",
+            "version": "v1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/theanik/laravel-more-command.git",
+                "reference": "aab76744edd18f3fdff240bf8bdd08daf9640985"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/theanik/laravel-more-command/zipball/aab76744edd18f3fdff240bf8bdd08daf9640985",
+                "reference": "aab76744edd18f3fdff240bf8bdd08daf9640985",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Theanik\\LaravelMoreCommand\\LaravelMoreCommandProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Theanik\\LaravelMoreCommand\\": "src/"
+                },
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Anwar Hossain Anik",
+                    "email": "anwar.anik33@gmail.com"
+                }
+            ],
+            "description": "Create a Repository and Service class and trait using Artisan CLI",
+            "support": {
+                "issues": "https://github.com/theanik/laravel-more-command/issues",
+                "source": "https://github.com/theanik/laravel-more-command/tree/v1.2.0"
+            },
+            "time": "2021-06-15T16:46:38+00:00"
         },
         {
             "name": "theseer/tokenizer",
