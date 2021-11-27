@@ -125,7 +125,7 @@ class AuthController extends Controller
 
     public function confirm_password(Request $request)
     {
-        $request->validate($this->password_rules(), $this->validationErrorMessages());
+        $request->validate($this->password_rules());
 
         $request->session()->put('auth.password_confirmed_at', time());
 
@@ -139,11 +139,6 @@ class AuthController extends Controller
         return [
             'password' => 'required|password',
         ];
-    }
-
-    protected function validationErrorMessages()
-    {
-        return [];
     }
 
     public function redirectPath()
