@@ -11,6 +11,7 @@
         "php": "^7.3|^8.0",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
+        "jenssegers/agent": "^2.6",
         "laravel/framework": "^8.65",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
@@ -34,15 +35,15 @@
         "theanik/laravel-more-command": "^1.2"
     },
     "autoload": {
-        "files": [
-            "app/Helpers.php"
-        ],
         "psr-4": {
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/",
             "Modules\\": "Modules/"
-        }
+        },
+        "files": [
+            "app/Helpers.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
