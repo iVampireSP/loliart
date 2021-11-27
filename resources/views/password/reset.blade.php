@@ -13,7 +13,7 @@
         </div>
 
         <button type="submit"
-            class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent">{{ tr('Next') }}</button>
+            class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent">{{ tr('Confirm') }}</button>
     </form>
 
 
