@@ -25,6 +25,19 @@ Route::domain('login.' . config('app.domain'))->prefix('/')->name('login.')->gro
     Route::get('callback', [Controllers\AuthController::class, 'callback'])->name('callback');
 });
 
-Route::fallback(function () {
-    return 0;
+
+Route::domain('teams.' . config('app.domain'))->name('teams.')->middleware(['auth'])->group(function () {
+    Route::get('/', [Controllers\TeamController::class, 'index'])->name('index');
+    Route::resource('/team', Controllers\TeamController::class);
 });
+
+Route::domain('password.' . config('app.domain'))->prefix('/')->name('password.')->middleware(['auth', 'password.confirm'])->group(function () {
+    Route::get('/reset', [Controllers\AuthController::class, 'reset'])->name('reset');
+    Route::post('/reset', [Controllers\AuthController::class, 'setup_password'])->name('setup_password');
+    Route::get('/confirm', [Controllers\AuthController::class, 'confirm'])->name('confirm');
+    Route::post('/confirm', [Controllers\AuthController::class, 'confirm_password'])->name('confirm_password');
+});
+
+// Route::fallback(function () {
+//     return 0;
+// });
