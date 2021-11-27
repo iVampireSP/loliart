@@ -39,7 +39,8 @@
             <span class="mdui-btn mdui-btn-icon mdui-ripple mdui-ripple-white"
                 mdui-drawer="{target: '#main-drawer', swipe: true, overlay:true}"><i
                     class="mdui-icon material-icons-outlined">menu</i></span>
-            <a href="/" class="mdui-typo-title" style="font-weight: 400;" id="top-title">{{ config('app.name') }}</a>
+            <a href="{{ route('main.index') }}" class="mdui-typo-title" style="font-weight: 400;"
+                id="top-title">{{ config('app.name') }}</a>
             <div class="mdui-toolbar-spacer"></div>
         </div>
     </header>
@@ -54,7 +55,7 @@
                 @guest
                     <a class="mdui-list-item mdui-rippl umami--click--guest-login" href="{{ route('login.redirect') }}">
                         <span class="mdui-list-item-icon mdui-icon material-icons-outlined">login</span>
-                        <div class="mdui-list-item-content">登录或注册</div>
+                        <div class="mdui-list-item-content">{{ tr('Login or register') }}</div>
                     </a>
                 @endguest
                 <a class="mdui-list-item mdui-ripple umami--click--why-begin" href="#">
@@ -89,7 +90,7 @@
         $(document).ajaxError(function(event, xhr, options, data) {
             mdui.snackbar({
                 position: 'right-bottom',
-                message: 'Unable to request.'
+                message: '{{ tr('Unable to request.') }}'
             })
         });
         $(document).ajaxComplete(function(event, xhr, options) {
