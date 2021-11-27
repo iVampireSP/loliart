@@ -21,13 +21,17 @@
     <script src="https://cdn.jsdelivr.net/npm/mdui@1.0.1/dist/js/mdui.min.js"
         integrity="sha384-gCMZcshYKOGRX9r6wbDrvF+TcCCswSHFucUzUPwka+Gr+uHgjlYvkABr95TCOz3A" crossorigin="anonymous">
     </script>
+    <script>
+        var $ = mdui.$;
+    </script>
 
+    @routes
     <livewire:styles />
     <livewire:scripts />
 </head>
 
 <body class="mdui-appbar-with-toolbar mdui-theme-primary-blue mdui-theme-accent-blue mdui-theme-layout-auto">
-    <div class="mdui-progress top-progress" style="display: none">
+    <div class="mdui-progress top-progress" id="top-progress" style="display: none">
         <div class="mdui-progress-indeterminate"></div>
     </div>
     <header class="mdui-appbar mdui-appbar-fixed" id="top-appbar">
@@ -70,6 +74,43 @@
     </div>
 
     <div class="mdui-m-t-5 mdui-m-b-5"></div>
+    <script defer src="/js/util.js?bpc={{ time() }}"></script>
+
+    <script>
+        $.ajaxSetup({
+            global: true,
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $(document).ajaxStart(function(event, xhr, options) {
+            $('#top-progress').show()
+        });
+        $(document).ajaxError(function(event, xhr, options, data) {
+            mdui.snackbar({
+                position: 'right-bottom',
+                message: 'Unable to request.'
+            })
+        });
+        $(document).ajaxComplete(function(event, xhr, options) {
+            $('#top-progress').hide()
+        });
+
+        @if (session('message'))
+            mdui.snackbar({
+            message: '{{ session('status') }}',
+            position: 'right-bottom',
+            })
+        @endif
+        @if (count($errors) > 0)
+            @foreach ($errors->all() as $error)
+                mdui.snackbar({
+                message: '{{ $error }}',
+                position: 'right-bottom',
+                })
+            @endforeach
+        @endif
+    </script>
 </body>
 
 </html>
