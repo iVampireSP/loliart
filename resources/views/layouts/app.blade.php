@@ -57,6 +57,7 @@
 
     <div class="mdui-m-t-5 mdui-m-b-5"></div>
     <script defer src="/js/util.js?bpc={{ time() }}"></script>
+    <script src="{{ mix('/js/menu.js') }}"></script>
 
     <script>
         $.ajaxSetup({
