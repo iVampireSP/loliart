@@ -58,10 +58,6 @@
                         <div class="mdui-list-item-content">{{ tr('Login or register') }}</div>
                     </a>
                 @endguest
-                <a class="mdui-list-item mdui-ripple umami--click--why-begin" href="#">
-                    <span class="mdui-list-item-icon mdui-icon material-icons-outlined">volunteer_activism</span>
-                    <div class="mdui-list-item-content">我们的初心</div>
-                </a>
             </div>
         </div>
     </div>
