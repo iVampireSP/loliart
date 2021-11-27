@@ -6,7 +6,9 @@ use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -67,6 +69,7 @@ class AuthController extends Controller
         $user = $user_sql->first();
 
         $api_token = null;
+        $set_password = 0;
         if (is_null($user)) {
             $name = $oauth_user->name;
             $email = $oauth_user->email;
@@ -74,6 +77,8 @@ class AuthController extends Controller
             $email_verified_at = $oauth_user->email_verified_at;
             $api_token = Str::random(50);
             $user = User::create(compact('name', 'email', 'password', 'email_verified_at', 'api_token'));
+            $set_password = 1;
+            $request->session()->put('auth.password_confirmed_at', time());
         } else {
             if ($user->name != $oauth_user->name) {
                 User::where('email', $oauth_user->email)->update([
@@ -90,6 +95,63 @@ class AuthController extends Controller
 
         Auth::loginUsingId($user->id, true);
 
+        if ($set_password) {
+            return redirect()->route('password.reset');
+        } else {
+            return redirect()->route('www.index');
+        }
+    }
+
+    public function reset()
+    {
+        return view('password.reset');
+    }
+
+    public function setup_password(Request $request)
+    {
+        $request->validate([
+            'password' => 'required',
+        ]);
+
+        User::find(auth()->id())->update(['password' => Hash::make($request->password)]);
+
         return redirect()->route('www.index');
+    }
+
+    public function confirm()
+    {
+        return view('password.confirm');
+    }
+
+    public function confirm_password(Request $request)
+    {
+        $request->validate($this->password_rules(), $this->validationErrorMessages());
+
+        $request->session()->put('auth.password_confirmed_at', time());
+
+        return $request->wantsJson()
+            ? new JsonResponse([], 204)
+            : redirect()->intended($this->redirectPath());
+    }
+
+    protected function password_rules()
+    {
+        return [
+            'password' => 'required|password',
+        ];
+    }
+
+    protected function validationErrorMessages()
+    {
+        return [];
+    }
+
+    public function redirectPath()
+    {
+        if (method_exists($this, 'redirectTo')) {
+            return $this->redirectTo();
+        }
+
+        return property_exists($this, 'redirectTo') ? $this->redirectTo : '/';
     }
 }
