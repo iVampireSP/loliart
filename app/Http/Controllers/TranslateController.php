@@ -33,7 +33,7 @@ class TranslateController extends Controller
             }
             $black_list = $temp_arr;
             unset($temp_arr);
-            Cache::put('language_blacklist', $black_list, 600);
+            Cache::put('language_blacklist', $black_list, 1800);
         }
 
         foreach ($languages as $lang) {
@@ -49,7 +49,7 @@ class TranslateController extends Controller
                 // Search str from language list
                 $output = $language_translates->where('sign', $cache_key)->first();
                 if (!is_null($output)) {
-                    Cache::add($cache_key, $output->output, 600);
+                    Cache::add($cache_key, $output->output, 1800);
                     return $output->output;
                 }
             }
