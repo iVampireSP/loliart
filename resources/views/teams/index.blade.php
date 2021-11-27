@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
-@section('title', 'Teams')
+@section('title', tr('Teams'))
 
 @section('content')
-    <div class="mdui-typo-display-2">Teams</div>
+    <div class="mdui-typo-display-2">{{ tr('Teams') }}</div>
 
-    <a onclick="util.team.create()" class="mdui-btn mdui-color-theme-accent mdui-ripple">新建团队</a>
+    <a onclick="util.team.create()" class="mdui-btn mdui-color-theme-accent mdui-ripple">{{ tr('New Team') }}</a>
     <div id="masonry" class="mdui-row">
         <ul class="mdui-list">
             @foreach ($teams as $team)
