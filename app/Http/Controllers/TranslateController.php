@@ -21,24 +21,22 @@ class TranslateController extends Controller
 
         $language_blacklist = new LanguageBlackList();
         $language_translates = new LanguageTranslate();
-        $black_list = $language_blacklist->get();
 
-        $temp_arr = [];
-        foreach ($black_list as $block) {
-            array_push($temp_arr, $block->language);
-        }
-        $black_list = $temp_arr;
-        unset($temp_arr);
-
-        if (count($black_list) > 0) {
-            Cache::put('language_blacklist', $black_list, 600);
+        $black_list = Cache::has('language_blacklist') ?? $language_blacklist->get();
+        if (Cache::has('language_blacklist')) {
             $black_list = Cache::get('language_blacklist');
         } else {
-            $black_list = [];
+            $black_list = $language_blacklist->get();
+            $temp_arr = [];
+            foreach ($black_list as $block) {
+                array_push($temp_arr, $block->language);
+            }
+            $black_list = $temp_arr;
+            unset($temp_arr);
+            Cache::put('language_blacklist', $black_list, 600);
         }
 
         foreach ($languages as $lang) {
-
             if (in_array($lang, $black_list)) {
                 continue;
             }
