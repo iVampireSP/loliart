@@ -98,14 +98,14 @@
 
         @if (session('message'))
             mdui.snackbar({
-            message: '{{ session('status') }}',
+            message: '{{ tr(session('status')) }}',
             position: 'right-bottom',
             })
         @endif
         @if (count($errors) > 0)
             @foreach ($errors->all() as $error)
                 mdui.snackbar({
-                message: '{{ $error }}',
+                message: '{{ tr($error) }}',
                 position: 'right-bottom',
                 })
             @endforeach
