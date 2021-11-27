@@ -34,8 +34,8 @@ Route::domain('teams.' . config('app.domain'))->name('teams.')->middleware(['aut
 Route::domain('password.' . config('app.domain'))->prefix('/')->name('password.')->middleware(['auth', 'password.confirm'])->group(function () {
     Route::get('/reset', [Controllers\AuthController::class, 'reset'])->name('reset');
     Route::post('/reset', [Controllers\AuthController::class, 'setup_password'])->name('setup_password');
-    Route::get('/confirm', [Controllers\AuthController::class, 'confirm'])->name('confirm');
-    Route::post('/confirm', [Controllers\AuthController::class, 'confirm_password'])->name('confirm_password');
+    Route::get('/confirm', [Controllers\AuthController::class, 'confirm'])->name('confirm')->withoutMiddleware('password.confirm');
+    Route::post('/confirm', [Controllers\AuthController::class, 'confirm_password'])->name('confirm_password')->withoutMiddleware('password.confirm');
 });
 
 // Route::fallback(function () {
