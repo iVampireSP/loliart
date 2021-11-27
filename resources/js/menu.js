@@ -15,6 +15,9 @@ var mainMenu = {
 
 $(() => {
     mainMenu.update()
+    let title = document.title;
+    title = title.replace(' - ' + $('#top-title').text(), '');
+    $('#top-title').text(title);
 })
 
 if (window.history && window.history.pushState) {
