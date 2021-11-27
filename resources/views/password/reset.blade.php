@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
-@section('title', tr('Set up your password.'))
+@section('title', tr('Set up your password'))
 
 @section('content')
-    <div class="mdui-typo-display-1">{{ tr('Setting up your password.') }}</div>
+    <div class="mdui-typo-display-1">{{ tr('Setting up your password') }}</div>
 
     <form method="POST" action="{{ route('password.setup_password') }}">
         @csrf
