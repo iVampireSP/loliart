@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Team;
 use Illuminate\Http\Request;
+use App\Traits\Teams;
 
 class TeamController extends Controller
 {
+    use Teams;
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +17,10 @@ class TeamController extends Controller
      */
     public function index()
     {
-        //
+        $teams = Team::where('user_id', auth()->id())->get();
+        return view('teams.index', compact('teams'));
+        // $this->switchToTeam(1);
+        // return session()->get('key');
     }
 
     /**
@@ -33,9 +39,17 @@ class TeamController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Team $team)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|max:20'
+        ]);
+
+        $team->name = $request->name;
+        $team->user_id = auth()->id();
+        $team->save();
+
+        return response()->json(['status' => 1]);
     }
 
     /**
@@ -46,7 +60,7 @@ class TeamController extends Controller
      */
     public function show(Team $team)
     {
-        //
+        // $this->switchToTeam($team);
     }
 
     /**
