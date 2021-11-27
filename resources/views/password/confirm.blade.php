@@ -3,7 +3,7 @@
 @section('title', tr('Confirm password'))
 
 @section('content')
-    <div class="mdui-typo-display-2">{{ tr('Confirm your password.') }}</div>
+    <div class="mdui-typo-display-1">{{ tr('Confirm your password to continue.') }}</div>
 
     <form method="POST" action="{{ route('password.confirm_password') }}">
         @csrf
@@ -13,7 +13,7 @@
         </div>
 
         <button type="submit"
-            class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent">{{ tr('Next') }}</button>
+            class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent">{{ tr('Go on') }}</button>
     </form>
 
 
