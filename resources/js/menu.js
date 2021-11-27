@@ -15,7 +15,6 @@ var mainMenu = {
 
 $(() => {
     mainMenu.update()
-
 })
 
 if (window.history && window.history.pushState) {
