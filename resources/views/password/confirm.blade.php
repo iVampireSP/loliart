@@ -7,7 +7,8 @@
 
     <form method="POST" action="{{ route('password.confirm_password') }}">
         @csrf
-        <div class="mdui-textfield mdui-textfield-floating-label @error('password') mdui-textfield-invalid @enderror">
+        <div
+            class="mdui-textfield mdui-textfield-floating-label mdui-m-b-2 @error('password') mdui-textfield-invalid @enderror">
             <label class="mdui-textfield-label">{{ tr('Your password') }}</label>
             <input class="mdui-textfield-input" type="password" name="password" />
             @error('password')
