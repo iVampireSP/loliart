@@ -39,7 +39,9 @@
             <span class="mdui-btn mdui-btn-icon mdui-ripple mdui-ripple-white"
                 mdui-drawer="{target: '#main-drawer', swipe: true, overlay:true}"><i
                     class="mdui-icon material-icons-outlined">menu</i></span>
-            <a href="{{ route('main.index') }}" class="mdui-typo-title" style="font-weight: 400;"
+            <a href="{{ route('main.index') }}" class="mdui-typo-headline"
+                style="font-weight: 400;">{{ config('app.name') }}</a>
+            <a href="javascript:;" class="mdui-typo-title" style="font-weight: 400;"
                 id="top-title">{{ config('app.name') }}</a>
             <div class="mdui-toolbar-spacer"></div>
         </div>
