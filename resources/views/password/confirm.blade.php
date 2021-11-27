@@ -3,7 +3,8 @@
 @section('title', tr('Confirm password'))
 
 @section('content')
-    <div class="mdui-typo-display-1">{{ tr('Confirm your password to continue') }}</div>
+    <div class="mdui-typo-display-1">{{ tr('You must provid password to continue') }}</div>
+    <p>{{ tr('You are doing a dangerous action, for security reasons, please provid your password to continue.') }}</p>
 
     <form method="POST" action="{{ route('password.confirm_password') }}">
         @csrf
