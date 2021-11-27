@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Str;
-use Illuminate\Http\Request;
 use App\Models\LanguageBlackList;
-use Illuminate\Support\Collection;
+use App\Models\LanguageTranslate;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Cache;
 
@@ -22,6 +20,7 @@ class TranslateController extends Controller
         $salt = rand(1, 100);
 
         $language_blacklist = new LanguageBlackList();
+        $language_translates = new LanguageTranslate();
         $black_list = $language_blacklist->get();
 
         $temp_arr = [];
@@ -32,7 +31,7 @@ class TranslateController extends Controller
         unset($temp_arr);
 
         if (count($black_list) > 0) {
-            Cache::put('language_blacklist', $black_list, 5);
+            Cache::put('language_blacklist', $black_list, 600);
             $black_list = Cache::get('language_blacklist');
         } else {
             $black_list = [];
@@ -44,10 +43,17 @@ class TranslateController extends Controller
                 continue;
             }
 
+            // Search cache
             $cache_key = 'language_' . $lang . '_' . md5($str);
-
             if (Cache::has($cache_key)) {
                 return Cache::get($cache_key);
+            } else {
+                // Search str from language list
+                $output = $language_translates->where('sign', $cache_key)->first();
+                if (!is_null($output)) {
+                    Cache::add($cache_key, $output->output, 600);
+                    return $output->output;
+                }
             }
 
             $app_id = config('baiduTranslate.app_id');
@@ -78,7 +84,14 @@ class TranslateController extends Controller
                 }
             } else {
                 $dst = $res['trans_result'][0]['dst'];
-                Cache::forever($cache_key, $dst);
+
+                // Save the language translation
+                $language_translates->language = $lang;
+                $language_translates->string = $str;
+                $language_translates->output = $dst;
+                $language_translates->sign = $cache_key;
+                $language_translates->save();
+
                 return $dst;
             }
         }
