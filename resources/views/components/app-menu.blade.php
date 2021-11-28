@@ -15,7 +15,7 @@
 
                 <a class="mdui-list-item mdui-rippl umami--click--guest-login" href="{{ route('teams.index') }}">
                     <span class="mdui-list-item-icon mdui-icon material-icons-outlined">peoples</span>
-                    <div class="mdui-list-item-content">{{ tr('teams') }}</div>
+                    <div class="mdui-list-item-content">{{ tr('Teams') }}</div>
                 </a>
 
                 <a class="mdui-list-item mdui-rippl umami--click--guest-login" href="{{ route('password.reset') }}">
