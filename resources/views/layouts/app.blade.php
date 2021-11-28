@@ -62,10 +62,12 @@
     <script src="{{ mix('/js/app.js') }}"></script>
 
     <script>
-        // window.Echo.channel('test-event')
-        //     .listen('ExampleEvent', (e) => {
-        //         console.log(e);
-        //     });
+        const app_channel_prefix = '{{ config('database.redis.options.prefix') }}';
+        window.Echo.channel(app_channel_prefix + 'test-event')
+            .listen('ExampleEvent', (e) => {
+                console.log(e);
+            });
+
 
         $.ajaxSetup({
             global: true,
