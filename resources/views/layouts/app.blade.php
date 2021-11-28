@@ -10,8 +10,6 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdui@1.0.1/dist/css/mdui.min.css"
         integrity="sha384-cLRrMq39HOZdvE0j6yBojO4+1PrHfB7a9l5qLcmRm/fiWXYY+CndJPmyu5FV/9Tw" crossorigin="anonymous" />
-    <link href="https://cdn.bootcdn.net/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/gh/riktar/jkanban@1.3.1/dist/jkanban.min.css" rel="stylesheet">
 
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 
@@ -59,9 +57,16 @@
 
     <div class="mdui-m-t-5 mdui-m-b-5"></div>
     <script defer src="/js/util.js?bpc={{ time() }}"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
     <script src="{{ mix('/js/menu.js') }}"></script>
+    <script src="{{ mix('/js/app.js') }}"></script>
 
     <script>
+        // window.Echo.channel('test-event')
+        //     .listen('ExampleEvent', (e) => {
+        //         console.log(e);
+        //     });
+
         $.ajaxSetup({
             global: true,
             headers: {

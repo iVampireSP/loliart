@@ -4,9 +4,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers;
 
 Route::domain('www.' . config('app.domain'))->prefix('/')->name('www.')->group(function () {
-    Route::get('/', function () {
-        return view('index');
-    })->name('index');
+    Route::view('/', 'index')->name('index');
+    Route::get('test-broadcast', function () {
+        broadcast(new \App\Events\ExampleEvent);
+    });
 });
 
 Route::domain('app.' . config('app.domain'))->prefix('/')->name('app.')->group(function () {
@@ -14,9 +15,7 @@ Route::domain('app.' . config('app.domain'))->prefix('/')->name('app.')->group(f
 });
 
 Route::domain(config('app.domain'))->prefix('/')->name('main.')->group(function () {
-    Route::get('/', function () {
-        return view('index');
-    })->name('index');
+    Route::view('/', 'index')->name('index');
 });
 
 Route::domain('login.' . config('app.domain'))->prefix('/')->name('login.')->group(function () {
@@ -37,6 +36,7 @@ Route::domain('password.' . config('app.domain'))->prefix('/')->name('password.'
     Route::get('/confirm', [Controllers\AuthController::class, 'confirm'])->name('confirm')->withoutMiddleware('password.confirm');
     Route::post('/confirm', [Controllers\AuthController::class, 'confirm_password'])->name('confirm_password')->withoutMiddleware('password.confirm');
 });
+
 
 // Route::fallback(function () {
 //     return 0;

@@ -1,1 +1,35 @@
-(()=>{var t=function(){var t=window.location.protocol+"//"+window.location.host+window.location.pathname,i=$("#main-list a[href='"+t+"']").length;i||(t=t.substr(0,t.length-1),i=$("#main-list a[href='"+t+"']").length),$("#main-list a[href='"+t+"']").length>0&&($("#main-list .mdui-list-item").removeClass("mdui-list-item-active"),$("#main-list a[href='"+t+"']").addClass("mdui-list-item-active"))};$((function(){t();var i=document.title;i=i.replace(" - "+$("#top-title").text(),""),$("#top-title").text(i)})),window.history&&window.history.pushState&&(window.onpopstate=function(){t()})})();
+/******/ (() => { // webpackBootstrap
+var __webpack_exports__ = {};
+/*!******************************!*\
+  !*** ./resources/js/menu.js ***!
+  \******************************/
+var mainMenu = {
+  update: function update() {
+    var url = window.location.protocol + '//' + window.location.host + window.location.pathname;
+    var length = $("#main-list a[href='" + url + "']").length;
+
+    if (!length) {
+      url = url.substr(0, url.length - 1);
+      length = $("#main-list a[href='" + url + "']").length;
+    }
+
+    if ($("#main-list a[href='" + url + "']").length > 0) {
+      $('#main-list .mdui-list-item').removeClass('mdui-list-item-active');
+      $("#main-list a[href='" + url + "']").addClass('mdui-list-item-active');
+    }
+  }
+};
+$(function () {
+  mainMenu.update();
+  var title = document.title;
+  title = title.replace(' - ' + $('#top-title').text(), '');
+  $('#top-title').text(title);
+});
+
+if (window.history && window.history.pushState) {
+  window.onpopstate = function () {
+    mainMenu.update();
+  };
+}
+/******/ })()
+;
