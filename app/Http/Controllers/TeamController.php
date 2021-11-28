@@ -58,9 +58,13 @@ class TeamController extends Controller
      * @param  \App\Models\Team  $team
      * @return \Illuminate\Http\Response
      */
-    public function show(Team $team)
+    public function show($id)
     {
+        $team = new Team();
+        $team = $team->where('id', $id)->with('users')->first();
+        return view('teams.show', compact('team'));
         // $this->switchToTeam($team);
+        // $this->
     }
 
     /**
@@ -71,7 +75,6 @@ class TeamController extends Controller
      */
     public function edit(Team $team)
     {
-        //
     }
 
     /**
