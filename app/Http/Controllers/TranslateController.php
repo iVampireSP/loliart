@@ -93,5 +93,7 @@ class TranslateController extends Controller
                 return $dst;
             }
         }
+
+        return $str;
     }
 }
