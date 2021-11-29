@@ -149,4 +149,10 @@ class AuthController extends Controller
 
         return property_exists($this, 'redirectTo') ? $this->redirectTo : '/';
     }
+
+    public function logout()
+    {
+        Auth::logout();
+        return route('main.index');
+    }
 }
