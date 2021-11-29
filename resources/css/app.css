@@ -258,7 +258,14 @@ a {
 
 .mdui-snackbar-bottom {
     bottom: 15px;
+    --smooth-corners: 20;
+    mask-image: paint(smooth-corners);
+    -webkit-mask-image: paint(smooth-corners);
     border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
 }
 
 @media (prefers-color-scheme: dark) {
