@@ -21,8 +21,10 @@ class TeamsPermission
             // 检查团队是否存在
             if (is_null($team) || !$team) {
                 session()->forget('team');
+                session()->forget('team_id');
                 return redirect()->route('teams.index')->with('message', 'Your team does not exist, please create or select a team.');
             } else {
+                session()->put('team_id', $team->id);
                 app(\Spatie\Permission\PermissionRegistrar::class)->setPermissionsTeamId($team->id);
             }
         }
