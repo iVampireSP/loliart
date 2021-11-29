@@ -64,13 +64,10 @@ class TeamController extends Controller
         $team = $team->where('id', $id)->with('users')->first();
 
         // 切换团队
-        // $this->switchToTeam(0);
         $this->switchToTeam($team);
 
-        // auth()->user()->hasRole('admin');
-
+        session()->flash('message', tr('You are now switch to team: ') . $team->name);
         return view('teams.show', compact('team'));
-        // $this->
     }
 
     public function afk()
