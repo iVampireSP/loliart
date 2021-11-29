@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Team;
-use Illuminate\Http\Request;
+use App\Models\User;
 use App\Traits\Teams;
+use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 class TeamController extends Controller
 {
@@ -61,12 +63,13 @@ class TeamController extends Controller
     public function show($id)
     {
         $team = new Team();
-        $team = $team->where('id', $id)->with('users')->first();
+        $team = $team->where('id', $id)->with('users')->firstOrFail();
 
         // 切换团队
         $this->switchToTeam($team);
 
-        session()->flash('message', tr('You are now switch to team: ') . $team->name);
+        session()->flash('message', tr('Your team has been switched.'));
+
         return view('teams.show', compact('team'));
     }
 
@@ -110,5 +113,11 @@ class TeamController extends Controller
     public function destroy(Team $team)
     {
         //
+    }
+
+    public function invite($email)
+    {
+        return 1;
+        // return auth()->user()->can('invite');
     }
 }
