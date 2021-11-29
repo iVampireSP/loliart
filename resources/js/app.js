@@ -16,11 +16,11 @@ window.Progress = {
     }
 }
 
-$(document).ajaxStart(function (event, xhr, options) {
+$(document).ajaxStart(() => {
     Progress.show()
 });
 
-$(document).ajaxComplete(function (event, xhr, options) {
+$(document).ajaxComplete(() => {
     Progress.hide()
 });
 
@@ -28,5 +28,7 @@ $.ajaxSetup({
     global: true,
     headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
+    },
+    dataType: "json",
+
 });
