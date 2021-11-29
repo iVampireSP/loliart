@@ -24,7 +24,7 @@
         var ui = mdui;
         window.user = {!! auth()->user() ?? 0 !!};
         window.team = {!! session('team') ?? 0 !!};
-        window.app_name = "{{ config('app.name') }}";
+        window.app = {!! app_info() !!};
     </script>
 
     @routes
@@ -37,12 +37,12 @@
         <div class="mdui-progress-indeterminate"></div>
     </div>
     <header class="mdui-appbar mdui-appbar-fixed" id="top-appbar">
-        <div class="mdui-toolbar mdui-color-white">
+        <div class="mdui-toolbar mdui-color-white top-bar">
             <span class="mdui-btn mdui-btn-icon mdui-ripple mdui-ripple-white"
                 mdui-drawer="{target: '#main-drawer', swipe: true, overlay:true}"><i
                     class="mdui-icon material-icons-outlined">menu</i></span>
-            <a href="{{ route('main.index') }}" class="mdui-typo-headline"
-                style="font-weight: 400;">{{ config('app.name') }}</a>
+            <a href="{{ route('main.index') }}" class="mdui-typo-headline" style="font-weight: 400;"
+                id="app-title">{{ config('app.name') }}</a>
             <a href="javascript:;" class="mdui-typo-title" style="font-weight: 400;"
                 id="top-title">{{ config('app.name') }}</a>
             <div class="mdui-toolbar-spacer"></div>
@@ -66,6 +66,7 @@
     <script src="{{ mix('/js/util.js') }}"></script>
 
     <script>
+        const app_name = '{{ config('app.name') }}';
         if (CSS && 'paintWorklet' in CSS) CSS.paintWorklet.addModule('https://unpkg.com/smooth-corners')
 
         util.event.listen();
