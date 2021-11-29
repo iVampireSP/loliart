@@ -19,7 +19,7 @@ class TeamsPermission
         if (!empty(auth()->user())) {
             $team = session('team');
             // 检查团队是否存在
-            if (is_null($team)) {
+            if (is_null($team) || !$team) {
                 session()->forget('team');
                 return redirect()->route('teams.index')->with('message', 'Your team does not exist, please create or select a team.');
             } else {
