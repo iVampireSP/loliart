@@ -62,9 +62,24 @@ class TeamController extends Controller
     {
         $team = new Team();
         $team = $team->where('id', $id)->with('users')->first();
+
+        // 切换团队
+        // $this->switchToTeam(0);
+        $this->switchToTeam($team);
+
+        // auth()->user()->hasRole('admin');
+
         return view('teams.show', compact('team'));
-        // $this->switchToTeam($team);
         // $this->
+    }
+
+    public function afk()
+    {
+        $this->switchToTeam(0);
+        return response()->json([
+            'status' => 1,
+            'data' => tr('You are offline now!')
+        ]);
     }
 
     /**
