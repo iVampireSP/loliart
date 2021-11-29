@@ -17,10 +17,8 @@ trait Teams
     {
     }
 
-    public function switchToTeam($team_id)
+    public function switchToTeam($team)
     {
-        // 检查是否有团队/在团队中
-
-        session()->put('key', 'value');
+        session()->put('team', $team);
     }
 }
