@@ -22,6 +22,11 @@
                     <span class="mdui-list-item-icon mdui-icon material-icons-outlined">password</span>
                     <div class="mdui-list-item-content">{{ tr('Password reset') }}</div>
                 </a>
+
+                <a class="mdui-list-item mdui-rippl umami--click--guest-login" href="{{ route('permission.index') }}">
+                    <span class="mdui-list-item-icon mdui-icon material-icons-outlined">policy</span>
+                    <div class="mdui-list-item-content">{{ tr('Permissions') }}</div>
+                </a>
             </div>
         </div>
     </div>

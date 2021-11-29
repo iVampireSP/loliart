@@ -6,6 +6,8 @@
     <div class="mdui-typo-display-2">{{ tr('Manage or Switch teams') }}</div>
 
     <a onclick="util.team.create()" class="mdui-btn mdui-color-theme-accent mdui-ripple">{{ tr('New Team') }}</a>
+    <a onclick="util.team.create()" class="mdui-btn mdui-color-theme-accent mdui-ripple">{{ tr('Team invites') }}</a>
+    <a onclick="util.team.afk()" class="mdui-btn mdui-color-theme-accent mdui-ripple">{{ tr('AFK session') }}</a>
     <div id="masonry" class="mdui-row">
         <ul class="mdui-list">
             @foreach ($teams as $team)
