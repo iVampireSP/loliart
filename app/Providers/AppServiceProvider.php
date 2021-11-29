@@ -25,6 +25,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        // \DB::listen(function ($query) {
+        //     $tmp = str_replace('?', '"' . '%s' . '"', $query->sql);
+        //     $tmp = vsprintf($tmp, $query->bindings);
+        //     $tmp = str_replace("\\", "", $tmp);
+        //     \Log::info(' execution time: ' . $query->time . 'ms; ' . $tmp . "\n\n\t");
+        // });
     }
 }
