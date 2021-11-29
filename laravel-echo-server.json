@@ -4,7 +4,9 @@
     "clients": [],
     "database": "redis",
     "databaseConfig": {
-        "redis": {},
+        "redis": {
+            "keyPrefix": "workbench_database_"
+        },
         "sqlite": {
             "databasePath": "/database/laravel-echo-server.sqlite"
         }
