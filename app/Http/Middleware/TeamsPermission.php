@@ -17,7 +17,14 @@ class TeamsPermission
     public function handle(Request $request, Closure $next)
     {
         if (!empty(auth()->user())) {
-            app(\Spatie\Permission\PermissionRegistrar::class)->setPermissionsTeamId(session('team_id'));
+            $team = session('team');
+            // 检查团队是否存在
+            if (is_null($team)) {
+                session()->forget('team');
+                return redirect()->route('teams.index')->with('message', 'Your team does not exist, please create or select a team.');
+            } else {
+                app(\Spatie\Permission\PermissionRegistrar::class)->setPermissionsTeamId($team->id);
+            }
         }
 
         return $next($request);
