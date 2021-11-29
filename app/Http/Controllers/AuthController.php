@@ -153,6 +153,6 @@ class AuthController extends Controller
     public function logout()
     {
         Auth::logout();
-        return route('main.index');
+        return redirect()->route('www.index')->with('message', 'Your account has been logged out.');
     }
 }

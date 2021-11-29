@@ -25,9 +25,10 @@ Route::domain('login.' . config('app.domain'))->prefix('/')->name('login.')->gro
 });
 
 
-Route::domain('teams.' . config('app.domain'))->name('teams.')->middleware(['auth'])->withoutMiddleware(['teams_permission'])->group(function () {
-    Route::get('/', [Controllers\TeamController::class, 'index'])->name('index');
-    Route::post('/afk', [Controllers\TeamController::class, 'afk'])->name('afk');
+Route::domain('teams.' . config('app.domain'))->name('teams.')->middleware(['teams_permission', 'auth'])->group(function () {
+    Route::get('/', [Controllers\TeamController::class, 'index'])->name('index')->withoutMiddleware(['teams_permission']);
+    Route::post('/afk', [Controllers\TeamController::class, 'afk'])->name('afk')->withoutMiddleware(['teams_permission']);
+    Route::get('/team/{team_id}/invite/{email}', [Controllers\TeamController::class, 'invite'])->name('invite')->middleware('permission:team_invite');
     Route::resource('/team', Controllers\TeamController::class);
 });
 
@@ -42,6 +43,8 @@ Route::domain('permission.' . config('app.domain'))->prefix('/')->name('permissi
     Route::get('/', [Controllers\PermissionController::class, 'index'])->name('index')->middleware(['teams_permission']);
     Route::get('/all', [Controllers\PermissionController::class, 'all'])->name('all');
 });
+
+Route::post('logout', [Controllers\AuthController::class, 'logout'])->name('logout');
 
 
 // Route::fallback(function () {
