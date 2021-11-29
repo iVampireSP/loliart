@@ -29,20 +29,27 @@ class AppController extends Controller
 
     private static function getVersion()
     {
-        return Cache::remember('git-version', 5, function () {
-            if (file_exists(base_path('.git/HEAD'))) {
-                $head = explode(' ', file_get_contents(base_path('.git/HEAD')));
+        if (app()->isLocal()) {
+            return self::version();
+        } else {
+            return Cache::remember('git-version', 5, self::version());
+        }
+    }
 
-                if (array_key_exists(1, $head)) {
-                    $path = base_path('.git/' . trim($head[1]));
-                }
+    private static function version()
+    {
+        if (file_exists(base_path('.git/HEAD'))) {
+            $head = explode(' ', file_get_contents(base_path('.git/HEAD')));
+
+            if (array_key_exists(1, $head)) {
+                $path = base_path('.git/' . trim($head[1]));
             }
+        }
 
-            if (isset($path) && file_exists($path)) {
-                return substr(file_get_contents($path), 0, 8);
-            }
+        if (isset($path) && file_exists($path)) {
+            return substr(file_get_contents($path), 0, 8);
+        }
 
-            return config('app.version');
-        });
+        return config('app.version');
     }
 }
