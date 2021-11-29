@@ -65,6 +65,8 @@
     <script src="{{ mix('/js/util.js') }}"></script>
 
     <script>
+        if (CSS && 'paintWorklet' in CSS) CSS.paintWorklet.addModule('https://unpkg.com/smooth-corners')
+
         util.event.listen();
         $(document).ajaxError(function(event, xhr, options, data) {
             mdui.snackbar({
