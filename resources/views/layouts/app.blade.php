@@ -22,7 +22,8 @@
     <script>
         var $ = mdui.$;
         var ui = mdui;
-        window.user = {!! auth()->user() !!}
+        window.user = {!! auth()->user() ?? 0 !!};
+        window.team = {!! session('team') ?? 0 !!};
         window.app_name = "{{ config('app.name') }}";
     </script>
 
