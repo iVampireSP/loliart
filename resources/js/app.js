@@ -31,3 +31,7 @@ $.ajaxSetup({
     },
     dataType: "json",
 });
+
+$(() => {
+    util.theme.update();
+})
