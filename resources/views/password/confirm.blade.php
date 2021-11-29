@@ -3,17 +3,20 @@
 @section('title', tr('Confirm password'))
 
 @section('content')
-    <div class="mdui-typo-display-1">{{ tr('You must provid password to continue') }}</div>
-    <p>{{ tr('You are doing a dangerous action, for security reasons, please provid your password to continue.') }}</p>
+    <p class="mdui-text-center material-icons mdui-icon" style="font-size: 10rem;width: 100%;margin:0;margin-top:-50px">
+        password</p>
 
-    <form method="POST" action="{{ route('password.confirm_password') }}">
+    <div class="mdui-typo-display-1 mdui-text-center">{{ tr('You must provid password to continue') }}</div>
+    <p class="mdui-text-center">
+        {{ tr('You are doing a dangerous action, for security reasons, please provid your password to continue.') }}</p>
+
+    <form method="POST" action="{{ route('password.confirm_password') }}" class="mdui-text-center">
         @csrf
-        <div
-            class="mdui-textfield mdui-textfield-floating-label mdui-m-b-2 @error('password') mdui-textfield-invalid @enderror">
-            <label class="mdui-textfield-label">{{ tr('Your password') }}</label>
-            <input class="mdui-textfield-input" type="password" name="password" />
+        <div class="mdui-textfield mdui-m-b-2 @error('password') mdui-textfield-invalid @enderror">
+            <input class="mdui-textfield-input mdui-text-center" type="password" name="password"
+                placeholder="{{ tr('Your password') }}" />
             @error('password')
-                <div class="mdui-textfield-error">{{ tr($message) }}</div>
+                <div class="mdui-textfield-error" style="width: 100%;">{{ tr($message) }}</div>
             @enderror
         </div>
 
