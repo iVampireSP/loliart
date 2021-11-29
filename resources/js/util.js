@@ -15,6 +15,19 @@ window.util = {
                     });
                 }
             );
+        },
+        afk: () => {
+            $.ajax({
+                method: 'POST',
+                url: route('teams.afk'),
+                success(data) {
+                    console.log(data);
+                    ui.snackbar({
+                        position: 'bottom',
+                        message: data.data
+                    })
+                }
+            });
         }
     },
     event: {
