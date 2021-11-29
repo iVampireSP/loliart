@@ -21,11 +21,12 @@ window.util = {
                 method: 'POST',
                 url: route('teams.afk'),
                 success(data) {
-                    console.log(data);
                     ui.snackbar({
-                        position: 'bottom',
+                        position: 'right-bottom',
                         message: data.data
                     })
+                    window.team = 0;
+                    util.theme.update();
                 }
             });
         }
@@ -71,13 +72,27 @@ window.util = {
                 $("#main-list a[href='" + url + "']").addClass('mdui-list-item-active');
             }
         }
+    },
+    theme: {
+        update: () => {
+            if (team) {
+                $('#app-title').text(team.name)
+                $('#top-appbar .top-bar').removeClass('mdui-color-theme')
+                $('#top-appbar .top-bar').addClass('mdui-color-white')
+            } else {
+                $('#app-title').text(app.data.name)
+                $('#top-appbar .top-bar').removeClass('mdui-color-white')
+                $('#top-appbar .top-bar').addClass('mdui-color-theme')
+            }
+
+        }
     }
 }
 
 $(() => {
     util.menu.update()
     var title = document.title;
-    title = title.replace(' - ' + app_name, '');
+    title = title.replace(' - ' + app.data.name, '');
     $('#top-title').text(title);
 });
 
