@@ -21,6 +21,9 @@
     </script>
     <script>
         var $ = mdui.$;
+        var ui = mdui;
+        window.user = {!! auth()->user() !!}
+        window.app_name = "{{ config('app.name') }}";
     </script>
 
     @routes
@@ -58,34 +61,16 @@
     <div class="mdui-m-t-5 mdui-m-b-5"></div>
     <script defer src="/js/util.js?bpc={{ time() }}"></script>
     <script src="https://cdn.bootcdn.net/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
-    <script src="{{ mix('/js/menu.js') }}"></script>
     <script src="{{ mix('/js/app.js') }}"></script>
+    <script src="{{ mix('/js/util.js') }}"></script>
 
     <script>
-        const app_channel_prefix = '{{ config('database.redis.options.prefix') }}';
-        window.Echo.channel(app_channel_prefix + 'test-event')
-            .listen('ExampleEvent', (e) => {
-                console.log(e);
-            });
-
-
-        $.ajaxSetup({
-            global: true,
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        $(document).ajaxStart(function(event, xhr, options) {
-            $('#top-progress').show()
-        });
+        util.event.listen();
         $(document).ajaxError(function(event, xhr, options, data) {
             mdui.snackbar({
                 position: 'right-bottom',
                 message: '{{ tr('Unable to request.') }}'
             })
-        });
-        $(document).ajaxComplete(function(event, xhr, options) {
-            $('#top-progress').hide()
         });
 
         @if (session('message'))
