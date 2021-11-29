@@ -93,20 +93,17 @@
                 message: '{{ tr('Unable to request.') }}'
             })
         });
-
+    </script>
+    <script>
         @if (session('message'))
             mdui.snackbar({
             message: '{{ tr(session('message')) }}',
             position: 'right-bottom',
             })
         @endif
-        @if (count($errors) > 0)
-            @foreach ($errors->all() as $error)
-                mdui.snackbar({
-                message: '{{ tr($error) }}',
-                position: 'right-bottom',
-                })
-            @endforeach
+
+        @if (session('alert'))
+            mdui.alert('{{ session('alert') }}', () => {}, {history: false});
         @endif
     </script>
 </body>
