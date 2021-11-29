@@ -6,7 +6,7 @@ use App\Http\Controllers;
 Route::domain('www.' . config('app.domain'))->prefix('/')->name('www.')->group(function () {
     Route::view('/', 'index')->name('index');
     Route::get('test-broadcast', function () {
-        broadcast(new \App\Events\ExampleEvent);
+        broadcast(new \App\Events\UserEvent);
     });
 });
 
@@ -25,16 +25,22 @@ Route::domain('login.' . config('app.domain'))->prefix('/')->name('login.')->gro
 });
 
 
-Route::domain('teams.' . config('app.domain'))->name('teams.')->middleware(['auth'])->group(function () {
+Route::domain('teams.' . config('app.domain'))->name('teams.')->middleware(['auth'])->withoutMiddleware(['teams_permission'])->group(function () {
     Route::get('/', [Controllers\TeamController::class, 'index'])->name('index');
+    Route::post('/afk', [Controllers\TeamController::class, 'afk'])->name('afk');
     Route::resource('/team', Controllers\TeamController::class);
 });
 
-Route::domain('password.' . config('app.domain'))->prefix('/')->name('password.')->middleware(['auth', 'password.confirm'])->group(function () {
+Route::domain('password.' . config('app.domain'))->prefix('/')->name('password.')->middleware(['auth', 'password.confirm'])->withoutMiddleware(['teams_permission'])->group(function () {
     Route::get('/reset', [Controllers\AuthController::class, 'reset'])->name('reset');
     Route::post('/reset', [Controllers\AuthController::class, 'setup_password'])->name('setup_password');
     Route::get('/confirm', [Controllers\AuthController::class, 'confirm'])->name('confirm')->withoutMiddleware('password.confirm');
     Route::post('/confirm', [Controllers\AuthController::class, 'confirm_password'])->name('confirm_password')->withoutMiddleware('password.confirm');
+});
+
+Route::domain('permission.' . config('app.domain'))->prefix('/')->name('permission.')->middleware(['auth'])->group(function () {
+    Route::get('/', [Controllers\PermissionController::class, 'index'])->name('index')->middleware(['teams_permission']);
+    Route::get('/all', [Controllers\PermissionController::class, 'all'])->name('all');
 });
 
 
