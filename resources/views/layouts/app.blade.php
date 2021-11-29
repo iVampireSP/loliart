@@ -77,7 +77,7 @@
 
         @if (session('message'))
             mdui.snackbar({
-            message: '{{ tr(session('status')) }}',
+            message: '{{ tr(session('message')) }}',
             position: 'right-bottom',
             })
         @endif
