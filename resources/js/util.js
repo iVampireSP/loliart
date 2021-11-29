@@ -85,8 +85,17 @@ window.util = {
                 $('#top-appbar .top-bar').addClass('mdui-color-theme')
             }
 
+        },
+        version: () => {
+            $('#version').text(app.data.version)
         }
     }
+}
+
+if (window.history && window.history.pushState) {
+    window.onpopstate = function () {
+        util.menu.update();
+    };
 }
 
 $(() => {
@@ -94,10 +103,5 @@ $(() => {
     var title = document.title;
     title = title.replace(' - ' + app.data.name, '');
     $('#top-title').text(title);
+    util.theme.version();
 });
-
-if (window.history && window.history.pushState) {
-    window.onpopstate = function () {
-        util.menu.update();
-    };
-}
