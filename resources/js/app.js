@@ -45,13 +45,17 @@ $.ajaxSetup({
 
 $(() => {
     util.theme.update();
+
     $(document).pjax('a', '.pjax-container');
+
     $(document).on('pjax:start', function () {
         Progress.show()
     });
+
     $(document).on('pjax:end', function () {
         Progress.hide();
     });
+
     $(document).on("pjax:timeout", function (event) {
         event.preventDefault()
     });
