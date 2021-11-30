@@ -48,15 +48,19 @@ $(() => {
 
     $(document).pjax('a', '.pjax-container');
 
-    $(document).on('pjax:start', function () {
+    $(document).on('pjax:start', () => {
         Progress.show()
     });
 
-    $(document).on('pjax:end', function () {
+    $(document).on('pjax:end', () => {
         Progress.hide();
     });
 
-    $(document).on("pjax:timeout", function (event) {
+    $(document).on("pjax:complete", () => {
+        ui.mutation()
+    })
+
+    $(document).on("pjax:timeout", (event) => {
         event.preventDefault()
     });
 })
