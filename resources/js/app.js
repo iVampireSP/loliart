@@ -48,6 +48,8 @@ $.ajaxSetup({
 $(() => {
     util.theme.update();
 
+    currentRoute = route().current();
+
     $(document).pjax('a', '.pjax-container');
 
     $(document).on('pjax:start', () => {
@@ -61,6 +63,7 @@ $(() => {
     $(document).on("pjax:complete", () => {
         util.menu.update();
         ui.mutation()
+        currentRoute = route().current();
     })
 
     $(document).on("pjax:timeout", (event) => {
