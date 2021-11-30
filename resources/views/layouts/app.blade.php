@@ -8,28 +8,18 @@
 
     <meta name="csrf-token" content="{!! csrf_token() !!}" />
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdui@1.0.1/dist/css/mdui.min.css"
-        integrity="sha384-cLRrMq39HOZdvE0j6yBojO4+1PrHfB7a9l5qLcmRm/fiWXYY+CndJPmyu5FV/9Tw" crossorigin="anonymous" />
-
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 
     <title>@yield('title') - {{ config('app.name') }}</title>
 
-    <!-- JavaScripts -->
-    <script src="https://cdn.jsdelivr.net/npm/mdui@1.0.1/dist/js/mdui.min.js"
-        integrity="sha384-gCMZcshYKOGRX9r6wbDrvF+TcCCswSHFucUzUPwka+Gr+uHgjlYvkABr95TCOz3A" crossorigin="anonymous">
-    </script>
+    <script src="{{ mix('/js/app.js') }}"></script>
     <script>
-        var $ = mdui.$;
-        var ui = mdui;
         window.user = {!! auth()->user() ?? 0 !!};
         window.team = {!! session('team') ?? 0 !!};
         window.app = {!! app_info() !!};
     </script>
 
     @routes
-    <livewire:styles />
-    <livewire:scripts />
 </head>
 
 <body class="mdui-appbar-with-toolbar mdui-theme-primary-blue mdui-theme-accent-blue mdui-theme-layout-auto">
@@ -81,14 +71,8 @@
     </div>
 
     <div class="mdui-m-t-5 mdui-m-b-5"></div>
-    <script defer src="/js/util.js?bpc={{ time() }}"></script>
-    <script src="https://cdn.bootcdn.net/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
-    <script src="{{ mix('/js/app.js') }}"></script>
-    <script src="{{ mix('/js/util.js') }}"></script>
 
     <script>
-        if (CSS && 'paintWorklet' in CSS) CSS.paintWorklet.addModule('https://unpkg.com/smooth-corners')
-
         util.event.listen();
         $(document).ajaxError(function(event, xhr, options, data) {
             mdui.snackbar({
