@@ -30,6 +30,58 @@ window.util = {
                 }
             });
         },
+        user: {
+            invite: () => {
+                ui.prompt('The email address of you want to invite.',
+                    function (value) {
+                        $.ajax({
+                            method: 'POST',
+                            url: route('teams.invite'),
+                            data: {
+                                email: value,
+                            },
+                            success(data) {
+                                if (data.status) {
+                                    window.location.reload()
+                                } else {
+                                    ui.snackbar({
+                                        position: 'right-bottom',
+                                        message: data.data
+                                    })
+                                }
+                            }
+                        });
+                    }
+                );
+            },
+            deleteInvitation: (id) => {
+                ui.confirm('Really delete this role?', () => {
+                    $.ajax({
+                        method: 'DELETE',
+                        url: route('teams.invite.delete', id),
+                        success(data) {
+                            if (data.status) {
+                                window.location.href = route('permission.index')
+                            } else {
+                                ui.snackbar({
+                                    position: 'right-bottom',
+                                    message: 'Unable to delete invitation.'
+                                })
+                            }
+                        }
+                    });
+                });
+            },
+            kick: () => {
+
+            },
+            giveRole: () => {
+
+            },
+            givePermission: () => {
+
+            }
+        },
         permission: {
             role: {
                 create: () => {
@@ -152,7 +204,6 @@ window.util = {
                             ui.alert('button clicked');
                         }
                     });
-                    // ui.confirm(event.data.team_owner + ' invite you to join team: ' + event.data.name, () => {}, () => {})
                     break;
 
                 default:
