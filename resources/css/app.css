@@ -256,15 +256,6 @@ a {
     box-shadow: 0 1px 8px 0 rgb(80 80 80 / 22%);
 }
 
-.mdui-snackbar-bottom {
-    bottom: 15px;
-    border-radius: 3px;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    -ms-border-radius: 3px;
-    -o-border-radius: 3px;
-}
-
 .git-icon {
     position: relative;
     top: 4px;
