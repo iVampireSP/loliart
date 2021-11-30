@@ -62,6 +62,7 @@ window.util = {
                         success(data) {
                             if (data.status) {
                                 util.url.to(route('permission.index'))
+                                util.reload()
                             } else {
                                 ui.snackbar({
                                     position: 'right-bottom',
@@ -185,6 +186,11 @@ window.util = {
                     });
                 }
             }
+        },
+        invitation: {
+            list: () => {
+                util.url.to(route('teams.invite.received'))
+            }
         }
     },
     event: {
@@ -201,7 +207,7 @@ window.util = {
                         message: 'You received a team invitation from ' + event.data.name,
                         buttonText: 'View',
                         onButtonClick: () => {
-                            // util.path.open(route('team.invitation'))
+                            util.team.invitation.list()
                         }
                     });
                     break;
@@ -209,7 +215,6 @@ window.util = {
                 default:
                     break;
             }
-            console.log(event);
         }
     },
     menu: {
@@ -245,6 +250,9 @@ window.util = {
         },
         version: () => {
             $('#version').text(app.data.version)
+        },
+        reload: () => {
+            $('.mdui-tooltip-open').remove()
         }
     },
     url: {
@@ -258,13 +266,15 @@ window.util = {
     },
     reload: () => {
         $.pjax.reload('.pjax-container')
+        $('.mdui-tooltip-open').remove()
     }
 }
 
 if (window.history && window.history.pushState) {
     window.onpopstate = () => {
         util.menu.update();
-        ui.mutation()
+        ui.mutation();
+        util.theme.reload();
     };
 }
 
