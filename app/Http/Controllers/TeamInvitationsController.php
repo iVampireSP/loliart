@@ -95,7 +95,16 @@ class TeamInvitationsController extends Controller
         }
     }
 
-    public function reject()
+    public function reject($id)
     {
+        $invitation = TeamInvitation::find($id);
+        if (is_null($invitation)) {
+            return response()->json(['status' => 0, 'data' => 'Invitation not found.']);
+        } elseif (is_null($invitation->agree_at)) {
+            // delete invitation
+            $invitation->delete();
+
+            return response()->json(['status' => 1, 'data' => 'Rejected successfully.']);;
+        }
     }
 }
