@@ -57,6 +57,7 @@ $(() => {
     });
 
     $(document).on("pjax:complete", () => {
+        util.menu.update();
         ui.mutation()
     })
 

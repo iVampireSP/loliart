@@ -264,6 +264,7 @@ window.util = {
 if (window.history && window.history.pushState) {
     window.onpopstate = () => {
         util.menu.update();
+        ui.mutation()
     };
 }
 
