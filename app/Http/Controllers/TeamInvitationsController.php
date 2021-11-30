@@ -51,7 +51,7 @@ class TeamInvitationsController extends Controller
 
     public function myInvitations()
     {
-        $invitations = TeamInvitation::where('user_id', auth()->id())->simplePagination();
+        $invitations = TeamInvitation::where('user_id', auth()->id())->simplePaginate(100);
 
         return view('teams.my_invitations', compact('invitations'));
     }
