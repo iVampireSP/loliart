@@ -166,7 +166,7 @@ window.util = {
                         }
                     );
                 },
-                removePermission: (name) => {
+                removePermission: () => {
                     ui.confirm('Really delete this permission?', () => {
                         $.ajax({
                             method: 'DELETE',
@@ -247,9 +247,10 @@ window.util = {
             $('#version').text(app.data.version)
         }
     },
-    path: {
+    url: {
         to: (url) => {
-            window.location.href = url
+            $('#helper-link').attr('href', url)
+            $('#helper-link').click()
         },
         open: (url) => {
             window.location.open = url
