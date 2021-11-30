@@ -11,9 +11,14 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js').js('resources/js/util.js', 'public/js')
-    .postCss('resources/css/app.css', 'public/css', [
-        //
-    ]).version();
+mix
+    .js('resources/js/app.js', 'public/js')
 
-mix.disableNotifications();
+    .styles([
+        'node_modules/mdui/dist/css/mdui.css',
+        'resources/css/app.css'
+    ], 'public/css/app.css')
+
+    .version()
+
+    .disableNotifications();
