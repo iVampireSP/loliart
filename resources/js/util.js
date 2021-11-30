@@ -10,7 +10,7 @@ window.util = {
                             name: value,
                         },
                         success() {
-                            window.location.reload()
+                            util.reload()
                         }
                     });
                 }
@@ -42,7 +42,7 @@ window.util = {
                             },
                             success(data) {
                                 if (data.status) {
-                                    window.location.reload()
+                                    util.reload()
                                 } else {
                                     ui.snackbar({
                                         position: 'right-bottom',
@@ -95,7 +95,7 @@ window.util = {
                                 },
                                 success(data) {
                                     if (data.status) {
-                                        window.location.reload()
+                                        util.reload()
                                     } else {
                                         ui.snackbar({
                                             position: 'right-bottom',
@@ -154,7 +154,7 @@ window.util = {
                                 },
                                 success(data) {
                                     if (data.status) {
-                                        window.location.reload()
+                                        util.reload()
                                     } else {
                                         ui.snackbar({
                                             position: 'right-bottom',
@@ -201,7 +201,7 @@ window.util = {
                         message: 'You received a team invitation from ' + event.data.name,
                         buttonText: 'View',
                         onButtonClick: () => {
-
+                            // util.path.open(route('team.invitation'))
                         }
                     });
                     break;
