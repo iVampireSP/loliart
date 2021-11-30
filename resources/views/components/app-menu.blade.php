@@ -7,23 +7,23 @@
                     <div class="mdui-list-item-content">{{ config('app.name') }}</div>
                 </a>
                 @guest
-                    <a class="mdui-list-item mdui-rippl umami--click--guest-login" href="{{ route('login.redirect') }}">
+                    <a class="mdui-list-item mdui-ripple" href="{{ route('login.redirect') }}">
                         <span class="mdui-list-item-icon mdui-icon material-icons-outlined">login</span>
                         <div class="mdui-list-item-content">{{ tr('Login or register') }}</div>
                     </a>
                 @endguest
 
-                <a class="mdui-list-item mdui-rippl umami--click--guest-login" href="{{ route('teams.index') }}">
+                <a class="mdui-list-item mdui-ripple" href="{{ route('teams.index') }}">
                     <span class="mdui-list-item-icon mdui-icon material-icons-outlined">peoples</span>
                     <div class="mdui-list-item-content">{{ tr('Teams') }}</div>
                 </a>
 
-                <a class="mdui-list-item mdui-rippl umami--click--guest-login" href="{{ route('password.reset') }}">
+                <a class="mdui-list-item mdui-ripple" href="{{ route('password.reset') }}">
                     <span class="mdui-list-item-icon mdui-icon material-icons-outlined">password</span>
                     <div class="mdui-list-item-content">{{ tr('Password reset') }}</div>
                 </a>
 
-                <a class="mdui-list-item mdui-rippl umami--click--guest-login" href="{{ route('permission.index') }}">
+                <a class="mdui-list-item mdui-ripple" href="{{ route('permission.index') }}">
                     <span class="mdui-list-item-icon mdui-icon material-icons-outlined">policy</span>
                     <div class="mdui-list-item-content">{{ tr('Roles and Permissions') }}</div>
                 </a>
