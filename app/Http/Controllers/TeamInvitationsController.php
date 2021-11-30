@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\TeamUser;
 use Illuminate\Http\Request;
 use App\Models\TeamInvitation;
+use Illuminate\Support\Carbon;
 
 class TeamInvitationsController extends Controller
 {
@@ -42,7 +43,7 @@ class TeamInvitationsController extends Controller
         ]);
 
         broadcast(new \App\Events\UserEvent($user->id, [
-            'type' => 'team_invitation',
+            'type' => 'team.invitation.received',
             'name' => $team->name,
         ]));
 
@@ -66,8 +67,20 @@ class TeamInvitationsController extends Controller
         }
     }
 
-    public function agree()
+    public function agree($id)
     {
+        $invitation = TeamInvitation::find($id);
+        if (is_null($invitation)) {
+            return response()->json(['status' => 0, 'data' => 'Invitation not found.']);
+        } elseif (is_null($invitation->agree_at)) {
+            // set invitation accepted
+            $invitation->agree_at = Carbon::now();
+            $invitation->save();
+            // create user to team
+            return response()->json(['status' => 1, 'data' => 'Accepted successfully.']);
+        } else {
+            return response()->json(['status' => 0, 'data' => 'Already agree.']);
+        }
     }
 
     public function reject()
