@@ -252,7 +252,7 @@ a {
     z-index: 1999;
 }
 
-#top-appbar {
+.top-bar-shadow {
     box-shadow: 0 1px 8px 0 rgb(80 80 80 / 22%);
 }
 
@@ -266,6 +266,11 @@ a {
     -moz-border-radius: 5px;
     -ms-border-radius: 5px;
     -o-border-radius: 5px;
+}
+
+.git-icon {
+    position: relative;
+    top: 4px;
 }
 
 @media (prefers-color-scheme: dark) {
