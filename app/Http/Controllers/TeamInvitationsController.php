@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\TeamInvitation;
+use App\Models\TeamUser;
 
 class TeamInvitationsController extends Controller
 {
     public function index()
     {
         // Show invitations
-        $invitations = TeamInvitation::where('team_id', session('team_id'))->get();
+        $invitations = TeamInvitation::where('team_id', session('team_id'))->with(['user'])->latest()->get();
 
         return view('teams.invites', compact('invitations'));
     }
@@ -24,7 +25,11 @@ class TeamInvitationsController extends Controller
             return response()->json(['status' => 0, 'data' => 'User not found.']);
         }
         if (TeamInvitation::where('user_id', $user->id)->where('team_id', session('team_id'))->exists()) {
-            return response()->json(['status' => 0, 'data' => 'Invitation already exists']);
+            return response()->json(['status' => 0, 'data' => 'Invitation already exists.']);
+        }
+
+        if (TeamUser::where('user_id', $user->id)->where('team_id', session('team_id'))->exists()) {
+            return response()->json(['status' => 0, 'data' => 'User already in team.']);
         }
 
         // send invite to user
