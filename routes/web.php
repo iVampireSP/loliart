@@ -28,8 +28,10 @@ Route::domain('login.' . config('app.domain'))->prefix('/')->name('login.')->gro
 Route::domain('teams.' . config('app.domain'))->name('teams.')->middleware(['teams_permission', 'auth'])->group(function () {
     Route::get('/', [Controllers\TeamController::class, 'index'])->name('index')->withoutMiddleware(['teams_permission']);
     Route::post('/afk', [Controllers\TeamController::class, 'afk'])->name('afk')->withoutMiddleware(['teams_permission']);
-    Route::get('/team/{team_id}/invite/{email}', [Controllers\TeamController::class, 'invite'])->name('invite')->middleware('permission:team_invite');
-    Route::resource('/team', Controllers\TeamController::class);
+    Route::get('/team/{team_id}/invite/{email}', [Controllers\TeamController::class, 'invite'])->name('invite')->middleware('permission:team.invite');
+    Route::resource('/team', Controllers\TeamController::class)->withoutMiddleware(['teams_permission']);
+    Route::get('/invites', [Controllers\TeamInvitationsController::class, 'index'])->name('invitations')->middleware(['permission:team.invitations.show']);
+    Route::post('/invites', [Controllers\TeamInvitationsController::class, 'invite'])->name('invite')->middleware(['permission:team.invitations.invite']);
 });
 
 Route::domain('password.' . config('app.domain'))->prefix('/')->name('password.')->middleware(['auth', 'password.confirm'])->withoutMiddleware(['teams_permission'])->group(function () {
@@ -39,9 +41,14 @@ Route::domain('password.' . config('app.domain'))->prefix('/')->name('password.'
     Route::post('/confirm', [Controllers\AuthController::class, 'confirm_password'])->name('confirm_password')->withoutMiddleware('password.confirm');
 });
 
-Route::domain('permission.' . config('app.domain'))->prefix('/')->name('permission.')->middleware(['auth'])->group(function () {
-    Route::get('/', [Controllers\PermissionController::class, 'index'])->name('index')->middleware(['teams_permission']);
+Route::domain('permission.' . config('app.domain'))->prefix('/')->name('permission.')->middleware(['auth', 'teams_permission'])->group(function () {
+    Route::get('/', [Controllers\PermissionController::class, 'index'])->name('index');
     Route::get('/all', [Controllers\PermissionController::class, 'all'])->name('all');
+    Route::get('/roles/{id}', [Controllers\PermissionController::class, 'edit'])->name('role.edit')->middleware('permission:role.edit');
+    Route::post('/roles', [Controllers\PermissionController::class, 'createRole'])->name('role.store')->middleware('permission:role.create');
+    Route::delete('/roles/{id}', [Controllers\PermissionController::class, 'deleteRole'])->name('role.delete')->middleware('permission:role.delete');
+    Route::post('/roles/{name}', [Controllers\PermissionController::class, 'givePermissionToRole'])->name('role.givePermission')->middleware('permission:role.givePermission');
+    Route::put('/roles/{name}', [Controllers\PermissionController::class, 'update'])->name('role.update')->middleware('permission:team.update');
 });
 
 Route::post('logout', [Controllers\AuthController::class, 'logout'])->name('logout');
