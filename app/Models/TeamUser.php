@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class TeamUser extends Model
 {
     use HasFactory;
+
+    public function users()
+    {
+        return $this->hasMany(TeamUser::class);
+    }
 }
