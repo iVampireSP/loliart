@@ -67,8 +67,7 @@ class TeamController extends Controller
 
         // 切换团队
         $this->switchToTeam($team);
-
-        session()->flash('message', tr('Your team has been switched.'));
+        app(\Spatie\Permission\PermissionRegistrar::class)->setPermissionsTeamId($team->id);
 
         return view('teams.show', compact('team'));
     }
