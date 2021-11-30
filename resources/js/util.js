@@ -254,6 +254,9 @@ window.util = {
         open: (url) => {
             window.location.open = url
         }
+    },
+    reload: () => {
+        $.pjax.reload('.pjax-container')
     }
 }
 
