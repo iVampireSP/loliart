@@ -55,7 +55,7 @@ window.util = {
                 );
             },
             deleteInvitation: (id) => {
-                ui.confirm('Really delete this role?', () => {
+                ui.confirm('Really delete this invitation?', () => {
                     $.ajax({
                         method: 'DELETE',
                         url: route('teams.invite.delete', id),
@@ -201,7 +201,7 @@ window.util = {
                         message: 'You received a team invitation from ' + event.data.name,
                         buttonText: 'View',
                         onButtonClick: () => {
-                            ui.alert('button clicked');
+
                         }
                     });
                     break;
