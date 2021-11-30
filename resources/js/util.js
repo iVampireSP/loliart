@@ -209,11 +209,11 @@ window.util = {
                     });
                 });
             },
-            deny: (id) => {
-                ui.confirm('Really deny this invitation?', () => {
+            reject: (id) => {
+                ui.confirm('Really reject this invitation?', () => {
                     $.ajax({
                         method: 'POST',
-                        url: route('teams.invite.deny', id),
+                        url: route('teams.invite.reject', id),
                         success(data) {
                             if (data.status) {
                                 util.reload()
