@@ -3,7 +3,8 @@
 @section('title', tr('Confirm password'))
 
 @section('content')
-    <p class="mdui-text-center material-icons mdui-icon" style="font-size: 10rem;width: 100%;margin:0;margin-top:-50px">
+    <p class="mdui-text-center material-icons mdui-icon mdui-typo-display-1-opacity"
+        style="font-size: 10rem;width: 100%;margin:0;margin-top:-50px">
         password</p>
 
     <div class="mdui-typo-display-1 mdui-text-center">{{ tr('You must provid password to continue') }}</div>
