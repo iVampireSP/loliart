@@ -5,9 +5,6 @@ use App\Http\Controllers;
 
 Route::domain('www.' . config('app.domain'))->prefix('/')->name('www.')->group(function () {
     Route::view('/', 'index')->name('index');
-    Route::get('test-broadcast', function () {
-        broadcast(new \App\Events\UserEvent);
-    });
 });
 
 Route::domain('app.' . config('app.domain'))->prefix('/')->name('app.')->group(function () {
@@ -32,6 +29,7 @@ Route::domain('teams.' . config('app.domain'))->name('teams.')->middleware(['tea
     Route::resource('/team', Controllers\TeamController::class)->withoutMiddleware(['teams_permission']);
     Route::get('/invites', [Controllers\TeamInvitationsController::class, 'index'])->name('invitations')->middleware(['permission:team.invitations.show']);
     Route::post('/invites', [Controllers\TeamInvitationsController::class, 'invite'])->name('invite')->middleware(['permission:team.invitations.invite']);
+    Route::delete('/invites/{id}', [Controllers\TeamInvitationsController::class, 'deleteInvite'])->name('invite.delete')->middleware(['permission:team.invitations.delete']);
 });
 
 Route::domain('password.' . config('app.domain'))->prefix('/')->name('password.')->middleware(['auth', 'password.confirm'])->withoutMiddleware(['teams_permission'])->group(function () {
