@@ -22,7 +22,7 @@ class CreateTeamUsersTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
 
             $table->unsignedBigInteger('team_id')->index();
-            $table->foreign('team_id')->references('id')->on('teams');
+            $table->foreign('team_id')->references('id')->on('teams')->cascadeOnDelete();
 
             $table->unique(['team_id', 'user_id']);
 
