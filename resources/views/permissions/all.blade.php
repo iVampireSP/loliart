@@ -6,6 +6,13 @@
     <div class="mdui-typo-display-2">{{ tr('All permissions') }}</div>
 
     <ul class="mdui-list">
+        <li class="mdui-list-item mdui-ripple">
+            <div class="mdui-list-item-content">
+                <div class="mdui-list-item-title mdui-list-item-one-line">
+                    {{ tr('Role name: ') }}Super Admin</div>
+                <div class="mdui-list-item-text mdui-list-item-two-line">{{ tr('Team super admin.') }}</div>
+            </div>
+        </li>
         @foreach ($permissions as $permission)
             <li class="mdui-list-item mdui-ripple">
                 <div class="mdui-list-item-content">
