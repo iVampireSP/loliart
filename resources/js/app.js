@@ -11,7 +11,6 @@ require('./ziggy');
 
 window.ui = window.mdui = ui
 
-
 window.io = require('socket.io-client');
 
 window.Echo = new Echo({
