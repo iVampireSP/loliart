@@ -89,10 +89,9 @@
     <script src="{{ mix('/js/util.js') }}"></script>
 
     <script>
-        const app_name = '{{ config('app.name') }}';
         if (CSS && 'paintWorklet' in CSS) CSS.paintWorklet.addModule('https://unpkg.com/smooth-corners')
 
-        util.event.listen();
+        // util.event.listen();
         $(document).ajaxError(function(event, xhr, options, data) {
             mdui.snackbar({
                 position: 'right-bottom',
