@@ -29,6 +29,51 @@ window.util = {
                     util.theme.update();
                 }
             });
+        },
+        permission: {
+            role: {
+                create: () => {
+                    mdui.prompt('What is the name of the new role?',
+                        function (value) {
+                            $.ajax({
+                                method: 'POST',
+                                url: route('permission.createRole'),
+                                data: {
+                                    name: value
+                                },
+                                success(data) {
+                                    if (data.status) {
+                                        window.location.reload()
+                                    } else {
+                                        ui.snackbar({
+                                            position: 'right-bottom',
+                                            message: 'Unable to create role.'
+                                        })
+                                    }
+                                }
+                            });
+                        }
+                    );
+                },
+                delete: (id) => {
+                    ui.confirm('Really delete this role?', function () {
+                        $.ajax({
+                            method: 'DELETE',
+                            url: route('permission.deleteRole', id),
+                            success(data) {
+                                if (data.status) {
+                                    window.location.reload()
+                                } else {
+                                    ui.snackbar({
+                                        position: 'right-bottom',
+                                        message: 'Unable to create role.'
+                                    })
+                                }
+                            }
+                        });
+                    });
+                }
+            }
         }
     },
     event: {
@@ -75,14 +120,16 @@ window.util = {
     },
     theme: {
         update: () => {
-            if (team) {
-                $('#app-title').text(team.name)
-                $('#top-appbar .top-bar').removeClass('mdui-color-theme')
-                $('#top-appbar .top-bar').addClass('mdui-color-white')
-            } else {
+            if (!team) {
                 $('#app-title').text(app.data.name)
                 $('#top-appbar .top-bar').removeClass('mdui-color-white')
                 $('#top-appbar .top-bar').addClass('mdui-color-theme')
+                $('#top-appbar').removeClass('top-bar-shadow')
+            } else {
+                $('#app-title').text(team.name)
+                $('#top-appbar .top-bar').removeClass('mdui-color-theme')
+                $('#top-appbar .top-bar').addClass('mdui-color-white')
+                $('#top-appbar').addClass('top-bar-shadow')
             }
 
         },
