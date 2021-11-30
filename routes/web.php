@@ -27,9 +27,12 @@ Route::domain('teams.' . config('app.domain'))->name('teams.')->middleware(['tea
     Route::post('/afk', [Controllers\TeamController::class, 'afk'])->name('afk')->withoutMiddleware(['teams_permission']);
     Route::get('/team/{team_id}/invite/{email}', [Controllers\TeamController::class, 'invite'])->name('invite')->middleware('permission:team.invite');
     Route::resource('/team', Controllers\TeamController::class)->withoutMiddleware(['teams_permission']);
-    Route::get('/invites', [Controllers\TeamInvitationsController::class, 'index'])->name('invitations')->middleware(['permission:team.invitations.show']);
-    Route::post('/invites', [Controllers\TeamInvitationsController::class, 'invite'])->name('invite')->middleware(['permission:team.invitations.invite']);
-    Route::delete('/invites/{id}', [Controllers\TeamInvitationsController::class, 'deleteInvite'])->name('invite.delete')->middleware(['permission:team.invitations.delete']);
+    Route::get('/invitations', [Controllers\TeamInvitationsController::class, 'index'])->name('invitations')->middleware(['permission:team.invitations.show']);
+    Route::post('/invitations', [Controllers\TeamInvitationsController::class, 'invite'])->name('invite')->middleware(['permission:team.invitations.invite']);
+    Route::delete('/invitations/{id}', [Controllers\TeamInvitationsController::class, 'deleteInvite'])->name('invite.delete')->middleware(['permission:team.invitations.delete']);
+    Route::get('/received_invitations', [Controllers\TeamInvitationsController::class, 'myInvitations'])->name('invite.received')->withoutMiddleware('teams_permission');
+    Route::post('/invitation/{id}/agree', [Controllers\TeamInvitationsController::class, 'agree'])->name('invite.agree')->withoutMiddleware('teams_permission');
+    Route::post('/invitation/{id}/reject', [Controllers\TeamInvitationsController::class, 'reject'])->name('invite.reject')->withoutMiddleware('teams_permission');
 });
 
 Route::domain('password.' . config('app.domain'))->prefix('/')->name('password.')->middleware(['auth', 'password.confirm'])->withoutMiddleware(['teams_permission'])->group(function () {
