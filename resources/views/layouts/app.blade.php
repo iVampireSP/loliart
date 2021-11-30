@@ -48,8 +48,6 @@
     <x-app-menu />
 
     <div class="mdui-container pjax-container" id="main">
-        <div id="topic" class="mdui-m-b-1">
-        </div>
         <div class="mdui-m-t-3">
             @yield('content')
         </div>
