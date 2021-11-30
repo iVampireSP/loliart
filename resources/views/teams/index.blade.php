@@ -6,22 +6,18 @@
     <div class="mdui-typo-display-2">{{ tr('Manage or Switch teams') }}</div>
 
     <a onclick="util.team.create()" class="mdui-btn mdui-color-theme-accent mdui-ripple">{{ tr('New Team') }}</a>
-    <a onclick="util.team.create()" class="mdui-btn mdui-color-theme-accent mdui-ripple">{{ tr('Team invites') }}</a>
+    <a onclick="util.team.invitation.list()"
+        class="mdui-btn mdui-color-theme-accent mdui-ripple">{{ tr('My Invirations') }}</a>
     <a onclick="util.team.afk()" class="mdui-btn mdui-color-theme-accent mdui-ripple">{{ tr('AFK session') }}</a>
-    <div id="masonry" class="mdui-row">
-        <ul class="mdui-list">
-            @foreach ($teams as $team)
-                <a href="{{ route('teams.team.show', $team->id) }}">
-                    <li class="mdui-list-item mdui-ripple">
-                        <i class="mdui-list-item-icon mdui-icon material-icons">peoples</i>
-                        <div class="mdui-list-item-content">{{ $team->name }}</div>
-                    </li>
-                </a>
-            @endforeach
-        </ul>
-
-    </div>
-
-
+    <ul class="mdui-list">
+        @foreach ($teams as $team)
+            <a href="{{ route('teams.team.show', $team->id) }}">
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons">peoples</i>
+                    <div class="mdui-list-item-content">{{ $team->name }}</div>
+                </li>
+            </a>
+        @endforeach
+    </ul>
 
 @endsection
