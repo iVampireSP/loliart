@@ -11,12 +11,15 @@
     },
     "devDependencies": {
         "axios": "^0.21",
-        "laravel-mix": "^6.0.6",
+        "laravel-mix": "^6.0.39",
         "lodash": "^4.17.19",
         "postcss": "^8.1.14"
     },
     "dependencies": {
+        "jquery": "^3.6.0",
+        "jquery-pjax": "^2.0.1",
         "laravel-echo": "^1.11.3",
-        "socket.io-client": "^4.4.0"
+        "mdui": "^1.0.2",
+        "socket.io-client": "^2.4.0"
     }
 }
