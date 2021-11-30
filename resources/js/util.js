@@ -238,13 +238,28 @@ window.util = {
         },
         process: (event) => {
             switch (event.data.type) {
-                case 'team_invitation':
+                case 'team.invitation.received':
                     if (currentRoute == 'teams.invite.received') {
                         util.reload()
                     } else {
                         ui.snackbar({
                             message: 'You received a team invitation from ' + event.data.name,
                             buttonText: 'View',
+                            onButtonClick: () => {
+                                util.team.invitation.list()
+                            }
+                        });
+                    }
+
+                    break;
+
+                case 'team.invitation.deleted':
+                    if (currentRoute == 'teams.invite.received') {
+                        util.reload()
+                    } else {
+                        ui.snackbar({
+                            message: event.data.name + '\'s invitation has been deleted.',
+                            buttonText: 'View another.',
                             onButtonClick: () => {
                                 util.team.invitation.list()
                             }
