@@ -20,10 +20,10 @@ window.Echo = new Echo({
 
 window.Progress = {
     show: () => {
-        $('#top-progress').show()
+        $('#top-progress').fadeIn()
     },
     hide: () => {
-        $('#top-progress').hide()
+        $('#top-progress').fadeOut()
     }
 }
 
