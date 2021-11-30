@@ -15,9 +15,12 @@ mix
     .js('resources/js/app.js', 'public/js')
 
     .styles([
-        'node_modules/mdui/dist/css/mdui.css',
+        'node_modules/mdui/dist/css/mdui.min.css',
         'resources/css/app.css'
     ], 'public/css/app.css')
+
+    .copy('node_modules/mdui/dist/js/mdui.esm.js.map', 'public/js')
+    .copy('node_modules/mdui/dist/css/mdui.min.css.map', 'public/css')
 
     .version()
 
