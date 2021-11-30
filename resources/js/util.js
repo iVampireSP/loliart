@@ -190,6 +190,42 @@ window.util = {
         invitation: {
             list: () => {
                 util.url.to(route('teams.invite.received'))
+            },
+            agree: (id) => {
+                ui.confirm('Really accept this invitation?', () => {
+                    $.ajax({
+                        method: 'POST',
+                        url: route('teams.invite.agree', id),
+                        success(data) {
+                            if (data.status) {
+                                util.reload()
+                            } else {
+                                ui.snackbar({
+                                    position: 'right-bottom',
+                                    message: data.data
+                                })
+                            }
+                        }
+                    });
+                });
+            },
+            deny: (id) => {
+                ui.confirm('Really deny this invitation?', () => {
+                    $.ajax({
+                        method: 'POST',
+                        url: route('teams.invite.deny', id),
+                        success(data) {
+                            if (data.status) {
+                                util.reload()
+                            } else {
+                                ui.snackbar({
+                                    position: 'right-bottom',
+                                    message: data.data
+                                })
+                            }
+                        }
+                    });
+                });
             }
         }
     },
@@ -203,13 +239,18 @@ window.util = {
         process: (event) => {
             switch (event.data.type) {
                 case 'team_invitation':
-                    ui.snackbar({
-                        message: 'You received a team invitation from ' + event.data.name,
-                        buttonText: 'View',
-                        onButtonClick: () => {
-                            util.team.invitation.list()
-                        }
-                    });
+                    if (currentRoute == 'teams.invite.received') {
+                        util.reload()
+                    } else {
+                        ui.snackbar({
+                            message: 'You received a team invitation from ' + event.data.name,
+                            buttonText: 'View',
+                            onButtonClick: () => {
+                                util.team.invitation.list()
+                            }
+                        });
+                    }
+
                     break;
 
                 default:
