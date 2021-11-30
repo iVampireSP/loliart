@@ -18,6 +18,8 @@ window.Echo = new Echo({
     host: window.location.hostname + ':6001'
 });
 
+window.currentRoute = null;
+
 window.Progress = {
     show: () => {
         $('#top-progress').fadeIn(100)
