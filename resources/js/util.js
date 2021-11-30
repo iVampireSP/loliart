@@ -1,7 +1,7 @@
 window.util = {
     team: {
         create: () => {
-            mdui.prompt('What is the name of the new team?',
+            ui.prompt('What is the name of the new team?',
                 function (value) {
                     $.ajax({
                         method: 'POST',
@@ -33,11 +33,11 @@ window.util = {
         permission: {
             role: {
                 create: () => {
-                    mdui.prompt('What is the name of the new role?',
+                    ui.prompt('What is the name of the new role?',
                         function (value) {
                             $.ajax({
                                 method: 'POST',
-                                url: route('permission.createRole'),
+                                url: route('permission.role.store'),
                                 data: {
                                     name: value
                                 },
@@ -56,17 +56,76 @@ window.util = {
                     );
                 },
                 delete: (id) => {
-                    ui.confirm('Really delete this role?', function () {
+                    ui.confirm('Really delete this role?', () => {
                         $.ajax({
                             method: 'DELETE',
-                            url: route('permission.deleteRole', id),
+                            url: route('permission.role.delete', id),
                             success(data) {
                                 if (data.status) {
-                                    window.location.reload()
+                                    window.location.href = route('permission.index')
                                 } else {
                                     ui.snackbar({
                                         position: 'right-bottom',
-                                        message: 'Unable to create role.'
+                                        message: 'Unable to delete role.'
+                                    })
+                                }
+                            }
+                        });
+                    });
+                },
+                edit: (id) => {
+                    ui.confirm('What is the new of this role?', () => {
+                        $.ajax({
+                            method: 'DELETE',
+                            url: route('permission.update', id),
+                            success(data) {
+                                if (data.status) {
+                                    window.location.href = route('permission.index')
+                                } else {
+                                    ui.snackbar({
+                                        position: 'right-bottom',
+                                        message: 'Unable to delete role.'
+                                    })
+                                }
+                            }
+                        });
+                    });
+                },
+                givePermission: (name) => {
+                    ui.prompt('What is the name of the permission?',
+                        function (value) {
+                            $.ajax({
+                                method: 'POST',
+                                url: route('permission.role.givePermission', name),
+                                data: {
+                                    permission_name: value,
+                                },
+                                success(data) {
+                                    if (data.status) {
+                                        window.location.reload()
+                                    } else {
+                                        ui.snackbar({
+                                            position: 'right-bottom',
+                                            message: data.data
+                                        })
+                                    }
+                                }
+                            });
+                        }
+                    );
+                },
+                removePermission: (name) => {
+                    ui.confirm('Really delete this permission?', () => {
+                        $.ajax({
+                            method: 'DELETE',
+                            url: route('permission.role.delete', id),
+                            success(data) {
+                                if (data.status) {
+                                    window.location.href = route('permission.index')
+                                } else {
+                                    ui.snackbar({
+                                        position: 'right-bottom',
+                                        message: 'Unable to delete role.'
                                     })
                                 }
                             }
@@ -89,7 +148,7 @@ window.util = {
                     ui.snackbar({
                         message: 'You received a team invitation from ' + event.data.name,
                         buttonText: 'View',
-                        onButtonClick: function () {
+                        onButtonClick: () => {
                             ui.alert('button clicked');
                         }
                     });
@@ -136,11 +195,19 @@ window.util = {
         version: () => {
             $('#version').text(app.data.version)
         }
+    },
+    path: {
+        to: (url) => {
+            window.location.href = url
+        },
+        open: (url) => {
+            window.location.open = url
+        }
     }
 }
 
 if (window.history && window.history.pushState) {
-    window.onpopstate = function () {
+    window.onpopstate = () => {
         util.menu.update();
     };
 }
