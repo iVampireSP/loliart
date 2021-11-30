@@ -59,8 +59,15 @@ class TeamInvitationsController extends Controller
 
     public function deleteInvite($id)
     {
-        if (TeamInvitation::where('id', $id)->where('team_id', session('team_id'))->exists()) {
+        $invitation = TeamInvitation::with('team')->find($id);
+        if (!is_null($invitation)) {
             TeamInvitation::where('id', $id)->where('team_id', session('team_id'))->delete();
+
+            broadcast(new \App\Events\UserEvent($invitation->user_id, [
+                'type' => 'team.invitation.deleted',
+                'name' => $invitation->team->name,
+            ]));
+
             return response()->json(['status' => 1, 'data' => 'Delete successfully.']);
         } else {
             return response()->json(['status' => 0, 'data' => 'Invitation not found.']);
@@ -77,6 +84,11 @@ class TeamInvitationsController extends Controller
             $invitation->agree_at = Carbon::now();
             $invitation->save();
             // create user to team
+            TeamUser::create([
+                'user_id' => $invitation->user_id,
+                'team_id' => $invitation->team_id,
+            ]);
+
             return response()->json(['status' => 1, 'data' => 'Accepted successfully.']);
         } else {
             return response()->json(['status' => 0, 'data' => 'Already agree.']);
