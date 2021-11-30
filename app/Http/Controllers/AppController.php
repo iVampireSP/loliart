@@ -32,7 +32,9 @@ class AppController extends Controller
         if (app()->isLocal()) {
             return self::version();
         } else {
-            return Cache::remember('git-version', 5, self::version());
+            return Cache::remember('git-version', 5, function () {
+                return self::version();
+            });
         }
     }
 
