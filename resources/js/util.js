@@ -61,7 +61,7 @@ window.util = {
                         url: route('teams.invite.delete', id),
                         success(data) {
                             if (data.status) {
-                                window.location.href = route('permission.index')
+                                util.url.to(route('permission.index'))
                             } else {
                                 ui.snackbar({
                                     position: 'right-bottom',
@@ -114,7 +114,7 @@ window.util = {
                             url: route('permission.role.delete', id),
                             success(data) {
                                 if (data.status) {
-                                    window.location.href = route('permission.index')
+                                    util.url.to(route('permission.index'))
                                 } else {
                                     ui.snackbar({
                                         position: 'right-bottom',
@@ -132,7 +132,7 @@ window.util = {
                             url: route('permission.update', id),
                             success(data) {
                                 if (data.status) {
-                                    window.location.href = route('permission.index')
+                                    util.url.to(route('permission.index'))
                                 } else {
                                     ui.snackbar({
                                         position: 'right-bottom',
@@ -173,7 +173,7 @@ window.util = {
                             url: route('permission.role.delete', id),
                             success(data) {
                                 if (data.status) {
-                                    window.location.href = route('permission.index')
+                                    util.url.to(route('permission.index'))
                                 } else {
                                     ui.snackbar({
                                         position: 'right-bottom',
