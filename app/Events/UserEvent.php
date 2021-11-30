@@ -16,14 +16,16 @@ class UserEvent implements ShouldBroadcastNow
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $data;
+    private $user_id = null;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($user_id, $data)
     {
+        $this->user_id = $user_id;
         $this->data = [
             'type' => 'team_invitation',
             'name' => 'test team',
@@ -38,13 +40,6 @@ class UserEvent implements ShouldBroadcastNow
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('user.' . auth()->id());
+        return new PrivateChannel('user.' . $this->user_id ?? auth()->id());
     }
-
-    // public function broadcastWith()
-    // {
-    //     return [
-    //         'data' => $this->data
-    //     ];
-    // }
 }
