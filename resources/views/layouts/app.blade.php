@@ -72,6 +72,8 @@
 
     <div class="mdui-m-t-5 mdui-m-b-5"></div>
 
+    <a style="display: none" aria-hidden="true" href="#" id="helper-link"></a>
+
     <script>
         util.event.listen();
         $(document).ajaxError(function(event, xhr, options, data) {
