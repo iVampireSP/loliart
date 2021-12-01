@@ -61,6 +61,8 @@ window.util.team = {
                 success(data) {
                     if (data.status) {
                         util.url.to(route('teams.index'))
+                        window.team = null;
+                        util.theme.update();
                     } else {
                         ui.snackbar({
                             position: 'right-bottom',
