@@ -21,6 +21,10 @@ class TeamInvitationsController extends Controller
 
     public function invite(Request $request)
     {
+        $this->validate($request, [
+            'email' => 'required|email',
+        ]);
+
         $team = Team::find(session('team_id'));
         $user = User::where('email', $request->email)->first();
 
