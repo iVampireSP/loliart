@@ -29,12 +29,12 @@ window.util.team = {
             }
         });
     },
-    edit: (ele) => {
+    edit: (name) => {
         $.ajax({
             method: 'PUT',
             url: route('teams.update'),
             data: {
-                name: ele.value
+                name: name
             },
             success(data) {
                 if (data.status) {
