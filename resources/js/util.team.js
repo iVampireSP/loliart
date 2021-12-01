@@ -29,19 +29,18 @@ window.util.team = {
             }
         });
     },
-    edit: (name) => {
+    edit: (ele) => {
         $.ajax({
             method: 'PUT',
             url: route('teams.update'),
             data: {
-                name: name
+                name: ele.value
             },
             success(data) {
                 if (data.status) {
                     util.url.to(route('permission.index'))
                     window.team = data.data;
-                    util.theme.update()
-                    util.reload()
+                    util.theme.update();
                 } else {
                     ui.snackbar({
                         position: 'right-bottom',
