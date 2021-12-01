@@ -26,20 +26,6 @@ html {
     scroll-behavior: smooth;
 }
 
-body {
-    transition: all 0.3s ease-in-out !important;
-    -webkit-transition: all 0.3s ease-in-out !important;
-    -moz-transition: all 0.3s ease-in-out !important;
-    -ms-transition: all 0.3s ease-in-out !important;
-    -o-transition: all 0.3s ease-in-out !important;
-    transform: unset;
-    -webkit-transform: unset;
-    -moz-transform: unset;
-    -ms-transform: unset;
-    -o-transform: unset;
-    height: 92vh;
-}
-
 .mdui-theme-primary-blue .mdui-color-theme {
     color: #fff !important;
 }
