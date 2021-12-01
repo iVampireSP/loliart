@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ModelHasRole;
 use App\Models\User;
 use App\Models\TeamUser;
 use Illuminate\Http\Request;
@@ -124,7 +125,7 @@ class PermissionController extends Controller
 
     public function user_role_and_permission(User $user)
     {
-        $roles = $user->getRoleClass()->where('team_id', session('team_id'))->get();
+        $roles = ModelHasRole::where('model_type', User::class)->where('team_id', session('team_id'))->where('model_id', $user->id)->with('role')->get();
         // dd($roles);
         $permissions = $user->getDirectPermissions();
         // dd($permissions);
@@ -161,6 +162,15 @@ class PermissionController extends Controller
         $this->validate($request, [
             'name' => 'required'
         ]);
+
+        if ($request->name == 'Super Admin') {
+            return response()->json([
+                'status' => 0,
+                'data' => 'Unable to delete super admin role.'
+            ]);
+        }
+
+        // find name by display name
         $user->removeRole($request->name);
 
         return response()->json([
