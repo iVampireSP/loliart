@@ -26,8 +26,8 @@
 
     <ul class="mdui-list">
         @foreach ($team_users as $user)
-            <a href="{{ route('teams.team.show', $user->user_id) }}">
-                <li class="mdui-list-item mdui-ripple">
+            <a href="javascript: util.team.user.kick({{ $user->user_id }})">
+                <li class=" mdui-list-item mdui-ripple">
                     <div class="mdui-list-item-avatar">
                         <img src="{{ avatar($user->user->email) }}" />
                     </div>

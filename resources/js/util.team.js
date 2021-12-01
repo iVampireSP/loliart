@@ -116,8 +116,23 @@ window.util.team = {
                 });
             });
         },
-        kick: () => {
-
+        kick: (user_id) => {
+            ui.confirm('Kick this user?', () => {
+                $.ajax({
+                    method: 'DELETE',
+                    url: route('teams.user.kick', user_id),
+                    success(data) {
+                        if (data.status) {
+                            util.reload()
+                        } else {
+                            ui.snackbar({
+                                position: 'right-bottom',
+                                message: 'Unable to kick user.'
+                            })
+                        }
+                    }
+                });
+            });
         }
     },
     permission: {

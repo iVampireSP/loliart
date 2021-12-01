@@ -147,4 +147,21 @@ class TeamController extends Controller
             ]);
         }
     }
+
+    public function kick($id)
+    {
+        $team = Team::find(session('team_id'));
+
+        if ($id == $team->user_id) {
+            return response()->json([
+                'status' => 0,
+                'data' => 'You are not allowed to kick youself.'
+            ]);
+        }
+        TeamUser::where('user_id', $id)->where('team_id', session('team_id'))->delete();
+
+        return response()->json([
+            'status' => 1,
+        ]);
+    }
 }
