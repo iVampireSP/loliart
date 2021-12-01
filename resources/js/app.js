@@ -69,4 +69,18 @@ $(() => {
     $(document).on("pjax:timeout", (event) => {
         event.preventDefault()
     });
+
+    if (window.history && window.history.pushState) {
+        window.onpopstate = () => {
+            util.menu.update();
+            ui.mutation();
+            util.theme.reload();
+        };
+    }
+
+    util.menu.update()
+    var title = document.title;
+    title = title.replace(' - ' + app.data.name, '');
+    $('#top-title').text(title);
+    util.theme.version();
 })

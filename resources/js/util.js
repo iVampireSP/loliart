@@ -30,6 +30,28 @@ window.util = {
                 }
             });
         },
+        edit: () => {
+
+        },
+        delete: (id) => {
+            ui.confirm('Really delete this team?', () => {
+                $.ajax({
+                    method: 'DELETE',
+                    url: route('teams.delete', id),
+                    success(data) {
+                        if (data.status) {
+                            util.url.to(route('permission.index'))
+                            util.reload()
+                        } else {
+                            ui.snackbar({
+                                position: 'right-bottom',
+                                message: 'Unable to delete invitation.'
+                            })
+                        }
+                    }
+                });
+            });
+        },
         user: {
             invite: () => {
                 ui.prompt('The email address of you want to invite.',
@@ -309,6 +331,8 @@ window.util = {
         },
         reload: () => {
             $('.mdui-tooltip-open').remove()
+            $('.mdui-ripple-wave').remove()
+
         }
     },
     url: {
@@ -325,19 +349,3 @@ window.util = {
         $('.mdui-tooltip-open').remove()
     }
 }
-
-if (window.history && window.history.pushState) {
-    window.onpopstate = () => {
-        util.menu.update();
-        ui.mutation();
-        util.theme.reload();
-    };
-}
-
-$(() => {
-    util.menu.update()
-    var title = document.title;
-    title = title.replace(' - ' + app.data.name, '');
-    $('#top-title').text(title);
-    util.theme.version();
-});
