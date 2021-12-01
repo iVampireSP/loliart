@@ -9,6 +9,7 @@ use App\Models\TeamUser;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Log;
+use Ramsey\Uuid\Nonstandard\UuidV6;
 
 class TeamController extends Controller
 {
@@ -21,12 +22,8 @@ class TeamController extends Controller
      */
     public function index()
     {
-        //   $projects = ProjectMember::where('user_id', Auth::id())->with('project')->get();
-        // $teams = Team::where('user_id', auth()->id())->get();
         $teams = TeamUser::where('user_id', auth()->id())->with('team')->get();
         return view('teams.index', compact('teams'));
-        // $this->switchToTeam(1);
-        // return session()->get('key');
     }
 
     /**
