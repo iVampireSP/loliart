@@ -72,27 +72,22 @@
 
     <a style="display: none" aria-hidden="true" href="#" id="helper-link"></a>
 
-    <script>
-        util.event.listen();
-        $(document).ajaxError(function(event, xhr, options, data) {
+    @if (session('message'))
+        <script>
             mdui.snackbar({
+                message: '{{ tr(session('message')) }}',
                 position: 'right-bottom',
-                message: '{{ tr('Unable to request.') }}'
             })
-        });
-    </script>
-    <script>
-        @if (session('message'))
-            mdui.snackbar({
-            message: '{{ tr(session('message')) }}',
-            position: 'right-bottom',
-            })
-        @endif
+        </script>
+    @endif
 
-        @if (session('alert'))
-            mdui.alert('{{ session('alert') }}', () => {}, {history: false});
-        @endif
-    </script>
+    @if (session('alert'))
+        <script>
+            mdui.alert('{{ session('alert') }}', () => {}, {
+                history: false
+            });
+        </script>
+    @endif
 </body>
 
 </html>
