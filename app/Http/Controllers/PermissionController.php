@@ -124,7 +124,7 @@ class PermissionController extends Controller
 
     public function user_role_and_permission(User $user)
     {
-        $roles = $user->getRoleNames();
+        $roles = $user->getRoleClass()->where('team_id', session('team_id'))->get();
         // dd($roles);
         $permissions = $user->getDirectPermissions();
         // dd($permissions);
@@ -138,15 +138,22 @@ class PermissionController extends Controller
             'name' => 'required'
         ]);
 
-        $user->assignRole($request->name);
+        // find name by display name
+        $role = Role::where('display_name', $request->name)->where('team_id', session('team_id'))->firstOrFail();
+        $user->assignRole($role->name);
 
         return response()->json([
             'status' => 1,
         ]);
     }
 
-    public function revokePermissionFromRole(Request $request, Role $role)
+    public function revokePermissionFromRole(Role $role, $permission_name)
     {
+        $role->revokePermissionTo($permission_name);
+
+        return response()->json([
+            'status' => 1
+        ]);
     }
 
     public function deleteRoleFromUser(Request $request, User $user)
