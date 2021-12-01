@@ -82,6 +82,16 @@ window.util.event = {
 
                 break;
 
+            case 'team.permission.updated':
+                util.reload()
+
+                ui.snackbar({
+                    message: 'Your permission has been updated.',
+                    position: 'right-bottom',
+                });
+
+                break;
+
             case 'team.users.beenKicked':
                 if (currentRoute == 'teams.index') {
                     util.reload()

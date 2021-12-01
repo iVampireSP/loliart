@@ -118,6 +118,10 @@ class PermissionController extends Controller
 
         $user->givePermissionTo($request->permission_name);
 
+        broadcast(new \App\Events\UserEvent($user->id, [
+            'type' => 'team.permission.updated',
+        ]));
+
         return response()->json([
             'status' => 1,
         ]);
@@ -142,6 +146,10 @@ class PermissionController extends Controller
         // find name by display name
         $role = Role::where('display_name', $request->name)->where('team_id', session('team_id'))->firstOrFail();
         $user->assignRole($role->name);
+
+        broadcast(new \App\Events\UserEvent($user->id, [
+            'type' => 'team.permission.updated',
+        ]));
 
         return response()->json([
             'status' => 1,
@@ -173,6 +181,10 @@ class PermissionController extends Controller
         // find name by display name
         $user->removeRole($request->name);
 
+        broadcast(new \App\Events\UserEvent($user->id, [
+            'type' => 'team.permission.updated',
+        ]));
+
         return response()->json([
             'status' => 1
         ]);
@@ -181,6 +193,10 @@ class PermissionController extends Controller
     public function deletePermissionFromUser(User $user, Permission $permission)
     {
         $user->revokePermissionTo($permission->name);
+
+        broadcast(new \App\Events\UserEvent($user->id, [
+            'type' => 'team.permission.updated',
+        ]));
 
         return response()->json([
             'status' => 1
