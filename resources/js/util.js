@@ -333,6 +333,14 @@ window.util = {
             $('.mdui-tooltip-open').remove()
             $('.mdui-ripple-wave').remove()
 
+        },
+        warning: () => {
+            $('body').css('cssText', 'transform: scale(0.98)')
+            $('body').css('overflow', 'hidden')
+            setTimeout(() => {
+                $('body').css('cssText', 'transform: unset')
+                $('body').css('cssText', 'unset')
+            }, 200)
         }
     },
     url: {
