@@ -89,6 +89,10 @@ class TeamInvitationsController extends Controller
                 'team_id' => $invitation->team_id,
             ]);
 
+            // give team.invitations.access to user
+            setPermissionsTeamId($invitation->team_id);
+            auth()->user()->givePermissionTo('team.invitations.access');
+
             return response()->json(['status' => 1, 'data' => 'Accepted successfully.']);
         } else {
             return response()->json(['status' => 0, 'data' => 'Already agree.']);

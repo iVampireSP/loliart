@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Team;
+use App\Models\TeamUser;
 use App\Models\User;
 use App\Traits\Teams;
 use Illuminate\Http\Request;
@@ -19,7 +20,9 @@ class TeamController extends Controller
      */
     public function index()
     {
-        $teams = Team::where('user_id', auth()->id())->get();
+        //   $projects = ProjectMember::where('user_id', Auth::id())->with('project')->get();
+        // $teams = Team::where('user_id', auth()->id())->get();
+        $teams = TeamUser::where('user_id', auth()->id())->with('team')->get();
         return view('teams.index', compact('teams'));
         // $this->switchToTeam(1);
         // return session()->get('key');
@@ -51,6 +54,11 @@ class TeamController extends Controller
         $team->user_id = auth()->id();
         $team->save();
 
+        TeamUser::create([
+            'user_id' => auth()->id(),
+            'team_id' => $team->id,
+        ]);
+
         return response()->json(['status' => 1]);
     }
 
@@ -64,12 +72,13 @@ class TeamController extends Controller
     {
         $team = new Team();
         $team = $team->where('id', $id)->with('users')->firstOrFail();
+        $team_users = TeamUser::where('team_id', $id)->with('user')->get();
 
         // 切换团队
         $this->switchToTeam($team);
         app(\Spatie\Permission\PermissionRegistrar::class)->setPermissionsTeamId($team->id);
 
-        return view('teams.show', compact('team'));
+        return view('teams.show', compact('team_users', 'team'));
     }
 
     public function afk()
@@ -111,12 +120,16 @@ class TeamController extends Controller
      */
     public function destroy(Team $team)
     {
-        //
-    }
-
-    public function invite($email)
-    {
-        return 1;
-        // return auth()->user()->can('invite');
+        try {
+            $team->delete();
+            return response()->json([
+                'status' => 1,
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 0,
+                'data' => $e->getMessage()
+            ]);
+        }
     }
 }

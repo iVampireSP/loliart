@@ -11,10 +11,10 @@
     <a onclick="util.team.afk()" class="mdui-btn mdui-color-theme-accent mdui-ripple">{{ tr('AFK session') }}</a>
     <ul class="mdui-list">
         @foreach ($teams as $team)
-            <a href="{{ route('teams.team.show', $team->id) }}">
+            <a href="{{ route('teams.team.show', $team->team->id) }}">
                 <li class="mdui-list-item mdui-ripple">
                     <i class="mdui-list-item-icon mdui-icon material-icons">peoples</i>
-                    <div class="mdui-list-item-content">{{ $team->name }}</div>
+                    <div class="mdui-list-item-content">{{ $team->team->name }}</div>
                 </li>
             </a>
         @endforeach

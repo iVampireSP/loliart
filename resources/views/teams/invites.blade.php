@@ -13,7 +13,7 @@
             <li class="mdui-list-item mdui-ripple" @can('team.invitations.delete')
                 onclick="util.team.user.deleteInvitation({{ $invitation->id }})" @endcan>
                 <div class="mdui-list-item-avatar">
-                    <img src="avatar1.jpg" />
+                    <img src="{{ avatar($invitation->user->email) }}" />
                 </div>
                 <div class="mdui-list-item-content">{{ $invitation->user->name }}</div>
                 <i class="mdui-list-item-icon mdui-icon material-icons">
