@@ -20,3 +20,12 @@ if (!function_exists('app_info')) {
         return json_encode(AppController::info());
     }
 }
+
+if (!function_exists('avatar')) {
+    function avatar($email)
+    {
+        $address = strtolower(trim($email));
+        $hash = md5($address);
+        return config('avatar.gravatar') . '/' . $hash;
+    }
+}
