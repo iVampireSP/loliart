@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Models\TeamUser;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Ramsey\Uuid\Nonstandard\UuidV6;
@@ -19,7 +21,10 @@ class PermissionController extends Controller
         // auth()->user()->givePermissionTo('admin.update');
         $roles = Role::where('team_id', session('team_id'))->get();
         $permissions = Auth::user()->getPermissionNames();
-        return view('permissions.index', compact('permissions', 'roles'));
+
+        $users = TeamUser::where('team_id', session('team_id'))->with(['team', 'user'])->get();
+
+        return view('permissions.index', compact('permissions', 'roles', 'users'));
     }
 
     public function all(Permission $permissions)
@@ -101,6 +106,67 @@ class PermissionController extends Controller
         return response()->json([
             'status' => $status,
             'data' => $data,
+        ]);
+    }
+
+    public function givePermissionToUser(Request $request, User $user)
+    {
+        $this->validate($request, [
+            'permission_name' => 'required'
+        ]);
+
+        $user->givePermissionTo($request->permission_name);
+
+        return response()->json([
+            'status' => 1,
+        ]);
+    }
+
+    public function user_role_and_permission(User $user)
+    {
+        $roles = $user->getRoleNames();
+        // dd($roles);
+        $permissions = $user->getDirectPermissions();
+        // dd($permissions);
+
+        return view('permissions.user', compact('permissions', 'roles', 'user'));
+    }
+
+    public function assignRoleToUser(Request $request, User $user)
+    {
+        $this->validate($request, [
+            'name' => 'required'
+        ]);
+
+        $user->assignRole($request->name);
+
+        return response()->json([
+            'status' => 1,
+        ]);
+    }
+
+    public function revokePermissionFromRole(Request $request, Role $role)
+    {
+    }
+
+    public function deleteRoleFromUser(Request $request, User $user)
+    {
+        $this->validate($request, [
+            'name' => 'required'
+        ]);
+        $user->removeRole($request->name);
+
+        return response()->json([
+            'status' => 1
+        ]);
+    }
+
+    public function deletePermissionFromUser(User $user, Permission $permission)
+    {
+        $user->revokePermissionTo($permission->name);
+
+        return response()->json([
+            'status' => 1
         ]);
     }
 }
