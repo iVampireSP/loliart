@@ -47,6 +47,9 @@ window.util.team = {
                         message: 'Unable to delete invitation.'
                     })
                 }
+            },
+            error() {
+                util.theme.warning();
             }
         });
     },
@@ -266,5 +269,11 @@ window.util.team = {
                 });
             });
         }
+    },
+    subscribe: () => {
+        window.Echo.private(`team.${window.team.id}`)
+            .listen('TeamEvent', (e) => {
+                util.event.process(e)
+            });
     }
 }

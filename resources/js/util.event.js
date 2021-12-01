@@ -4,6 +4,15 @@ window.util.event = {
             .listen('UserEvent', (e) => {
                 util.event.process(e)
             });
+        util.team.subscribe();
+    },
+    reSubscribe: (currentTeam) => {
+        if (window.team.id != currentTeam.id) {
+            Echo.leave('team.' + window.team.id);
+            window.team = currentTeam;
+            util.team.subscribe();
+        }
+
     },
     process: (event) => {
         switch (event.data.type) {
@@ -20,6 +29,17 @@ window.util.event = {
                     });
                 }
 
+                break;
+
+            case 'team.updated':
+                if (currentRoute == 'teams.team.show') {
+                    $('#app-title').text(event.data.data.name);
+                    $('.team-inline-edit').val(event.data.data.name);
+                } else {
+                    ui.snackbar({
+                        message: 'Team name has been updated to' + event.data.data.name,
+                    });
+                }
                 break;
 
             case 'team.invitation.deleted':
