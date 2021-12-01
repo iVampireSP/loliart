@@ -334,11 +334,11 @@ window.util = {
             $('.mdui-ripple-wave').remove()
         },
         warning: () => {
-            $('body').css('cssText', 'transform: scale(0.98)')
-            $('body').css('overflow', 'hidden')
+            $('#main').css('cssText', 'transform: scale(0.98)')
+            $('#main').css('overflow', 'hidden')
             setTimeout(() => {
-                $('body').css('cssText', 'transform: unset')
-                $('body').css('cssText', 'unset')
+                $('#main').css('cssText', 'transform: unset')
+                $('#main').css('cssText', 'unset')
             }, 200)
         }
     },
