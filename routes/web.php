@@ -26,6 +26,7 @@ Route::domain('teams.' . config('app.domain'))->name('teams.')->middleware(['tea
     Route::get('/', [Controllers\TeamController::class, 'index'])->name('index')->withoutMiddleware(['teams_permission']);
     Route::post('/afk', [Controllers\TeamController::class, 'afk'])->name('afk')->withoutMiddleware(['teams_permission']);
     Route::get('/team/{team_id}/invite/{email}', [Controllers\TeamController::class, 'invite'])->name('invite')->middleware('permission:team.invite');
+    Route::put('/team', [Controllers\TeamController::class, 'update'])->name('update')->middleware('permission:team.update');
     Route::resource('/team', Controllers\TeamController::class)->withoutMiddleware(['teams_permission']);
     Route::get('/invitations', [Controllers\TeamInvitationsController::class, 'index'])->name('invitations')->middleware(['permission:team.invitations.access']);
     Route::post('/invitations', [Controllers\TeamInvitationsController::class, 'invite'])->name('invite')->middleware(['permission:team.invitations.invite']);
