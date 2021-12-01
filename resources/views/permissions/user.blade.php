@@ -16,8 +16,8 @@
     <ul class="mdui-list">
         @foreach ($roles as $role)
             <li class="mdui-list-item mdui-ripple">
-                <div class="mdui-list-item-content">{{ $role }}</div>
-                <a href="javascript: util.team.permission.role.revokeRoleFromUser({{ $user->id }},'{{ $role }}')"
+                <div class="mdui-list-item-content">{{ $role->display_name }}</div>
+                <a href="javascript: util.team.permission.role.revokeRoleFromUser({{ $user->id }},'{{ $role->name }}')"
                     mdui-tooltip="{content: '{{ tr('Delete') }}', position: 'left'}"
                     class="mdui-text-color-blue mdui-btn mdui-btn-icon mdui-ripple mdui-m-r-1"
                     style="border-radius: 50px !important">
