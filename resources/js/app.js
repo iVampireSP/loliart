@@ -3,8 +3,10 @@
 import Echo from 'laravel-echo'
 
 import ui from 'mdui'
+import NProgess from 'nprogress'
 
 window.jQuery = window.$ = require('jQuery')
+
 require('jquery-pjax');
 require('./util');
 require('./ziggy');
@@ -20,21 +22,22 @@ window.Echo = new Echo({
 
 window.currentRoute = null;
 
-window.Progress = {
-    show: () => {
-        $('#top-progress').fadeIn(100)
-    },
-    hide: () => {
-        $('#top-progress').fadeOut(100)
-    }
-}
+// window.Progress = {
+//     show: () => {
+//         $('#top-progress').fadeIn(100)
+//     },
+//     hide: () => {
+//         $('#top-progress').fadeOut(100)
+//     }
+// }
 
 $(document).ajaxStart(() => {
-    Progress.show()
+    NProgess.start();
 });
 
 $(document).ajaxComplete(() => {
-    Progress.hide()
+    NProgess.done();
+
 });
 
 $.ajaxSetup({
@@ -45,7 +48,12 @@ $.ajaxSetup({
     dataType: "json",
 });
 
+
+document.onreadystatechange = NProgess.done;
+
 $(() => {
+    NProgess.done();
+
     util.theme.update();
 
     currentRoute = route().current();
@@ -53,11 +61,11 @@ $(() => {
     $(document).pjax('a', '.pjax-container');
 
     $(document).on('pjax:start', () => {
-        Progress.show()
+        NProgess.start();
     });
 
     $(document).on('pjax:end', () => {
-        Progress.hide();
+        NProgess.done()
     });
 
     $(document).on("pjax:complete", () => {
@@ -93,7 +101,6 @@ $(() => {
 
         } else {
             util.theme.warning();
-
         }
     });
 

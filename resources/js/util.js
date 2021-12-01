@@ -332,7 +332,6 @@ window.util = {
         reload: () => {
             $('.mdui-tooltip-open').remove()
             $('.mdui-ripple-wave').remove()
-
         },
         warning: () => {
             $('body').css('cssText', 'transform: scale(0.98)')
