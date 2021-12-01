@@ -7,7 +7,8 @@
         "watch-poll": "mix watch -- --watch-options-poll=1000",
         "hot": "mix watch --hot",
         "prod": "npm run production",
-        "production": "mix --production"
+        "production": "mix --production",
+        "obfuscator": "./node_modules/.bin/javascript-obfuscator public/js/app.js --config obfuscator-config.json --output public/js/app.js"
     },
     "devDependencies": {
         "axios": "^0.21",
@@ -16,6 +17,7 @@
         "postcss": "^8.1.14"
     },
     "dependencies": {
+        "javascript-obfuscator": "^3.0.0",
         "jquery": "^3.6.0",
         "jquery-pjax": "^2.0.1",
         "laravel-echo": "^1.11.3",
