@@ -7,11 +7,14 @@
 
     <a onclick="util.team.user.invite()" class="mdui-btn mdui-color-theme-accent mdui-ripple">{{ tr('Invite User') }}</a>
     <ul class="mdui-list">
+
         @foreach ($invitations as $invitation)
 
             <li class="mdui-list-item mdui-ripple" @can('team.invitations.delete')
                 onclick="util.team.user.deleteInvitation({{ $invitation->id }})" @endcan>
-                <i class="mdui-list-item-icon mdui-icon material-icons">peoples</i>
+                <div class="mdui-list-item-avatar">
+                    <img src="avatar1.jpg" />
+                </div>
                 <div class="mdui-list-item-content">{{ $invitation->user->name }}</div>
                 <i class="mdui-list-item-icon mdui-icon material-icons">
                     @if (is_null($invitation->agree_at))
@@ -23,9 +26,8 @@
             </li>
 
         @endforeach
+
     </ul>
-
-
 
 
 @endsection
