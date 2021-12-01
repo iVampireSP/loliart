@@ -9,6 +9,9 @@ window.jQuery = window.$ = require('jQuery')
 
 require('jquery-pjax');
 require('./util');
+require('./util.event');
+require('./util.team');
+require('./util.theme');
 require('./ziggy');
 
 window.ui = window.mdui = ui
@@ -115,9 +118,9 @@ $(() => {
         };
     }
 
-    util.menu.update()
-    var title = document.title;
-    title = title.replace(' - ' + app.data.name, '');
-    $('#top-title').text(title);
+    util.menu.update();
+    util.theme.update();
     util.theme.version();
+
+    util.event.listen();
 })
