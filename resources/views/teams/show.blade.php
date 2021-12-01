@@ -6,9 +6,15 @@
     @can('Super Admin')
         <div class="mdui-typo-headline-opacity">{{ tr('Super Admin') }}</div>
     @endcan
-    <input class="mdui-typo-display-2 inline-edit team-inline-edit" value="{{ $team->name }}"
-        onchange="util.team.edit(this.value)" mdui-tooltip="{content: '{{ tr('Click to edit.') }}'}" maxlength="25" />
-    <br />
+
+    @can('team.update')
+        <input class="mdui-typo-display-2 inline-edit team-inline-edit" value="{{ $team->name }}"
+            onchange="util.team.edit(this.value)" mdui-tooltip="{content: '{{ tr('Click to edit.') }}'}" maxlength="25" />
+        <br />
+    @else
+        <div class="mdui-typo-display-1 current-team-text">{{ $team->name }}</div>
+    @endcan
+
     <a onclick="util.url.to(route('teams.invitations'))"
         class="mdui-btn mdui-color-theme-accent mdui-ripple">{{ tr('Invitations') }}</a>
 

@@ -36,19 +36,20 @@ window.util.event = {
                     $('#app-title').text(event.data.data.name);
                     $('.team-inline-edit').val(event.data.data.name);
                 } else if (currentRoute == 'teams.index') {
-                    $('.current-team-text').text(event.data.data.name);
                     $('.current-team-item').addClass('mdui-color-green');
                     $('.current-team-item *').css('color', 'white');
                     setTimeout(() => {
                         $('.current-team-item').removeClass('mdui-color-green');
                         $('.current-team-item *').css('color', 'inherit');
-
                     }, 500)
                 } else {
                     ui.snackbar({
                         message: 'Team name has been updated to ' + event.data.data.name,
                     });
                 }
+
+                $('.current-team-text').text(event.data.data.name);
+
                 break;
 
             case 'team.invitation.deleted':
