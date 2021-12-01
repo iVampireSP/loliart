@@ -109,6 +109,7 @@ $(() => {
             util.menu.update();
             ui.mutation();
             util.theme.reload();
+            $('.mdui-tab-indicator')[0].remove()
         };
     }
 
