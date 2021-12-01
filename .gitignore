@@ -14,3 +14,4 @@ yarn-error.log
 /.idea
 /.vscode
 laravel-echo-server.lock
+.DS_Store
