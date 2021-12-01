@@ -53,19 +53,18 @@ window.util.team = {
             }
         });
     },
-    delete: (id) => {
+    destroy: (id) => {
         ui.confirm('Really delete this team?', () => {
             $.ajax({
                 method: 'DELETE',
-                url: route('teams.delete', id),
+                url: route('teams.team.destroy', id),
                 success(data) {
                     if (data.status) {
-                        util.url.to(route('permission.index'))
-                        util.reload()
+                        util.url.to(route('teams.index'))
                     } else {
                         ui.snackbar({
                             position: 'right-bottom',
-                            message: 'Unable to delete invitation.'
+                            message: 'Unable to delete team.'
                         })
                     }
                 }
@@ -116,12 +115,6 @@ window.util.team = {
             });
         },
         kick: () => {
-
-        },
-        giveRole: () => {
-
-        },
-        givePermission: () => {
 
         }
     },
@@ -186,6 +179,29 @@ window.util.team = {
                     });
                 });
             },
+            assignRole: (id) => {
+                ui.prompt('Name of the role to assign.',
+                    (value) => {
+                        $.ajax({
+                            method: 'POST',
+                            url: route('permission.assignRoleToUser', id),
+                            data: {
+                                name: value,
+                            },
+                            success(data) {
+                                if (data.status) {
+                                    util.reload()
+                                } else {
+                                    ui.snackbar({
+                                        position: 'right-bottom',
+                                        message: 'Unable to create role.'
+                                    })
+                                }
+                            }
+                        });
+                    }
+                );
+            },
             givePermission: (name) => {
                 ui.prompt('What is the name of the permission?',
                     function (value) {
@@ -209,6 +225,35 @@ window.util.team = {
                     }
                 );
             },
+            givePermissionToUser: (id) => {
+                ui.prompt('What is the name of the permission?',
+                    (value) => {
+                        $.ajax({
+                            method: 'POST',
+                            url: route('permission.givePermissionToUser', id),
+                            data: {
+                                permission_name: value,
+                            },
+                            success(data) {
+                                if (data.status) {
+                                    util.reload()
+                                } else {
+                                    ui.snackbar({
+                                        position: 'right-bottom',
+                                        message: data.data
+                                    })
+                                }
+                            },
+                            error() {
+                                ui.snackbar({
+                                    position: 'right-bottom',
+                                    message: 'Unable to give permission.'
+                                })
+                            }
+                        });
+                    }
+                )
+            },
             removePermission: () => {
                 ui.confirm('Really delete this permission?', () => {
                     $.ajax({
@@ -217,6 +262,45 @@ window.util.team = {
                         success(data) {
                             if (data.status) {
                                 util.url.to(route('permission.index'))
+                            } else {
+                                ui.snackbar({
+                                    position: 'right-bottom',
+                                    message: 'Unable to delete role.'
+                                })
+                            }
+                        }
+                    });
+                });
+            },
+            revokePermissionFromUser: (id, permission_id) => {
+                ui.confirm('Really revoke this permission?', () => {
+                    $.ajax({
+                        method: 'DELETE',
+                        url: route('permission.deletePermissionFromUser', [id, permission_id]),
+                        success(data) {
+                            if (data.status) {
+                                util.reload()
+                            } else {
+                                ui.snackbar({
+                                    position: 'right-bottom',
+                                    message: 'Unable to revoke permission.'
+                                })
+                            }
+                        }
+                    });
+                });
+            },
+            revokeRoleFromUser: (id, role_name) => {
+                ui.confirm('Really revoke this role?', () => {
+                    $.ajax({
+                        method: 'DELETE',
+                        url: route('permission.deleteRoleFromUser', [id]),
+                        data: {
+                            name: role_name
+                        },
+                        success(data) {
+                            if (data.status) {
+                                util.reload()
                             } else {
                                 ui.snackbar({
                                     position: 'right-bottom',
