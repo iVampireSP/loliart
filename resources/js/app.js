@@ -71,18 +71,30 @@ $(() => {
     });
 
     $(document).on("pjax:error", (event) => {
-        event.preventDefault()
+        event.preventDefault();
+        util.theme.warning();
         window.history.back();
     });
 
-    $(document).ajaxError(function (event, xhr, options, data) {
-        if (xhr.status !== 200) {
-            mdui.snackbar({
+    $(document).ajaxError((event, xhr, options, data) => {
+        if (xhr.responseJSON != null && xhr.responseJSON != undefined) {
+            let json = xhr.responseJSON;
+            for (let i in json.errors) {
+                ui.snackbar({
+                    position: 'right-bottom',
+                    message: json.errors[i]
+                })
+            }
+        } else if (!xhr.responseText.status) {
+            ui.snackbar({
                 position: 'right-bottom',
-                message: 'Request failed.'
+                message: 'Something went wrong.'
             })
-        }
 
+        } else {
+            util.theme.warning();
+
+        }
     });
 
     if (window.history && window.history.pushState) {
