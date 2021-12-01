@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Team;
-use App\Models\TeamUser;
 use App\Models\User;
 use App\Traits\Teams;
+use App\Models\TeamUser;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Log;
 
 class TeamController extends Controller
 {
@@ -107,9 +108,26 @@ class TeamController extends Controller
      * @param  \App\Models\Team  $team
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Team $team)
+    public function update(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|max:20',
+        ]);
+
+        $team = Team::find(session('team_id'));
+
+        $team->name = $request->name;
+        $team->save();
+
+        // setPermissionsTeamId($team->id);
+        // User::find(1)->givePermissionTo('team.update');
+
+        broadcast(new \App\Events\TeamEvent($team, [
+            'type' => 'team.updated',
+            'data' => $team
+        ]));
+
+        return response()->json(['status' => 1, 'data' => $team->toArray()]);
     }
 
     /**
