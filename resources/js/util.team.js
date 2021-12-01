@@ -254,18 +254,18 @@ window.util.team = {
                     }
                 )
             },
-            removePermission: () => {
+            removePermission: (role, permission_name) => {
                 ui.confirm('Really delete this permission?', () => {
                     $.ajax({
                         method: 'DELETE',
-                        url: route('permission.role.delete', id),
+                        url: route('permission.role.permission.revoke', [role, permission_name]),
                         success(data) {
                             if (data.status) {
-                                util.url.to(route('permission.index'))
+                                util.reload()
                             } else {
                                 ui.snackbar({
                                     position: 'right-bottom',
-                                    message: 'Unable to delete role.'
+                                    message: 'Unable to delete permission.'
                                 })
                             }
                         }
