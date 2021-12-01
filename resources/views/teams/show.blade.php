@@ -12,8 +12,8 @@
     <a onclick="util.url.to(route('teams.invitations'))"
         class="mdui-btn mdui-color-theme-accent mdui-ripple">{{ tr('Invitations') }}</a>
 
-    <a onclick="util.url.to(route('teams.invitations'))"
-        class="mdui-btn mdui-color-theme-accent mdui-ripple">{{ tr('Edit Team') }}</a>
+    {{-- <a onclick="util.url.to(route('teams.invitations'))"
+        class="mdui-btn mdui-color-theme-accent mdui-ripple">{{ tr('Edit Team') }}</a> --}}
 
     <a onclick="util.url.to(route('teams.invitations'))"
         class="mdui-btn mdui-color-theme-accent mdui-ripple">{{ tr('Delete Team') }}</a>
