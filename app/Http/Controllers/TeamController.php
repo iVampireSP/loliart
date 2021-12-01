@@ -73,7 +73,7 @@ class TeamController extends Controller
     {
         $team = new Team();
         $team = $team->where('id', $id)->with('users')->firstOrFail();
-        $team_users = TeamUser::where('team_id', $id)->with('user')->get();
+        $team_users = TeamUser::where('team_id', $id)->with('user')->oldest()->get();
 
         // 切换团队
         $this->switchToTeam($team);
