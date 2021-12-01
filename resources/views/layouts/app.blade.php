@@ -33,8 +33,8 @@
                     class="mdui-icon material-icons-outlined">menu</i></span>
             <a href="{{ route('main.index') }}" class="mdui-typo-headline" style="font-weight: 400;"
                 id="app-title">{{ config('app.name') }}</a>
-            <a href="javascript:;" class="mdui-typo-title" style="font-weight: 400;"
-                id="top-title">{{ config('app.name') }}</a>
+            {{-- <a href="javascript:;" class="mdui-typo-title" style="font-weight: 400;"
+                id="top-title">{{ config('app.name') }}</a> --}}
             <div class="mdui-toolbar-spacer"></div>
             @auth
                 <span class="mdui-btn mdui-btn-icon mdui-ripple mdui-ripple-white" mdui-menu="{target: '#app-menu'}">
