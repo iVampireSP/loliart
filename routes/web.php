@@ -27,7 +27,7 @@ Route::domain('teams.' . config('app.domain'))->name('teams.')->middleware(['tea
     Route::post('/afk', [Controllers\TeamController::class, 'afk'])->name('afk')->withoutMiddleware(['teams_permission']);
     Route::get('/team/{team_id}/invite/{email}', [Controllers\TeamController::class, 'invite'])->name('invite')->middleware('permission:team.invite');
     Route::resource('/team', Controllers\TeamController::class)->withoutMiddleware(['teams_permission']);
-    Route::get('/invitations', [Controllers\TeamInvitationsController::class, 'index'])->name('invitations')->middleware(['permission:team.invitations.show']);
+    Route::get('/invitations', [Controllers\TeamInvitationsController::class, 'index'])->name('invitations')->middleware(['permission:team.invitations.access']);
     Route::post('/invitations', [Controllers\TeamInvitationsController::class, 'invite'])->name('invite')->middleware(['permission:team.invitations.invite']);
     Route::delete('/invitations/{id}', [Controllers\TeamInvitationsController::class, 'deleteInvite'])->name('invite.delete')->middleware(['permission:team.invitations.delete']);
     Route::get('/received_invitations', [Controllers\TeamInvitationsController::class, 'myInvitations'])->name('invite.received')->withoutMiddleware('teams_permission');
@@ -55,6 +55,10 @@ Route::domain('permission.' . config('app.domain'))->prefix('/')->name('permissi
 Route::post('logout', [Controllers\AuthController::class, 'logout'])->name('logout');
 
 
-// Route::fallback(function () {
-//     return 0;
-// });
+Route::fallback(function () {
+    return response()->json([
+        'status' => 0,
+        'code' => 404,
+        'data' => 'Not Found',
+    ]);
+});
