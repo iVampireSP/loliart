@@ -1,5 +1,6 @@
 <?php
 
+use App\Broadcasting;
 use Illuminate\Support\Facades\Broadcast;
 
 /*
@@ -20,3 +21,5 @@ Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
 Broadcast::channel('user.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;
 }, ['guards' => ['web', 'auth']]);
+
+Broadcast::channel('team.{id}', Broadcasting\TeamChannel::class, ['guards' => ['web', 'auth']]);
