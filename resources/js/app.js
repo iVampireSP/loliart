@@ -70,6 +70,21 @@ $(() => {
         event.preventDefault()
     });
 
+    $(document).on("pjax:error", (event) => {
+        event.preventDefault()
+        window.history.back();
+    });
+
+    $(document).ajaxError(function (event, xhr, options, data) {
+        if (xhr.status !== 200) {
+            mdui.snackbar({
+                position: 'right-bottom',
+                message: 'Request failed.'
+            })
+        }
+
+    });
+
     if (window.history && window.history.pushState) {
         window.onpopstate = () => {
             util.menu.update();
