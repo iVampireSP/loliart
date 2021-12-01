@@ -6,7 +6,8 @@
     @can('Super Admin')
         <div class="mdui-typo-headline-opacity">{{ tr('Super Admin') }}</div>
     @endcan
-    <input class="mdui-typo-display-2 inline-edit" value="{{ $team->name }}" onchange="util.team.edit(this.value)" />
+    <input class="mdui-typo-display-2 inline-edit team-inline-edit" value="{{ $team->name }}"
+        onchange="util.team.edit(this.value)" />
     <br />
     <a onclick="util.url.to(route('teams.invitations'))"
         class="mdui-btn mdui-color-theme-accent mdui-ripple">{{ tr('Invitations') }}</a>
@@ -33,7 +34,8 @@
 
     <script>
         $(() => {
-            window.team = {!! $team !!};
+            let currentTeam = {!! $team !!};
+            util.event.reSubscribe(currentTeam)
             util.theme.update()
         })
     </script>
