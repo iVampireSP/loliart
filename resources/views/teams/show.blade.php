@@ -15,14 +15,17 @@
         <div class="mdui-typo-display-1 current-team-text">{{ $team->name }}</div>
     @endcan
 
-    <a onclick="util.url.to(route('teams.invitations'))"
-        class="mdui-btn mdui-color-theme-accent mdui-ripple">{{ tr('Invitations') }}</a>
+    @can('team.edit')
+        <a onclick="util.url.to(route('teams.invitations'))"
+            class="mdui-btn mdui-color-theme-accent mdui-ripple">{{ tr('Invitations') }}</a>
+    @endcan
 
-    {{-- <a onclick="util.url.to(route('teams.invitations'))"
-        class="mdui-btn mdui-color-theme-accent mdui-ripple">{{ tr('Edit Team') }}</a> --}}
 
-    <a onclick="util.team.destroy({{ $team->id }})"
-        class="mdui-btn mdui-color-theme-accent mdui-ripple">{{ tr('Delete Team') }}</a>
+    @can('Super Admin')
+        <a onclick="util.team.destroy({{ $team->id }})"
+            class="mdui-btn mdui-color-theme-accent mdui-ripple">{{ tr('Delete Team') }}</a>
+    @endcan
+
 
     <ul class="mdui-list">
         @foreach ($team_users as $user)
