@@ -21,6 +21,11 @@
                         {{ tr('Permission name: ') }}{{ $permission->name }}</div>
                     <div class="mdui-list-item-text mdui-list-item-two-line">{{ tr($permission->display_name) }}</div>
                 </div>
+                <a href="javascript: void(0)" mdui-tooltip="{content: '{{ tr('Delete') }}', position: 'left'}"
+                    class="mdui-text-color-blue mdui-btn mdui-btn-icon mdui-ripple mdui-m-r-1"
+                    style="border-radius: 50px !important">
+                    <i class="mdui-list-item-icon mdui-icon material-icons">delete</i>
+                </a>
             </li>
         @endforeach
     </ul>

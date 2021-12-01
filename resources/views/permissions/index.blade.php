@@ -8,7 +8,7 @@
     @can('role.edit')
         <div class="mdui-tab" mdui-tab>
             <a href="#roles" class="mdui-ripple">{{ tr('Roles') }}</a>
-            <a href="#permissions" class="mdui-ripple">{{ tr('User Permissions') }}</a>
+            <a href="#users" class="mdui-ripple">{{ tr('Users') }}</a>
             <a href="#" onclick="util.url.to(route('permission.all'))" class="mdui-ripple">{{ tr('Permissions Book') }}</a>
         </div>
     @endcan
@@ -31,13 +31,15 @@
 
     </ul>
 </div>
-<div id="permissions" class="mdui-p-a-2">
+<div id="users" class="mdui-p-a-2">
     <ul class="mdui-list">
-        @foreach ($permissions as $permission)
-            <li class="mdui-list-item mdui-ripple" @can('role.delete') can-delete="true" @endcan>
-                <i class="mdui-list-item-icon mdui-icon material-icons">policy</i>
-                <div class="mdui-list-item-content">{{ $permission }}</div>
-            </li>
+        @foreach ($users as $user)
+            <a href="javascript:util.url.to(route('permission.user_role_and_permission', {{ $user->user_id }}))">
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons">peoples</i>
+                    <div class="mdui-list-item-content">{{ $user->user->name }}</div>
+                </li>
+            </a>
         @endforeach
     </ul>
 </div>
