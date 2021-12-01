@@ -17,9 +17,9 @@ window.util.menu = {
 
 window.util.theme = {
     update: () => {
-        let title = document.title;
-        title = title.replace(' - ' + app.data.name, '');
-        $('#top-title').text(title);
+        // let title = document.title;
+        // title = title.replace(' - ' + app.data.name, '');
+        // $('#top-title').text(title);
         if (!team) {
             $('#app-title').text(app.data.name)
             $('#top-appbar .top-bar').removeClass('mdui-color-white')
