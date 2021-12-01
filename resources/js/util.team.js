@@ -38,14 +38,10 @@ window.util.team = {
             },
             success(data) {
                 if (data.status) {
-                    util.url.to(route('permission.index'))
                     window.team = data.data;
                     util.theme.update();
                 } else {
-                    ui.snackbar({
-                        position: 'right-bottom',
-                        message: 'Unable to delete invitation.'
-                    })
+                    util.theme.warning();
                 }
             },
             error() {
@@ -104,8 +100,7 @@ window.util.team = {
                     url: route('teams.invite.delete', id),
                     success(data) {
                         if (data.status) {
-                            util.url.to(route('permission.index'))
-                            util.reload()
+                            util.url.to(route('teams.invitations'))
                         } else {
                             ui.snackbar({
                                 position: 'right-bottom',

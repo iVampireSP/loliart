@@ -67,6 +67,40 @@ window.util.event = {
 
                 break;
 
+            case 'team.users.updated':
+                if (currentRoute == 'teams.team.show') {
+                    util.reload()
+                }
+
+                break;
+
+
+            case 'team.invitations.updated':
+                if (currentRoute == 'teams.invitations') {
+                    util.reload()
+                }
+
+                break;
+
+            case 'team.users.beenKicked':
+                if (currentRoute == 'teams.index') {
+                    util.reload()
+                }
+
+                if (currentRoute == 'teams.team.show') {
+                    util.url.to(route('teams.index'))
+                }
+
+                ui.snackbar({
+                    message: 'You have been kick from ' + event.data.data.name,
+                    position: 'right-bottom',
+                });
+
+                util.team.afk()
+
+                break;
+
+
             default:
                 break;
         }

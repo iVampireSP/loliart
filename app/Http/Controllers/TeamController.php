@@ -158,7 +158,17 @@ class TeamController extends Controller
                 'data' => 'You are not allowed to kick youself.'
             ]);
         }
+
         TeamUser::where('user_id', $id)->where('team_id', session('team_id'))->delete();
+
+        broadcast(new \App\Events\TeamEvent($team, [
+            'type' => 'team.users.updated'
+        ]));
+
+        broadcast(new \App\Events\UserEvent($id, [
+            'type' => 'team.users.beenKicked',
+            'data' => $team,
+        ]));
 
         return response()->json([
             'status' => 1,

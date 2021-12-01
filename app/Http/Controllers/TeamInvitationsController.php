@@ -46,6 +46,10 @@ class TeamInvitationsController extends Controller
             'team_id' => session('team_id')
         ]);
 
+        broadcast(new \App\Events\TeamEvent($team, [
+            'type' => 'team.invitations.updated',
+        ]));
+
         broadcast(new \App\Events\UserEvent($user->id, [
             'type' => 'team.invitation.received',
             'name' => $team->name,
@@ -72,6 +76,10 @@ class TeamInvitationsController extends Controller
                 'name' => $invitation->team->name,
             ]));
 
+            broadcast(new \App\Events\TeamEvent($invitation->team, [
+                'type' => 'team.invitations.updated',
+            ]));
+
             return response()->json(['status' => 1, 'data' => 'Delete successfully.']);
         } else {
             return response()->json(['status' => 0, 'data' => 'Invitation not found.']);
@@ -80,7 +88,7 @@ class TeamInvitationsController extends Controller
 
     public function agree($id)
     {
-        $invitation = TeamInvitation::find($id);
+        $invitation = TeamInvitation::with('team')->find($id);
         if (is_null($invitation)) {
             return response()->json(['status' => 0, 'data' => 'Invitation not found.']);
         } elseif (is_null($invitation->agree_at)) {
@@ -97,6 +105,11 @@ class TeamInvitationsController extends Controller
             setPermissionsTeamId($invitation->team_id);
             auth()->user()->givePermissionTo('team.invitations.access');
 
+
+            broadcast(new \App\Events\TeamEvent($invitation->team, [
+                'type' => 'team.invitations.updated',
+            ]));
+
             return response()->json(['status' => 1, 'data' => 'Accepted successfully.']);
         } else {
             return response()->json(['status' => 0, 'data' => 'Already agree.']);
@@ -105,12 +118,16 @@ class TeamInvitationsController extends Controller
 
     public function reject($id)
     {
-        $invitation = TeamInvitation::find($id);
+        $invitation = TeamInvitation::with('team')->find($id);
         if (is_null($invitation)) {
             return response()->json(['status' => 0, 'data' => 'Invitation not found.']);
         } elseif (is_null($invitation->agree_at)) {
             // delete invitation
             $invitation->delete();
+
+            broadcast(new \App\Events\TeamEvent($invitation->team, [
+                'type' => 'team.invitations.updated',
+            ]));
 
             return response()->json(['status' => 1, 'data' => 'Rejected successfully.']);;
         }
