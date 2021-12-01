@@ -153,6 +153,13 @@ html {
     animation-play-state: paused;
 }
 
+.inline-edit {
+    background: transparent;
+    color: inherit;
+    border: none;
+    outline: none;
+}
+
 @keyframes turn {
     0% {
         -webkit-transform: rotate(0deg);
