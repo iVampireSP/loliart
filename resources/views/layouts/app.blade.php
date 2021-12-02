@@ -45,7 +45,9 @@
         </div>
     </header>
 
-    <x-app-menu />
+    <div class="mdui-drawer mdui-color-white mdui-drawer-close mdui-drawer-full-height" id="main-drawer">
+        @yield('app-menu', View::make('components.app-menu'))
+    </div>
 
     <div class="mdui-container pjax-container" id="main">
         <div class="mdui-m-t-3">
