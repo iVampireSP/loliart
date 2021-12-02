@@ -25,7 +25,7 @@ Route::domain('login.' . config('app.domain'))->prefix('/')->name('login.')->gro
 Route::domain('teams.' . config('app.domain'))->name('teams.')->middleware(['teams_permission', 'auth'])->group(function () {
     Route::get('/', [Controllers\TeamController::class, 'index'])->name('index')->withoutMiddleware(['teams_permission']);
     Route::post('/afk', [Controllers\TeamController::class, 'afk'])->name('afk')->withoutMiddleware(['teams_permission']);
-    Route::get('/team/{team_id}/invite/{email}', [Controllers\TeamController::class, 'invite'])->name('invite')->middleware('permission:team.edit');
+    Route::get('/team/{team_id}/invite/{email}', [Controllers\TeamController::class, 'invite'])->name('invites')->middleware('permission:team.edit');
     Route::put('/team', [Controllers\TeamController::class, 'update'])->name('update')->middleware('permission:team.edit');
     Route::resource('/team', Controllers\TeamController::class)->withoutMiddleware(['teams_permission']);
     Route::delete('/team/{team}', [Controllers\TeamController::class, 'destroy'])->name('team.destroy')->middleware('permission:team.edit');
