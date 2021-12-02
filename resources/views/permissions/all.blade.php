@@ -7,6 +7,9 @@
 
     <ul class="mdui-list">
         <li class="mdui-list-item mdui-ripple">
+            <i class="mdui-list-item-icon mdui-icon material-icons">
+                group_work
+            </i>
             <div class="mdui-list-item-content">
                 <div class="mdui-list-item-title mdui-list-item-one-line">
                     {{ tr('Role name: ') }}Super Admin</div>
@@ -15,6 +18,9 @@
         </li>
         @foreach ($permissions as $permission)
             <li class="mdui-list-item mdui-ripple">
+                <i class="mdui-list-item-icon mdui-icon material-icons">
+                    shield
+                </i>
                 <div class="mdui-list-item-content">
                     <div class="mdui-list-item-title mdui-list-item-one-line">
                         {{ tr('Permission name: ') }}{{ $permission->name }}</div>
