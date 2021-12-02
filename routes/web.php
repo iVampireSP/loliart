@@ -25,12 +25,12 @@ Route::domain('login.' . config('app.domain'))->prefix('/')->name('login.')->gro
 Route::domain('teams.' . config('app.domain'))->name('teams.')->middleware(['teams_permission', 'auth'])->group(function () {
     Route::get('/', [Controllers\TeamController::class, 'index'])->name('index')->withoutMiddleware(['teams_permission']);
     Route::post('/afk', [Controllers\TeamController::class, 'afk'])->name('afk')->withoutMiddleware(['teams_permission']);
-    Route::get('/team/{team_id}/invite/{email}', [Controllers\TeamController::class, 'invite'])->name('invite')->middleware('permission:team.invite');
+    Route::get('/team/{team_id}/invite/{email}', [Controllers\TeamController::class, 'invite'])->name('invite')->middleware('permission:team.edit');
     Route::put('/team', [Controllers\TeamController::class, 'update'])->name('update')->middleware('permission:team.edit');
     Route::resource('/team', Controllers\TeamController::class)->withoutMiddleware(['teams_permission']);
     Route::delete('/team/{team}', [Controllers\TeamController::class, 'destroy'])->name('team.destroy')->middleware('permission:team.edit');
     Route::get('/invitations', [Controllers\TeamInvitationsController::class, 'index'])->name('invitations')->middleware(['permission:team.invitations.access']);
-    Route::post('/invitations', [Controllers\TeamInvitationsController::class, 'invite'])->name('invite')->middleware(['permission:team.invitations.invite']);
+    Route::post('/invitations', [Controllers\TeamInvitationsController::class, 'invite'])->name('invite')->middleware(['permission:team.edit']);
     Route::delete('/invitations/{id}', [Controllers\TeamInvitationsController::class, 'deleteInvite'])->name('invite.delete')->middleware(['permission:team.edit']);
     Route::get('/received_invitations', [Controllers\TeamInvitationsController::class, 'myInvitations'])->name('invite.received')->withoutMiddleware('teams_permission');
     Route::post('/invitation/{id}/agree', [Controllers\TeamInvitationsController::class, 'agree'])->name('invite.agree')->withoutMiddleware('teams_permission');
@@ -49,15 +49,15 @@ Route::domain('password.' . config('app.domain'))->prefix('/')->name('password.'
 Route::domain('permission.' . config('app.domain'))->prefix('/')->name('permission.')->middleware(['auth', 'teams_permission'])->group(function () {
     Route::get('/', [Controllers\PermissionController::class, 'index'])->name('index');
     Route::get('/all', [Controllers\PermissionController::class, 'all'])->name('all');
-    Route::get('/roles/user/{user}', [Controllers\PermissionController::class, 'user_role_and_permission'])->name('user_role_and_permission')->middleware('permission:role.user.show');
-    Route::post('/roles/user/{user}', [Controllers\PermissionController::class, 'assignRoleToUser'])->name('assignRoleToUser')->middleware('permission:role.user.edit');
-    Route::post('/roles/user/{user}/permissions', [Controllers\PermissionController::class, 'givePermissionToUser'])->name('givePermissionToUser')->middleware('permission:role.user.edit');
-    Route::delete('/roles/user/{user}/permissions/{permission}', [Controllers\PermissionController::class, 'deletePermissionFromUser'])->name('deletePermissionFromUser')->middleware('permission:role.user.edit');
-    Route::delete('/roles/user/{user}', [Controllers\PermissionController::class, 'deleteRoleFromUser'])->name('deleteRoleFromUser')->middleware('permission:role.user.edit');
+    Route::get('/roles/user/{user}', [Controllers\PermissionController::class, 'user_role_and_permission'])->name('user_role_and_permission')->middleware('permission:role.show');
+    Route::post('/roles/user/{user}', [Controllers\PermissionController::class, 'assignRoleToUser'])->name('assignRoleToUser')->middleware('permission:role.edit');
+    Route::post('/roles/user/{user}/permissions', [Controllers\PermissionController::class, 'givePermissionToUser'])->name('givePermissionToUser')->middleware('permission:role.edit');
+    Route::delete('/roles/user/{user}/permissions/{permission}', [Controllers\PermissionController::class, 'deletePermissionFromUser'])->name('deletePermissionFromUser')->middleware('permission:role.edit');
+    Route::delete('/roles/user/{user}', [Controllers\PermissionController::class, 'deleteRoleFromUser'])->name('deleteRoleFromUser')->middleware('permission:role.edit');
     Route::get('/roles/{id}', [Controllers\PermissionController::class, 'edit'])->name('role.edit')->middleware('permission:role.edit');
-    Route::post('/roles', [Controllers\PermissionController::class, 'createRole'])->name('role.store')->middleware('permission:role.create');
+    Route::post('/roles', [Controllers\PermissionController::class, 'createRole'])->name('role.store')->middleware('permission:role.edit');
     Route::delete('/roles/{id}', [Controllers\PermissionController::class, 'deleteRole'])->name('role.delete')->middleware('permission:role.edit');
-    Route::post('/roles/{name}', [Controllers\PermissionController::class, 'givePermissionToRole'])->name('role.givePermission')->middleware('permission:role.givePermission');
+    Route::post('/roles/{name}', [Controllers\PermissionController::class, 'givePermissionToRole'])->name('role.givePermission')->middleware('permission:role.edit');
     Route::put('/roles/{name}', [Controllers\PermissionController::class, 'update'])->name('role.update')->middleware('permission:team.edit');
     Route::delete('/roles/{id}', [Controllers\PermissionController::class, 'deleteRole'])->name('role.delete')->middleware('permission:role.edit');
     Route::delete('/roles/{role}/permission/{permission_name}', [Controllers\PermissionController::class, 'revokePermissionFromRole'])->name('role.permission.revoke')->middleware('permission:role.edit');
