@@ -51,6 +51,7 @@
             $(`#user-${user.id} li`).append(
                 `<i class="mdui-list-item-icon mdui-icon material-icons" mdui-tooltip="{content: '{{ tr('You') }}', position: 'left'}">account_circle</i>`
             );
+            $(`#user-${user.id}`).attr('href', null);
         })
     </script>
 
