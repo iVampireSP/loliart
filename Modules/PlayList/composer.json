@@ -1,0 +1,23 @@
+{
+    "name": "ivampiresp/playlist",
+    "description": "",
+    "authors": [
+        {
+            "name": "iVampireSP",
+            "email": "im@ivampiresp.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\PlayList\\": ""
+        }
+    }
+}
