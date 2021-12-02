@@ -31,7 +31,7 @@
 
     <ul class="mdui-list">
         @foreach ($team_users as $user)
-            <a href="javascript: util.team.user.kick({{ $user->user_id }})">
+            <a href="javascript: @can('team.edit') util.team.user.kick({{ $user->user_id }}) @else void(0) @endcan">
                 <li class=" mdui-list-item mdui-ripple">
                     <div class="mdui-list-item-avatar">
                         <img src="{{ avatar($user->user->email) }}" />
@@ -41,7 +41,6 @@
             </a>
         @endforeach
     </ul>
-
 
     <script>
         $(() => {
