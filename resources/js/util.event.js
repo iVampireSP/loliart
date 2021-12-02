@@ -70,7 +70,7 @@ window.util.event = {
                 break;
 
             case 'team.users.updated':
-                if (currentRoute == 'teams.team.show') {
+                if (currentRoute == 'teams.team.show' || currentRoute == 'teams.invitations') {
                     util.reload()
                 }
 
