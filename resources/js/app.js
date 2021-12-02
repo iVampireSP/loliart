@@ -81,10 +81,14 @@ $(() => {
         event.preventDefault()
     });
 
-    $(document).on("pjax:error", (event) => {
-        event.preventDefault();
+    $(document).on("pjax:error", (event, xhr) => {
+        if (xhr.statusText == 'abort') {
+            event.preventDefault();
+        } else {
+            window.history.back();
+        }
         util.theme.warning();
-        window.history.back();
+
     });
 
     $(document).ajaxError((event, xhr, options, data) => {
