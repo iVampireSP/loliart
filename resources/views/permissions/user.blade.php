@@ -3,7 +3,7 @@
 @section('title', $user->name . tr('\'s role and permissions'))
 
 @section('content')
-    <div class="mdui-typo-display-1">{{ $user->name . tr('\'s role and permissions') }}</div>
+    <div class="mdui-typo-display-1 mdui-m-b-1">{{ $user->name . tr('\'s role and permissions') }}</div>
 
     <a onclick="util.team.permission.role.assignRole({{ $user->id }})"
         class="mdui-btn mdui-color-theme-accent mdui-ripple">{{ tr('Assign a role') }}</a>
