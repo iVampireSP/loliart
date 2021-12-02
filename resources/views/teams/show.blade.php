@@ -25,6 +25,9 @@
             class="mdui-btn mdui-color-theme-accent mdui-ripple">{{ tr('Delete Team') }}</a>
     @endcan
 
+    @unlessrole('Super Admin')
+        <a onclick="util.team.user.leave()" class="mdui-btn mdui-color-theme-accent mdui-ripple">{{ tr('Leave Team') }}</a>
+    @endunlessrole
 
     <ul class="mdui-list">
         @foreach ($team_users as $user)

@@ -120,7 +120,6 @@ window.util.event = {
           $('#app-title').text(event.data.data.name);
           $('.team-inline-edit').val(event.data.data.name);
         } else if (currentRoute == 'teams.index') {
-          $('.current-team-text').text(event.data.data.name);
           $('.current-team-item').addClass('mdui-color-green');
           $('.current-team-item *').css('color', 'white');
           setTimeout(function () {
@@ -128,11 +127,14 @@ window.util.event = {
             $('.current-team-item *').css('color', 'inherit');
           }, 500);
         } else {
+          window.team = event.data.data;
           ui.snackbar({
             message: 'Team name has been updated to ' + event.data.data.name
           });
         }
 
+        $('#app-title').text(event.data.data.name);
+        $('.current-team-text').text(event.data.data.name);
         break;
 
       case 'team.invitation.deleted':
@@ -148,6 +150,54 @@ window.util.event = {
           });
         }
 
+        break;
+
+      case 'team.users.updated':
+        if (currentRoute == 'teams.team.show' || currentRoute == 'teams.invitations') {
+          util.reload();
+        }
+
+        break;
+
+      case 'team.invitations.updated':
+        if (currentRoute == 'teams.invitations' || currentRoute == 'teams.team.show') {
+          util.reload();
+        }
+
+        break;
+
+      case 'team.permission.updated':
+        util.reload();
+        ui.snackbar({
+          message: 'Your permission has been updated.',
+          position: 'right-bottom'
+        });
+        break;
+
+      case 'team.users.beenKicked':
+        if (currentRoute == 'teams.index') {
+          util.reload();
+        }
+
+        if (currentRoute == 'teams.team.show') {
+          util.url.to(route('teams.index'));
+        }
+
+        ui.snackbar({
+          message: 'You have been kick from ' + event.data.data.name,
+          position: 'right-bottom'
+        });
+        util.team.afk();
+        break;
+
+      case 'team.deleted':
+        util.url.to(route('teams.index'));
+        ui.snackbar({
+          message: 'Your team has been deleted.',
+          position: 'right-bottom'
+        });
+        util.reload();
+        util.team.afk();
         break;
 
       default:
@@ -197,8 +247,8 @@ window.util.team = {
         data: {
           name: value
         },
-        success: function success() {
-          util.reload();
+        success: function success(data) {
+          util.url.to(route('teams.team.show', data.data.id));
         }
       });
     });
@@ -226,14 +276,10 @@ window.util.team = {
       },
       success: function success(data) {
         if (data.status) {
-          util.url.to(route('permission.index'));
           window.team = data.data;
           util.theme.update();
         } else {
-          ui.snackbar({
-            position: 'right-bottom',
-            message: 'Unable to delete invitation.'
-          });
+          util.theme.warning();
         }
       },
       error: function error() {
@@ -241,19 +287,20 @@ window.util.team = {
       }
     });
   },
-  "delete": function _delete(id) {
+  destroy: function destroy(id) {
     ui.confirm('Really delete this team?', function () {
       $.ajax({
         method: 'DELETE',
-        url: route('teams.delete', id),
+        url: route('teams.team.destroy', id),
         success: function success(data) {
           if (data.status) {
-            util.url.to(route('permission.index'));
-            util.reload();
+            util.url.to(route('teams.index'));
+            window.team = null;
+            util.theme.update();
           } else {
             ui.snackbar({
               position: 'right-bottom',
-              message: 'Unable to delete invitation.'
+              message: 'Unable to delete team.'
             });
           }
         }
@@ -289,8 +336,7 @@ window.util.team = {
           url: route('teams.invite.delete', id),
           success: function success(data) {
             if (data.status) {
-              util.url.to(route('permission.index'));
-              util.reload();
+              util.url.to(route('teams.invitations'));
             } else {
               ui.snackbar({
                 position: 'right-bottom',
@@ -301,9 +347,42 @@ window.util.team = {
         });
       });
     },
-    kick: function kick() {},
-    giveRole: function giveRole() {},
-    givePermission: function givePermission() {}
+    kick: function kick(user_id) {
+      ui.confirm('Kick this user?', function () {
+        $.ajax({
+          method: 'DELETE',
+          url: route('teams.user.kick', user_id),
+          success: function success(data) {
+            if (data.status) {
+              util.reload();
+            } else {
+              ui.snackbar({
+                position: 'right-bottom',
+                message: 'Unable to kick user.'
+              });
+            }
+          }
+        });
+      });
+    },
+    leave: function leave() {
+      ui.confirm('Leave this team?', function () {
+        $.ajax({
+          method: 'POST',
+          url: route('teams.team.leave'),
+          success: function success(data) {
+            if (data.status) {
+              util.url.to(route('teams.index'));
+            } else {
+              ui.snackbar({
+                position: 'right-bottom',
+                message: 'Unable to leave.'
+              });
+            }
+          }
+        });
+      });
+    }
   },
   permission: {
     role: {
@@ -364,6 +443,27 @@ window.util.team = {
           });
         });
       },
+      assignRole: function assignRole(id) {
+        ui.prompt('Name of the role to assign.', function (value) {
+          $.ajax({
+            method: 'POST',
+            url: route('permission.assignRoleToUser', id),
+            data: {
+              name: value
+            },
+            success: function success(data) {
+              if (data.status) {
+                util.reload();
+              } else {
+                ui.snackbar({
+                  position: 'right-bottom',
+                  message: 'Unable to create role.'
+                });
+              }
+            }
+          });
+        });
+      },
       givePermission: function givePermission(name) {
         ui.prompt('What is the name of the permission?', function (value) {
           $.ajax({
@@ -385,14 +485,80 @@ window.util.team = {
           });
         });
       },
-      removePermission: function removePermission() {
+      givePermissionToUser: function givePermissionToUser(id) {
+        ui.prompt('What is the name of the permission?', function (value) {
+          $.ajax({
+            method: 'POST',
+            url: route('permission.givePermissionToUser', id),
+            data: {
+              permission_name: value
+            },
+            success: function success(data) {
+              if (data.status) {
+                util.reload();
+              } else {
+                ui.snackbar({
+                  position: 'right-bottom',
+                  message: data.data
+                });
+              }
+            },
+            error: function error() {
+              ui.snackbar({
+                position: 'right-bottom',
+                message: 'Unable to give permission.'
+              });
+            }
+          });
+        });
+      },
+      removePermission: function removePermission(role, permission_name) {
         ui.confirm('Really delete this permission?', function () {
           $.ajax({
             method: 'DELETE',
-            url: route('permission.role.delete', id),
+            url: route('permission.role.permission.revoke', [role, permission_name]),
             success: function success(data) {
               if (data.status) {
-                util.url.to(route('permission.index'));
+                util.reload();
+              } else {
+                ui.snackbar({
+                  position: 'right-bottom',
+                  message: 'Unable to delete permission.'
+                });
+              }
+            }
+          });
+        });
+      },
+      revokePermissionFromUser: function revokePermissionFromUser(id, permission_id) {
+        ui.confirm('Really revoke this permission?', function () {
+          $.ajax({
+            method: 'DELETE',
+            url: route('permission.deletePermissionFromUser', [id, permission_id]),
+            success: function success(data) {
+              if (data.status) {
+                util.reload();
+              } else {
+                ui.snackbar({
+                  position: 'right-bottom',
+                  message: 'Unable to revoke permission.'
+                });
+              }
+            }
+          });
+        });
+      },
+      revokeRoleFromUser: function revokeRoleFromUser(id, role_name) {
+        ui.confirm('Really revoke this role?', function () {
+          $.ajax({
+            method: 'DELETE',
+            url: route('permission.deleteRoleFromUser', [id]),
+            data: {
+              name: role_name
+            },
+            success: function success(data) {
+              if (data.status) {
+                util.reload();
               } else {
                 ui.snackbar({
                   position: 'right-bottom',
@@ -30375,10 +30541,14 @@ $(function () {
   $(document).on("pjax:timeout", function (event) {
     event.preventDefault();
   });
-  $(document).on("pjax:error", function (event) {
-    event.preventDefault();
+  $(document).on("pjax:error", function (event, xhr) {
+    if (xhr.statusText == 'abort') {
+      event.preventDefault();
+    } else {
+      window.history.back();
+    }
+
     util.theme.warning();
-    window.history.back();
   });
   $(document).ajaxError(function (event, xhr, options, data) {
     if (xhr.responseJSON != null && xhr.responseJSON != undefined) {
@@ -30390,11 +30560,6 @@ $(function () {
           message: json.errors[i]
         });
       }
-    } else if (!xhr.responseText.status) {
-      mdui__WEBPACK_IMPORTED_MODULE_1__["default"].snackbar({
-        position: 'right-bottom',
-        message: 'Something went wrong.'
-      });
     } else {
       util.theme.warning();
     }
@@ -30406,7 +30571,7 @@ $(function () {
       mdui__WEBPACK_IMPORTED_MODULE_1__["default"].mutation();
       util.theme.reload();
 
-      if ($('.mdui-tab-indicator').length) {
+      if ($('.mdui-tab-indicator').length > 1) {
         $('.mdui-tab-indicator')[0].remove();
       }
     };
