@@ -116,9 +116,11 @@ window.util.event = {
                 util.url.to(route('teams.index'))
 
                 ui.snackbar({
-                    message: 'Team ' + event.data.data.name + 'has been deleted.',
+                    message: 'Your team has been deleted.',
                     position: 'right-bottom',
                 });
+
+                util.reload()
 
                 util.team.afk()
 
