@@ -18,28 +18,28 @@
                 class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent">{{ tr('Create Role') }}</button>
             <ul class="mdui-list">
                 @foreach ($roles as $role)
-                <a href="javascript: util.url.to(route('permission.role.edit', '{{ $role->name }}')) @endcan">
+                    <a href="javascript: util.url.to(route('permission.role.edit', '{{ $role->name }}'))">
+                        <li class="mdui-list-item mdui-ripple">
+                            <i class="mdui-list-item-icon mdui-icon material-icons">policy</i>
+                            <div class="mdui-list-item-content">{{ $role->display_name }}</div>
+                        </li>
+                    </a>
+                @endforeach
+            @endcan
+
+        </ul>
+    </div>
+    <div id="users" class="mdui-p-a-2">
+        <ul class="mdui-list">
+            @foreach ($users as $user)
+                <a href="javascript:util.url.to(route('permission.user_role_and_permission', {{ $user->user_id }}))">
                     <li class="mdui-list-item mdui-ripple">
-                        <i class="mdui-list-item-icon mdui-icon material-icons">policy</i>
-                        <div class="mdui-list-item-content">{{ $role->display_name }}</div>
+                        <i class="mdui-list-item-icon mdui-icon material-icons">peoples</i>
+                        <div class="mdui-list-item-content">{{ $user->user->name }}</div>
                     </li>
                 </a>
             @endforeach
-        @endcan
-
-    </ul>
-</div>
-<div id="users" class="mdui-p-a-2">
-    <ul class="mdui-list">
-        @foreach ($users as $user)
-            <a href="javascript:util.url.to(route('permission.user_role_and_permission', {{ $user->user_id }}))">
-                <li class="mdui-list-item mdui-ripple">
-                    <i class="mdui-list-item-icon mdui-icon material-icons">peoples</i>
-                    <div class="mdui-list-item-content">{{ $user->user->name }}</div>
-                </li>
-            </a>
-        @endforeach
-    </ul>
-</div>
+        </ul>
+    </div>
 
 @endsection
