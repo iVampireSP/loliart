@@ -260,6 +260,10 @@ a {
     top: 4px;
 }
 
+#nprogress .spinner {
+    display: none !important;
+}
+
 @media (prefers-color-scheme: dark) {
     .mdui-drawer {
         background-color: #303030 !important;
