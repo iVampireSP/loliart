@@ -96,12 +96,6 @@ $(() => {
                     message: json.errors[i]
                 })
             }
-        } else if (!xhr.responseText.status) {
-            ui.snackbar({
-                position: 'right-bottom',
-                message: 'Something went wrong.'
-            })
-
         } else {
             util.theme.warning();
         }
