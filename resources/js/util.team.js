@@ -8,8 +8,8 @@ window.util.team = {
                     data: {
                         name: value,
                     },
-                    success() {
-                        util.reload()
+                    success(data) {
+                        util.url.to(route('teams.team.show', data.data.id))
                     }
                 });
             }
