@@ -137,6 +137,11 @@ class TeamController extends Controller
     {
         try {
             $team->delete();
+
+            broadcast(new \App\Events\TeamEvent($team, [
+                'type' => 'team.deleted',
+            ]));
+
             return response()->json([
                 'status' => 1,
             ]);
