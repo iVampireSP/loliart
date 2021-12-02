@@ -20,7 +20,11 @@ class TeamsPermission
         if (!empty(auth()->user())) {
             $team = session('team');
             // 检查团队是否存在
-            $team = Team::find($team->id);
+            if (is_null($team) || !$team) {
+                $team = null;
+            } else {
+                $team = Team::find($team->id);
+            }
             if (is_null($team) || !$team) {
                 session()->forget('team');
                 session()->forget('team_id');
