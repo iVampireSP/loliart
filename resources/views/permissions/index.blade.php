@@ -20,7 +20,7 @@
                 @foreach ($roles as $role)
                     <a href="javascript: util.url.to(route('permission.role.edit', '{{ $role->name }}'))">
                         <li class="mdui-list-item mdui-ripple">
-                            <i class="mdui-list-item-icon mdui-icon material-icons">policy</i>
+                            <i class="mdui-list-item-icon mdui-icon material-icons">group_work</i>
                             <div class="mdui-list-item-content">{{ $role->display_name }}</div>
                         </li>
                     </a>
@@ -34,7 +34,7 @@
             @foreach ($users as $user)
                 <a href="javascript:util.url.to(route('permission.user_role_and_permission', {{ $user->user_id }}))">
                     <li class="mdui-list-item mdui-ripple">
-                        <i class="mdui-list-item-icon mdui-icon material-icons">peoples</i>
+                        <i class="mdui-list-item-icon mdui-icon material-icons">person</i>
                         <div class="mdui-list-item-content">{{ $user->user->name }}</div>
                     </li>
                 </a>
