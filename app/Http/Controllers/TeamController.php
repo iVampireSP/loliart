@@ -179,4 +179,27 @@ class TeamController extends Controller
             'status' => 1,
         ]);
     }
+
+    public function leave()
+    {
+        $team = Team::find(session('team_id'));
+
+        $user_id = auth()->id();
+        if ($user_id == $team->user_id) {
+            return response()->json([
+                'status' => 0,
+                'data' => 'Super admin is not allowed to leave.'
+            ]);
+        }
+
+        TeamUser::where('user_id', $user_id)->where('team_id', session('team_id'))->delete();
+
+        broadcast(new \App\Events\TeamEvent($team, [
+            'type' => 'team.users.updated'
+        ]));
+
+        return response()->json([
+            'status' => 1,
+        ]);
+    }
 }

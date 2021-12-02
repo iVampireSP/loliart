@@ -128,6 +128,24 @@ window.util.team = {
                     }
                 });
             });
+        },
+        leave: () => {
+            ui.confirm('Leave this team?', () => {
+                $.ajax({
+                    method: 'POST',
+                    url: route('teams.team.leave'),
+                    success(data) {
+                        if (data.status) {
+                            util.url.to(route('teams.index'))
+                        } else {
+                            ui.snackbar({
+                                position: 'right-bottom',
+                                message: 'Unable to leave.'
+                            })
+                        }
+                    }
+                });
+            });
         }
     },
     permission: {

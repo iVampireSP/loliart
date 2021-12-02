@@ -36,6 +36,7 @@ Route::domain('teams.' . config('app.domain'))->name('teams.')->middleware(['tea
     Route::post('/invitation/{id}/agree', [Controllers\TeamInvitationsController::class, 'agree'])->name('invite.agree')->withoutMiddleware('teams_permission');
     Route::post('/invitation/{id}/reject', [Controllers\TeamInvitationsController::class, 'reject'])->name('invite.reject')->withoutMiddleware('teams_permission');
     Route::delete('/team/user/kick/{id}', [Controllers\TeamController::class, 'kick'])->name('user.kick')->middleware(['permission:team.edit']);
+    Route::post('/team/leave', [Controllers\TeamController::class, 'leave'])->name('team.leave');
 });
 
 Route::domain('password.' . config('app.domain'))->prefix('/')->name('password.')->middleware(['auth', 'password.confirm'])->withoutMiddleware(['teams_permission'])->group(function () {
