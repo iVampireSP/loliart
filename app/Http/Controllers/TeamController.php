@@ -57,7 +57,7 @@ class TeamController extends Controller
             'team_id' => $team->id,
         ]);
 
-        return response()->json(['status' => 1]);
+        return response()->json(['status' => 1, 'data' => $team]);
     }
 
     /**
