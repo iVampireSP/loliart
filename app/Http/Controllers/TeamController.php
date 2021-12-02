@@ -71,7 +71,13 @@ class TeamController extends Controller
     {
         $team = new Team();
         $team = $team->where('id', $id)->with('users')->firstOrFail();
-        $team_users = TeamUser::where('team_id', $id)->with('user')->oldest()->get();
+
+        $team_user_where = TeamUser::where('team_id', $id);
+        $team_users = $team_user_where->with('user')->oldest()->get();
+
+        if (!$team_user_where->where('user_id', auth()->id())->exists()) {
+            return redirect()->route('teams.index')->with('message', 'Team not found.');
+        }
 
         // 切换团队
         $this->switchToTeam($team);
