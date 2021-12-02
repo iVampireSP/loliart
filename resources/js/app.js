@@ -1,7 +1,3 @@
-// require('./bootstrap');
-
-import Echo from 'laravel-echo'
-
 import ui from 'mdui'
 import NProgess from 'nprogress'
 
@@ -13,15 +9,9 @@ require('./util.event');
 require('./util.team');
 require('./util.theme');
 require('./ziggy');
+require('./echo');
 
 window.ui = window.mdui = ui
-
-window.io = require('socket.io-client');
-
-window.Echo = new Echo({
-    broadcaster: 'socket.io',
-    host: window.location.hostname + ':6001'
-});
 
 window.currentRoute = null;
 
