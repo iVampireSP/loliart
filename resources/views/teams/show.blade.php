@@ -31,7 +31,7 @@
 
     <ul class="mdui-list">
         @foreach ($team_users as $user)
-            <a id="user-{{ $user->id }}"
+            <a id="user-{{ $user->user_id }}"
                 href="javascript: @can('team.edit') util.team.user.kick({{ $user->user_id }}) @else void(0) @endcan">
                 <li class=" mdui-list-item mdui-ripple">
                     <div class="mdui-list-item-avatar">
@@ -46,8 +46,11 @@
     <script>
         $(() => {
             let currentTeam = {!! $team !!};
-            util.event.reSubscribe(currentTeam)
-            util.theme.update()
+            util.event.reSubscribe(currentTeam);
+            util.theme.update();
+            $(`#user-${user.id} li`).append(
+                `<i class="mdui-list-item-icon mdui-icon material-icons" mdui-tooltip="{content: '{{ tr('You') }}', position: 'left'}">account_circle</i>`
+            );
         })
     </script>
 
