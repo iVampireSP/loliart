@@ -21,6 +21,7 @@
         "jquery": "^3.6.0",
         "jquery-pjax": "^2.0.1",
         "laravel-echo": "^1.11.3",
+        "laravel-echo-server": "^1.6.2",
         "mdui": "^1.0.2",
         "nprogress": "^0.2.0",
         "smooth-corners": "^1.0.8",
