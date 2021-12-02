@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,6 +13,6 @@
 |
 */
 
-Route::prefix('playlist')->group(function() {
+Route::domain('playlist.' . config('app.domain'))->prefix('/')->name('playlist.')->group(function () {
     Route::get('/', 'PlayListController@index');
 });

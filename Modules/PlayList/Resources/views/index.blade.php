@@ -1,4 +1,10 @@
-@extends('playlist::layouts.master')
+{{-- @extends('playlist::layouts.master') --}}
+
+@section('app-menu')
+    @include('playlist::layouts.menu')
+@endsection
+
+@extends('layouts.app')
 
 @section('content')
     <h1>Hello World</h1>
