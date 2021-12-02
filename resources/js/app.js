@@ -112,7 +112,7 @@ $(() => {
             util.menu.update();
             ui.mutation();
             util.theme.reload();
-            if ($('.mdui-tab-indicator').length) {
+            if ($('.mdui-tab-indicator').length > 1) {
                 $('.mdui-tab-indicator')[0].remove()
             }
         };
