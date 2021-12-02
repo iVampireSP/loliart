@@ -16,6 +16,7 @@
     <ul class="mdui-list">
         @foreach ($roles as $role)
             <li class="mdui-list-item mdui-ripple">
+                <i class="mdui-list-item-icon mdui-icon material-icons">group_work</i>
                 <div class="mdui-list-item-content">{{ $role->role->display_name }}</div>
                 <a href="javascript: util.team.permission.role.revokeRoleFromUser({{ $user->id }},'{{ $role->role->name }}')"
                     mdui-tooltip="{content: '{{ tr('Delete') }}', position: 'left'}"
@@ -32,6 +33,8 @@
     <ul class="mdui-list">
         @foreach ($permissions as $permission)
             <li class="mdui-list-item mdui-ripple">
+                <i class="mdui-list-item-icon mdui-icon material-icons">lock</i>
+
                 <div class="mdui-list-item-content">{{ $permission->name }}</div>
                 <a href="javascript: util.team.permission.role.revokePermissionFromUser({{ $user->id }},{{ $permission->id }})"
                     mdui-tooltip="{content: '{{ tr('Delete') }}', position: 'left'}"
