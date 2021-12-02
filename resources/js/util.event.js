@@ -78,7 +78,7 @@ window.util.event = {
 
 
             case 'team.invitations.updated':
-                if (currentRoute == 'teams.invitations') {
+                if (currentRoute == 'teams.invitations' || currentRoute == 'teams.team.show') {
                     util.reload()
                 }
 
