@@ -13,19 +13,17 @@
         </div>
     @endcan
     <div id="roles" class="mdui-p-a-2">
-        @can('role.create')
+        @can('role.edit')
             <button onclick="util.team.permission.role.create()"
                 class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent">{{ tr('Create Role') }}</button>
             <ul class="mdui-list">
                 @foreach ($roles as $role)
-                    <a @can('role.edit')
-                    href="javascript: util.url.to(route('permission.role.edit', '{{ $role->name }}')) @else 'javascript:void(0)' @endcan">
+                <a href="javascript: util.url.to(route('permission.role.edit', '{{ $role->name }}')) @endcan">
                     <li class="mdui-list-item mdui-ripple">
                         <i class="mdui-list-item-icon mdui-icon material-icons">policy</i>
                         <div class="mdui-list-item-content">{{ $role->display_name }}</div>
                     </li>
                 </a>
-
             @endforeach
         @endcan
 

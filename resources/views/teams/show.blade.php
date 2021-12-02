@@ -3,9 +3,9 @@
 @section('title', tr('Team users of:') . $team->name)
 
 @section('content')
-    @can('Super Admin')
+    @role('Super Admin')
         <div class="mdui-typo-headline-opacity">{{ tr('Super Admin') }}</div>
-    @endcan
+    @endrole
 
     @can('team.edit')
         <input class="mdui-typo-display-2 inline-edit team-inline-edit" value="{{ $team->name }}"
@@ -20,10 +20,10 @@
             class="mdui-btn mdui-color-theme-accent mdui-ripple">{{ tr('Invitations') }}</a>
     @endcan
 
-    @can('Super Admin')
+    @role('Super Admin')
         <a onclick="util.team.destroy({{ $team->id }})"
             class="mdui-btn mdui-color-theme-accent mdui-ripple">{{ tr('Delete Team') }}</a>
-    @endcan
+    @endrole
 
     @unlessrole('Super Admin')
         <a onclick="util.team.user.leave()" class="mdui-btn mdui-color-theme-accent mdui-ripple">{{ tr('Leave Team') }}</a>

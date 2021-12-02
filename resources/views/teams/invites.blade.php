@@ -10,7 +10,7 @@
 
         @foreach ($invitations as $invitation)
 
-            <li class="mdui-list-item mdui-ripple" @can('team.invitations.delete')
+            <li class="mdui-list-item mdui-ripple" @can('team.edit')
                 onclick="util.team.user.deleteInvitation({{ $invitation->id }})" @endcan>
                 <div class="mdui-list-item-avatar">
                     <img src="{{ avatar($invitation->user->email) }}" />

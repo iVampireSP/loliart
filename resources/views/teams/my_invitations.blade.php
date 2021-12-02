@@ -7,7 +7,7 @@
 
     <ul class="mdui-list">
         @foreach ($invitations as $invitation)
-            <li class="mdui-list-item mdui-ripple" @can('team.invitations.delete')
+            <li class="mdui-list-item mdui-ripple" @can('team.edit')
                 onclick="util.team.user.deleteInvitation({{ $invitation->id }})" @endcan>
                 <i class="mdui-list-item-icon mdui-icon material-icons">peoples</i>
                 <div class="mdui-list-item-content">{{ $invitation->team->name }}</div>
