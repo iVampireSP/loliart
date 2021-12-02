@@ -7,7 +7,7 @@
         <div class="mdui-typo-headline-opacity">{{ tr('Super Admin') }}</div>
     @endcan
 
-    @can('team.update')
+    @can('team.edit')
         <input class="mdui-typo-display-2 inline-edit team-inline-edit" value="{{ $team->name }}"
             onchange="util.team.edit(this.value)" mdui-tooltip="{content: '{{ tr('Click to edit.') }}'}" maxlength="25" />
         <br />
@@ -19,7 +19,6 @@
         <a onclick="util.url.to(route('teams.invitations'))"
             class="mdui-btn mdui-color-theme-accent mdui-ripple">{{ tr('Invitations') }}</a>
     @endcan
-
 
     @can('Super Admin')
         <a onclick="util.team.destroy({{ $team->id }})"
