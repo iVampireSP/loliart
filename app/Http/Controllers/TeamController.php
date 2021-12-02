@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Team;
+use App\Models\TeamInvitation;
 use App\Models\User;
 use App\Traits\Teams;
 use App\Models\TeamUser;
@@ -165,6 +166,7 @@ class TeamController extends Controller
         }
 
         TeamUser::where('user_id', $id)->where('team_id', session('team_id'))->delete();
+        TeamInvitation::where('user_id', $id)->where('team_id', session('team_id'))->delete();
 
         broadcast(new \App\Events\TeamEvent($team, [
             'type' => 'team.users.updated'
@@ -193,6 +195,7 @@ class TeamController extends Controller
         }
 
         TeamUser::where('user_id', $user_id)->where('team_id', session('team_id'))->delete();
+        TeamInvitation::where('user_id', $user_id)->where('team_id', session('team_id'))->delete();
 
         broadcast(new \App\Events\TeamEvent($team, [
             'type' => 'team.users.updated'
