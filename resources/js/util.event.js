@@ -43,11 +43,13 @@ window.util.event = {
                         $('.current-team-item *').css('color', 'inherit');
                     }, 500)
                 } else {
+                    window.team = event.data.data
                     ui.snackbar({
                         message: 'Team name has been updated to ' + event.data.data.name,
                     });
                 }
 
+                $('#app-title').text(event.data.data.name);
                 $('.current-team-text').text(event.data.data.name);
 
                 break;
