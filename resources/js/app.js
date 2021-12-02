@@ -5,7 +5,7 @@ import Echo from 'laravel-echo'
 import ui from 'mdui'
 import NProgess from 'nprogress'
 
-window.jQuery = window.$ = require('jQuery')
+window.jQuery = window.$ = require('jquery')
 
 require('jquery-pjax');
 require('./util');
