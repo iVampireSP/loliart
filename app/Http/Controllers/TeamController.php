@@ -129,7 +129,7 @@ class TeamController extends Controller
         broadcast(new \App\Events\TeamEvent($team, [
             'type' => 'team.updated',
             'data' => $team
-        ]))->toOthers();
+        ]));
 
         return response()->json(['status' => 1, 'data' => $team->toArray()]);
     }
