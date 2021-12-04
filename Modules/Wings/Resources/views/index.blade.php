@@ -4,7 +4,7 @@
     @include('wings::layouts.menu')
 @endsection
 
-@section('title', tr('Wings'))
+@section('title', 'Wings')
 
 @section('content')
     <h1>Hello World</h1>
