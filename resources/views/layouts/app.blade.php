@@ -72,7 +72,7 @@
 
     <div class="mdui-m-t-5 mdui-m-b-5"></div>
 
-    <a style="display: none" aria-hidden="true" href="#" id="helper-link"
+    <a aria-hidden="true" href="#" id="helper-link"
         data-console-alert="{{ tr('Donnnnnnnnnnnnnn \'t paste any code hereeeeeeeeee! It\'s very dangerous dangerous and also may cause security issues!') }}"></a>
 
     @if (session('message'))
