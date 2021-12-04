@@ -52,7 +52,7 @@ window.util.theme = {
 
         setTimeout(() => {
             $('.mdui-ripple-wave').remove()
-        }, 1100)
+        }, 5000)
     },
     warning: () => {
         $('#main').css('cssText', 'transform: scale(0.98)')
