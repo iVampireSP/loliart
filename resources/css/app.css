@@ -271,6 +271,14 @@ a {
     content: "light";
 }
 
+.button-group a:not(:first-child) {
+    margin: 2px;
+}
+
+.button-group a:last-child {
+    margin-left: 1px;
+}
+
 @media (prefers-color-scheme: dark) {
     .mdui-drawer {
         background-color: #303030 !important;
