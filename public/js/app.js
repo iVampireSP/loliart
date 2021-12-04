@@ -679,7 +679,11 @@ window.util.theme = {
     }
   },
   version: function version() {
-    $('#version').text(app.data.version);
+    var ele = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : $('#version');
+    ele.text(app.data.version[0]);
+    ele.attr('mdui-tooltip', JSON.stringify({
+      content: app.data.version[1]
+    }));
   },
   reload: function reload() {
     $('.mdui-tooltip-open').remove();
