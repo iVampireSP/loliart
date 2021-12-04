@@ -100,9 +100,14 @@ $(() => {
             util.menu.update();
             ui.mutation();
             util.theme.reload();
+
             if ($('.mdui-tab-indicator').length > 1) {
                 $('.mdui-tab-indicator')[0].remove()
             }
+
+            setTimeout(() => {
+                $('.mdui-ripple-wave').remove()
+            }, 1000)
         };
     }
 
