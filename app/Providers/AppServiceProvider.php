@@ -31,5 +31,9 @@ class AppServiceProvider extends ServiceProvider
         //     $tmp = str_replace("\\", "", $tmp);
         //     \Log::info(' execution time: ' . $query->time . 'ms; ' . $tmp . "\n\n\t");
         // });
+
+        if (PHP_OS_FAMILY === 'Windows') {
+            throw new \App\Exceptions\PlatformNotSupported();
+        }
     }
 }
