@@ -57,12 +57,14 @@ class AppController extends Controller
 
     private static function commit()
     {
-        // show latest commit
-        $disableds = explode(',', ini_get('disable_functions'));
-        if (in_array('exec', $disableds)) {
-            return null;
-        } else {
-            return exec('git log --oneline -1');
-        }
+        return Cache::remember('latest_commit', 5, function () {
+            // show latest commit
+            $disableds = explode(',', ini_get('disable_functions'));
+            if (in_array('exec', $disableds)) {
+                return null;
+            } else {
+                return exec('git log --oneline -1');
+            }
+        });
     }
 }
