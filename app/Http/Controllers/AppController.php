@@ -49,7 +49,7 @@ class AppController extends Controller
         }
 
         if (isset($path) && file_exists($path)) {
-            return substr(file_get_contents($path), 0, 8);
+            return substr(file_get_contents($path), 0, 7);
         }
 
         return config('app.version');
