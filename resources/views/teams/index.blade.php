@@ -5,10 +5,12 @@
 @section('content')
     <div class="mdui-typo-display-2">{{ tr('Manage or Switch teams') }}</div>
 
-    <a onclick="util.team.create()" class="mdui-btn mdui-color-theme-accent mdui-ripple">{{ tr('New Team') }}</a>
-    <a onclick="util.team.invitation.list()"
-        class="mdui-btn mdui-color-theme-accent mdui-ripple">{{ tr('My Invirations') }}</a>
-    <a onclick="util.team.afk()" class="mdui-btn mdui-color-theme-accent mdui-ripple">{{ tr('AFK session') }}</a>
+    <div class="button-group">
+        <a onclick="util.team.create()" class="mdui-btn mdui-color-theme-accent mdui-ripple">{{ tr('New Team') }}</a>
+        <a onclick="util.team.invitation.list()"
+            class="mdui-btn mdui-color-theme-accent mdui-ripple">{{ tr('My Invirations') }}</a>
+        <a onclick="util.team.afk()" class="mdui-btn mdui-color-theme-accent mdui-ripple">{{ tr('AFK session') }}</a>
+    </div>
     <ul class="mdui-list">
         @foreach ($teams as $team)
             <a href="{{ route('teams.team.show', $team->team->id) }}" id="team-{{ $team->team_id }}">
