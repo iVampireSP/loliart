@@ -67,17 +67,10 @@ class TeamController extends Controller
      * @param  \App\Models\Team  $team
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(TeamUser $team)
     {
-        $team = new Team();
-        $team = $team->where('id', $id)->with('users')->firstOrFail();
-
-        $team_user_where = TeamUser::where('team_id', $id);
-        $team_users = $team_user_where->with('user')->oldest()->get();
-
-        if (!$team_user_where->where('user_id', auth()->id())->exists()) {
-            return redirect()->route('teams.index')->with('message', 'Team not found.');
-        }
+        $team = $team->team;
+        $team_users = TeamUser::where('team_id', $team->id)->with('user')->oldest()->get();
 
         // 切换团队
         $this->switchToTeam($team);

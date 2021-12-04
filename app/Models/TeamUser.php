@@ -13,6 +13,11 @@ class TeamUser extends Model
         'user_id', 'team_id'
     ];
 
+    public function resolveRouteBinding($value, $field = null)
+    {
+        return $this->where('user_id', auth()->id())->where('team_id', $value)->with('team')->firstOrFail();
+    }
+
     public function user()
     {
         return $this->hasOne(User::class, 'id', 'user_id');
