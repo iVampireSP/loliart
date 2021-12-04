@@ -1,3 +1,7 @@
+const {
+    set
+} = require("nprogress");
+
 window.util.menu = {
     update: () => {
         var url = window.location.protocol + '//' + window.location.host + window.location.pathname;
@@ -41,7 +45,14 @@ window.util.theme = {
     },
     reload: () => {
         $('.mdui-tooltip-open').remove()
-        $('.mdui-ripple-wave').remove()
+
+        setTimeout(() => {
+            $('.mdui-ripple-wave').fadeOut(500)
+        }, 200)
+
+        setTimeout(() => {
+            $('.mdui-ripple-wave').remove()
+        }, 1100)
     },
     warning: () => {
         $('#main').css('cssText', 'transform: scale(0.98)')
