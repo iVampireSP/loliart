@@ -1,0 +1,13 @@
+{
+    "name": "Wings",
+    "alias": "wings",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Wings\\Providers\\WingsServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}
