@@ -266,6 +266,11 @@ a {
     display: none !important;
 }
 
+#helper-link {
+    display: none !important;
+    content: "light";
+}
+
 @media (prefers-color-scheme: dark) {
     .mdui-drawer {
         background-color: #303030 !important;
