@@ -111,4 +111,16 @@ $(() => {
     util.theme.version();
 
     util.event.listen();
+
+    if (window.top === window && window.console) {
+        let console_style = 'font-size: 24px;';
+        // if ($('#helper-link').css('content') == '"dark"') {
+        //     console_style = 'font-size: 24px;';
+        // } else {
+        //     console_style = 'font-size: 24px;';
+        // }
+        window.console.log('%c%s', console_style, $('#helper-link').attr('data-console-alert'));
+
+    }
+
 })
