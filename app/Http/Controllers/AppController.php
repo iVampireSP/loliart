@@ -21,7 +21,7 @@ class AppController extends Controller
                 'name' => config('app.name'),
                 'url' => config('app.url'),
                 'node' => config('app.node'),
-                'version' => self::getVersion(),
+                'version' => [self::getVersion(), self::commit()],
                 'modules' => Module::all()
             ]
         ];
@@ -53,5 +53,16 @@ class AppController extends Controller
         }
 
         return config('app.version');
+    }
+
+    private static function commit()
+    {
+        // show latest commit
+        $disableds = explode(',', ini_get('disable_functions'));
+        if (in_array('exec', $disableds)) {
+            return null;
+        } else {
+            return exec('git log --oneline -1');
+        }
     }
 }

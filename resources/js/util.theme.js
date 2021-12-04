@@ -33,8 +33,11 @@ window.util.theme = {
         }
 
     },
-    version: () => {
-        $('#version').text(app.data.version)
+    version: (ele = $('#version')) => {
+        ele.text(app.data.version[0])
+        ele.attr('mdui-tooltip', JSON.stringify({
+            content: app.data.version[1]
+        }))
     },
     reload: () => {
         $('.mdui-tooltip-open').remove()
