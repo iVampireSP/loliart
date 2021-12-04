@@ -14,5 +14,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::domain('wings.' . config('app.domain'))->prefix('/')->name('wings.')->group(function () {
-    Route::get('/', 'WingsController@index');
+    Route::get('/', 'WingsController@index')->name('index');
 });
