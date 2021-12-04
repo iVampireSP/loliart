@@ -6,5 +6,6 @@
     </div>
     <div class="mdui-collapse-item-body mdui-list">
         {{-- <a href="{{ route('teams.index') }}" class="mdui-list-item mdui-ripple">{{ tr('Teams') }}</a> --}}
+        <a href="{{ route('wings.index') }}" class="mdui-list-item mdui-ripple">{{ tr('Game Containers') }}</a>
     </div>
 </div>
