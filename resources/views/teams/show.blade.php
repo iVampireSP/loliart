@@ -7,27 +7,29 @@
         <div class="mdui-typo-headline-opacity">{{ tr('Super Admin') }}</div>
     @endrole
 
-    @can('team.edit')
-        <input class="mdui-typo-display-2 inline-edit team-inline-edit" value="{{ $team->name }}"
-            onchange="util.team.edit(this.value)" mdui-tooltip="{content: '{{ tr('Click to edit.') }}'}" maxlength="25" />
-        <br />
-    @else
-        <div class="mdui-typo-display-1 current-team-text">{{ $team->name }}</div>
-    @endcan
+    <div class="button-group">
 
-    @can('team.edit')
-        <a onclick="util.url.to(route('teams.invitations'))"
-            class="mdui-btn mdui-color-theme-accent mdui-ripple">{{ tr('Invitations') }}</a>
-    @endcan
+        @can('team.edit')
+            <input class="mdui-typo-display-2 inline-edit team-inline-edit" value="{{ $team->name }}"
+                onchange="util.team.edit(this.value)" mdui-tooltip="{content: '{{ tr('Click to edit.') }}'}" maxlength="25" />
+            <br />
+        @else
+            <div class="mdui-typo-display-1 current-team-text">{{ $team->name }}</div>
+        @endcan
 
-    @role('Super Admin')
-        <a onclick="util.team.destroy({{ $team->id }})"
-            class="mdui-btn mdui-color-theme-accent mdui-ripple">{{ tr('Delete Team') }}</a>
-    @endrole
+        @can('team.edit')
+            <a onclick="util.url.to(route('teams.invitations'))"
+                class="mdui-btn mdui-color-theme-accent mdui-ripple">{{ tr('Invitations') }}</a>
+        @endcan
 
-    @unlessrole('Super Admin')
-        <a onclick="util.team.user.leave()" class="mdui-btn mdui-color-theme-accent mdui-ripple">{{ tr('Leave Team') }}</a>
-    @endunlessrole
+        @role('Super Admin')
+            <a onclick="util.team.destroy({{ $team->id }})"
+                class="mdui-btn mdui-color-theme-accent mdui-ripple">{{ tr('Delete Team') }}</a>
+        @else
+            <a onclick="util.team.user.leave()" class="mdui-btn mdui-color-theme-accent mdui-ripple">{{ tr('Leave Team') }}</a>
+        @endrole
+    </div>
+
 
     <ul class="mdui-list">
         @foreach ($team_users as $user)
