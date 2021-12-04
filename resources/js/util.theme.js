@@ -45,14 +45,6 @@ window.util.theme = {
     },
     reload: () => {
         $('.mdui-tooltip-open').remove()
-
-        setTimeout(() => {
-            $('.mdui-ripple-wave').fadeOut(500)
-        }, 200)
-
-        setTimeout(() => {
-            $('.mdui-ripple-wave').remove()
-        }, 5000)
     },
     warning: () => {
         $('#main').css('cssText', 'transform: scale(0.98)')
