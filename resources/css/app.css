@@ -162,6 +162,32 @@ html {
     outline: none;
 }
 
+.mdui-collapse-item {
+    border-radius: 0 20px 20px 0;
+    transition: all 0.3s ease;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+}
+
+.mdui-collapse-item-open {
+    background: #efeeee56;
+    border-left: 0;
+    border-radius: 0 25px 25px 0;
+    -webkit-border-radius: 0 25px 25px 0;
+    -moz-border-radius: 0 25px 25px 0;
+    -ms-border-radius: 0 25px 25px 0;
+    -o-border-radius: 0 25px 25px 0;
+}
+
+.mdui-collapse-item-body {
+    transition: all 0.3s ease-in-out;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+}
 @keyframes turn {
     0% {
         -webkit-transform: rotate(0deg);
@@ -315,5 +341,15 @@ a {
 
     #helper-link {
         content: "dark";
+    }
+
+    .mdui-collapse-item-open {
+        background: #4c4c4c38;
+        border-left: 0;
+        border-radius: 0 25px 25px 0;
+        -webkit-border-radius: 0 25px 25px 0;
+        -moz-border-radius: 0 25px 25px 0;
+        -ms-border-radius: 0 25px 25px 0;
+        -o-border-radius: 0 25px 25px 0;
     }
 }
