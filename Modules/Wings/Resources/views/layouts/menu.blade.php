@@ -22,21 +22,10 @@
                 <div class="mdui-list-item-content">{{ tr('Browse Servers') }}</div>
             </a>
 
-
-            <div class="mdui-collapse-item">
-                <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
-                    <i class="mdui-list-item-icon mdui-icon material-icons">manage_accounts</i>
-                    <div class="mdui-list-item-content">{{ tr('Panel Management') }}</div>
-                    <i class="mdui-collapse-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
-                </div>
-                <div class="mdui-collapse-item-body mdui-list">
-                    <a href="#" class="mdui-list-item mdui-ripple">{{ tr('Users') }}</a>
-                </div>
-
-                <div class="mdui-collapse-item-body mdui-list">
-                    <a href="#" class="mdui-list-item mdui-ripple">{{ tr('Servers') }}</a>
-                </div>
-            </div>
+            <a class="mdui-list-item mdui-ripple" href="#">
+                <span class="mdui-list-item-icon mdui-icon material-icons-outlined">manage_accounts</span>
+                <div class="mdui-list-item-content">{{ tr('Panel Accounts') }}</div>
+            </a>
 
             <div class="mdui-collapse-item">
                 <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
