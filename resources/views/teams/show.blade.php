@@ -50,8 +50,9 @@
             let currentTeam = {!! $team !!};
             util.event.reSubscribe(currentTeam);
             util.theme.update();
+            $('#my-self-icon').remove();
             $(`#user-${user.id} li`).append(
-                `<i class="mdui-list-item-icon mdui-icon material-icons" mdui-tooltip="{content: '{{ tr('You') }}', position: 'left'}">account_circle</i>`
+                `<i id="my-self-icon" class="mdui-list-item-icon mdui-icon material-icons" mdui-tooltip="{content: '{{ tr('You') }}', position: 'left'}">account_circle</i>`
             );
             $(`#user-${user.id}`).attr('href', null);
         })
