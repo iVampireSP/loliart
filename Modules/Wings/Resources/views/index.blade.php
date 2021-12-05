@@ -7,9 +7,5 @@
 @section('title', 'Wings')
 
 @section('content')
-    <h1>Hello World</h1>
-
-    <p>
-        This view is loaded from module: {!! config('wings.name') !!}
-    </p>
+    <h1 class="mdui-typo-display-1">Pterodactyl Wings</h1>
 @endsection
