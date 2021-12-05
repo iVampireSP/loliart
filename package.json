@@ -25,6 +25,6 @@
         "mdui": "^1.0.2",
         "nprogress": "^0.2.0",
         "smooth-corners": "^1.0.8",
-        "socket.io-client": "^2.4.0"
+        "socket.io-client": "4.4.0"
     }
 }
