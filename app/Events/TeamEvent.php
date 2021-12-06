@@ -36,6 +36,12 @@ class TeamEvent implements ShouldBroadcastNow
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('team.' . $this->team->id);
+        if (!isset($this->team->id)) {
+            $team_id = $this->team;
+        } else {
+            $team_id = $this->team->id;
+        }
+
+        return new PrivateChannel('team.' . $team_id);
     }
 }
