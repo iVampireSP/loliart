@@ -128,30 +128,70 @@ window.util.event = {
                 break;
 
             case 'wings.locations.pending':
-                if (currentRoute == 'wings.locations.index') {
+                if (currentRoute == 'wings.locations.show') {
                     util.reload()
                 }
-                util.theme.warning();
+                $('#location-create-text').text('Pending...');
 
                 break;
 
             case 'wings.locations.creating':
-                if (currentRoute == 'wings.locations.index') {
+                if (currentRoute == 'wings.locations.show') {
                     util.reload()
                 }
-                util.theme.warning();
+                $('#location-create-text').text('Creating location...');
+                $('#location-create-progress div').css('width', '50%')
+                break;
 
+            case 'wings.locations.calling':
+                $('#location-create-text').text('Calling server...');
+                $('#location-create-progress div').css('width', '75%')
                 break;
 
             case 'wings.locations.created':
-                if (currentRoute == 'wings.locations.index') {
+                $('#location-create-text').text('Created!');
+                $('#location-create-progress div').css('width', '100%')
+                $('#location-create-text').addClass('mdui-text-color-green');
+                $('#location-create-progress div').css('width', '100%')
+                $('#location-create-progress div').addClass('mdui-color-green')
+
+                setTimeout(() => {
+                    util.theme.warning();
                     util.reload()
-                }
-                util.theme.warning();
+                }, 1000)
 
 
                 break;
 
+            case 'wings.locations.failed':
+                $('#location-create-text').text('Failed');
+                $('#location-create-text').addClass('mdui-text-color-red');
+                $('#location-create-progress div').css('width', '100%')
+                $('#location-create-progress div').addClass('mdui-color-red')
+
+                setTimeout(() => {
+                    $('#location-create-progress div').css('width', '0%')
+                }, 1500)
+
+                setTimeout(() => {
+                    util.url.to(route('wings.locations.index'))
+                }, 2000)
+
+
+                break;
+
+            case 'wings.locations.deleting':
+                util.reload();
+                break;
+
+            case 'wings.locations.deleted':
+                $('#location-create-progress div').css('width', '0%')
+
+                setTimeout(() => {
+                    util.url.to(route('wings.locations.index'))
+                }, 1500)
+
+                break;
             default:
                 break;
         }

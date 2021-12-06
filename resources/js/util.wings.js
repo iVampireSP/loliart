@@ -2,7 +2,7 @@ window.util.wings = {
     locations: {
         create: () => {
             ui.prompt('What is the name of the new location?',
-                function (value) {
+                (value) => {
                     $.ajax({
                         method: 'POST',
                         url: route('wings.locations.store'),
@@ -10,8 +10,22 @@ window.util.wings = {
                             name: value,
                         },
                         success(data) {
-                            util.url.to('#location-' + data.data.id);
-                            util.reload()
+                            util.url.to(route('wings.locations.show', data.data));
+                        }
+                    });
+                }
+            );
+        },
+        delete: (id) => {
+            ui.confirm('Are you sure you want to delete this location?',
+                () => {
+                    $.ajax({
+                        method: 'DELETE',
+                        url: route('wings.locations.destroy', id),
+                        success(data) {
+                            if (data.status) {
+                                util.reload();
+                            } else {}
                         }
                     });
                 }
