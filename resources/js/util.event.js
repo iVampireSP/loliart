@@ -128,7 +128,7 @@ window.util.event = {
                 break;
 
             case 'wings.locations.pending':
-                if (currentRoute == 'wings.locations.show') {
+                if (currentRoute == 'wings.locations.index') {
                     util.reload()
                 }
                 $('#location-create-text').text('Pending...');
