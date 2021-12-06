@@ -128,17 +128,27 @@ window.util.event = {
                 break;
 
             case 'wings.locations.pending':
-                console.log(event.data)
+                if (currentRoute == 'wings.locations.index') {
+                    util.reload()
+                }
+                util.theme.warning();
 
                 break;
 
             case 'wings.locations.creating':
-                console.log(event.data)
+                if (currentRoute == 'wings.locations.index') {
+                    util.reload()
+                }
+                util.theme.warning();
 
                 break;
 
             case 'wings.locations.created':
-                console.log(event.data)
+                if (currentRoute == 'wings.locations.index') {
+                    util.reload()
+                }
+                util.theme.warning();
+
 
                 break;
 
