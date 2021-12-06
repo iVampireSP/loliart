@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::domain('wings.' . config('app.domain'))->prefix('/')->name('wings.')->group(function () {
+Route::domain('wings.' . config('app.domain'))->prefix('/')->middleware('teams_permission')->name('wings.')->group(function () {
     Route::get('/', 'WingsController@index')->name('index');
+
+    Route::resource('/locations', LocationController::class);
 });
