@@ -46,13 +46,13 @@ class PanelController extends Controller
     public function get($url, $data = null)
     {
         try {
-            $response = $this->http->get($this->url . $url, $data)->json();
+            $response = $this->http->get($this->url . $url, $data);
             $response->throw();
 
             if ($response->failed()) {
                 return false;
             } else {
-                return $response;
+                return $response->json() ?? false;
             }
         } catch (Exception $e) {
             unset($e);
@@ -68,7 +68,7 @@ class PanelController extends Controller
             if ($response->failed()) {
                 return false;
             } else {
-                return $response;
+                return $response->json() ?? false;
             }
         } catch (RequestException $e) {
             unset($e);
@@ -84,7 +84,7 @@ class PanelController extends Controller
             if ($response->failed()) {
                 return false;
             } else {
-                return $response;
+                return $response->json() ?? false;
             }
         } catch (RequestException $e) {
             unset($e);
@@ -100,7 +100,7 @@ class PanelController extends Controller
             if ($response->failed()) {
                 return false;
             } else {
-                return $response;
+                return $response->json() ?? false;
             }
         } catch (RequestException $e) {
             unset($e);
