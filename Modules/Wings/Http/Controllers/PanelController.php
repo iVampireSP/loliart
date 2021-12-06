@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Http\Client\RequestException;
 
 class PanelController extends Controller
 {
@@ -45,40 +46,65 @@ class PanelController extends Controller
     public function get($url, $data = null)
     {
         try {
-            return $this->http->get($this->url . $url, $data)->json();
+            $response = $this->http->get($this->url . $url, $data)->json();
+            $response->throw();
+
+            if ($response->failed()) {
+                return false;
+            } else {
+                return $response;
+            }
         } catch (Exception $e) {
             unset($e);
-            return null;
+            return false;
         }
     }
 
     public function post($url, $data = null)
     {
         try {
-            return $this->http->post($this->url . $url, $data);
-        } catch (Exception $e) {
+            $response = $this->http->post($this->url . $url, $data);
+            $response->throw();
+            if ($response->failed()) {
+                return false;
+            } else {
+                return $response;
+            }
+        } catch (RequestException $e) {
             unset($e);
-            return null;
+            return false;
         }
     }
 
     public function patch($url, $data = null)
     {
         try {
-            return $this->http->patch($this->url . $url, $data);
-        } catch (Exception $e) {
+            $response = $this->http->patch($this->url . $url, $data);
+            $response->throw();
+            if ($response->failed()) {
+                return false;
+            } else {
+                return $response;
+            }
+        } catch (RequestException $e) {
             unset($e);
-            return null;
+            return false;
         }
     }
 
     public function delete($url, $data = null)
     {
         try {
-            return $this->http->delete($this->url . $url, $data);
-        } catch (Exception $e) {
+            $response = $this->http->delete($this->url . $url, $data);
+            $response->throw();
+            if ($response->failed()) {
+                return false;
+            } else {
+                return $response;
+            }
+        } catch (RequestException $e) {
             unset($e);
-            return null;
+            return false;
         }
     }
 }
