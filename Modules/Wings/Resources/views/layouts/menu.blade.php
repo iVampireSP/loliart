@@ -34,7 +34,8 @@
                     <i class="mdui-collapse-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
                 </div>
                 <div class="mdui-collapse-item-body mdui-list">
-                    <a href="javascript:void(0);" class="mdui-list-item mdui-ripple">{{ tr('Locations') }}</a>
+                    <a href="{{ route('wings.locations.index') }}"
+                        class="mdui-list-item mdui-ripple">{{ tr('Locations') }}</a>
                     <a href="#" class="mdui-list-item mdui-ripple">{{ tr('Nodes') }}</a>
                     <a href="#" class="mdui-list-item mdui-ripple">{{ tr('Allocations') }}</a>
                     <a href="#" class="mdui-list-item mdui-ripple">{{ tr('Nests') }}</a> {{-- Eggs in Nests --}}
