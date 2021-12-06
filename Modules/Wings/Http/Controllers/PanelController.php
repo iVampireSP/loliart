@@ -34,13 +34,17 @@ class PanelController extends Controller
     }
 
     // createLocation
-
     public function createLocation($short, $name)
     {
         return $this->post('/locations', [
             'short' => $short,
             'long' => $name,
         ]);
+    }
+
+    public function deleteLocation($id)
+    {
+        return $this->delete('/locations/' . $id);
     }
 
     public function get($url, $data = null)
@@ -68,7 +72,7 @@ class PanelController extends Controller
             if ($response->failed()) {
                 return false;
             } else {
-                return $response->json() ?? false;
+                return $response->json();
             }
         } catch (RequestException $e) {
             unset($e);
@@ -84,7 +88,7 @@ class PanelController extends Controller
             if ($response->failed()) {
                 return false;
             } else {
-                return $response->json() ?? false;
+                return $response->json();
             }
         } catch (RequestException $e) {
             unset($e);
@@ -100,7 +104,7 @@ class PanelController extends Controller
             if ($response->failed()) {
                 return false;
             } else {
-                return $response->json() ?? false;
+                return true;
             }
         } catch (RequestException $e) {
             unset($e);
