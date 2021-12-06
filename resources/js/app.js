@@ -8,6 +8,7 @@ require('./util');
 require('./util.event');
 require('./util.team');
 require('./util.theme');
+require('./util.wings');
 require('./ziggy');
 require('./echo');
 
