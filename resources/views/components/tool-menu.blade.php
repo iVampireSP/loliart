@@ -1,6 +1,6 @@
 <ul class="mdui-menu @if (!Agent::isMobile()) mdui-menu-cascade @endif" id="app-menu" style="border-radius: 10px">
     @auth
-        <li class="mdui-menu-item" disabled>
+        <li class="mdui-menu-item mdui-hidden-sm-down" disabled>
             <a class="#">
                 <i class="mdui-menu-item-icon mdui-icon material-icons-outlined"
                     style="position: relative;top: -1px;">forward</i>

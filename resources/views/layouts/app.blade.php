@@ -36,6 +36,7 @@
             {{-- <a href="javascript:;" class="mdui-typo-title" style="font-weight: 400;"
                 id="top-title">{{ config('app.name') }}</a> --}}
             <div class="mdui-toolbar-spacer"></div>
+            <span class="mdui-typo-caption-opacity queue_message mdui-hidden-sm-down"></span>
             @auth
                 <span class="mdui-btn mdui-btn-icon mdui-ripple mdui-ripple-white" mdui-menu="{target: '#app-menu'}">
                     <i class="mdui-icon material-icons-outlined">more_vert</i>
