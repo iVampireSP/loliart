@@ -30,6 +30,25 @@ window.util.wings = {
                     });
                 }
             );
+        },
+        edit: (id, ele) => {
+            $.ajax({
+                method: 'PUT',
+                url: route('wings.locations.update', id),
+                data: {
+                    name: ele.value
+                },
+                success(data) {
+                    if (data.status) {
+                        util.reload();
+                    } else {
+                        util.theme.warning();
+                    }
+                },
+                error() {
+                    util.theme.warning();
+                }
+            });
         }
     }
 }

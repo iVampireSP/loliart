@@ -14,12 +14,18 @@
 
     </style>
     @if ($location->status == 'created')
-        <div class="mdui-typo-display-1">{{ $location->name }}</div>
+        @can('location.edit')
+            <input class="mdui-typo-display-1 inline-edit team-inline-edit" value="{{ $location->name }}"
+                onchange="util.wings.locations.edit({{ $location->id }}, this)"
+                mdui-tooltip="{content: '{{ tr('Click to edit.') }}'}" maxlength="25" />
+            <br />
+            <div class="mdui-row mdui-p-b-2 mdui-p-l-1">
+                <a class="mdui-btn mdui-color-theme-accent mdui-ripple"
+                    href="javascript: util.wings.locations.delete({{ $location->id }})">{{ tr('Delete') }}</a>
+            </div>
+        @endcan
 
-        <div class="mdui-row mdui-p-b-2 mdui-p-l-1">
-            <a class="mdui-btn mdui-color-theme-accent mdui-ripple"
-                href="javascript: util.wings.locations.delete({{ $location->id }})">{{ tr('Delete') }}</a>
-        </div>
+
 
     @elseif ($location->status == 'pending')
         <div class="mdui-typo-display-1">{{ tr('Please wait for process.') }}</div>
@@ -51,6 +57,49 @@
             })
         </script>
     @endif
-
+    <div class="mdui-typo-display-3">test</div>
+    <div class="mdui-typo-display-3">test</div>
+    <div class="mdui-typo-display-3">test</div>
+    <div class="mdui-typo-display-3">test</div>
+    <div class="mdui-typo-display-3">test</div>
+    <div class="mdui-typo-display-3">test</div>
+    <div class="mdui-typo-display-3">test</div>
+    <div class="mdui-typo-display-3">test</div>
+    <div class="mdui-typo-display-3">test</div>
+    <div class="mdui-typo-display-3">test</div>
+    <div class="mdui-typo-display-3">test</div>
+    <div class="mdui-typo-display-3">test</div>
+    <div class="mdui-typo-display-3">test</div>
+    <div class="mdui-typo-display-3">test</div>
+    <div class="mdui-typo-display-3">test</div>
+    <div class="mdui-typo-display-3">test</div>
+    <div class="mdui-typo-display-3">test</div>
+    <div class="mdui-typo-display-3">test</div>
+    <div class="mdui-typo-display-3">test</div>
+    <div class="mdui-typo-display-3">test</div>
+    <div class="mdui-typo-display-3">test</div>
+    <div class="mdui-typo-display-3">test</div>
+    <div class="mdui-typo-display-3">test</div>
+    <div class="mdui-typo-display-3">test</div>
+    <div class="mdui-typo-display-3">test</div>
+    <div class="mdui-typo-display-3">test</div>
+    <div class="mdui-typo-display-3">test</div>
+    <div class="mdui-typo-display-3">test</div>
+    <div class="mdui-typo-display-3">test</div>
+    <div class="mdui-typo-display-3">test</div>
+    <div class="mdui-typo-display-3">test</div>
+    <div class="mdui-typo-display-3">test</div>
+    <div class="mdui-typo-display-3">test</div>
+    <div class="mdui-typo-display-3">test</div>
+    <div class="mdui-typo-display-3">test</div>
+    <div class="mdui-typo-display-3">test</div>
+    <div class="mdui-typo-display-3">test</div>
+    <div class="mdui-typo-display-3">test</div>
+    <div class="mdui-typo-display-3">test</div>
+    <div class="mdui-typo-display-3">test</div>
+    <div class="mdui-typo-display-3">test</div>
+    <div class="mdui-typo-display-3">test</div>
+    <div class="mdui-typo-display-3">test</div>
+    <div class="mdui-typo-display-3">test</div>
 
 @endsection

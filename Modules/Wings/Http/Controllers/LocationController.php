@@ -90,23 +90,42 @@ class LocationController extends Controller
      */
     public function edit($id)
     {
-        return view('wings::edit');
+        // return view('wings::edit');
     }
 
     /**
      * Update the specified resource in storage.
      * @param Request $request
-     * @param int $id
+     * @param WingsLocation $location
      * @return Renderable
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, WingsLocation $location)
     {
-        //
+        $request->validate([
+            'name' => 'required|max:20',
+        ]);
+        if (session('team_id') != $location->team_id) {
+            response()->json(['status' => 0], 403);
+        }
+
+        $location->name = $request->name;
+        $location->save();
+
+        broadcast(new TeamEvent(
+            session('team_id'),
+            [
+                'type' => 'wings.locations.renamed',
+                'data' => $request->name,
+                'status' => 'pending'
+            ]
+        ))->toOthers();
+
+        return response()->json(['status' => 1, 'data' => $request->name]);
     }
 
     /**
      * Remove the specified resource from storage.
-     * @param int $id
+     * @param WingsLocation $location
      * @return Renderable
      */
     public function destroy(WingsLocation $location)

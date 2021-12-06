@@ -184,6 +184,10 @@ window.util.event = {
                 util.reload();
                 break;
 
+            case 'wings.locations.renamed':
+                util.reload();
+                break;
+
             case 'wings.locations.deleted':
                 $('#location-create-progress div').css('width', '0%')
 
