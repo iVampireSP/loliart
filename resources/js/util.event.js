@@ -15,6 +15,7 @@ window.util.event = {
 
     },
     process: (event) => {
+        $('#queue_message').html(event.data.type);
         switch (event.data.type) {
             case 'team.invitation.received':
                 if (currentRoute == 'teams.invite.received') {
@@ -126,6 +127,20 @@ window.util.event = {
 
                 break;
 
+            case 'wings.locations.pending':
+                console.log(event.data)
+
+                break;
+
+            case 'wings.locations.creating':
+                console.log(event.data)
+
+                break;
+
+            case 'wings.locations.created':
+                console.log(event.data)
+
+                break;
 
             default:
                 break;
