@@ -153,6 +153,6 @@ class LocationController extends Controller
             'id' => $location->id
         ]));
 
-        response()->json(['status' => 1, 'data' => 'pending'], 200);
+        return response()->json(['status' => 1, 'data' => 'pending'], 200);
     }
 }
