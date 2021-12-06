@@ -131,7 +131,7 @@ class LocationController extends Controller
     public function destroy(WingsLocation $location)
     {
         if (session('team_id') != $location->team_id) {
-            response()->json(['status' => 0], 403);
+            return response()->json(['status' => 0], 403);
         }
 
         $location->status = 'deleting';
