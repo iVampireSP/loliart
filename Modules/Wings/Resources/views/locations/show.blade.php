@@ -23,8 +23,9 @@
                 <a class="mdui-btn mdui-color-theme-accent mdui-ripple"
                     href="javascript: util.wings.locations.delete({{ $location->id }})">{{ tr('Delete') }}</a>
             </div>
+        @else
+            <div class="mdui-typo-display-1">{{ $location->name }}</div>
         @endcan
-
 
 
     @elseif ($location->status == 'pending')
@@ -57,49 +58,5 @@
             })
         </script>
     @endif
-    <div class="mdui-typo-display-3">test</div>
-    <div class="mdui-typo-display-3">test</div>
-    <div class="mdui-typo-display-3">test</div>
-    <div class="mdui-typo-display-3">test</div>
-    <div class="mdui-typo-display-3">test</div>
-    <div class="mdui-typo-display-3">test</div>
-    <div class="mdui-typo-display-3">test</div>
-    <div class="mdui-typo-display-3">test</div>
-    <div class="mdui-typo-display-3">test</div>
-    <div class="mdui-typo-display-3">test</div>
-    <div class="mdui-typo-display-3">test</div>
-    <div class="mdui-typo-display-3">test</div>
-    <div class="mdui-typo-display-3">test</div>
-    <div class="mdui-typo-display-3">test</div>
-    <div class="mdui-typo-display-3">test</div>
-    <div class="mdui-typo-display-3">test</div>
-    <div class="mdui-typo-display-3">test</div>
-    <div class="mdui-typo-display-3">test</div>
-    <div class="mdui-typo-display-3">test</div>
-    <div class="mdui-typo-display-3">test</div>
-    <div class="mdui-typo-display-3">test</div>
-    <div class="mdui-typo-display-3">test</div>
-    <div class="mdui-typo-display-3">test</div>
-    <div class="mdui-typo-display-3">test</div>
-    <div class="mdui-typo-display-3">test</div>
-    <div class="mdui-typo-display-3">test</div>
-    <div class="mdui-typo-display-3">test</div>
-    <div class="mdui-typo-display-3">test</div>
-    <div class="mdui-typo-display-3">test</div>
-    <div class="mdui-typo-display-3">test</div>
-    <div class="mdui-typo-display-3">test</div>
-    <div class="mdui-typo-display-3">test</div>
-    <div class="mdui-typo-display-3">test</div>
-    <div class="mdui-typo-display-3">test</div>
-    <div class="mdui-typo-display-3">test</div>
-    <div class="mdui-typo-display-3">test</div>
-    <div class="mdui-typo-display-3">test</div>
-    <div class="mdui-typo-display-3">test</div>
-    <div class="mdui-typo-display-3">test</div>
-    <div class="mdui-typo-display-3">test</div>
-    <div class="mdui-typo-display-3">test</div>
-    <div class="mdui-typo-display-3">test</div>
-    <div class="mdui-typo-display-3">test</div>
-    <div class="mdui-typo-display-3">test</div>
 
 @endsection
