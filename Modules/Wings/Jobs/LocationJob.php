@@ -108,8 +108,6 @@ class LocationJob implements ShouldQueue
                     'status' => 'deleting'
                 ]);
 
-                sleep(1);
-
                 broadcast(new TeamEvent(
                     $data->team_id,
                     [
@@ -139,6 +137,10 @@ class LocationJob implements ShouldQueue
                             'status' => 'failed'
                         ]
                     ));
+
+                    $wingsLocations_where->update([
+                        'status' => 'created'
+                    ]);
                 }
 
                 break;
