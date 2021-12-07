@@ -39,14 +39,14 @@ class CreateWingsNodesTable extends Migration
                 '/var/lib/pterodactyl/volumes'
             );
 
-            $table->unsignedSmallInteger('daemonListen')->index()->default(8080);
-            $table->unsignedSmallInteger('daemonSFTP')->index()->default(2022);
+            $table->unsignedSmallInteger('daemon_listen')->index()->default(8080);
+            $table->unsignedSmallInteger('daemon_sftp')->index()->default(2022);
 
 
             $table->unsignedBigInteger('location_id')->index();
             $table->foreign('location_id')->references('id')->on('wings_locations');
 
-            $table->unsignedBigInteger('node_id')->index();
+            $table->unsignedBigInteger('node_id')->index()->nullable();
 
             $table->timestamps();
         });
