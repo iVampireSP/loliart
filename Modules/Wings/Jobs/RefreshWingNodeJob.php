@@ -34,6 +34,7 @@ class RefreshWingNodeJob implements ShouldQueue
     {
         $panel = new PanelController();
         $data = $panel->node($this->id, false);
+        var_dump($data);
         Cache::put('wings_node_' . $this->id, $data, 600);
     }
 }

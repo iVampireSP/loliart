@@ -18,7 +18,7 @@ class JobController extends Controller
             $nodes = WingsNode::all();
             WingsNode::chunk(100, function () use ($nodes) {
                 foreach ($nodes as $node) {
-                    dispatch(new RefreshWingNodeJob($node->id));
+                    dispatch(new RefreshWingNodeJob($node->node_id));
                 }
             });
         } else {

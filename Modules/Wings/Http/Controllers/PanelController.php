@@ -59,10 +59,14 @@ class PanelController extends Controller
         $cache_key = 'wings_node_' . $id;
         // return Cache::get($cache_key);
         if ($cache) {
-            return Cache::get($cache_key);
+            if (Cache::has($cache_key)) {
+                return Cache::get($cache_key);
+            } else {
+                return $this->get('/nodes/' . $id);
+            }
         } else {
             Cache::put($cache_key, $this->get('/nodes/' . $id), 600);
-            return $this->get('/nodes/' . $id);
+            return Cache::get($cache_key);;
         }
     }
 

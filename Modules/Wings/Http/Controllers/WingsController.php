@@ -2,9 +2,9 @@
 
 namespace Modules\Wings\Http\Controllers;
 
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Contracts\Support\Renderable;
 
 class WingsController extends Controller
 {
@@ -14,8 +14,6 @@ class WingsController extends Controller
      */
     public function index()
     {
-        // $panel = new PanelController();
-        // dd($panel->users());
         return view('wings::index');
     }
 
