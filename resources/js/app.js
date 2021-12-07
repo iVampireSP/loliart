@@ -58,9 +58,7 @@ $(() => {
         NProgess.start();
     });
 
-    $(document).on('pjax:end', () => {});
-
-    $(document).on("pjax:complete", () => {
+    $(document).on("ready pjax:end", () => {
         NProgess.done()
         util.menu.update();
         ui.mutation()
