@@ -40,7 +40,7 @@ class CreateWingsNodesTable extends Migration
             );
 
             $table->unsignedSmallInteger('daemonListen')->index()->default(8080);
-            $table->unsignedSmallInteger('daemonSFTP')->index()->default(8080);
+            $table->unsignedSmallInteger('daemonSFTP')->index()->default(2022);
 
 
             $table->unsignedBigInteger('location_id')->index();
