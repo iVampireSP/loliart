@@ -46,7 +46,7 @@
                         <tr id="node-{{ $node->id }}}">
                             <td nowrap>{{ $location->id }}</td>
                             <td nowrap><a
-                                    href="{{ route('wings.locations.nodes.show', [$node->location_id, $node->id]) }}">{{ $node->name }}</a>
+                                    href="{{ route('wings.locations.nodes.show', [$node->location_id, $node->id]) }}">{{ $node->display_name }}</a>
                             </td>
                             <td nowrap>0</td>
                             <td nowrap>0</td>
