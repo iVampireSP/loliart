@@ -17,7 +17,6 @@ mix
     .styles([
         'node_modules/mdui/dist/css/mdui.min.css',
         'resources/css/app.css',
-        'node_modules/nprogress/nprogress.css',
     ], 'public/css/app.css')
 
     .copy('node_modules/mdui/dist/js/mdui.esm.js.map', 'public/js')
