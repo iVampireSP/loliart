@@ -10,9 +10,9 @@ class WingsNode extends Model
     use HasFactory;
 
     protected $fillable = [];
-    
-    protected static function newFactory()
+
+    public function location()
     {
-        return \Modules\Wings\Database\factories\WingsNodeFactory::new();
+        return $this->belongsTo(WingsLocation::class);
     }
 }
