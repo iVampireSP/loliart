@@ -37,20 +37,22 @@
                         <th>ID</th>
                         <th>{{ tr('Name') }}</th>
                         <th>{{ tr('Servers') }}</th>
-                        <th>{{ tr('Disk space allocated') }}</th>
                         <th>{{ tr('Memory allocated') }}</th>
+                        <th>{{ tr('Disk space allocated') }}</th>
                     </tr>
                 </thead>
                 <tbody class="mdui-typo">
                     @foreach ($nodes as $node)
-                        <tr id="node-{{ $node->id }}}">
+                        @php($allocated = Cache::get('wings_node_' . $node->node_id))
+                        <tr id="node-{{ $node->id }}">
                             <td nowrap>{{ $location->id }}</td>
                             <td nowrap><a
                                     href="{{ route('wings.locations.nodes.show', [$node->location_id, $node->id]) }}">{{ $node->display_name }}</a>
                             </td>
-                            <td nowrap>0</td>
-                            <td nowrap>0</td>
-                            <td nowrap>0</td>
+                            <td nowrap></td>
+                            <td nowrap>{{ $allocated['attributes']['allocated_resources']['memory'] }}</td>
+                            <td nowrap>{{ $allocated['attributes']['allocated_resources']['disk'] }}</td>
+
                         </tr>
                     @endforeach
                 </tbody>
