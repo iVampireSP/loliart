@@ -54,7 +54,7 @@ $(() => {
 
     $(document).pjax('a', '.pjax-container');
 
-    $(document).on('pjax:start', () => {
+    $(document).on('pjax:send', () => {
         NProgess.start();
     });
 
