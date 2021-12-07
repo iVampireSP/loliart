@@ -39,9 +39,7 @@ window.util.wings = {
                     name: ele.value
                 },
                 success(data) {
-                    if (data.status) {
-                        util.reload();
-                    } else {
+                    if (!data.status) {
                         util.theme.warning();
                     }
                 },
@@ -49,6 +47,26 @@ window.util.wings = {
                     util.theme.warning();
                 }
             });
+        }
+    },
+    nodes: {
+        create: (id) => {
+            ui.prompt('The name of new node.',
+                (value) => {
+                    $.ajax({
+                        method: 'POST',
+                        url: route('wings.locations.nodes.store', id),
+                        data: {
+                            name: value,
+                        },
+                        success(data) {
+                            if (data.status) {
+                                util.url.reload();
+                            }
+                        }
+                    });
+                }
+            );
         }
     }
 }
