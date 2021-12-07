@@ -2,8 +2,10 @@
 
 namespace Modules\Wings\Jobs;
 
+use PDOException;
 use App\Events\TeamEvent;
 use Illuminate\Bus\Queueable;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Modules\Wings\Entities\WingsLocation;
@@ -108,16 +110,29 @@ class LocationJob implements ShouldQueue
                     'status' => 'deleting'
                 ]);
 
-                broadcast(new TeamEvent(
-                    $data->team_id,
-                    [
-                        'type' => 'wings.locations.calling',
-                        'data' => $data->id,
-                        'status' => 'creating'
-                    ]
-                ));
+                try {
+                    $wingsLocations_where->delete();
 
-                if ($response = $panel->deleteLocation($data->location)) {
+                    broadcast(new TeamEvent(
+                        $data->team_id,
+                        [
+                            'type' => 'wings.locations.calling',
+                            'data' => $data->id,
+                            'status' => 'creating'
+                        ]
+                    ));
+                    if (!$response = $panel->deleteLocation($data->location)) {
+                        DB::rollback();
+                        broadcast(new TeamEvent(
+                            $data->team_id,
+                            [
+                                'type' => 'wings.locations.failed',
+                                'data' => $data->id,
+                                'status' => 'failed'
+                            ]
+                        ));
+                    }
+                    DB::commit();
                     broadcast(new TeamEvent(
                         $data->team_id,
                         [
@@ -126,9 +141,9 @@ class LocationJob implements ShouldQueue
                             'status' => 'deleted'
                         ]
                     ));
+                } catch (PDOException $e) {
+                    unset($e);
 
-                    $wingsLocations_where->delete();
-                } else {
                     broadcast(new TeamEvent(
                         $data->team_id,
                         [
@@ -141,6 +156,8 @@ class LocationJob implements ShouldQueue
                     $wingsLocations_where->update([
                         'status' => 'created'
                     ]);
+
+                    // rollback
                 }
 
                 break;
