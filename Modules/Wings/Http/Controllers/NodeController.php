@@ -2,6 +2,7 @@
 
 namespace Modules\Wings\Http\Controllers;
 
+use App\Events\TeamEvent;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -52,7 +53,7 @@ class NodeController extends Controller
         $request->validate([
             'name' => 'required',
             'location_id' => 'integer|required',
-            'fqdn' => 'required',
+            'fqdn' => 'required|unique:wings_nodes',
             'memory' => 'integer|required',
             'memory_overallocate' => 'integer|required',
             'disk' => 'integer|required',
@@ -95,6 +96,15 @@ class NodeController extends Controller
         $data['location_id'] = $location->location_id;
 
         // send data to pterodactyl panel
+
+        broadcast(new TeamEvent(
+            session('team_id'),
+            [
+                'type' => 'wings.locations.node.pending',
+                'data' => $wingsNode->id,
+                'status' => 'pending'
+            ]
+        ));
 
         return response()->json(['status' => 1, 'data' => $data]);
     }
