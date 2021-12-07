@@ -24,6 +24,9 @@
 
 <body class="mdui-appbar-with-toolbar mdui-theme-primary-blue mdui-theme-accent-blue mdui-theme-layout-auto">
     <div id="loader" class="loader-active"></div>
+
+    <x-offline-tip />
+
     <header class="mdui-appbar mdui-appbar-fixed" id="top-appbar">
         <div class="mdui-toolbar mdui-color-white top-bar">
             <span class="mdui-btn mdui-btn-icon mdui-ripple mdui-ripple-white"
