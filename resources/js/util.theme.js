@@ -1,7 +1,3 @@
-const {
-    set
-} = require("nprogress");
-
 window.util.menu = {
     update: () => {
         var url = window.location.protocol + '//' + window.location.host + window.location.pathname;
