@@ -11,6 +11,7 @@ class WingsNode extends Model
 
     protected $fillable = [
         'name',
+        'display_name',
         'location_id',
         'fqdn',
         'memory',
