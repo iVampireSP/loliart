@@ -64,6 +64,7 @@ class NodeJob implements ShouldQueue
                         'node_id' => $node_info['attributes']['id']
                     ]);
                 }
+
                 break;
             case 'delete':
                 $this->broadcast('deleting');
@@ -71,6 +72,16 @@ class NodeJob implements ShouldQueue
                 $wingsNode->update([
                     'status' => 'deleting'
                 ]);
+
+                if (!$panel->deleteNode($wingsNode->first()->node_id)) {
+                    $wingsNode->update([
+                        'status' => 'created'
+                    ]);
+                    $this->broadcast('failed');
+                } else {
+                    $wingsNode->delete();
+                    $this->broadcast('deleted');
+                }
                 break;
         }
     }
