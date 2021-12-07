@@ -9,6 +9,7 @@ use Illuminate\Routing\Controller;
 use Modules\Wings\Entities\WingsNode;
 use Modules\Wings\Entities\WingsLocation;
 use Illuminate\Contracts\Support\Renderable;
+use Modules\Wings\Jobs\NodeJob;
 
 class NodeController extends Controller
 {
@@ -74,9 +75,13 @@ class NodeController extends Controller
         }
 
         $data = [
+            'type' => 'create',
+            'team_id' => session('team_id'),
             'name' => $name,
+            'description' => $request->name,
             'display_name' => $request->name,
             'location_id' => $location->id,
+            'wings_locations_id' => $location->id,
             'fqdn' => $request->fqdn,
             'scheme' => "https",
             'memory' => $request->memory,
@@ -91,17 +96,18 @@ class NodeController extends Controller
             'behind_proxy' => $request->behind_proxy ?? 0,
         ];
 
-        $wingsNode->create($data);
+        $id = $wingsNode->create($data)->id;
 
         $data['location_id'] = $location->location_id;
 
         // send data to pterodactyl panel
+        dispatch(new NodeJob($id, $data));
 
         broadcast(new TeamEvent(
             session('team_id'),
             [
                 'type' => 'wings.locations.node.pending',
-                'data' => $wingsNode->id,
+                'data' => $id,
                 'status' => 'pending'
             ]
         ));
@@ -114,9 +120,14 @@ class NodeController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function show($id)
+    public function show($id, WingsNode $node)
     {
-        return view('wings::show');
+        // $wingsNode->with('')
+        // $servers = WingsServer::where('node_', $id)->get();
+        if (!auth()->user()->can('team.access')) {
+            return response()->json(['status' => 0, 'data' => 'Permission denied.']);
+        }
+        return view('wings::nodes.show', compact('node'));
     }
 
     /**
@@ -145,8 +156,28 @@ class NodeController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        if (!auth()->user()->can('node.edit')) {
+            return response()->json(['status' => 0, 'data' => 'Permission denied.']);
+        }
+
+        $node = WingsNode::where('location_id', $request->route('location'))->first();
+
+        if (userInTeam($node->location->team_id)) {
+            broadcast(new TeamEvent(
+                session('team_id'),
+                [
+                    'type' => 'wings.locations.node.pending',
+                    'data' => $node->id,
+                    'status' => 'pending'
+                ]
+            ));
+
+            dispatch(new NodeJob($node->id, [
+                'type' => 'delete',
+                'node_id' => $node->node_id,
+            ]));
+        }
     }
 }
