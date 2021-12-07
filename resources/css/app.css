@@ -250,8 +250,8 @@ a {
 }
 
 .loader-active {
-    animation: loader-animation 1s ease-in-out infinite;
-    -webkit-animation: loader-animation 1s ease-in-out infinite;
+    animation: loader-animation 0.7s ease-in-out infinite;
+    -webkit-animation: loader-animation 0.7s ease-in-out infinite;
 }
 
 @keyframes loader-animation {
