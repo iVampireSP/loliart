@@ -130,3 +130,12 @@ $(() => {
     }
 
 })
+
+
+window.addEventListener('online', () => {
+    $('#offline_tip').fadeOut()
+})
+window.addEventListener('offline', () => {
+    $('#offline_tip').fadeIn()
+
+})
