@@ -71,6 +71,11 @@ class PanelController extends Controller
         return $this->post('/nodes', $data);
     }
 
+    public function deleteNode($id)
+    {
+        return $this->delete('/nodes/' . $id);
+    }
+
     public function get($url, $data = null)
     {
         try {

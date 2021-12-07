@@ -19,7 +19,7 @@ class LocationController extends Controller
      */
     public function index()
     {
-        $locations = WingsLocation::where('team_id', session('team_id'))->get();
+        $locations = WingsLocation::where('team_id', session('team_id'))->with('nodes')->get();
         return view('wings::locations.index', compact('locations'));
     }
 
@@ -81,7 +81,7 @@ class LocationController extends Controller
             abort(404);
         }
 
-        $nodes = WingsNode::where('location_id', $location->id)->get();
+        $nodes = WingsNode::where('location_id', $location->id)->where('status', 'created')->get();
 
         return view('wings::locations.show', compact('location', 'nodes'));
     }

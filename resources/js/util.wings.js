@@ -58,9 +58,29 @@ window.util.wings = {
                     success(data) {
                         if (data.status) {
                             util.url.to(route('wings.locations.show', route().params.location))
+                        } else {
+                            util.theme.warning()
                         }
                     }
                 });
+            },
+            delete: (id, location_id) => {
+                ui.confirm('Are you sure?',
+                    () => {
+                        $.ajax({
+                            method: 'DELETE',
+                            url: route('wings.locations.nodes.destroy', [location_id, id]),
+                            success(data) {
+                                if (data.status) {
+                                    util.url.to(route('wings.locations.show', location_id))
+                                } else {
+                                    util.theme.warning()
+                                }
+                            }
+                        });
+                    }
+                );
+
             }
         }
     }
