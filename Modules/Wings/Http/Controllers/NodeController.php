@@ -146,9 +146,31 @@ class NodeController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        if (!auth()->user()->can('node.edit')) {
+            return response()->json(['status' => 0, 'data' => 'Permission denied.']);
+        }
+
+        $orm = WingsNode::where('id', $request->route('node'))->where('location_id', $request->route('location'));
+        $node = $orm->first();
+
+        $team_id = $node->location->team_id;
+
+        if (userInTeam($team_id)) {
+            broadcast(new TeamEvent(
+                session('team_id'),
+                [
+                    'type' => 'wings.locations.node.update',
+                    'data' => $node->id,
+                    'status' => 'update'
+                ]
+            ));
+
+            $orm->update(['display_name' => $request->name]);
+
+            return response()->json(['status' => 1, 'data' => $request->name]);
+        }
     }
 
     /**
@@ -162,9 +184,10 @@ class NodeController extends Controller
             return response()->json(['status' => 0, 'data' => 'Permission denied.']);
         }
 
-        $node = WingsNode::where('location_id', $request->route('location'))->first();
+        $node = WingsNode::where('id', $request->route('node'))->where('location_id', $request->route('location'))->first();
 
-        if (userInTeam($node->location->team_id)) {
+        $team_id = $node->location->team_id;
+        if (userInTeam($team_id)) {
             broadcast(new TeamEvent(
                 session('team_id'),
                 [
@@ -176,6 +199,7 @@ class NodeController extends Controller
 
             dispatch(new NodeJob($node->id, [
                 'type' => 'delete',
+                'team_id' => $team_id,
                 'node_id' => $node->node_id,
             ]));
         }

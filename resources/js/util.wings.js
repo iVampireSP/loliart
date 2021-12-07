@@ -80,7 +80,25 @@ window.util.wings = {
                         });
                     }
                 );
-
+            },
+            edit: (note_id, location_id, ele) => {
+                $.ajax({
+                    method: 'PUT',
+                    url: route('wings.locations.nodes.update', [location_id, note_id]),
+                    data: {
+                        name: ele.value
+                    },
+                    success(data) {
+                        if (data.status) {
+                            util.reload();
+                        } else {
+                            util.theme.warning();
+                        }
+                    },
+                    error() {
+                        util.theme.warning();
+                    }
+                });
             }
         }
     }

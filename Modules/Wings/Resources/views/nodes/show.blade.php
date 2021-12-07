@@ -16,7 +16,7 @@
     @if ($node->status == 'created')
         @can('node.edit')
             <input class="mdui-typo-display-1 inline-edit team-inline-edit" value="{{ $node->display_name }}"
-                onchange="util.wings.locations.nodes.edit({{ $node->id }}, this)"
+                onchange="util.wings.locations.nodes.edit({{ $node->id }}, {{ $node->location_id }},this)"
                 mdui-tooltip="{content: '{{ tr('Click to edit.') }}'}" maxlength="25" />
             <br />
             <div class="mdui-row mdui-p-b-2 mdui-p-l-1">
@@ -24,7 +24,7 @@
                     href="javascript: util.wings.locations.nodes.delete({{ $node->id }}, {{ $node->location_id }})">{{ tr('Delete') }}</a>
             </div>
         @else
-            <div class="mdui-typo-display-1">{{ $node->name }}</div>
+            <div class="mdui-typo-display-1">{{ $node->display_name }}</div>
         @endcan
 
         {{-- <div class="mdui-table-fluid">
