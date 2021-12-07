@@ -1,5 +1,4 @@
 import ui from 'mdui'
-import NProgess from 'nprogress'
 
 window.jQuery = window.$ = require('jquery')
 
@@ -16,22 +15,21 @@ window.ui = window.mdui = ui
 
 window.currentRoute = null;
 
-// window.Progress = {
-//     show: () => {
-//         $('#top-progress').fadeIn(100)
-//     },
-//     hide: () => {
-//         $('#top-progress').fadeOut(100)
-//     }
-// }
+window.Progress = {
+    start: () => {
+        $('#loader').addClass('loader-active')
+    },
+    done: () => {
+        $('#loader').removeClass('loader-active')
+    }
+}
 
 $(document).ajaxStart(() => {
-    NProgess.start();
+    Progress.start();
 });
 
 $(document).ajaxComplete(() => {
-    NProgess.done();
-
+    Progress.done();
 });
 
 $.ajaxSetup({
@@ -43,10 +41,10 @@ $.ajaxSetup({
 });
 
 
-document.onreadystatechange = NProgess.done;
+document.onreadystatechange = Progress.done;
 
 $(() => {
-    NProgess.done();
+    Progress.done();
 
     util.theme.update();
 
@@ -55,11 +53,11 @@ $(() => {
     $(document).pjax('a', '.pjax-container');
 
     $(document).on('pjax:send', () => {
-        NProgess.start();
+        Progress.start();
     });
 
     $(document).on("ready pjax:end", () => {
-        NProgess.done()
+        Progress.done()
         util.menu.update();
         ui.mutation()
         currentRoute = route().current();
@@ -75,7 +73,7 @@ $(() => {
         } else {
             window.history.back();
         }
-        util.theme.warning();
+        util.theme.warniw();
 
     });
 
