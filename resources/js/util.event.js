@@ -184,16 +184,18 @@ window.util.event = {
                 util.reload();
                 break;
 
-            case 'wings.locations.renamed':
-                util.reload();
-                break;
-
             case 'wings.locations.deleted':
                 $('#location-create-progress div').css('width', '0%')
 
                 setTimeout(() => {
                     util.url.to(route('wings.locations.index'))
                 }, 1500)
+                break;
+
+            case 'wings.locations.node.created':
+                if (currentRoute == 'wings.locations.show' || currentRoute == 'currentRoute') {
+                    util.reload();
+                }
 
                 break;
             default:
