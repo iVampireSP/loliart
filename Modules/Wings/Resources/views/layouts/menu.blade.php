@@ -36,7 +36,6 @@
                 <div class="mdui-collapse-item-body mdui-list">
                     <a href="{{ route('wings.locations.index') }}"
                         class="mdui-list-item mdui-ripple">{{ tr('Locations') }}</a>
-                    <a href="#" class="mdui-list-item mdui-ripple">{{ tr('Nodes') }}</a>
                     <a href="#" class="mdui-list-item mdui-ripple">{{ tr('Allocations') }}</a>
                     <a href="#" class="mdui-list-item mdui-ripple">{{ tr('Nests') }}</a> {{-- Eggs in Nests --}}
 
