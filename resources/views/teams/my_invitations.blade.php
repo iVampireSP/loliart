@@ -3,7 +3,7 @@
 @section('title', tr('Your Invirations'))
 
 @section('content')
-    <div class="mdui-typo-display-2">{{ tr('Your Invirations') }}</div>
+    <div class="mdui-typo-display-1">{{ tr('Your Invirations') }}</div>
 
     <ul class="mdui-list">
         @foreach ($invitations as $invitation)

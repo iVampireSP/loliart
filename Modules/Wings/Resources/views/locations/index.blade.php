@@ -7,7 +7,7 @@
 @endsection
 
 @section('content')
-    <div class="mdui-typo-display-2">{{ tr('Locations') }}</div>
+    <div class="mdui-typo-display-1">{{ tr('Locations') }}</div>
 
     <div class="mdui-row mdui-p-b-2 mdui-p-l-1">
         <a class="mdui-btn mdui-color-theme-accent mdui-ripple"

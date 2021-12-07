@@ -3,7 +3,7 @@
 @section('title', tr('All permissions'))
 
 @section('content')
-    <div class="mdui-typo-display-2">{{ tr('All permissions') }}</div>
+    <div class="mdui-typo-display-1">{{ tr('All permissions') }}</div>
 
     <ul class="mdui-list">
         <li class="mdui-list-item mdui-ripple">

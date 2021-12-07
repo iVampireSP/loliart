@@ -3,7 +3,7 @@
 @section('title', tr('Invirations'))
 
 @section('content')
-    <div class="mdui-typo-display-2">{{ tr('Invirations') }}</div>
+    <div class="mdui-typo-display-1">{{ tr('Invirations') }}</div>
 
     <a onclick="util.team.user.invite()" class="mdui-btn mdui-color-theme-accent mdui-ripple">{{ tr('Invite User') }}</a>
     <ul class="mdui-list">

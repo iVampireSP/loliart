@@ -3,7 +3,7 @@
 @section('title', tr('Roles and Permissions'))
 
 @section('content')
-    <div class="mdui-typo-display-2">{{ tr('Roles and Permissions') }}</div>
+    <div class="mdui-typo-display-1">{{ tr('Roles and Permissions') }}</div>
 
     @can('role.edit')
         <div class="mdui-tab" mdui-tab>

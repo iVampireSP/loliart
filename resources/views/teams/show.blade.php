@@ -10,7 +10,7 @@
     <div class="button-group">
 
         @can('team.edit')
-            <input class="mdui-typo-display-2 inline-edit team-inline-edit" value="{{ $team->name }}"
+            <input class="mdui-typo-display-1 inline-edit team-inline-edit" value="{{ $team->name }}"
                 onchange="util.team.edit(this.value)" mdui-tooltip="{content: '{{ tr('Click to edit.') }}'}" maxlength="25" />
             <br />
         @else

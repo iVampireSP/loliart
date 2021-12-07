@@ -3,7 +3,7 @@
 @section('title', tr('Role permissions'))
 
 @section('content')
-    <div class="mdui-typo-display-2">{{ tr('Role permissions') }}</div>
+    <div class="mdui-typo-display-1">{{ tr('Role permissions') }}</div>
 
     @can('role.edit')
         <button onclick="util.team.permission.role.givePermission('{{ $role->name }}')"

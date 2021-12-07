@@ -3,7 +3,7 @@
 @section('title', tr('Teams'))
 
 @section('content')
-    <div class="mdui-typo-display-2">{{ tr('Manage or Switch teams') }}</div>
+    <div class="mdui-typo-display-1">{{ tr('Manage or Switch teams') }}</div>
 
     <div class="button-group">
         <a onclick="util.team.create()" class="mdui-btn mdui-color-theme-accent mdui-ripple">{{ tr('New Team') }}</a>
