@@ -44,14 +44,7 @@ class NodeJob implements ShouldQueue
 
         switch ($data->type) {
             case 'create':
-                broadcast(new TeamEvent(
-                    $data->team_id,
-                    [
-                        'type' => 'wings.locations.node.creating',
-                        'data' => $this->id,
-                        'status' => 'creating'
-                    ]
-                ));
+                $this->broadcast('creating');
 
                 $wingsNode->update([
                     'status' => 'creating'
@@ -60,25 +53,11 @@ class NodeJob implements ShouldQueue
                 $node_info = $panel->createNode((array)$data);
 
                 if (!$node_info) {
-                    broadcast(new TeamEvent(
-                        $data->team_id,
-                        [
-                            'type' => 'wings.locations.node.failed',
-                            'data' => $this->id,
-                            'status' => 'failed'
-                        ]
-                    ));
+                    $this->broadcast('failed');
 
                     $wingsNode->delete();
                 } else {
-                    broadcast(new TeamEvent(
-                        $data->team_id,
-                        [
-                            'type' => 'wings.locations.node.created',
-                            'data' => $this->id,
-                            'status' => 'created'
-                        ]
-                    ));
+                    $this->broadcast('created');
 
                     $wingsNode->update([
                         'status' => 'created',
@@ -86,6 +65,25 @@ class NodeJob implements ShouldQueue
                     ]);
                 }
                 break;
+            case 'delete':
+                $this->broadcast('deleting');
+
+                $wingsNode->update([
+                    'status' => 'deleting'
+                ]);
+                break;
         }
+    }
+
+    public function broadcast($event)
+    {
+        broadcast(new TeamEvent(
+            $this->data->team_id,
+            [
+                'type' => 'wings.locations.node.' . $event,
+                'data' => $this->id,
+                'status' => $event
+            ]
+        ));
     }
 }
