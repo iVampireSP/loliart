@@ -17,4 +17,6 @@ Route::domain('wings.' . config('app.domain'))->prefix('/')->middleware(['teams_
     Route::get('/', 'WingsController@index')->name('index');
 
     Route::resource('/locations', LocationController::class);
+
+    Route::resource('/nodes', NodeController::class);
 });
