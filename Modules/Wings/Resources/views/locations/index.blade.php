@@ -9,7 +9,7 @@
 @section('content')
     <div class="mdui-typo-display-1">{{ tr('Locations') }}</div>
 
-    <div class="mdui-row mdui-p-b-2 mdui-p-l-1">
+    <div class="mdui-row mdui-p-b-2 mdui-p-l-1 mdui-m-t-2">
         <a class="mdui-btn mdui-color-theme-accent mdui-ripple"
             href="javascript: util.wings.locations.create()">{{ tr('New Location') }}</a>
     </div>
