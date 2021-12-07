@@ -47,26 +47,21 @@ window.util.wings = {
                     util.theme.warning();
                 }
             });
-        }
-    },
-    nodes: {
-        create: (id) => {
-            ui.prompt('The name of new node.',
-                (value) => {
-                    $.ajax({
-                        method: 'POST',
-                        url: route('wings.locations.nodes.store', id),
-                        data: {
-                            name: value,
-                        },
-                        success(data) {
-                            if (data.status) {
-                                util.url.reload();
-                            }
+        },
+        nodes: {
+            create: (ele) => {
+                let data = ele.serializeArray();
+                $.ajax({
+                    method: 'POST',
+                    url: route('wings.locations.nodes.store', route().params.location),
+                    data: data,
+                    success(data) {
+                        if (data.status) {
+                            util.url.reload();
                         }
-                    });
-                }
-            );
+                    }
+                });
+            }
         }
     }
 }
