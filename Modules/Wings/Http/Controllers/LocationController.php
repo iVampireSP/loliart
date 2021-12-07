@@ -7,6 +7,7 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Wings\Entities\WingsLocation;
+use Modules\Wings\Entities\WingsNode;
 use Modules\Wings\Events\LocationsEvent;
 use Modules\Wings\Jobs\LocationJob;
 
@@ -80,7 +81,9 @@ class LocationController extends Controller
             abort(404);
         }
 
-        return view('wings::locations.show', compact('location'));
+        $nodes = WingsNode::where('location_id', $location->id)->get();
+
+        return view('wings::locations.show', compact('location', 'nodes'));
     }
 
     /**
