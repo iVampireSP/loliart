@@ -73,7 +73,7 @@ $(() => {
         } else {
             window.history.back();
         }
-        util.theme.warniw();
+        util.theme.warning();
 
     });
 
