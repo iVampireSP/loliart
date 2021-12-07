@@ -58,11 +58,10 @@ $(() => {
         NProgess.start();
     });
 
-    $(document).on('pjax:end', () => {
-        NProgess.done()
-    });
+    $(document).on('pjax:end', () => {});
 
     $(document).on("pjax:complete", () => {
+        NProgess.done()
         util.menu.update();
         ui.mutation()
         currentRoute = route().current();
