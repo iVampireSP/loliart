@@ -10,4 +10,9 @@ class WingsLocation extends Model
     use HasFactory;
 
     protected $fillable = [];
+
+    public function nodes()
+    {
+        return $this->hasMany(WingsNode::class, 'location_id');
+    }
 }
