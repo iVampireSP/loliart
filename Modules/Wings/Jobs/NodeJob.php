@@ -41,7 +41,6 @@ class NodeJob implements ShouldQueue
 
         $data = $this->data;
         $wingsNode = WingsNode::where('id', $this->id);
-        echo $this->id;
 
         switch ($data->type) {
             case 'create':
@@ -83,7 +82,7 @@ class NodeJob implements ShouldQueue
 
                     $wingsNode->update([
                         'status' => 'created',
-                        'node_id' => $node_info['id']
+                        'node_id' => $node_info['attributes']['id']
                     ]);
                 }
                 break;
