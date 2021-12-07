@@ -26,7 +26,7 @@ class CreateWingsLocationsTable extends Migration
 
             $table->string('status')->index()->default('pending');
 
-            $table->boolean('share')->index()->default(false);
+            $table->boolean('visibility')->index()->default(false);
 
             $table->timestamps();
         });
