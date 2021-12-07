@@ -57,7 +57,7 @@ window.util.wings = {
                     data: data,
                     success(data) {
                         if (data.status) {
-                            util.url.reload();
+                            util.url.to(route('wings.locations.show', route().params.location))
                         }
                     }
                 });
