@@ -66,6 +66,11 @@ class PanelController extends Controller
         }
     }
 
+    public function createNode($data)
+    {
+        return $this->post('/nodes', $data);
+    }
+
     public function get($url, $data = null)
     {
         try {
