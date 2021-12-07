@@ -10,7 +10,7 @@
     <div class="mdui-typo-display-1">{{ tr('New Node') }}</div>
 
     <div class="mdui-row mdui-m-t-5">
-        <form action="#">
+        <form action="#" id="new" onsubmit="event.preventDefault();util.wings.locations.nodes.create($(this))">
             <div class="mdui-col-md-6 mdui-col-sm-12">
                 <div class="mdui-typo-headline">{{ tr('Basic Details') }}</div>
 
@@ -46,7 +46,7 @@
                 <p>{{ tr('If you are running the daemon behind a proxy such as Cloudflare, checked this to have the daemon skip looking for certificates on boot.') }}
                 </p>
                 <label class="mdui-switch">
-                    <input type="checkbox" name="visibility" value="1" />
+                    <input type="checkbox" name="behind_proxy" value="1" />
                     <i class="mdui-switch-icon"></i>
                 </label>
 
@@ -77,14 +77,21 @@
 
                         <div class="mdui-textfield">
                             <label class="mdui-textfield-label">{{ tr('Daemon Port') }}</label>
-                            <input class="mdui-textfield-input" type="text" name="daemonListen" value="8080" />
+                            <input class="mdui-textfield-input" type="text" name="daemon_listen" value="8080" />
                             <div class="mdui-textfield-helper">{{ tr('Unit: %') }}
                             </div>
                         </div>
 
                         <div class="mdui-textfield">
                             <label class="mdui-textfield-label">{{ tr('Daemon SFTP Port') }}</label>
-                            <input class="mdui-textfield-input" type="text" name="daemonListen" value="2022" />
+                            <input class="mdui-textfield-input" type="text" name="daemon_sftp" value="2022" />
+                        </div>
+
+                        <div class="mdui-textfield">
+                            <label class="mdui-textfield-label">{{ tr('Maximum Web Upload Filesize') }}</label>
+                            <input class="mdui-textfield-input" type="text" name="upload_size" value="100" />
+                            <div class="mdui-textfield-helper">{{ tr('Unit: MB') }}
+                            </div>
                         </div>
 
                     </div>
@@ -118,7 +125,7 @@
                         </div>
                         <button
                             class="mdui-m-t-4 mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent mdui-float-right"
-                            type="submit" onclick="event.preventDefault();">{{ tr('Create Node') }}</button>
+                            type="submit">{{ tr('Create Node') }}</button>
                     </div>
                 </div>
             </div>
