@@ -50,8 +50,12 @@
                                     href="{{ route('wings.locations.nodes.show', [$node->location_id, $node->id]) }}">{{ $node->display_name }}</a>
                             </td>
                             <td nowrap></td>
-                            <td nowrap>{{ $allocated['attributes']['allocated_resources']['memory'] }}</td>
-                            <td nowrap>{{ $allocated['attributes']['allocated_resources']['disk'] }}</td>
+                            <td nowrap>
+                                {{ $allocated['attributes']['allocated_resources']['memory'] ?? tr('wait to refresh') }}
+                            </td>
+                            <td nowrap>
+                                {{ $allocated['attributes']['allocated_resources']['disk'] ?? tr('wait to refresh') }}
+                            </td>
 
                         </tr>
                     @endforeach
