@@ -15,7 +15,7 @@
         "laravel/framework": "^8.65",
         "laravel/horizon": "^5.7",
         "laravel/sanctum": "^2.11",
-        "laravel/tinker": "^2.5",
+        "laravel/tinker": "2.6.3",
         "nwidart/laravel-modules": "^8.2",
         "orangehill/iseed": "^3.0",
         "pragmarx/health": "^1.1",
