@@ -16,8 +16,9 @@
     </div>
 
     <div class="mdui-row mdui-m-t-5" id="node-info">
-        <button class="mdui-btn mdui-btn-icon mdui-float-right" style="z-index: 1;" onclick="util.toggleLock('node-edit')"
-            data-lock-btn="node-edit" mdui-tooltip="{content: '{{ tr('切换锁定') }}', position: 'left'}">
+        <button class="mdui-btn mdui-btn-icon mdui-float-right" style="z-index: 1;"
+            onclick="util.toggleLock('node-edit', true)" data-lock-btn="node-edit"
+            mdui-tooltip="{content: '{{ tr('切换锁定') }}', position: 'left'}">
             <i class="mdui-icon material-icons">lock</i>
         </button>
         <form action="#" id="new" data-lock-form="node-edit"
