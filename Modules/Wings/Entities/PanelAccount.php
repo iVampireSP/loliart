@@ -9,7 +9,9 @@ class PanelAccount extends Model
 {
     use HasFactory;
 
-    protected $fillable = [];
+    protected $fillable = [
+        'email', 'username', 'password', 'last_name', 'first_name'
+    ];
 
     public function team()
     {
