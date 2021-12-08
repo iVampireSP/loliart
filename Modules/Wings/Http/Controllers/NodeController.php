@@ -72,7 +72,8 @@ class NodeController extends Controller
 
         $name = 'art-' . Str::random(5) . '-' . time();
 
-        $location = WingsLocation::where('team_id', session('team_id'))->where('id', $request->location_id)->first();
+        $location_orm = WingsLocation::where('team_id', session('team_id'))->where('id', $request->location_id);
+        $location = $location_orm->first();
         if (is_null($location)) {
             return response()->json(['status' => 0, 'data' => 'Location not found.']);
         }
@@ -100,6 +101,7 @@ class NodeController extends Controller
         ];
 
         $id = $wingsNode->create($data)->id;
+        $location_orm->increment('node_count');
 
         $data['location_id'] = $location->location_id;
         $data['daemonListen'] = $location->daemon_listen;

@@ -9,6 +9,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Modules\Wings\Entities\WingsLocation;
 use Modules\Wings\Http\Controllers\PanelController;
 
 class NodeJob implements ShouldQueue
@@ -73,7 +74,8 @@ class NodeJob implements ShouldQueue
                     'status' => 'deleting'
                 ]);
 
-                if (!$panel->deleteNode($wingsNode->first()->node_id)) {
+                $node_data = $wingsNode->first();
+                if (!$panel->deleteNode($node_data->node_id)) {
                     $wingsNode->update([
                         'status' => 'created'
                     ]);
@@ -82,6 +84,8 @@ class NodeJob implements ShouldQueue
                     $wingsNode->delete();
                     $this->broadcast('deleted');
                 }
+                WingsLocation::find($node_data->location_id)->decrement('node_count');
+
                 break;
 
             case 'update':
