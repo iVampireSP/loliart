@@ -24,6 +24,8 @@ class CreatePanelAccountsTable extends Migration
             $table->unsignedBigInteger('team_id')->index();
             $table->foreign('team_id')->references('id')->on('teams');
 
+            $table->unsignedBigInteger('user_id')->index()->nullable();
+
             $table->timestamps();
         });
     }
