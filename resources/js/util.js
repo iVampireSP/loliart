@@ -12,7 +12,7 @@ window.util = {
         $.pjax.reload('.pjax-container')
         $('.mdui-tooltip-open').remove()
     },
-    toggleLock: (id) => {
+    toggleLock: (id, play = false) => {
         let btn = `[data-lock-btn="${id}"]`
         let form = `[data-lock-form="${id}"]`
         let j = $(`${btn} i`)
@@ -21,7 +21,9 @@ window.util = {
             $(`${form} input`).attr('readonly', false)
             $(`${form} input`).attr('disabled', false)
             $(`${form} button`).attr('disabled', false)
-
+            if (play) {
+                util.play('unlock')
+            }
             j.removeClass('locked')
         } else {
             j.html('lock')
@@ -29,6 +31,9 @@ window.util = {
             $(`${form} input`).attr('disabled', true)
             $(`${form} input`).attr('readonly', true)
             $(`${form} button`).attr('disabled', true)
+            if (play) {
+                util.play('lock')
+            }
         }
     },
     play: (name) => {
