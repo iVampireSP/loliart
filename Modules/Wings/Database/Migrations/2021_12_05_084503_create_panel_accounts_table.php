@@ -13,7 +13,7 @@ class CreatePanelAccountsTable extends Migration
      */
     public function up()
     {
-        Schema::create('panel_accounts', function (Blueprint $table) {
+        Schema::create('wings_panel_accounts', function (Blueprint $table) {
             $table->id();
 
             $table->string('email')->index()->unique();
@@ -25,6 +25,7 @@ class CreatePanelAccountsTable extends Migration
             $table->foreign('team_id')->references('id')->on('teams');
 
             $table->unsignedBigInteger('user_id')->index()->nullable();
+            $table->string('status')->index()->default('pending');
 
             $table->timestamps();
         });
@@ -37,6 +38,6 @@ class CreatePanelAccountsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('panel_accounts');
+        Schema::dropIfExists('wings_panel_accounts');
     }
 }
