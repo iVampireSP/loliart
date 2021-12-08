@@ -9,8 +9,19 @@
 @section('content')
     <div class="mdui-typo-display-1">{{ $node->display_name }}</div>
 
-    <div class="mdui-row mdui-m-t-5">
-        <form action="#" id="new" onsubmit="event.preventDefault();util.wings.locations.nodes.edit($(this))">
+    <div class="mdui-tab" mdui-tab>
+        <a href="#node-info" class="mdui-ripple">{{ tr('Node Info') }}</a>
+        {{-- <a href="#example1-tab2" class="mdui-ripple">shopping</a> --}}
+        {{-- <a href="#example1-tab3" class="mdui-ripple">images</a> --}}
+    </div>
+
+    <div class="mdui-row mdui-m-t-5" id="node-info">
+        <button class="mdui-btn mdui-btn-icon mdui-float-right" onclick="util.toggleLock('node-edit')"
+            data-lock-btn="node-edit" mdui-tooltip="{content: '{{ tr('切换锁定') }}', position: 'left'}">
+            <i class="mdui-icon material-icons">lock</i>
+        </button>
+        <form action="#" id="new" data-lock-form="node-edit"
+            onsubmit="event.preventDefault();util.wings.locations.nodes.edit($(this))">
             <div class="mdui-col-md-6 mdui-col-sm-12">
                 <div class="mdui-typo-headline">{{ tr('Basic Details') }}</div>
 
@@ -139,7 +150,8 @@
                             {{ tr('The daemon runs its own SFTP management container and does not use the SSHd process on the main physical server. Do not use the same port that you have assigned for your physical server\'s SSH process. If you will be running the daemon behind CloudFlare® you should set the daemon port to 8443 to allow websocket proxying over SSL.') }}
                         </div>
 
-                        <button class="mdui-m-t-4 mdui-btn mdui-ripple mdui-btn-outlined"
+                        <button data-lock-submit="node-edit"
+                            class="submit mdui-m-t-4 mdui-btn mdui-ripple mdui-btn-outlined"
                             type="submit">{{ tr('Update Node') }}</button>
 
                     </div>
@@ -150,8 +162,7 @@
 
     <script>
         $(() => {
-            $('#new input').attr('readonly', true)
-            $('#new button').hide()
+            util.toggleLock('node-edit')
         })
     </script>
 
