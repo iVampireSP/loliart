@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', tr('Edit Node') . ':' . $node->display_name)
+@section('title', tr('Edit Node') . ': ' . $node->display_name)
 
 @section('app-menu')
     @include('wings::layouts.menu')
@@ -147,5 +147,12 @@
             </div>
         </form>
     </div>
+
+    <script>
+        $(() => {
+            $('#new input').attr('readonly', true)
+            $('#new button').hide()
+        })
+    </script>
 
 @endsection

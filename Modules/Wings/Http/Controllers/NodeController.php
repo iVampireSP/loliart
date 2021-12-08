@@ -131,7 +131,7 @@ class NodeController extends Controller
         $locations = WingsLocation::where('team_id', session('team_id'))->get();
 
 
-        return view('wings::nodes.edit', compact('node', 'locations'));
+        return view('wings::nodes.show', compact('node', 'locations'));
     }
 
     /**
