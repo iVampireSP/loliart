@@ -205,6 +205,12 @@ window.util.event = {
 
                 break;
 
+            case 'wings.locations.node.deleted':
+                if (currentRoute == 'wings.locations.nodes.show' || currentRoute == 'wings.locations.show') {
+                    util.url.to(route('wings.locations.show', route().params.location))
+                }
+
+                break;
             default:
                 break;
         }
