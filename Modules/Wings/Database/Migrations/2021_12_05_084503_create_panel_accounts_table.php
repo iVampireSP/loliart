@@ -17,7 +17,7 @@ class CreatePanelAccountsTable extends Migration
             $table->id();
 
             $table->string('email')->index()->unique();
-            $table->string('username')->index();
+            $table->string('username')->index()->unique();
             $table->string('first_name')->index();
             $table->string('last_name')->index();
 
