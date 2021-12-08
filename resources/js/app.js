@@ -29,7 +29,6 @@ $(document).ajaxStart(() => {
 
 $(document).ajaxComplete(() => {
     Progress.done();
-    util.play('done.mp3', 0.1)
 });
 
 $.ajaxSetup({
@@ -51,6 +50,7 @@ $(() => {
 
     currentRoute = route().current();
 
+    $.pjax.defaults.timeout = 10000;
     $(document).pjax('a', '.pjax-container');
 
     $(document).on('pjax:send', () => {
@@ -66,6 +66,8 @@ $(() => {
 
     $(document).on("pjax:timeout", (event) => {
         event.preventDefault()
+        util.play('alert.mp3', 0.2)
+
     });
 
     $(document).on("pjax:error", (event, xhr) => {
@@ -76,6 +78,7 @@ $(() => {
         }
         util.theme.warning();
 
+        util.play('error_1.wav')
     });
 
     $(document).ajaxError((event, xhr, options, data) => {
@@ -90,6 +93,7 @@ $(() => {
         } else {
             util.theme.warning();
         }
+        util.play('error_1.wav')
     });
 
     if (window.history && window.history.pushState) {
@@ -133,15 +137,20 @@ $(() => {
     window.addEventListener('click', () => {
         if (!firstClick) {
             firstClick = true
-            util.play('empty.mp3')
+            util.play('error_1.wav', 0)
+            util.play('success_1.wav', 0)
         }
     })
 })
 
 window.addEventListener('online', () => {
     $('#offline_tip').fadeOut()
+    util.play('success_1.wav')
+
 })
 window.addEventListener('offline', () => {
     $('#offline_tip').fadeIn()
+    util.play('error_1.wav')
+
 
 })
