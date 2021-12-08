@@ -36,7 +36,7 @@ window.util = {
             }
         }
     },
-    play: (name, volume = 0.6) => {
+    play: (name, volume = 0.5) => {
         if (firstClick) {
             let filename = '/sounds/' + name;
             let audio = new Audio(filename);
