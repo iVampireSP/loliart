@@ -150,8 +150,7 @@
                             {{ tr('The daemon runs its own SFTP management container and does not use the SSHd process on the main physical server. Do not use the same port that you have assigned for your physical server\'s SSH process. If you will be running the daemon behind CloudFlare® you should set the daemon port to 8443 to allow websocket proxying over SSL.') }}
                         </div>
 
-                        <button data-lock-submit="node-edit"
-                            class="submit mdui-m-t-4 mdui-btn mdui-ripple mdui-btn-outlined"
+                        <button class="mdui-m-t-4 mdui-btn mdui-ripple mdui-btn-outlined"
                             type="submit">{{ tr('Update Node') }}</button>
 
                     </div>

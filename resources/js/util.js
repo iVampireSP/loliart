@@ -20,13 +20,17 @@ window.util = {
         if (j.hasClass('locked')) {
             j.html('lock_open')
             $(`${form} input`).attr('readonly', false)
-            $(submit_btn).show()
+            $(`${form} input`).attr('disabled', false)
+            $(`${form} button`).attr('disabled', false)
+
             j.removeClass('locked')
         } else {
             j.html('lock')
             j.addClass('locked')
+            $(`${form} input`).attr('disabled', true)
             $(`${form} input`).attr('readonly', true)
-            $(submit_btn).hide()
+            $(`${form} button`).attr('disabled', true)
+
         }
 
     }
