@@ -20,7 +20,7 @@
                 mdui-tooltip="{content: '{{ tr('Click to edit.') }}'}" maxlength="25" />
             <br />
             <div class="mdui-row mdui-p-b-2 mdui-p-l-1">
-                <a class="mdui-btn mdui-color-theme-accent mdui-ripple"
+                <a class="mdui-btn mdui-btn-outlined mdui-ripple"
                     href="javascript: util.wings.locations.nodes.delete({{ $node->id }}, {{ $node->location_id }})">{{ tr('Delete') }}</a>
             </div>
         @else
