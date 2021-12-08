@@ -12,7 +12,7 @@
     <div class="mdui-tab" mdui-tab>
         <a href="#node-info" class="mdui-ripple">{{ tr('Node Info') }}</a>
         <a href="#node-config" class="mdui-ripple">{{ tr('Node Configuration') }}</a>
-        {{-- <a href="#example1-tab3" class="mdui-ripple">images</a> --}}
+        <a href="#delete-node" class="mdui-ripple">{{ tr('Delete Node') }}</a>
     </div>
 
     <div class="mdui-row mdui-m-t-5" id="node-info">
@@ -174,6 +174,13 @@
         <div class="mdui-typo">
             <pre>{!! $node_configuration !!}</pre>
         </div>
+    </div>
+
+    <div id="delete-node" class="mdui-m-t-5">
+        <div class="mdui-typo-headline">{{ tr('Delete Node') }}</div>
+
+        <button class="mdui-btn btn-ripple mdui-btn-outlined"
+            onclick="util.wings.locations.nodes.delete({{ $node->id }}, {{ $node->location_id }})">{{ tr('Delete') }}</button>
     </div>
 
 
