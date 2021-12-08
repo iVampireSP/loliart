@@ -1,5 +1,3 @@
-import ui from 'mdui'
-
 window.jQuery = window.$ = require('jquery')
 
 require('jquery-pjax');
@@ -11,7 +9,8 @@ require('./util.wings');
 require('./ziggy');
 require('./echo');
 
-window.ui = window.mdui = ui
+
+window.ui = window.mdui = require('./mdui');
 
 window.currentRoute = null;
 
