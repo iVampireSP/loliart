@@ -7,11 +7,12 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Modules\Wings\Jobs\NodeJob;
+use Symfony\Component\Yaml\Yaml;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Cache;
 use Modules\Wings\Entities\WingsNode;
 use Modules\Wings\Entities\WingsLocation;
 use Illuminate\Contracts\Support\Renderable;
-use Symfony\Component\Yaml\Yaml;
 
 class NodeController extends Controller
 {
@@ -133,7 +134,13 @@ class NodeController extends Controller
         }
         $locations = WingsLocation::where('team_id', session('team_id'))->get();
 
-        $node_configuration = Yaml::dump($panel->nodeConfig($node->node_id));
+        $cache_key = 'wings_nodes_config' . $node->node_id;
+        if (Cache::has($cache_key)) {
+            $node_configuration = Cache::get($cache_key);
+        } else {
+            $node_configuration = Yaml::dump($panel->nodeConfig($node->node_id));
+            Cache::put($cache_key, $node_configuration, 600);
+        }
 
         return view('wings::nodes.show', compact('node', 'locations', 'node_configuration'));
     }
