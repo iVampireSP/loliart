@@ -30,7 +30,7 @@
                         <td nowrap>{{ $location->id }}</td>
                         <td nowrap><a
                                 href="{{ route('wings.locations.show', $location->id) }}">{{ $location->name }}</a></td>
-                        <td nowrap>{{ $location->nodes }}</td>
+                        <td nowrap>{{ $location->node_count }}</td>
                         <td nowrap>{{ $location->servers }}</td>
                     </tr>
                 @endforeach
