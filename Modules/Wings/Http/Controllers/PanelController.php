@@ -120,7 +120,6 @@ class PanelController extends Controller
 
     public function patch($url, $data = null)
     {
-        // dd($response = $this->http->patch($this->url . $url, $data)->body());
         try {
             $response = $this->http->patch($this->url . $url, $data);
             $response->throw();
