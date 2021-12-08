@@ -372,8 +372,12 @@ a {
     line-height: 1 !important;
 }
 
+.mdui-btn-outlined .mdui-ripple-wave {
+    background: rgb(183 227 255 / 13%);
+}
+
 .mdui-btn-outlined:hover {
-    background-color: #f1f5ff !important;
+    background-color: #c7d7ff2a !important;
 }
 
 .mdui-snackbar-action:hover {
