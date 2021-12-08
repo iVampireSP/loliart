@@ -88,6 +88,9 @@ window.util.wings = {
                     method: 'PUT',
                     url: route('wings.locations.nodes.update', [route().params.location, route().params.node]),
                     data: data,
+                    success() {
+                        util.toggleLock('node-edit', true)
+                    },
                     error() {
                         util.theme.warning();
                     }
