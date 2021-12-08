@@ -15,7 +15,6 @@ window.util = {
     toggleLock: (id) => {
         let btn = `[data-lock-btn="${id}"]`
         let form = `[data-lock-form="${id}"]`
-        let submit_btn = `[data-lock-submit="${id}"]`
         let j = $(`${btn} i`)
         if (j.hasClass('locked')) {
             j.html('lock_open')
@@ -30,7 +29,6 @@ window.util = {
             $(`${form} input`).attr('disabled', true)
             $(`${form} input`).attr('readonly', true)
             $(`${form} button`).attr('disabled', true)
-
         }
 
     }
