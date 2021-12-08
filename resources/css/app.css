@@ -389,6 +389,24 @@ a.mdui-btn-outlined {
     border-radius: 4px;
 }
 
+.mdui-btn-outlined[disabled] {
+    background-color: rgba(0, 0, 0, 0.12) !important;
+    -webkit-box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2),
+        0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12) !important;
+    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2),
+        0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12) !important;
+    border: none !important;
+}
+
+.mdui-btn-outlined[disabled]:hover {
+    background-color: rgba(0, 0, 0, 0.12) !important;
+    -webkit-box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2),
+        0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12) !important;
+    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2),
+        0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12) !important;
+    border: none !important;
+}
+
 .mdui-snackbar {
     position: fixed;
     box-shadow: 0 3px 5px -1px rgb(0 0 0 / 20%), 0 6px 10px 0 rgb(0 0 0 / 14%),
