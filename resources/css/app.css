@@ -372,6 +372,10 @@ a {
     line-height: 1 !important;
 }
 
+a.mdui-btn-outlined {
+    line-height: 2.5 !important;
+}
+
 .mdui-btn-outlined .mdui-ripple-wave {
     background: rgb(183 227 255 / 13%);
 }
