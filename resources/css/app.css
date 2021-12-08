@@ -383,7 +383,6 @@ a {
 
 .mdui-snackbar {
     position: fixed;
-    bottom: 15px;
     opacity: 1;
     box-shadow: 0 3px 5px -1px rgb(0 0 0 / 20%), 0 6px 10px 0 rgb(0 0 0 / 14%),
         0 1px 18px 0 rgb(0 0 0 / 12%);
@@ -394,6 +393,14 @@ a {
     -moz-border-radius: 4px;
     -ms-border-radius: 4px;
     -o-border-radius: 4px;
+}
+
+.mdui-snackbar-top {
+    top: 15px;
+}
+
+.mdui-snackbar-bottom {
+    bottom: 15px;
 }
 
 @keyframes snackbar-load {
