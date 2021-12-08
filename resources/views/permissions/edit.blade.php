@@ -7,10 +7,10 @@
 
     @can('role.edit')
         <button onclick="util.team.permission.role.givePermission('{{ $role->name }}')"
-            class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent">{{ tr('Add Permission') }}</button>
+            class="mdui-btn mdui-btn-outlined mdui-ripple ">{{ tr('Add Permission') }}</button>
 
         <button onclick="util.team.permission.role.delete({{ $role->id }})"
-            class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent">{{ tr('Remove this role') }}</button>
+            class="mdui-btn mdui-btn-outlined mdui-ripple ">{{ tr('Remove this role') }}</button>
     @endcan
 
     <ul class="mdui-list">

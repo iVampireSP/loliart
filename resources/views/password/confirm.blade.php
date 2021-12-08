@@ -21,8 +21,7 @@
             @enderror
         </div>
 
-        <button type="submit"
-            class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent">{{ tr('Go on') }}</button>
+        <button type="submit" class="mdui-btn mdui-btn-outlined mdui-ripple ">{{ tr('Go on') }}</button>
 
     </form>
 

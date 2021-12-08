@@ -15,7 +15,7 @@
     <div id="roles" class="mdui-p-a-2">
         @can('role.edit')
             <button onclick="util.team.permission.role.create()"
-                class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent">{{ tr('Create Role') }}</button>
+                class="mdui-btn mdui-btn-outlined mdui-ripple ">{{ tr('Create Role') }}</button>
             <ul class="mdui-list">
                 @foreach ($roles as $role)
                     <a href="javascript: util.url.to(route('permission.role.edit', '{{ $role->name }}'))">

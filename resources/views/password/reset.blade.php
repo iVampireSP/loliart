@@ -12,8 +12,7 @@
             <input class="mdui-textfield-input" type="password" name="password" />
         </div>
 
-        <button type="submit"
-            class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent">{{ tr('Confirm') }}</button>
+        <button type="submit" class="mdui-btn mdui-btn-outlined mdui-ripple ">{{ tr('Confirm') }}</button>
     </form>
 
 
