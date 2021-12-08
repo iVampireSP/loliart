@@ -85,6 +85,11 @@ class PanelController extends Controller
         return $this->patch('/nodes/' . $id, $data);
     }
 
+    public function nodeConfig($id)
+    {
+        return $this->get('/nodes/' . $id . '/configuration');
+    }
+
     public function get($url, $data = null)
     {
         try {
