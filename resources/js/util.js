@@ -22,7 +22,7 @@ window.util = {
             $(`${form} input`).attr('disabled', false)
             $(`${form} button`).attr('disabled', false)
             if (play) {
-                util.play('unlock')
+                util.play('unlock.mp3')
             }
             j.removeClass('locked')
         } else {
@@ -32,14 +32,15 @@ window.util = {
             $(`${form} input`).attr('readonly', true)
             $(`${form} button`).attr('disabled', true)
             if (play) {
-                util.play('lock')
+                util.play('lock.mp3')
             }
         }
     },
-    play: (name) => {
+    play: (name, volume = 0.8) => {
         if (firstClick) {
-            let filename = '/sounds/' + name + '.mp3';
+            let filename = '/sounds/' + name;
             let audio = new Audio(filename);
+            audio.volume = volume;
             audio.load();
             audio.play();
         }

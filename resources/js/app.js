@@ -29,6 +29,7 @@ $(document).ajaxStart(() => {
 
 $(document).ajaxComplete(() => {
     Progress.done();
+    util.play('done.mp3', 0.1)
 });
 
 $.ajaxSetup({
@@ -132,13 +133,10 @@ $(() => {
     window.addEventListener('click', () => {
         if (!firstClick) {
             firstClick = true
-
-            util.play('empty')
+            util.play('empty.mp3')
         }
     })
-
 })
-
 
 window.addEventListener('online', () => {
     $('#offline_tip').fadeOut()
