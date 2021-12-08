@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', tr('New User'))
+@section('title', tr('New Account'))
 
 @section('app-menu')
     @include('wings::layouts.menu')
