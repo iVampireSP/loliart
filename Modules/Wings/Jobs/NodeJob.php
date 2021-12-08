@@ -114,6 +114,7 @@ class NodeJob implements ShouldQueue
                     'daemon_base' => $data['daemon_base'],
                     'visibility' => $data['visibility'] ?? 0,
                     'behind_proxy' => $data['behind_proxy'] ?? 0,
+                    'maintenance_mode' => (bool)$data['maintenance_mode'],
                     'status' => 'created'
                 ];
 

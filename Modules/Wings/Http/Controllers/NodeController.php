@@ -165,6 +165,7 @@ class NodeController extends Controller
             'behind_proxy' => 'boolean',
             'visibility' => 'boolean',
             'maintenance_mode' => 'boolean',
+            'reset_secret' => 'boolean',
         ]);
 
         if (!auth()->user()->can('node.edit')) {
@@ -205,7 +206,8 @@ class NodeController extends Controller
             'daemon_base' => $request->daemon_base,
             'visibility' => $request->visibility ?? 0,
             'behind_proxy' => $request->behind_proxy ?? 0,
-            'status' => 'created'
+            'status' => 'created',
+            'maintenance_mode' => (bool)$request->maintenance_mode ?? false
         ];
 
         $team_id = $node->location->team_id;

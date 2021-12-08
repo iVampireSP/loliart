@@ -61,12 +61,12 @@
                     <i class="mdui-switch-icon"></i>
                 </label>
 
-                <div class="mdui-typo-subheading mdui-m-t-2">{{ tr('Reset Daemon Master Key') }}</div>
-
-                <label class="mdui-checkbox mdui-m-t-1">
-                    <input type="checkbox" name="reset_secret" value="1" />
-                    <i class="mdui-checkbox-icon"></i>
-                    {{ tr('Checked to reset secret') }}
+                <div class="mdui-typo-subheading mdui-m-t-2">{{ tr('Maintenance Mode') }}</div>
+                <p>{{ tr('If the node is marked as \'Under Maintenance\' users won\'t be able to access servers that are on this node.') }}
+                </p>
+                <label class="mdui-switch">
+                    <input type="checkbox" name="maintenance_mode" value="1" @if ($node->maintenance_mode) checked @endif />
+                    <i class="mdui-switch-icon"></i>
                 </label>
 
 
