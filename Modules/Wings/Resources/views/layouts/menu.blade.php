@@ -22,7 +22,7 @@
                 <div class="mdui-list-item-content">{{ tr('Browse Servers') }}</div>
             </a>
 
-            <a class="mdui-list-item mdui-ripple" href="#">
+            <a class="mdui-list-item mdui-ripple" href="{{ route('wings.accounts.index') }}">
                 <span class="mdui-list-item-icon mdui-icon material-icons-outlined">manage_accounts</span>
                 <div class="mdui-list-item-content">{{ tr('Panel Accounts') }}</div>
             </a>

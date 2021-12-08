@@ -17,6 +17,7 @@ Route::domain('wings.' . config('app.domain'))->prefix('/')->middleware(['teams_
     Route::get('/', 'WingsController@index')->name('index');
 
     Route::resource('/locations', LocationController::class);
+    Route::resource('/accounts', AccountController::class);
     Route::resource('/locations/{location}/nodes', NodeController::class, ['as' => 'locations']);
 
     // Route::resource('/nodes', NodeController::class)->except('store');

@@ -2,9 +2,12 @@
 
 namespace Modules\Wings\Http\Controllers;
 
-use Illuminate\Contracts\Support\Renderable;
+use App\Events\TeamEvent;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Contracts\Support\Renderable;
+use Modules\Wings\Entities\WingsPanelAccount;
+use Modules\Wings\Jobs\AccountJob;
 
 class AccountController extends Controller
 {
@@ -14,7 +17,8 @@ class AccountController extends Controller
      */
     public function index()
     {
-        return view('wings::index');
+        $accounts = WingsPanelAccount::where('team_id', session('team_id'))->where('status', 'created')->get();
+        return view('wings::accounts.index', compact('accounts'));
     }
 
     /**
@@ -23,7 +27,7 @@ class AccountController extends Controller
      */
     public function create()
     {
-        return view('wings::create');
+        return view('wings::accounts.create');
     }
 
     /**
@@ -33,7 +37,37 @@ class AccountController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'first_name' => 'required|max:10',
+            'last_name' => 'required|max:10',
+            'username' => 'required|unique:wings_panel_accounts',
+            'email' => 'required|unique:wings_panel_accounts',
+            'password' => 'required|max:255'
+        ]);
+
+        $accounts = new WingsPanelAccount();
+        $accounts->email = $request->email;
+        $accounts->username = $request->username;
+        $accounts->first_name = $request->first_name;
+        $accounts->last_name = $request->last_name;
+        $accounts->team_id = session('team_id');
+        $accounts->save();
+
+        broadcast(new TeamEvent(
+            $accounts->team_id,
+            [
+                'type' => 'wings.accounts.pending',
+                'status' => 'pending'
+            ]
+        ));
+
+        $data = $request->toArray();
+        $data['team_id'] = $accounts->team_id;
+        $data['type'] = 'create';
+
+        dispatch(new AccountJob($accounts->id, $data));
+
+        return response()->json(['status' => 1, 'data' => $data]);
     }
 
     /**
