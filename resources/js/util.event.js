@@ -198,7 +198,7 @@ window.util.event = {
                 }
                 break;
 
-            case 'wings.locations.node.update':
+            case 'wings.locations.node.updated':
                 if (currentRoute == 'wings.locations.nodes.show' || currentRoute == 'wings.locations.show') {
                     util.reload();
                 }
