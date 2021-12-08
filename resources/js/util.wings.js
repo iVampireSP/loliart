@@ -88,13 +88,6 @@ window.util.wings = {
                     method: 'PUT',
                     url: route('wings.locations.nodes.update', [route().params.location, route().params.node]),
                     data: data,
-                    success(data) {
-                        if (data.status) {
-                            util.reload();
-                        } else {
-                            util.theme.warning();
-                        }
-                    },
                     error() {
                         util.theme.warning();
                     }
