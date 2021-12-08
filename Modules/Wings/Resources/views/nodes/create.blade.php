@@ -123,9 +123,10 @@
                         <div class="mdui-typo-caption-opacity mdui-m-t-3">
                             {{ tr('The daemon runs its own SFTP management container and does not use the SSHd process on the main physical server. Do not use the same port that you have assigned for your physical server\'s SSH process. If you will be running the daemon behind CloudFlare® you should set the daemon port to 8443 to allow websocket proxying over SSL.') }}
                         </div>
-                        <button
-                            class="mdui-m-t-4 mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent mdui-float-right"
+
+                        <button class="mdui-m-t-4 mdui-btn mdui-ripple mdui-btn-outlined"
                             type="submit">{{ tr('Create Node') }}</button>
+
                     </div>
                 </div>
             </div>
