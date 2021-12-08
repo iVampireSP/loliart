@@ -42,6 +42,7 @@ $.ajaxSetup({
 
 document.onreadystatechange = Progress.done;
 
+window.firstClick = false
 $(() => {
     Progress.done();
 
@@ -125,8 +126,16 @@ $(() => {
             window.console.log('');
 
         }
-
     }
+
+    // 监听用户点击，播放空音频
+    window.addEventListener('click', () => {
+        if (!firstClick) {
+            firstClick = true
+
+            util.play('empty')
+        }
+    })
 
 })
 

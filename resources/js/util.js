@@ -37,9 +37,12 @@ window.util = {
         }
     },
     play: (name) => {
-        let filename = '/sounds/' + name + '.mp3';
-        let audio = new Audio(filename);
-        audio.load();
-        audio.play();
+        if (firstClick) {
+            let filename = '/sounds/' + name + '.mp3';
+            let audio = new Audio(filename);
+            audio.load();
+            audio.play();
+        }
+
     }
 }
