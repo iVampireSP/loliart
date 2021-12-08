@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Cache;
+use GuzzleHttp\Exception\ConnectException;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Client\RequestException;
 
@@ -101,7 +102,10 @@ class PanelController extends Controller
             } else {
                 return $response->json() ?? false;
             }
-        } catch (Exception $e) {
+        } catch (ConnectException $e) {
+            unset($e);
+            return false;
+        } catch (RequestException $e) {
             unset($e);
             return false;
         }
@@ -117,6 +121,9 @@ class PanelController extends Controller
             } else {
                 return $response->json();
             }
+        } catch (ConnectException $e) {
+            unset($e);
+            return false;
         } catch (RequestException $e) {
             unset($e);
             return false;
@@ -133,6 +140,9 @@ class PanelController extends Controller
             } else {
                 return $response->json();
             }
+        } catch (ConnectException $e) {
+            unset($e);
+            return false;
         } catch (RequestException $e) {
             unset($e);
             return false;
@@ -149,6 +159,9 @@ class PanelController extends Controller
             } else {
                 return true;
             }
+        } catch (ConnectException $e) {
+            unset($e);
+            return false;
         } catch (RequestException $e) {
             unset($e);
             return false;
