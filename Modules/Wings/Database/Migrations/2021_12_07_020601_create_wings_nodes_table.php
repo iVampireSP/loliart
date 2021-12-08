@@ -50,6 +50,8 @@ class CreateWingsNodesTable extends Migration
 
             $table->string('status')->index()->default('pending');
 
+            $table->unsignedBigInteger('server_count')->index()->default(0);
+
             $table->timestamps();
         });
     }

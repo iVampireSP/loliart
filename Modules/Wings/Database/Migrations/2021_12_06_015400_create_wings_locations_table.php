@@ -28,6 +28,8 @@ class CreateWingsLocationsTable extends Migration
 
             $table->boolean('visibility')->index()->default(false);
 
+            $table->unsignedBigInteger('node_count')->index()->default(0);
+
             $table->timestamps();
         });
     }
