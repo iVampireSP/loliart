@@ -11,6 +11,7 @@ use Illuminate\Routing\Controller;
 use Modules\Wings\Entities\WingsNode;
 use Modules\Wings\Entities\WingsLocation;
 use Illuminate\Contracts\Support\Renderable;
+use Symfony\Component\Yaml\Yaml;
 
 class NodeController extends Controller
 {
@@ -125,13 +126,16 @@ class NodeController extends Controller
      */
     public function show($id, WingsNode $node)
     {
+        $panel = new PanelController();
+
         if (!auth()->user()->can('team.access')) {
             return response()->json(['status' => 0, 'data' => 'Permission denied.']);
         }
         $locations = WingsLocation::where('team_id', session('team_id'))->get();
 
+        $node_configuration = Yaml::dump($panel->nodeConfig($node->node_id));
 
-        return view('wings::nodes.show', compact('node', 'locations'));
+        return view('wings::nodes.show', compact('node', 'locations', 'node_configuration'));
     }
 
     /**

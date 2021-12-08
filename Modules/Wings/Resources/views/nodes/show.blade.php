@@ -11,12 +11,12 @@
 
     <div class="mdui-tab" mdui-tab>
         <a href="#node-info" class="mdui-ripple">{{ tr('Node Info') }}</a>
-        {{-- <a href="#example1-tab2" class="mdui-ripple">shopping</a> --}}
+        <a href="#node-config" class="mdui-ripple">{{ tr('Node Configuration') }}</a>
         {{-- <a href="#example1-tab3" class="mdui-ripple">images</a> --}}
     </div>
 
     <div class="mdui-row mdui-m-t-5" id="node-info">
-        <button class="mdui-btn mdui-btn-icon mdui-float-right" onclick="util.toggleLock('node-edit')"
+        <button class="mdui-btn mdui-btn-icon mdui-float-right" style="z-index: 1;" onclick="util.toggleLock('node-edit')"
             data-lock-btn="node-edit" mdui-tooltip="{content: '{{ tr('切换锁定') }}', position: 'left'}">
             <i class="mdui-icon material-icons">lock</i>
         </button>
@@ -157,12 +157,24 @@
                 </div>
             </div>
         </form>
+        <script>
+            $(() => {
+                util.toggleLock('node-edit')
+            })
+        </script>
+
     </div>
 
-    <script>
-        $(() => {
-            util.toggleLock('node-edit')
-        })
-    </script>
+    <div id="node-config" class="mdui-m-t-5">
+        <div class="mdui-typo-headline">{{ tr('Configuration File') }}</div>
+        <p>{{ tr('This file should be placed in your daemon\'s root directory (usually /etc/pterodactyl) in a file called config.yml.') }}
+        </p>
+
+        <div class="mdui-typo">
+            <pre>{!! $node_configuration !!}</pre>
+        </div>
+    </div>
+
+
 
 @endsection
