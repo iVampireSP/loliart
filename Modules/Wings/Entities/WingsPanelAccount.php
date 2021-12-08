@@ -5,9 +5,11 @@ namespace Modules\Wings\Entities;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class PanelAccount extends Model
+class WingsPanelAccount extends Model
 {
     use HasFactory;
+
+    protected $table = 'wings_panel_accounts';
 
     protected $fillable = [
         'email', 'username', 'password', 'last_name', 'first_name'
