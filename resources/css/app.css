@@ -408,6 +408,14 @@ a.mdui-btn-outlined {
     bottom: 10px;
 }
 
+.rounded {
+    border-radius: 50px;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    -ms-border-radius: 50px;
+    -o-border-radius: 50px;
+}
+
 @media (prefers-color-scheme: dark) {
     .mdui-drawer {
         background-color: #303030 !important;
