@@ -58,7 +58,6 @@ class PanelController extends Controller
     public function node($id, $cache = true)
     {
         $cache_key = 'wings_node_' . $id;
-        // return Cache::get($cache_key);
         if ($cache) {
             if (Cache::has($cache_key)) {
                 return Cache::get($cache_key);
@@ -89,6 +88,35 @@ class PanelController extends Controller
     public function nodeConfig($id)
     {
         return $this->get('/nodes/' . $id . '/configuration');
+    }
+
+    // user
+    public function user($id, $cache = true)
+    {
+        $cache_key = 'wings_user_' . $id;
+        if ($cache) {
+            if (Cache::has($cache_key)) {
+                return Cache::get($cache_key);
+            } else {
+                Cache::put($cache_key, $this->get('/users/' . $id), 600);
+            }
+        }
+        return Cache::get($cache_key);
+    }
+
+    public function createUser($data)
+    {
+        return $this->post('/users', $data);
+    }
+
+    public function deleteUser($id)
+    {
+        return $this->delete('/users/' . $id);
+    }
+
+    public function updateUser($id, $data)
+    {
+        return $this->patch('/users/' . $id, $data);
     }
 
     public function get($url, $data = null)
