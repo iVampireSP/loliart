@@ -376,6 +376,40 @@ a {
     background-color: #f1f5ff !important;
 }
 
+.mdui-snackbar-action:hover {
+    background-color: rgb(101 159 255 / 12%);
+    border-radius: 4px;
+}
+
+.mdui-snackbar {
+    position: fixed;
+    bottom: 15px;
+    opacity: 1;
+    box-shadow: 0 3px 5px -1px rgb(0 0 0 / 20%), 0 6px 10px 0 rgb(0 0 0 / 14%),
+        0 1px 18px 0 rgb(0 0 0 / 12%);
+    animation: snackbar-load 1 ease;
+    -webkit-animation: snackbar-load 1 ease;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+}
+
+@keyframes snackbar-load {
+    25% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        bottom: 0;
+    }
+}
+
 @media (prefers-color-scheme: dark) {
     .mdui-drawer {
         background-color: #303030 !important;
