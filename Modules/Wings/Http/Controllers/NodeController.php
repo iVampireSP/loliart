@@ -5,11 +5,12 @@ namespace Modules\Wings\Http\Controllers;
 use App\Events\TeamEvent;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use Modules\Wings\Jobs\NodeJob;
 use Illuminate\Routing\Controller;
 use Modules\Wings\Entities\WingsNode;
 use Modules\Wings\Entities\WingsLocation;
 use Illuminate\Contracts\Support\Renderable;
-use Modules\Wings\Jobs\NodeJob;
 
 class NodeController extends Controller
 {
@@ -81,7 +82,7 @@ class NodeController extends Controller
             'description' => $request->name,
             'display_name' => $request->name,
             'location_id' => $location->id,
-            'wings_locations_id' => $location->id,
+            'wings_locations_id' => $location->location_id,
             'fqdn' => $request->fqdn,
             'scheme' => "https",
             'memory' => $request->memory,
@@ -99,6 +100,8 @@ class NodeController extends Controller
         $id = $wingsNode->create($data)->id;
 
         $data['location_id'] = $location->location_id;
+        $data['daemonListen'] = $location->daemon_listen;
+        $data['daemonSFTP'] = $location->daemon_sftp;
 
         // send data to pterodactyl panel
         dispatch(new NodeJob($id, $data));
@@ -122,12 +125,13 @@ class NodeController extends Controller
      */
     public function show($id, WingsNode $node)
     {
-        // $wingsNode->with('')
-        // $servers = WingsServer::where('node_', $id)->get();
         if (!auth()->user()->can('team.access')) {
             return response()->json(['status' => 0, 'data' => 'Permission denied.']);
         }
-        return view('wings::nodes.show', compact('node'));
+        $locations = WingsLocation::where('team_id', session('team_id'))->get();
+
+
+        return view('wings::nodes.edit', compact('node', 'locations'));
     }
 
     /**
@@ -135,9 +139,9 @@ class NodeController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function edit($id)
+    public function edit($id, WingsNode $node)
     {
-        return view('wings::edit');
+        //
     }
 
     /**
@@ -148,12 +152,61 @@ class NodeController extends Controller
      */
     public function update(Request $request)
     {
+        $request->validate([
+            'name' => 'required|max:20',
+            'location_id' => 'integer|required',
+            'memory' => 'integer|required',
+            'memory_overallocate' => 'integer|required',
+            'disk' => 'integer|required',
+            'disk_overallocate' => 'integer|required',
+            'upload_size' => 'integer|required',
+            'daemon_sftp' => 'integer|required',
+            'daemon_listen' => 'integer|required',
+            'behind_proxy' => 'boolean',
+            'visibility' => 'boolean',
+            'maintenance_mode' => 'boolean',
+        ]);
+
         if (!auth()->user()->can('node.edit')) {
             return response()->json(['status' => 0, 'data' => 'Permission denied.']);
         }
 
+        $location = WingsLocation::where('team_id', session('team_id'))->where('id', $request->location_id)->first();
+        if (is_null($location)) {
+            return response()->json(['status' => 0, 'data' => 'Location not found.']);
+        }
+
         $orm = WingsNode::where('id', $request->route('node'))->where('location_id', $request->route('location'));
         $node = $orm->first();
+
+        $request->validate([
+            'fqdn' => [
+                'required', Rule::unique('wings_nodes')->ignore($node->id)
+            ]
+        ]);
+
+        $data = [
+            'type' => 'update',
+            'team_id' => session('team_id'),
+            'description' => $request->name,
+            'display_name' => $request->name,
+            'name' => $node->name,
+            'location_id' => $location->location_id,
+            'pl_location_id' => $location->id,
+            'fqdn' => $request->fqdn,
+            'scheme' => "https",
+            'memory' => $request->memory,
+            'memory_overallocate' => $request->memory_overallocate,
+            'disk' => $request->disk,
+            'disk_overallocate' => $request->disk_overallocate,
+            'upload_size' => $request->upload_size,
+            'daemon_sftp' => $request->daemon_sftp,
+            'daemon_listen' => $request->daemon_listen,
+            'daemon_base' => $request->daemon_base,
+            'visibility' => $request->visibility ?? 0,
+            'behind_proxy' => $request->behind_proxy ?? 0,
+            'status' => 'created'
+        ];
 
         $team_id = $node->location->team_id;
 
@@ -167,7 +220,11 @@ class NodeController extends Controller
                 ]
             ));
 
-            $orm->update(['display_name' => $request->name]);
+            dispatch(new NodeJob($node->id, $data));
+
+            $orm->update([
+                'display_name' => $request->name,
+            ]);
 
             return response()->json(['status' => 1, 'data' => $request->name]);
         }

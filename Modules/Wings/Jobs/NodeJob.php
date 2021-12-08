@@ -7,7 +7,6 @@ use Illuminate\Bus\Queueable;
 use Modules\Wings\Entities\WingsNode;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
-use Modules\Wings\Entities\WingsLocation;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Modules\Wings\Http\Controllers\PanelController;
@@ -18,6 +17,7 @@ class NodeJob implements ShouldQueue
 
     public $data;
     public $id;
+    public $changed;
 
     /**
      * Create a new job instance.
@@ -82,6 +82,43 @@ class NodeJob implements ShouldQueue
                     $wingsNode->delete();
                     $this->broadcast('deleted');
                 }
+                break;
+
+            case 'update':
+                $this->broadcast('updateing');
+
+                $wingsNode->update([
+                    'status' => 'updateing'
+                ]);
+
+                $data = (array)$data;
+                $update = $panel->updateNode($wingsNode->first()->node_id, $data);
+                if (!$update) {
+                    $this->broadcast('updated');
+                } else {
+                    $this->broadcast('failed');
+                }
+
+                $this->changed = [
+                    'name' => $data['name'],
+                    'display_name' => $data['display_name'],
+                    'location_id' => $data['pl_location_id'],
+                    'fqdn' => $data['fqdn'],
+                    'memory' => $data['memory'],
+                    'memory_overallocate' => $data['memory_overallocate'],
+                    'disk' => $data['disk'],
+                    'disk_overallocate' => $data['disk_overallocate'],
+                    'upload_size' => $data['upload_size'],
+                    'daemon_sftp' => $data['daemon_sftp'],
+                    'daemon_listen' => $data['daemon_listen'],
+                    'daemon_base' => $data['daemon_base'],
+                    'visibility' => $data['visibility'] ?? 0,
+                    'behind_proxy' => $data['behind_proxy'] ?? 0,
+                    'status' => 'created'
+                ];
+
+                $wingsNode->update($this->changed);
+
                 break;
         }
     }

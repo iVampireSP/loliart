@@ -80,6 +80,11 @@ class PanelController extends Controller
         return $this->delete('/nodes/' . $id);
     }
 
+    public function updateNode($id, $data)
+    {
+        return $this->patch('/nodes/' . $id, $data);
+    }
+
     public function get($url, $data = null)
     {
         try {
@@ -115,6 +120,7 @@ class PanelController extends Controller
 
     public function patch($url, $data = null)
     {
+        // dd($response = $this->http->patch($this->url . $url, $data)->body());
         try {
             $response = $this->http->patch($this->url . $url, $data);
             $response->throw();

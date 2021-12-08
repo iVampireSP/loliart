@@ -81,13 +81,13 @@ window.util.wings = {
                     }
                 );
             },
-            edit: (note_id, location_id, ele) => {
+            edit: (ele) => {
+                let data = ele.serializeArray();
+
                 $.ajax({
                     method: 'PUT',
-                    url: route('wings.locations.nodes.update', [location_id, note_id]),
-                    data: {
-                        name: ele.value
-                    },
+                    url: route('wings.locations.nodes.update', [route().params.location, route().params.node]),
+                    data: data,
                     success(data) {
                         if (data.status) {
                             util.reload();
