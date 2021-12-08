@@ -5902,7 +5902,7 @@
                 translateY = snackbarHeight + 20;
             }
             if (position === 'top') {
-                translateY = -snackbarHeight;
+                translateY = -snackbarHeight - 20;
             }
             if (position === 'left-top' || position === 'right-top') {
                 translateY = -snackbarHeight - 24;
