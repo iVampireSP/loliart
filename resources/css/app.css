@@ -383,11 +383,8 @@ a {
 
 .mdui-snackbar {
     position: fixed;
-    opacity: 1;
     box-shadow: 0 3px 5px -1px rgb(0 0 0 / 20%), 0 6px 10px 0 rgb(0 0 0 / 14%),
         0 1px 18px 0 rgb(0 0 0 / 12%);
-    animation: snackbar-load 1 ease;
-    -webkit-animation: snackbar-load 1 ease;
     border-radius: 4px;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
@@ -396,25 +393,11 @@ a {
 }
 
 .mdui-snackbar-top {
-    top: 15px;
+    top: 10px;
 }
 
 .mdui-snackbar-bottom {
-    bottom: 15px;
-}
-
-@keyframes snackbar-load {
-    25% {
-        opacity: 0;
-    }
-
-    50% {
-        opacity: 1;
-    }
-
-    100% {
-        bottom: 0;
-    }
+    bottom: 10px;
 }
 
 @media (prefers-color-scheme: dark) {
