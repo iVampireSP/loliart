@@ -4164,7 +4164,7 @@ make-dir@^3.0.0, make-dir@^3.0.2, make-dir@^3.1.0:
 
 masonry-layout@^4.2.2:
   version "4.2.2"
-  resolved "https://registry.npm.taobao.org/masonry-layout/download/masonry-layout-4.2.2.tgz#d57b44af13e601bfcdc423f1dd8348b5524de348"
+  resolved "https://registry.nlark.com/masonry-layout/download/masonry-layout-4.2.2.tgz#d57b44af13e601bfcdc423f1dd8348b5524de348"
   integrity sha1-1XtErxPmAb/NxCPx3YNItVJN40g=
   dependencies:
     get-size "^2.0.2"

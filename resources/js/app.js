@@ -1,6 +1,7 @@
 window.jQuery = window.$ = require('jquery')
 
 require('jquery-pjax');
+require('masonry-layout');
 require('./util');
 require('./util.event');
 require('./util.team');
