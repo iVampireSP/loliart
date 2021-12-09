@@ -9,13 +9,9 @@
 @section('content')
     <div class="mdui-typo-display-1">{{ $user->username }}</div>
 
-    <button class="mdui-btn mdui-btn-icon mdui-float-right" style="z-index: 1;"
-        onclick="util.toggleLock('account-edit', true)" data-lock-btn="account-edit"
-        mdui-tooltip="{content: '{{ tr('Lock/Unlock') }}', position: 'left'}">
-        <i class="mdui-icon material-icons">lock_open</i>
-    </button>
+    <x-lock for="account-edit" lock="0" />
 
-    <form action="#" id="edit" class="mdui-m-t-5"
+    <form action="#" class="mdui-m-t-5"
         onsubmit="event.preventDefault();util.wings.accounts.edit({{ $user->id }},$(this))"
         data-lock-form="account-edit">
 
@@ -55,9 +51,4 @@
 
     </form>
 
-    <script>
-        $(() => {
-            util.toggleLock('account-edit')
-        })
-    </script>
 @endsection

@@ -16,12 +16,9 @@
     </div>
 
     <div class="mdui-row mdui-m-t-5" id="node-info">
-        <button class="mdui-btn mdui-btn-icon mdui-float-right" style="z-index: 1;"
-            onclick="util.toggleLock('node-edit', true)" data-lock-btn="node-edit"
-            mdui-tooltip="{content: '{{ tr('Lock/Unlock') }}', position: 'left'}">
-            <i class="mdui-icon material-icons">lock</i>
-        </button>
-        <form action="#" id="new" data-lock-form="node-edit"
+        <x-lock for="node-edit" lock="0" />
+
+        <form action="#" data-lock-form="node-edit"
             onsubmit="event.preventDefault();util.wings.locations.nodes.edit($(this))">
             <div class="mdui-col-md-6 mdui-col-sm-12">
                 <div class="mdui-typo-headline">{{ tr('Basic Details') }}</div>
@@ -158,12 +155,6 @@
                 </div>
             </div>
         </form>
-        <script>
-            $(() => {
-                util.toggleLock('node-edit')
-            })
-        </script>
-
     </div>
 
     <div id="node-config" class="mdui-m-t-5">
