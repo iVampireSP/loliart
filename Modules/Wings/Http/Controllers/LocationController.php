@@ -81,7 +81,7 @@ class LocationController extends Controller
             abort(404);
         }
 
-        $nodes = WingsNode::where('location_id', $location->id)->where('status', 'created')->get();
+        $nodes = WingsNode::where('location_id', $location->id)->where('status', 'created')->simplePaginate();
 
         return view('wings::locations.show', compact('location', 'nodes'));
     }
