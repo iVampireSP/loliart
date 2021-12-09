@@ -8,6 +8,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Modules\Wings\Http\Controllers\JobController;
 use Modules\Wings\Http\Controllers\PanelController;
 
 class RefreshWingNodeJob implements ShouldQueue
@@ -34,7 +35,6 @@ class RefreshWingNodeJob implements ShouldQueue
     {
         $panel = new PanelController();
         $data = $panel->node($this->id, false);
-        var_dump($data);
         Cache::put('wings_node_' . $this->id, $data, 600);
     }
 }
