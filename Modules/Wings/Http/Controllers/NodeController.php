@@ -140,7 +140,10 @@ class NodeController extends Controller
         if (Cache::has($cache_key)) {
             $node_configuration = Cache::get($cache_key);
         } else {
-            $node_configuration = Yaml::dump($panel->nodeConfig($node->node_id), 4, 2, Yaml::DUMP_EMPTY_ARRAY_AS_SEQUENCE);
+            $node_config = $panel->nodeConfig($node->node_id);
+            $node->token = $node_config['token'];
+            $node->save();
+            $node_configuration = Yaml::dump($node_config, 4, 2, Yaml::DUMP_EMPTY_ARRAY_AS_SEQUENCE);
             Cache::put($cache_key, $node_configuration, 600);
         }
 
