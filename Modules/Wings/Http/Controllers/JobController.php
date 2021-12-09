@@ -8,6 +8,7 @@ use Modules\Wings\Entities\WingsNest;
 use Modules\Wings\Entities\WingsNode;
 use Modules\Wings\Jobs\RefreshWingNodeJob;
 use Illuminate\Contracts\Support\Renderable;
+use Modules\Wings\Entities\WingsNestEgg;
 
 class JobController extends Controller
 {
@@ -46,17 +47,20 @@ class JobController extends Controller
         foreach ($arr as $a) {
             $wingsNest = new WingsNest();
             $attr = $a['attributes'];
+            $nest_id = $attr['id'];
             $create_data = [
-                'nest_id' => $attr['id'],
+                'nest_id' => $nest_id,
                 'author' => $attr['author'],
                 'name' => $attr['name'],
                 'description' => $attr['description'],
             ];
-            $wingsNest_where = $wingsNest->where('nest_id', $attr['id']);
+            $wingsNest_where = $wingsNest->where('nest_id', $nest_id);
             if ($wingsNest_where->exists()) {
-                $ids[] = $attr['id'];
+                $ids[] = $nest_id;
+                $create_data['found'] = 1;
                 $wingsNest_where->update($create_data);
             } else {
+                $ids[] = $nest_id;
                 $wingsNest->create($create_data);
             }
         }
@@ -66,11 +70,53 @@ class JobController extends Controller
         return $arr;
     }
 
-    public static function refresh_eggs($nest_id)
+    public static function refresh_eggs()
     {
         $panel = new PanelController();
-        $eggs = (object)$panel->eggs($nest_id);
-        return $eggs;
+
+        WingsNest::chunk(100, function ($nests) use ($panel) {
+            $egg_ids = [];
+
+            foreach ($nests as $nest) {
+                // Refresh Eggs
+                // Search for eggs in nest
+                $eggs = $panel->eggs($nest->nest_id);
+                if (!$eggs) {
+                    continue;
+                }
+                foreach ($eggs['data'] as $egg) {
+                    $wingsNestEgg = new WingsNestEgg();
+                    $egg = $egg['attributes'];
+
+                    $egg_data = [
+                        'name' => $egg['name'],
+                        'nest_id' => $egg['nest'],
+                        'author' => $egg['author'],
+                        'description' => $egg['description'],
+                        'docker_image' => $egg['docker_image'],
+                        'docker_images' => json_encode($egg['docker_images']),
+                        'startup' => $egg['startup'],
+                        'egg_id' => $egg['id'],
+                        'environment' => json_encode($egg['relationships']['variables']['data']),
+                    ];
+
+                    $wingsNestEgg_where = $wingsNestEgg->where('egg_id', $egg['id']);
+                    if ($wingsNestEgg_where->exists()) {
+                        $egg_ids[] = $egg['id'];
+                        $egg_data['found'] = 1;
+                        $wingsNestEgg_where->update($egg_data);
+                    } else {
+                        $egg_ids[] = $egg['id'];
+                        $wingsNestEgg->create($egg_data);
+                    }
+                }
+            }
+
+            // Update Egg found column
+            WingsNestEgg::whereNotIn('egg_id', $egg_ids)->update(['found' => 0]);
+        });
+
+        return true;
     }
 
     protected static function search(object $data)
