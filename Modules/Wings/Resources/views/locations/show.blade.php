@@ -39,6 +39,7 @@
                         <th>{{ tr('Servers') }}</th>
                         <th>{{ tr('Memory allocated') }}</th>
                         <th>{{ tr('Disk space allocated') }}</th>
+                        <th>{{ tr('Online') }}</th>
                     </tr>
                 </thead>
                 <tbody class="mdui-typo">
@@ -56,7 +57,13 @@
                             <td nowrap>
                                 {{ $allocated['attributes']['allocated_resources']['disk'] ?? tr('wait to refresh') }}
                             </td>
-
+                            <td nowrap>
+                                @if ($node->online)
+                                    <i class="mdui-icon material-icons mdui-text-color-green">done</i>
+                                @else
+                                    <i class="mdui-icon material-icons mdui-text-color-red">close</i>
+                                @endif
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
