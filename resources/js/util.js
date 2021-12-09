@@ -45,5 +45,4 @@ window.util = {
             audio.play();
         }
     },
-    masonry: require('masonry-layout')
 }

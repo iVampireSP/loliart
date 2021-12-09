@@ -8,7 +8,7 @@ require('./util.theme');
 require('./util.wings');
 require('./ziggy');
 require('./echo');
-
+let masonry = require('masonry-layout')
 
 window.ui = window.mdui = require('./mdui');
 
@@ -29,6 +29,7 @@ $(document).ajaxStart(() => {
 
 $(document).ajaxComplete(() => {
     Progress.done();
+    new masonry('.masonry')
 });
 
 $.ajaxSetup({
@@ -139,8 +140,10 @@ $(() => {
             firstClick = true
             util.play('error_1.wav', 0)
             util.play('success_1.wav', 0)
+            util.play('alert.mp3', 0)
         }
     })
+    new masonry('.masonry')
 })
 
 window.addEventListener('online', () => {
@@ -151,6 +154,4 @@ window.addEventListener('online', () => {
 window.addEventListener('offline', () => {
     $('#offline_tip').fadeIn()
     util.play('error_1.wav')
-
-
 })
