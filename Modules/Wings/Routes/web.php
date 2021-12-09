@@ -16,9 +16,12 @@ use Illuminate\Support\Facades\Route;
 Route::domain('wings.' . config('app.domain'))->prefix('/')->middleware(['teams_permission', 'auth'])->name('wings.')->group(function () {
     Route::get('/', 'WingsController@index')->name('index');
 
-    Route::resource('/locations', LocationController::class);
     Route::resource('/accounts', AccountController::class);
+    Route::resource('/locations', LocationController::class);
     Route::resource('/locations/{location}/nodes', NodeController::class, ['as' => 'locations']);
+    Route::resource('/nests', NestsController::class);
+    Route::resource('/nests/{nest}/eggs', NestEggsController::class, ['as' => 'nests']);
+
 
     // Route::resource('/nodes', NodeController::class)->except('store');
 });
