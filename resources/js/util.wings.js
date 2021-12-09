@@ -97,5 +97,21 @@ window.util.wings = {
                 });
             }
         }
+    },
+    accounts: {
+        create: (ele) => {
+            let data = ele.serializeArray();
+            $.ajax({
+                method: 'POST',
+                url: route('wings.accounts.store'),
+                data: data,
+                success() {
+
+                },
+                error() {
+                    util.theme.warning();
+                }
+            });
+        }
     }
 }
