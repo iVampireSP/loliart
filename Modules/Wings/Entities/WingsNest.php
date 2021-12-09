@@ -12,4 +12,9 @@ class WingsNest extends Model
     protected $fillable = [
         'nest_id', 'author', 'name', 'description'
     ];
+
+    public function eggsList()
+    {
+        return $this->hasMany(WingsNestEgg::class, 'nest_id', 'nest_id');
+    }
 }
