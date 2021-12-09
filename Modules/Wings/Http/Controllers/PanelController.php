@@ -119,6 +119,32 @@ class PanelController extends Controller
         return $this->patch('/users/' . $id, $data);
     }
 
+    // Nests
+    public function nests($page = 0)
+    {
+        return $this->get('/nests' . '?page=' . $page);
+    }
+
+    public function nest($id)
+    {
+        return $this->get('/nests/' . $id);
+    }
+
+    public function eggs($id)
+    {
+        return $this->get('/nests/' . $id . '/eggs?include=variables');
+    }
+
+    public function egg($nest_id, $egg_id)
+    {
+        return $this->get('/nests/' . $nest_id . '/eggs/' . $egg_id);
+    }
+
+    public function eggVar($nest_id, $egg_id)
+    {
+        return $this->get('/nests/' . $nest_id . '/eggs/' . $egg_id . '?include=variables');
+    }
+
     public function get($url, $data = null)
     {
         try {
