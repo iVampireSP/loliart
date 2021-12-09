@@ -44,6 +44,6 @@ window.util = {
             audio.load();
             audio.play();
         }
-
-    }
+    },
+    masonry: require('masonry-layout')
 }
