@@ -168,8 +168,6 @@
     </div>
 
     <div id="delete-node" class="mdui-m-t-5">
-        <div class="mdui-typo-headline">{{ tr('Delete Node') }}</div>
-
         <button class="mdui-btn btn-ripple mdui-btn-outlined"
             onclick="util.wings.locations.nodes.delete({{ $node->id }}, {{ $node->location_id }})">{{ tr('Delete') }}</button>
     </div>
