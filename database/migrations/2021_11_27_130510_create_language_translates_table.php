@@ -17,8 +17,8 @@ class CreateLanguageTranslatesTable extends Migration
             $table->id();
 
             $table->string('language')->index();
-            $table->string('string', 512)->index();
-            $table->string('output', 512)->index();
+            $table->text('string');
+            $table->text('output');
 
             $table->timestamps();
         });
