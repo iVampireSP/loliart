@@ -9,10 +9,7 @@ class WingsNest extends Model
 {
     use HasFactory;
 
-    protected $fillable = [];
-    
-    protected static function newFactory()
-    {
-        return \Modules\Wings\Database\factories\WingsNestFactory::new();
-    }
+    protected $fillable = [
+        'nest_id', 'author', 'name', 'description'
+    ];
 }
