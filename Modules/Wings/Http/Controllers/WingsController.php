@@ -14,8 +14,6 @@ class WingsController extends Controller
      */
     public function index()
     {
-        $panel = new PanelController();
-        dd($panel->user(1));
         return view('wings::index');
     }
 
