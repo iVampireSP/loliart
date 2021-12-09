@@ -37,3 +37,11 @@ if (!function_exists('userInTeam')) {
         return TeamUser::where('team_id', $team_id)->where('user_id', auth()->id())->exists();
     }
 }
+if (!function_exists('userInTeamFail')) {
+    function userInTeamFail($team_id)
+    {
+        if (!TeamUser::where('team_id', $team_id)->where('user_id', auth()->id())->exists()) {
+            abort(401);
+        }
+    }
+}
