@@ -64,6 +64,27 @@ class AccountJob implements ShouldQueue
                     $this->broadcast('created');
                 }
                 break;
+            case 'update':
+                $this->broadcast('updating');
+                $data_array = [
+                    'email' => $data->email,
+                    'username' => $data->username,
+                    'first_name' => $data->first_name,
+                    'last_name' => $data->last_name,
+                ];
+                if (!is_null($data->password)) {
+                    $data_array['password'] = $data->password;
+                }
+                $status = $panel->updateUser($wingsPanelAccount->first()->user_id, $data_array);
+                if (!$status) {
+                    $this->broadcast('failed');
+                } else {
+                    $data_array['status'] = 'created';
+                    unset($data_array['password']);
+                    $wingsPanelAccount->update($data_array);
+                    $this->broadcast('updated');
+                }
+                break;
         }
     }
 

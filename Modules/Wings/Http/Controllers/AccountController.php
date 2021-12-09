@@ -3,11 +3,13 @@
 namespace Modules\Wings\Http\Controllers;
 
 use App\Events\TeamEvent;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\Routing\Controller;
+use Modules\Wings\Jobs\AccountJob;
 use Illuminate\Contracts\Support\Renderable;
 use Modules\Wings\Entities\WingsPanelAccount;
-use Modules\Wings\Jobs\AccountJob;
 
 class AccountController extends Controller
 {
@@ -40,10 +42,12 @@ class AccountController extends Controller
         $request->validate([
             'first_name' => 'required|max:10',
             'last_name' => 'required|max:10',
-            'username' => 'required|unique:wings_panel_accounts',
+            'username' => 'required|alpha_num|unique:wings_panel_accounts',
             'email' => 'required|unique:wings_panel_accounts',
             'password' => 'required|max:255'
         ]);
+
+        $request->username = Str::lower($request->username);
 
         $accounts = new WingsPanelAccount();
         $accounts->email = $request->email;
@@ -75,9 +79,11 @@ class AccountController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function show($id)
+    public function show(WingsPanelAccount $account)
     {
-        return view('wings::show');
+        userInTeamFail($account->team_id);
+        $user = $account;
+        return view('wings::accounts.show', compact('user'));
     }
 
     /**
@@ -96,9 +102,35 @@ class AccountController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, WingsPanelAccount $account)
     {
-        //
+        userInTeamFail($account->team_id);
+
+        $request->validate([
+            'first_name' => 'required|max:10',
+            'last_name' => 'required|max:10',
+            'username' => ['required', 'alpha_num', Rule::unique('wings_panel_accounts')->ignore($account->id)],
+            'email' => ['required', Rule::unique('wings_panel_accounts')->ignore($account->id)],
+            'password' => 'max:255'
+        ]);
+
+        $request->username = Str::lower($request->username);
+
+        broadcast(new TeamEvent(
+            $account->team_id,
+            [
+                'type' => 'wings.accounts.pending',
+                'status' => 'pending'
+            ]
+        ));
+
+        $data = $request->toArray();
+        $data['team_id'] = $account->team_id;
+        $data['type'] = 'update';
+
+        dispatch(new AccountJob($account->id, $data));
+
+        return response()->json(['status' => 1, 'data' => $data]);
     }
 
     /**

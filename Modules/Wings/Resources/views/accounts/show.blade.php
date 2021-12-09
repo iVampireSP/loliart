@@ -9,7 +9,8 @@
 @section('content')
     <div class="mdui-typo-display-1">{{ $user->username }}</div>
 
-    <form action="#" id="new" class="mdui-m-t-5" onsubmit="event.preventDefault();util.wings.accounts.edit($(this))">
+    <form action="#" id="new" class="mdui-m-t-5"
+        onsubmit="event.preventDefault();util.wings.accounts.edit({{ $user->id }},$(this))">
 
         <div class="mdui-textfield">
             <label class="mdui-textfield-label">{{ tr('Username') }}</label>
@@ -31,6 +32,13 @@
         <div class="mdui-textfield">
             <label class="mdui-textfield-label">{{ tr('Last Name') }}</label>
             <input class="mdui-textfield-input" type="text" name="last_name" value="{{ $user->last_name }}" />
+        </div>
+
+        <div class="mdui-textfield mdui-textfield-floating-label">
+            <label class="mdui-textfield-label">{{ tr('Password') }}</label>
+            <input class="mdui-textfield-input" type="password" name="password" />
+            <div class="mdui-textfield-helper">{{ tr('Enter new password if you want to change it.') }}</div>
+
         </div>
 
         <button class="mdui-btn mdui-btn-outlined mdui-ripple mdui-m-t-4">{{ tr('Save') }}</button>
