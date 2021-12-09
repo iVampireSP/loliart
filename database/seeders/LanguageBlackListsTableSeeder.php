@@ -21,16 +21,16 @@ class LanguageBlackListsTableSeeder extends Seeder
         \DB::table('language_black_lists')->insert(array (
             0 => 
             array (
+                'created_at' => '2021-12-02 13:17:19',
                 'id' => 1,
                 'language' => 'zh-cn',
-                'created_at' => '2021-12-02 13:17:19',
                 'updated_at' => '2021-12-02 13:17:19',
             ),
             1 => 
             array (
+                'created_at' => '2021-12-02 13:17:20',
                 'id' => 2,
                 'language' => 'zh-hans',
-                'created_at' => '2021-12-02 13:17:20',
                 'updated_at' => '2021-12-02 13:17:20',
             ),
         ));
