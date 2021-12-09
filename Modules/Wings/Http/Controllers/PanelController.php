@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Cache;
 use GuzzleHttp\Exception\ConnectException;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Client\RequestException;
+use Modules\Wings\Entities\WingsNode;
 
 class PanelController extends Controller
 {
@@ -68,6 +69,13 @@ class PanelController extends Controller
             Cache::put($cache_key, $this->get('/nodes/' . $id), 600);
             return Cache::get($cache_key);;
         }
+    }
+
+    public function nodeStatus($id)
+    {
+        $node = WingsNode::find($id);
+        $get_url = 'https://' . $node->fqdn . ':' . $node->daemon_listen . '/api/system';
+        return Http::withToken($node->token)->get($get_url)->json() ?? false;
     }
 
     public function createNode($data)
