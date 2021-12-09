@@ -16,7 +16,7 @@
     </div>
 
     <div class="mdui-row mdui-m-t-5" id="node-info">
-        <x-lock for="node-edit" lock="0" />
+        <x-lock for="node-edit" lock="1" />
 
         <form action="#" data-lock-form="node-edit"
             onsubmit="event.preventDefault();util.wings.locations.nodes.edit($(this))">

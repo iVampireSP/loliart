@@ -9,7 +9,7 @@
 @section('content')
     <div class="mdui-typo-display-1">{{ $user->username }}</div>
 
-    <x-lock for="account-edit" lock="0" />
+    <x-lock for="account-edit" lock="1" />
 
     <form action="#" class="mdui-m-t-5"
         onsubmit="event.preventDefault();util.wings.accounts.edit({{ $user->id }},$(this))"
