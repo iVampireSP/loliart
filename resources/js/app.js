@@ -142,6 +142,9 @@ $(() => {
             util.play('success_1.wav', 0)
             util.play('alert.mp3', 0)
         }
+        // 顺便刷新masonry
+        new masonry('.masonry')
+
     })
     new masonry('.masonry')
 })
