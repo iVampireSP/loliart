@@ -75,7 +75,7 @@ class PanelController extends Controller
     {
         $node = WingsNode::find($id);
         $get_url = 'https://' . $node->fqdn . ':' . $node->daemon_listen . '/api/system';
-        return Http::withToken($node->token)->get($get_url)->json() ?? false;
+        return (object)Http::withToken($node->token)->get($get_url)->json() ?? false;
     }
 
     public function createNode($data)
