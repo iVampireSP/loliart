@@ -98,9 +98,9 @@ class NodeJob implements ShouldQueue
                 $data = (array)$data;
                 $update = $panel->updateNode($wingsNode->first()->node_id, $data);
                 if (!$update) {
-                    $this->broadcast('updated');
-                } else {
                     $this->broadcast('failed');
+                } else {
+                    $this->broadcast('updated');
                 }
 
                 $this->changed = [
