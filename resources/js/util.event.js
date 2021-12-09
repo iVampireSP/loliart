@@ -211,6 +211,12 @@ window.util.event = {
                 }
 
                 break;
+            case 'wings.accounts.deleted':
+                if (currentRoute == 'currentRoute') {
+                    util.reload()
+                }
+
+                break;
             default:
                 break;
         }

@@ -126,6 +126,23 @@ window.util.wings = {
                     util.theme.warning();
                 }
             });
+        },
+        delete: (id) => {
+            ui.confirm('Are you sure?',
+                () => {
+                    $.ajax({
+                        method: 'DELETE',
+                        url: route('wings.accounts.destroy', id),
+                        success(data) {
+                            if (data.status) {
+                                util.url.to(route('wings.accounts.index'))
+                            } else {
+                                util.theme.warning()
+                            }
+                        }
+                    });
+                }
+            );
         }
     }
 }
