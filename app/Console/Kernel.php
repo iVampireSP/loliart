@@ -20,6 +20,7 @@ class Kernel extends ConsoleKernel
         $schedule->call(function () {
             \Modules\Wings\Http\Controllers\JobController::refresh_wings();
             dispatch(new \Modules\Wings\Jobs\RefreshNestJob());
+            dispatch(new \Modules\Wings\Jobs\UpdateNodeInfoJob());
         })->hourly()->name('Wings');
     }
 
