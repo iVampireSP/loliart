@@ -14,6 +14,6 @@ class WingsNestEgg extends Model
     ];
 
     protected $casts = [
-        'environment' => 'array'
+        'environment' => 'object'
     ];
 }
