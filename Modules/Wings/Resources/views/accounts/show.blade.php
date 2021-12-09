@@ -9,8 +9,15 @@
 @section('content')
     <div class="mdui-typo-display-1">{{ $user->username }}</div>
 
-    <form action="#" id="new" class="mdui-m-t-5"
-        onsubmit="event.preventDefault();util.wings.accounts.edit({{ $user->id }},$(this))">
+    <button class="mdui-btn mdui-btn-icon mdui-float-right" style="z-index: 1;"
+        onclick="util.toggleLock('account-edit', true)" data-lock-btn="account-edit"
+        mdui-tooltip="{content: '{{ tr('Lock/Unlock') }}', position: 'left'}">
+        <i class="mdui-icon material-icons">lock_open</i>
+    </button>
+
+    <form action="#" id="edit" class="mdui-m-t-5"
+        onsubmit="event.preventDefault();util.wings.accounts.edit({{ $user->id }},$(this))"
+        data-lock-form="account-edit">
 
         <div class="mdui-textfield">
             <label class="mdui-textfield-label">{{ tr('Username') }}</label>
@@ -41,9 +48,16 @@
 
         </div>
 
-        <button class="mdui-btn mdui-btn-outlined mdui-ripple mdui-m-t-4">{{ tr('Save') }}</button>
+        <button class="mdui-btn mdui-btn-outlined mdui-ripple mdui-m-t-4"
+            onclick="util.toggleLock('account-edit', true)">{{ tr('Save') }}</button>
         <button class="mdui-btn mdui-btn-outlined mdui-ripple mdui-m-t-4"
             onclick="event.preventDefault();util.wings.accounts.delete({{ $user->id }})">{{ tr('Delete') }}</button>
 
     </form>
+
+    <script>
+        $(() => {
+            util.toggleLock('account-edit')
+        })
+    </script>
 @endsection
