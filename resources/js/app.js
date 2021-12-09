@@ -8,7 +8,6 @@ require('./util.theme');
 require('./util.wings');
 require('./ziggy');
 require('./echo');
-let masonry = require('masonry-layout')
 
 window.ui = window.mdui = require('./mdui');
 
@@ -29,7 +28,8 @@ $(document).ajaxStart(() => {
 
 $(document).ajaxComplete(() => {
     Progress.done();
-    new masonry('.masonry')
+    util.masonry('.masonry')
+
 });
 
 $.ajaxSetup({
@@ -142,11 +142,10 @@ $(() => {
             util.play('success_1.wav', 0)
             util.play('alert.mp3', 0)
         }
-        // 顺便刷新masonry
-        new masonry('.masonry')
+        util.masonry('.masonry')
 
     })
-    new masonry('.masonry')
+    util.masonry('.masonry')
 })
 
 window.addEventListener('online', () => {

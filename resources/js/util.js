@@ -45,4 +45,11 @@ window.util = {
             audio.play();
         }
     },
+    masonry: (ele) => {
+        if (!$(ele).length) {
+            return false;
+        }
+        let masonry = require('masonry-layout')
+        new masonry(ele)
+    }
 }
