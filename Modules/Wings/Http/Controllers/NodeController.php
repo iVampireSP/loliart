@@ -144,8 +144,6 @@ class NodeController extends Controller
             Cache::put($cache_key, $node_configuration, 600);
         }
 
-
-
         return view('wings::nodes.show', compact('node', 'locations', 'node_configuration'));
     }
 
