@@ -24,6 +24,10 @@ class CreateWingsNestsTable extends Migration
             $table->boolean('display')->default(true)->index();
             $table->boolean('found')->default(true)->index();
 
+            $table->unsignedInteger('eggs')->index()->default(0);
+            $table->unsignedInteger('servers')->index()->default(0);
+
+
             $table->timestamps();
         });
     }

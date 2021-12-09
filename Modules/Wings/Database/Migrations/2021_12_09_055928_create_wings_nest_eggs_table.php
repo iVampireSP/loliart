@@ -31,6 +31,7 @@ class CreateWingsNestEggsTable extends Migration
             $table->boolean('can_use')->default(true)->index();
             $table->boolean('found')->default(true)->index();
 
+            $table->unsignedInteger('servers')->index()->default(0);
 
             $table->timestamps();
         });
