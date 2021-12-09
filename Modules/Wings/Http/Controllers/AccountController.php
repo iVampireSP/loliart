@@ -138,8 +138,29 @@ class AccountController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function destroy($id)
+    public function destroy(WingsPanelAccount $account)
     {
-        //
+        userInTeamFail($account->team_id);
+
+        if (!auth()->user()->can('wings.accounts.edit')) {
+            return response()->json(['status' => 0, 'data' => 'Permission denied.']);
+        }
+
+        broadcast(new TeamEvent(
+            $account->team_id,
+            [
+                'type' => 'wings.accounts.pending',
+                'status' => 'pending'
+            ]
+        ));
+
+        $data = [
+            'type' => 'delete',
+            'team_id' => $account->team_id
+        ];
+
+        dispatch(new AccountJob($account->id, $data));
+
+        return response()->json(['status' => 1, 'data' => $account->toArray()]);
     }
 }

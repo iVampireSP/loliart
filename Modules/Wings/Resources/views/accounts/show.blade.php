@@ -42,6 +42,8 @@
         </div>
 
         <button class="mdui-btn mdui-btn-outlined mdui-ripple mdui-m-t-4">{{ tr('Save') }}</button>
+        <button class="mdui-btn mdui-btn-outlined mdui-ripple mdui-m-t-4"
+            onclick="event.preventDefault();util.wings.accounts.delete({{ $user->id }})">{{ tr('Delete') }}</button>
 
     </form>
 @endsection

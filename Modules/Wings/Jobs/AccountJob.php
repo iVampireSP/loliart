@@ -85,6 +85,19 @@ class AccountJob implements ShouldQueue
                     $this->broadcast('updated');
                 }
                 break;
+
+            case 'delete':
+                $this->broadcast('deleting');
+
+                $status = $panel->deleteUser($wingsPanelAccount->first()->user_id);
+                if (!$status) {
+                    $this->broadcast('failed');
+                } else {
+                    $wingsPanelAccount->delete();
+                    $this->broadcast('deleted');
+                }
+
+                break;
         }
     }
 
