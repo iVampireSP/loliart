@@ -112,6 +112,20 @@ window.util.wings = {
                     util.theme.warning();
                 }
             });
+        },
+        edit: (id, ele) => {
+            let data = ele.serializeArray();
+            $.ajax({
+                method: 'PUT',
+                url: route('wings.accounts.update', id),
+                data: data,
+                success() {
+
+                },
+                error() {
+                    util.theme.warning();
+                }
+            });
         }
     }
 }
