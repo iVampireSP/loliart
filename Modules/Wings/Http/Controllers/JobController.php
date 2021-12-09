@@ -60,7 +60,8 @@ class JobController extends Controller
                 $wingsNest->create($create_data);
             }
         }
-        $not_found = WingsNest::whereNotIn('nest_id', $ids)->update(['found' => 0]);
+
+        WingsNest::whereNotIn('nest_id', $ids)->update(['found' => 0]);
 
         return $arr;
     }
