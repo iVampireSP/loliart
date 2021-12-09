@@ -9,9 +9,19 @@ use Illuminate\Support\Facades\Cache;
 
 class TranslateController extends Controller
 {
-    public static function translate($str)
+    public $locate;
+    public $black_list;
+
+    public function translate($str)
     {
-        $languages = session()->get('locate');
+        if (is_null($str)) {
+            return $str;
+        }
+        if (is_null($this->locate)) {
+            $this->locate = $languages = session()->get('locate');
+        } else {
+            $languages = $this->locate;
+        }
 
         if (strpos($languages[0], 'en') !== false) {
             return $str;
@@ -22,22 +32,24 @@ class TranslateController extends Controller
         $language_blacklist = new LanguageBlackList();
         $language_translates = new LanguageTranslate();
 
-        $black_list = Cache::has('language_blacklist') ?? $language_blacklist->get();
-        if (Cache::has('language_blacklist')) {
-            $black_list = Cache::get('language_blacklist');
-        } else {
-            $black_list = $language_blacklist->get();
-            $temp_arr = [];
-            foreach ($black_list as $block) {
-                array_push($temp_arr, $block->language);
+        if (is_null($this->black_list)) {
+            $this->black_list = Cache::has('language_blacklist') ?? $language_blacklist->get();
+            if (Cache::has('language_blacklist')) {
+                $this->black_list = Cache::get('language_blacklist');
+            } else {
+                $this->black_list = $language_blacklist->get();
+                $temp_arr = [];
+                foreach ($this->black_list as $block) {
+                    array_push($temp_arr, $block->language);
+                }
+                $this->black_list = $temp_arr;
+                unset($temp_arr);
+                Cache::put('language_blacklist', $this->black_list, 1800);
             }
-            $black_list = $temp_arr;
-            unset($temp_arr);
-            Cache::put('language_blacklist', $black_list, 1800);
         }
 
         foreach ($languages as $lang) {
-            if (in_array($lang, $black_list)) {
+            if (in_array($lang, $this->black_list)) {
                 continue;
             }
 
@@ -72,8 +84,8 @@ class TranslateController extends Controller
             if (isset($res['error_code'])) {
                 if ($res['error_code'] == '58001') {
                     // 加入语言黑名单（不支持翻译的语言）
-                    array_push($black_list, $lang);
-                    Cache::forever('language_blacklist', $black_list);
+                    array_push($this->black_list, $lang);
+                    Cache::forever('language_blacklist', $this->black_list);
                     $language_blacklist->language = $lang;
                     $language_blacklist->save();
                     continue;
