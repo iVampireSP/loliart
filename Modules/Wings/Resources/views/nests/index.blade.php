@@ -25,7 +25,7 @@
                     <tr id="nests-{{ $nest->id }}}">
                         <td nowrap>{{ $nest->id }}</td>
                         <td nowrap><a href="{{ route('wings.nests.show', $nest->id) }}">{{ $nest->name }}</a></td>
-                        <td nowrap>{{ $nest->description }}</td>
+                        <td nowrap>{{ tr($nest->description) }}</td>
                         <td nowrap>{{ $nest->eggs }}</td>
                         <td nowrap>{{ $nest->servers }}</td>
                     </tr>

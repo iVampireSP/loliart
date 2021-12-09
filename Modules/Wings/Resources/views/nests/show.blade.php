@@ -26,7 +26,7 @@
                         <td nowarp><a
                                 href="{{ route('wings.nests.eggs.show', [$nest->id, $egg->id]) }}">{{ $egg->name }}</a>
                         </td>
-                        <td nowarp style="word-break: break-all;word-wrap: break-word;">{{ $egg->description }}</td>
+                        <td nowarp style="word-break: break-all;word-wrap: break-word;">{{ tr($egg->description) }}</td>
                         <td nowrap>{{ $egg->servers }}</td>
                     </tr>
                 @endforeach
