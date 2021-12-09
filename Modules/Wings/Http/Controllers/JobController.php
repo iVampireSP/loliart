@@ -119,6 +119,17 @@ class JobController extends Controller
         return true;
     }
 
+    public static function updateCountColumn()
+    {
+        //  Refresh nests counts
+        WingsNest::chunk(100, function ($nests) {
+            foreach ($nests as $nest) {
+                $nest->eggs = WingsNestEgg::where('nest_id', $nest->id)->count();
+                $nest->save();
+            }
+        });
+    }
+
     protected static function search(object $data)
     {
         $next_page = 1;

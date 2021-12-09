@@ -32,5 +32,6 @@ class RefreshNestJob implements ShouldQueue
     {
         JobController::refresh_nests();
         JobController::refresh_eggs();
+        JobController::updateCountColumn();
     }
 }
