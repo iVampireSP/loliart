@@ -60,7 +60,7 @@
                                 {{ $allocated['attributes']['allocated_resources']['disk'] ?? tr('wait to refresh') }}
                             </td>
                             <td nowrap>
-                                @if ($node->online)
+                                @if ($node->active)
                                     <i class="mdui-icon material-icons mdui-text-color-green">done</i>
                                 @else
                                     <i class="mdui-icon material-icons mdui-text-color-red">close</i>
