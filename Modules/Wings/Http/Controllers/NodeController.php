@@ -12,6 +12,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Cache;
 use Modules\Wings\Entities\WingsNode;
 use Modules\Wings\Entities\WingsLocation;
+use Modules\Wings\Entities\WingsAllocation;
 use Illuminate\Contracts\Support\Renderable;
 
 class NodeController extends Controller
@@ -68,6 +69,7 @@ class NodeController extends Controller
             'behind_proxy' => 'boolean',
             'visibility' => 'boolean',
             'maintenance_mode' => 'boolean',
+            'ip' => 'required|ip',
         ]);
 
         $name = 'art-' . Str::random(5) . '-' . time();
@@ -98,6 +100,7 @@ class NodeController extends Controller
             'daemon_base' => $request->daemon_base,
             'visibility' => $request->visibility ?? 0,
             'behind_proxy' => $request->behind_proxy ?? 0,
+            'ip' => $request->ip
         ];
 
         $id = $wingsNode->create($data)->id;
@@ -135,6 +138,7 @@ class NodeController extends Controller
             return response()->json(['status' => 0, 'data' => 'Permission denied.']);
         }
         $locations = WingsLocation::where('team_id', session('team_id'))->get();
+        $allocations = WingsAllocation::where('node_id', $node->node_id)->simplePaginate();
 
         $cache_key = 'wings_nodes_config' . $node->node_id;
         if (Cache::has($cache_key)) {
@@ -147,7 +151,7 @@ class NodeController extends Controller
             Cache::put($cache_key, $node_configuration, 600);
         }
 
-        return view('wings::nodes.show', compact('node', 'locations', 'node_configuration'));
+        return view('wings::nodes.show', compact('node', 'locations', 'node_configuration', 'allocations'));
     }
 
     /**
@@ -181,7 +185,6 @@ class NodeController extends Controller
             'behind_proxy' => 'boolean',
             'visibility' => 'boolean',
             'maintenance_mode' => 'boolean',
-            'reset_secret' => 'boolean',
         ]);
 
         if (!auth()->user()->can('node.edit')) {
@@ -223,7 +226,7 @@ class NodeController extends Controller
             'visibility' => $request->visibility ?? 0,
             'behind_proxy' => $request->behind_proxy ?? 0,
             'status' => 'created',
-            'maintenance_mode' => (bool)$request->maintenance_mode ?? false
+            'maintenance_mode' => (bool)$request->maintenance_mode ?? false,
         ];
 
         $team_id = $node->location->team_id;
