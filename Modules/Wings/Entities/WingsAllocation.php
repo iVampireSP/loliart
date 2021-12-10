@@ -9,10 +9,7 @@ class WingsAllocation extends Model
 {
     use HasFactory;
 
-    protected $fillable = [];
-    
-    protected static function newFactory()
-    {
-        return \Modules\Wings\Database\factories\WingsAllocationFactory::new();
-    }
+    protected $fillable = [
+        'ip', 'alias', 'port', 'node_id', 'allocation_id'
+    ];
 }
