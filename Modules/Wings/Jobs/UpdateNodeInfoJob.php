@@ -9,7 +9,6 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Modules\Wings\Entities\WingsAllocation;
 use Modules\Wings\Entities\WingsNode;
-use Modules\Wings\Http\Controllers\JobController;
 use Modules\Wings\Http\Controllers\PanelController;
 
 class UpdateNodeInfoJob implements ShouldQueue
