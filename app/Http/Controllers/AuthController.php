@@ -98,7 +98,7 @@ class AuthController extends Controller
         if ($set_password) {
             return redirect()->route('password.reset');
         } else {
-            return redirect()->route('www.index');
+            return redirect()->route('main.index');
         }
     }
 
@@ -115,7 +115,7 @@ class AuthController extends Controller
 
         User::find(auth()->id())->update(['password' => Hash::make($request->password)]);
 
-        return redirect()->route('www.index');
+        return redirect()->route('main.index');
     }
 
     public function confirm()
@@ -153,6 +153,6 @@ class AuthController extends Controller
     public function logout()
     {
         Auth::logout();
-        return redirect()->route('www.index')->with('message', 'Your account has been logged out.');
+        return redirect()->route('main.index')->with('message', 'Your account has been logged out.');
     }
 }
