@@ -14,6 +14,7 @@ class WingsNode extends Model
         'display_name',
         'location_id',
         'fqdn',
+        'ip',
         'memory',
         'memory_overallocate',
         'disk',
