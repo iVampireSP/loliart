@@ -154,9 +154,9 @@ class PanelController extends Controller
     }
 
     // Allocation
-    public function allocations($node_id)
+    public function allocations($node_id, $page = 1)
     {
-        return $this->get('/nodes/' . $node_id . '/allocations');
+        return $this->get('/nodes/' . $node_id . '/allocations??include=server&page=' . $page);
     }
 
     public function createAllocation($node_id, $data)
