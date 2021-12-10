@@ -153,6 +153,22 @@ class PanelController extends Controller
         return $this->get('/nests/' . $nest_id . '/eggs/' . $egg_id . '?include=variables');
     }
 
+    // Allocation
+    public function allocations($node_id)
+    {
+        return $this->get('/nodes/' . $node_id . '/allocations');
+    }
+
+    public function createAllocation($node_id, $data)
+    {
+        return $this->post('/nodes/' . $node_id . '/allocations', $data);
+    }
+
+    public function deleteAllocation($node_id, $allocation_id)
+    {
+        return $this->delete('/nodes/' . $node_id . '/allocations/' . $allocation_id);
+    }
+
     public function get($url, $data = null)
     {
         try {
