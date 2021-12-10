@@ -31,4 +31,9 @@ class WingsNode extends Model
     {
         return $this->belongsTo(WingsLocation::class);
     }
+
+    public function allocations()
+    {
+        return $this->hasMany(WingsAllocation::class, 'node_id', 'node_id');
+    }
 }
