@@ -16,77 +16,76 @@
         <a href="#node-allocation" class="mdui-ripple">{{ tr('Allocations') }} </a>
         <a href="#delete-node" class="mdui-ripple">{{ tr('Delete Node') }}</a>
     </div>
+    <form action="#" data-lock-form="node-edit" onsubmit="event.preventDefault();util.wings.locations.nodes.edit($(this))">
+        <div id="node-about">
+            <div class="mdui-row">
+                <div class="mdui-col-md-6 mdui-col-sm-12">
+                    <div class="mdui-typo-headline mdui-m-t-3">{{ tr('Information') }}</div>
 
-    <div id="node-about">
-        <div class="mdui-row">
-            <div class="mdui-col-md-6 mdui-col-sm-12">
-                <div class="mdui-typo-headline mdui-m-t-3">{{ tr('Information') }}</div>
-
-                <div class="mdui-table-fluid mdui-m-t-2">
-                    <table class="mdui-table mdui-table-hoverable">
-                        <tbody class="mdui-typo">
-                            <tr>
-                                <td>{{ tr('Daemon Version') }}</td>
-                                <td>{{ $node->version }}</td>
-                            </tr>
-                            <tr>
-                                <td>{{ tr('System Information') }}</td>
-                                <td>{{ $node->os }} ({{ $node->architecture }})
-                                    <code>{{ $node->kernel_version }}</code>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>{{ tr('Total CPU Threads') }}</td>
-                                <td>{{ $node->cpu_count }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="mdui-table-fluid mdui-m-t-2">
+                        <table class="mdui-table mdui-table-hoverable">
+                            <tbody class="mdui-typo">
+                                <tr>
+                                    <td>{{ tr('Daemon Version') }}</td>
+                                    <td>{{ $node->version }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{ tr('System Information') }}</td>
+                                    <td>{{ $node->os }} ({{ $node->architecture }})
+                                        <code>{{ $node->kernel_version }}</code>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>{{ tr('Total CPU Threads') }}</td>
+                                    <td>{{ $node->cpu_count }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-            </div>
 
-            <div class="mdui-col-md-6 mdui-col-sm-12">
-                <div class="mdui-typo-headline mdui-m-t-3">At-a-Glance</div>
-                @php($allocated = Cache::get('wings_node_' . $node->node_id)['attributes']['allocated_resources'] ?? ['memory' => 0, 'disk' => 0])
-                <div class="mdui-table-fluid mdui-m-t-2">
-                    <table class="mdui-table mdui-table-hoverable">
-                        <tbody class="mdui-typo">
-                            <tr>
-                                <td>{{ tr('DISK SPACE ALLOCATED') }}</td>
-                                <td>
-                                    {{ $allocated['disk'] }} / {{ $node->disk }} Mb
-                                    <div class="mdui-progress">
-                                        <div class="mdui-progress-determinate"
-                                            style="width: {{ ($allocated['disk'] / $node->disk) * 100 }}%;"></div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>{{ tr('MEMORY ALLOCATED') }}</td>
-                                <td>
-                                    {{ $allocated['memory'] }} / {{ $node->memory }} Mb
-                                    <div class="mdui-progress">
-                                        <div class="mdui-progress-determinate"
-                                            style="width: {{ ($allocated['memory'] / $node->memory) * 100 }}%;"></div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>{{ tr('TOTAL SERVERS') }}</td>
-                                <td>0</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div class="mdui-col-md-6 mdui-col-sm-12">
+                    <div class="mdui-typo-headline mdui-m-t-3">At-a-Glance</div>
+                    @php($allocated = Cache::get('wings_node_' . $node->node_id)['attributes']['allocated_resources'] ?? ['memory' => 0, 'disk' => 0])
+                    <div class="mdui-table-fluid mdui-m-t-2">
+                        <table class="mdui-table mdui-table-hoverable">
+                            <tbody class="mdui-typo">
+                                <tr>
+                                    <td>{{ tr('DISK SPACE ALLOCATED') }}</td>
+                                    <td>
+                                        {{ $allocated['disk'] }} / {{ $node->disk }} Mb
+                                        <div class="mdui-progress">
+                                            <div class="mdui-progress-determinate"
+                                                style="width: {{ ($allocated['disk'] / $node->disk) * 100 }}%;"></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>{{ tr('MEMORY ALLOCATED') }}</td>
+                                    <td>
+                                        {{ $allocated['memory'] }} / {{ $node->memory }} Mb
+                                        <div class="mdui-progress">
+                                            <div class="mdui-progress-determinate"
+                                                style="width: {{ ($allocated['memory'] / $node->memory) * 100 }}%;">
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>{{ tr('TOTAL SERVERS') }}</td>
+                                    <td>0</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
 
-    <div class="mdui-row mdui-m-t-5" id="node-settings">
-        <x-lock for="node-edit" lock="1" />
+        <div class="mdui-row mdui-m-t-5" id="node-settings">
+            <x-lock for="node-edit" lock="1" />
 
-        <form action="#" data-lock-form="node-edit"
-            onsubmit="event.preventDefault();util.wings.locations.nodes.edit($(this))">
             <div class="mdui-col-md-6 mdui-col-sm-12">
                 <div class="mdui-typo-headline">{{ tr('Basic Details') }}</div>
 
@@ -221,8 +220,8 @@
                     </div>
                 </div>
             </div>
-        </form>
-    </div>
+        </div>
+    </form>
 
     <div id="node-config" class="mdui-m-t-5">
         <div class="mdui-typo-headline">{{ tr('Configuration File') }}</div>
