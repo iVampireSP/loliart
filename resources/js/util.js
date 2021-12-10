@@ -1,9 +1,8 @@
 window.util = {
     url: {
-        to: (url) => {
-            $('#helper-link').attr('href', url)
-            $('#helper-link').click()
-            $.pjax.reload('#main-list');
+        to: (url, ele = '.pjax-container') => {
+            history.pushState(null, null, url);
+            $.pjax.reload(ele);
         },
         open: (url) => {
             window.location.open = url
