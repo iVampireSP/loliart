@@ -22,14 +22,16 @@ window.Progress = {
     }
 }
 
+reload_menu = false
+
 $(document).ajaxStart(() => {
     Progress.start();
+    reload_menu = false
 });
 
 $(document).ajaxComplete(() => {
     Progress.done();
     util.masonry('.masonry')
-
 });
 
 $.ajaxSetup({
@@ -63,6 +65,10 @@ $(() => {
         util.menu.update();
         ui.mutation()
         currentRoute = route().current();
+        if (!reload_menu) {
+            $.pjax.reload('#main-list');
+            reload_menu = true
+        }
     })
 
     $(document).on("pjax:timeout", (event) => {

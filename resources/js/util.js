@@ -3,6 +3,7 @@ window.util = {
         to: (url) => {
             $('#helper-link').attr('href', url)
             $('#helper-link').click()
+            $.pjax.reload('#main-list');
         },
         open: (url) => {
             window.location.open = url
