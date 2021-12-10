@@ -263,6 +263,8 @@
                 </tbody>
             </table>
         </div>
+
+        {{ $allocations->links() }}
     </div>
 
     <div id="delete-node" class="mdui-m-t-5">
