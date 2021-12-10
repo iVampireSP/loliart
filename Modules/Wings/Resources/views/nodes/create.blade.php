@@ -35,6 +35,14 @@
                 </label>
 
                 <div class="mdui-textfield mdui-textfield-floating-label">
+                    <label class="mdui-textfield-label">{{ tr('Real IP Address') }}</label>
+                    <input class="mdui-textfield-input" type="text" name="ip" />
+                    <div class="mdui-textfield-helper">
+                        {{ tr('The real ip address of the node.') }}
+                    </div>
+                </div>
+
+                <div class="mdui-textfield mdui-textfield-floating-label">
                     <label class="mdui-textfield-label">{{ tr('FQDN') }}</label>
                     <input class="mdui-textfield-input" type="text" name="fqdn" />
                     <div class="mdui-textfield-helper">
