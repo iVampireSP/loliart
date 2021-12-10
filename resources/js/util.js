@@ -52,5 +52,8 @@ window.util = {
         }
         let masonry = require('masonry-layout')
         new masonry(ele)
+    },
+    m: () => {
+        $.pjax.reload('#main-list');
     }
 }
