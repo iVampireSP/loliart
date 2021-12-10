@@ -44,6 +44,8 @@ $.ajaxSetup({
 document.onreadystatechange = Progress.done;
 
 window.firstClick = false
+
+// links_loaded = false
 $(() => {
     Progress.done();
 
@@ -55,6 +57,7 @@ $(() => {
     $(document).pjax('a', '.pjax-container');
 
     $(document).on('pjax:send', () => {
+        // links_loaded = false
         Progress.start();
     });
 
@@ -63,6 +66,12 @@ $(() => {
         util.menu.update();
         ui.mutation()
         currentRoute = route().current();
+        // if ($('.pages-link').length > 0) {
+        //     if (!links_loaded) {
+        //         util.reload('.pages-link')
+        //     }
+        //     links_loaded = true
+        // }
     })
 
     $(document).on("pjax:timeout", (event) => {
