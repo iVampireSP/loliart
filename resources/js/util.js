@@ -18,9 +18,9 @@ window.util = {
         let j = $(`${btn} i`)
         if (j.hasClass('locked')) {
             j.html('lock_open')
-            $(`${form} input`).attr('readonly', false)
-            $(`${form} input`).attr('disabled', false)
-            $(`${form} button`).attr('disabled', false)
+            $(`${form} input:not([data-pass-lock])`).attr('readonly', false)
+            $(`${form} input:not([data-pass-lock]`).attr('disabled', false)
+            $(`${form} button:not([data-pass-lock]`).attr('disabled', false)
             if (play) {
                 util.play('unlock.mp3')
             }
@@ -28,9 +28,9 @@ window.util = {
         } else {
             j.html('lock')
             j.addClass('locked')
-            $(`${form} input`).attr('disabled', true)
-            $(`${form} input`).attr('readonly', true)
-            $(`${form} button`).attr('disabled', true)
+            $(`${form} input:not([data-pass-lock]`).attr('disabled', true)
+            $(`${form} input:not([data-pass-lock]`).attr('readonly', true)
+            $(`${form} button:not([data-pass-lock]`).attr('disabled', true)
             if (play) {
                 util.play('lock.mp3')
             }
