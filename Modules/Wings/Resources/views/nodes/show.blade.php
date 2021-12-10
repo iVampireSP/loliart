@@ -227,8 +227,10 @@
         <p>{{ tr('This file should be placed in your daemon\'s root directory (usually /etc/pterodactyl) in a file called config.yml.') }}
         </p>
 
-        <div class="mdui-typo">
-            <pre>{!! $node_configuration !!}</pre>
+        <div class="mdui-textfield">
+            <textarea class="mdui-textfield-input blur">{!! $node_configuration !!}</textarea>
+            <div class="mdui-textfield-helper">{{ tr('This field should be security sensitive, Please use ') }} <kbd>Ctrl
+                    + C {{ tr('to copy the configuration.') }}</kbd></div>
         </div>
     </div>
 
