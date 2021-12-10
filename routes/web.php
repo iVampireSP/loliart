@@ -3,16 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers;
 
-Route::domain('www.' . config('app.domain'))->prefix('/')->name('www.')->group(function () {
+Route::name('main.')->group(function () {
     Route::view('/', 'index')->name('index');
-});
-
-Route::domain('app.' . config('app.domain'))->prefix('/')->name('app.')->group(function () {
-    Route::get('/', [Controllers\AppController::class, 'index'])->name('index');
-});
-
-Route::domain(config('app.domain'))->prefix('/')->name('main.')->group(function () {
-    Route::view('/', 'index')->name('index');
+    Route::get('/version', [Controllers\AppController::class, 'index'])->name('version');
 });
 
 Route::domain('login.' . config('app.domain'))->prefix('/')->name('login.')->group(function () {
@@ -22,7 +15,7 @@ Route::domain('login.' . config('app.domain'))->prefix('/')->name('login.')->gro
 });
 
 
-Route::domain('teams.' . config('app.domain'))->name('teams.')->middleware(['teams_permission', 'auth'])->group(function () {
+Route::prefix('teams')->name('teams.')->middleware(['teams_permission', 'auth'])->group(function () {
     Route::get('/', [Controllers\TeamController::class, 'index'])->name('index')->withoutMiddleware(['teams_permission']);
     Route::get('/test/{team}', [Controllers\TeamController::class, 'test'])->name('test')->withoutMiddleware(['teams_permission']);
     Route::post('/afk', [Controllers\TeamController::class, 'afk'])->name('afk')->withoutMiddleware(['teams_permission']);
@@ -41,14 +34,14 @@ Route::domain('teams.' . config('app.domain'))->name('teams.')->middleware(['tea
     Route::post('/team/leave', [Controllers\TeamController::class, 'leave'])->name('team.leave');
 });
 
-Route::domain('password.' . config('app.domain'))->prefix('/')->name('password.')->middleware(['auth', 'password.confirm'])->withoutMiddleware(['teams_permission'])->group(function () {
+Route::prefix('password')->name('password.')->middleware(['auth', 'password.confirm'])->withoutMiddleware(['teams_permission'])->group(function () {
     Route::get('/reset', [Controllers\AuthController::class, 'reset'])->name('reset');
     Route::post('/reset', [Controllers\AuthController::class, 'setup_password'])->name('setup_password');
     Route::get('/confirm', [Controllers\AuthController::class, 'confirm'])->name('confirm')->withoutMiddleware('password.confirm');
     Route::post('/confirm', [Controllers\AuthController::class, 'confirm_password'])->name('confirm_password')->withoutMiddleware('password.confirm');
 });
 
-Route::domain('permission.' . config('app.domain'))->prefix('/')->name('permission.')->middleware(['auth', 'teams_permission'])->group(function () {
+Route::prefix('permission')->name('permission.')->middleware(['auth', 'teams_permission'])->group(function () {
     Route::get('/', [Controllers\PermissionController::class, 'index'])->name('index');
     Route::get('/all', [Controllers\PermissionController::class, 'all'])->name('all');
     Route::get('/roles/user/{user}', [Controllers\PermissionController::class, 'user_role_and_permission'])->name('user_role_and_permission')->middleware('permission:role.show');
