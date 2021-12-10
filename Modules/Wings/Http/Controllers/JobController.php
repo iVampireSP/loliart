@@ -151,4 +151,29 @@ class JobController extends Controller
 
         return $arr;
     }
+
+    public static function allocationSearch($data)
+    {
+        $data = (object)$data;
+        $next_page = 1;
+        $is_continue = true;
+        $arr = [];
+        do {
+            $total_page = $data->meta['pagination']['total_pages'];
+            if ($next_page == $total_page) {
+                $is_continue = false;
+            } else {
+                $next_page = $data->meta['pagination']['current_page'] + 1;
+            }
+            foreach ($data->data as $allocation) {
+                dd($allocation);
+                // if (!$allocation['attributes']['assigned']) {
+                //     $selected_id = $allocation['attributes']['id'];
+                //     return $selected_id;
+                // }
+            }
+        } while ($is_continue);
+
+        return $arr;
+    }
 }
