@@ -5,7 +5,7 @@
     "database": "redis",
     "databaseConfig": {
         "redis": {
-            "keyPrefix": "workbench_database_"
+            "keyPrefix": "edgest_database_"
         },
         "sqlite": {
             "databasePath": "/database/laravel-echo-server.sqlite"
