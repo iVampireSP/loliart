@@ -21,10 +21,12 @@
             <br />
             <div class="mdui-row mdui-p-b-2 mdui-p-l-1">
                 <a class="mdui-btn mdui-btn-outlined mdui-ripple"
-                    href="javascript: util.wings.locations.delete({{ $location->id }})">{{ tr('Delete') }}</a>
-
-                <a class="mdui-btn mdui-btn-outlined mdui-ripple"
                     href="{{ route('wings.locations.nodes.create', $location->id) }}">{{ tr('New Node') }}</a>
+
+                @if (!count($nodes))
+                    <a class="mdui-btn mdui-btn-outlined mdui-ripple"
+                        href="javascript: util.wings.locations.delete({{ $location->id }})">{{ tr('Delete') }}</a>
+                @endif
             </div>
         @else
             <div class="mdui-typo-display-1">{{ $location->name }}</div>
