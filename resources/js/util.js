@@ -9,8 +9,8 @@ window.util = {
             window.location.open = url
         }
     },
-    reload: () => {
-        $.pjax.reload('.pjax-container')
+    reload: (ele = '.pjax-container') => {
+        $.pjax.reload(ele)
         $('.mdui-tooltip-open').remove()
     },
     toggleLock: (id, play = false) => {
