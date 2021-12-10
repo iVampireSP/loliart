@@ -239,7 +239,7 @@
     <div id="node-allocation">
         <div class="mdui-typo-headline mdui-m-t-3">{{ tr('Existing Allocations') }}</div>
 
-        <div class="mdui-table-fluid mdui-m-t-2 existing-allocations">
+        <div class="mdui-table-fluid mdui-m-t-2 existing-allocations pages">
             <table class="mdui-table mdui-table-hoverable">
                 <thead>
                     <tr>

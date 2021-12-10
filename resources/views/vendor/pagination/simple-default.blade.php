@@ -1,15 +1,15 @@
-<div class="mdui-m-t-2">
+<div class="mdui-m-t-2 pages-link">
     @if ($paginator->hasPages())
         @if ($paginator->onFirstPage())
             <button disabled
                 class="mdui-float-left mdui-btn mdui-color-theme-accent mdui-ripple">{{ tr('Previous page') }}</button>
         @else
-            <a href="{{ $paginator->previousPageUrl() }}"
+            <a onclick="util.url.to('{{ $paginator->previousPageUrl() }}', '.pages', '.pages-link')"
                 class="mdui-float-left mdui-btn mdui-color-theme-accent mdui-ripple">{{ tr('Previous page') }}</a>
         @endif
 
         @if ($paginator->hasMorePages())
-            <a href="{{ $paginator->nextPageUrl() }}"
+            <a onclick="util.url.to('{{ $paginator->nextPageUrl() }}', '.pages', '.pages-link')"
                 class="mdui-float-right mdui-btn mdui-color-theme-accent mdui-ripple">{{ tr('Next page') }}</a>
         @else
             <button disabled
