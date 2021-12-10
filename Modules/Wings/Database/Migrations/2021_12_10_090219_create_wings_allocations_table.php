@@ -21,6 +21,7 @@ class CreateWingsAllocationsTable extends Migration
             $table->smallInteger('port')->index();
 
             $table->unsignedBigInteger('node_id')->index();
+            $table->unsignedBigInteger('server_id')->index();
 
             $table->timestamps();
         });
