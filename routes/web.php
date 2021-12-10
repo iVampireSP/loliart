@@ -8,7 +8,7 @@ Route::name('main.')->group(function () {
     Route::get('/version', [Controllers\AppController::class, 'index'])->name('version');
 });
 
-Route::domain('login.' . config('app.domain'))->prefix('/')->name('login.')->group(function () {
+Route::prefix('login')->name('login.')->group(function () {
     Route::get('redirect', [Controllers\AuthController::class, 'redirect'])->name('redirect');
     Route::get('/', [Controllers\AuthController::class, 'redirect'])->name('root_redirect');
     Route::get('callback', [Controllers\AuthController::class, 'callback'])->name('callback');
