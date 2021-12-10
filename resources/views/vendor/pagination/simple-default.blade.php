@@ -1,4 +1,4 @@
-<div class="mdui-m-t-2 pages-link">
+<div class="mdui-m-t-2">
     @if ($paginator->hasPages())
         @if ($paginator->onFirstPage())
             <button disabled

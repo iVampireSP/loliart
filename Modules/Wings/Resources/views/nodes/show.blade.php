@@ -239,32 +239,35 @@
     <div id="node-allocation">
         <div class="mdui-typo-headline mdui-m-t-3">{{ tr('Existing Allocations') }}</div>
 
-        <div class="mdui-table-fluid mdui-m-t-2 existing-allocations pages">
-            <table class="mdui-table mdui-table-hoverable">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>{{ tr('IP Address') }}</th>
-                        <th>{{ tr('IP Alias') }}</th>
-                        <th>{{ tr('Port') }}</th>
-                        <th>{{ tr('Assigned To Server') }}</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($allocations as $allocation)
+        <div class="pages">
+            <div class="mdui-table-fluid mdui-m-t-2 existing-allocations pages">
+                <table class="mdui-table mdui-table-hoverable">
+                    <thead>
                         <tr>
-                            <td>{{ $allocation->id }}</td>
-                            <td>{{ $allocation->ip }}</td>
-                            <td>{{ $allocation->alias }}</td>
-                            <td>{{ $allocation->port }}</td>
-                            <td>{{ $allocation->server_id }}</td>
+                            <th>ID</th>
+                            <th>{{ tr('IP Address') }}</th>
+                            <th>{{ tr('IP Alias') }}</th>
+                            <th>{{ tr('Port') }}</th>
+                            <th>{{ tr('Assigned To Server') }}</th>
                         </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        @foreach ($allocations as $allocation)
+                            <tr>
+                                <td>{{ $allocation->id }}</td>
+                                <td>{{ $allocation->ip }}</td>
+                                <td>{{ $allocation->alias }}</td>
+                                <td>{{ $allocation->port }}</td>
+                                <td>{{ $allocation->server_id }}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+
+            {{ $allocations->links() }}
         </div>
 
-        {{ $allocations->links() }}
     </div>
 
     <div id="delete-node" class="mdui-m-t-5">
