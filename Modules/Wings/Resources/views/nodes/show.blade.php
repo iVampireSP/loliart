@@ -97,7 +97,7 @@
                 <div class="mdui-typo-subheading mdui-m-t-2">{{ tr('Where is your new node?') }}</div>
                 <select class="mdui-select" name="location_id" mdui-select>
                     @foreach ($locations as $location)
-                        <option value="{{ $location->id }}">{{ $location->name }}</option>
+                        <option value="{{ $location->id }}" @if ($node->location_id == $location->id) selected @endif>{{ $location->name }}</option>
                     @endforeach
                 </select>
 
