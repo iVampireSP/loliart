@@ -138,7 +138,7 @@ class NodeController extends Controller
             return response()->json(['status' => 0, 'data' => 'Permission denied.']);
         }
         $locations = WingsLocation::where('team_id', session('team_id'))->get();
-        $allocations = WingsAllocation::where('node_id', $node->node_id)->simplePaginate();
+        $allocations = WingsAllocation::where('node_id', $node->id)->simplePaginate();
 
         $cache_key = 'wings_nodes_config' . $node->node_id;
         if (Cache::has($cache_key)) {
