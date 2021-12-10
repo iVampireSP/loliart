@@ -12,7 +12,7 @@
 
     <title>@yield('title') - {{ config('app.name') }}</title>
 
-    <script src="{{ config('app.url') . mix('/js/app.js') }}"></script>
+    <script src="{{ mix('/js/app.js') }}"></script>
     <script>
         window.user = {!! auth()->user() ?? 0 !!};
         window.team = {!! session('team') ?? 0 !!};
