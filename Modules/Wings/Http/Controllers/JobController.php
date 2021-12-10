@@ -130,8 +130,9 @@ class JobController extends Controller
         });
     }
 
-    public static function search(object $data)
+    public static function search($data)
     {
+        $data = (object)$data;
         $next_page = 1;
         $is_continue = true;
         $arr = [];
