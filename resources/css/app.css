@@ -434,6 +434,11 @@ a.mdui-btn-outlined {
     -o-border-radius: 50px;
 }
 
+.blur {
+    filter: blur(20px);
+    -webkit-filter: blur(20px);
+}
+
 @media (prefers-color-scheme: dark) {
     .mdui-drawer {
         background-color: #303030 !important;
