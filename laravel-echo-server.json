@@ -1,5 +1,5 @@
 {
-    "authHost": "https://www.loliart.test",
+    "authHost": "https://www.edge.test",
     "authEndpoint": "/broadcasting/auth",
     "clients": [],
     "database": "redis",
