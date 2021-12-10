@@ -9,6 +9,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Modules\Wings\Entities\WingsAllocation;
 use Modules\Wings\Entities\WingsLocation;
 use Modules\Wings\Http\Controllers\PanelController;
 
@@ -58,6 +59,13 @@ class NodeJob implements ShouldQueue
 
                     $wingsNode->delete();
                 } else {
+                    $panel->createAllocation($node_info['attributes']['id'], [
+                        "ip" => $data->ip,
+                        "alias" => $data->fqdn,
+                        "ports" => [
+                            '21000-21500'
+                        ]
+                    ]);
                     $this->broadcast('created');
 
                     $wingsNode->update([
