@@ -21,6 +21,7 @@
 
     <div class="mdui-typo-headline mdui-m-t-3">{{ tr('Variables') }}</div>
     <div class="mdui-row masonry">
+        @php($egg->environment = json_decode($egg->environment))
         @foreach ($egg->environment as $env)
             @php($env = $env->attributes)
             @if ($env->user_viewable)
