@@ -63,7 +63,7 @@ if (!function_exists('canFail')) {
     function canFail($permission)
     {
         if (!auth()->user()->can($permission)) {
-            return response()->json(['status' => 0, 'data' => 'Permission denied.']);
+            abort(403);
         }
     }
 }
