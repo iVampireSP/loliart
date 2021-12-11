@@ -51,6 +51,10 @@ if (!function_exists('userInTeamFail')) {
 if (!function_exists('can')) {
     function can($permission)
     {
+        if (auth()->user()->can('admin')) {
+            return true;
+        }
+
         if (!auth()->user()->can($permission)) {
             return false;
         }
@@ -62,6 +66,9 @@ if (!function_exists('can')) {
 if (!function_exists('canFail')) {
     function canFail($permission)
     {
+        if (auth()->user()->can('admin')) {
+            return true;
+        }
         if (!auth()->user()->can($permission)) {
             abort(403);
         }
