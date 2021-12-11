@@ -4,7 +4,7 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class tool-menu extends Component
+class ToolMenu extends Component
 {
     /**
      * Create a new component instance.
