@@ -38,6 +38,10 @@
                 id="top-title">{{ config('app.name') }}</a> --}}
             <div class="mdui-toolbar-spacer"></div>
             <span class="mdui-typo-caption-opacity queue_message mdui-hidden-sm-down"></span>
+            {{-- <span data-lock-pass class="mdui-btn mdui-btn-icon mdui-ripple mdui-ripple-white"
+                onclick="event.preventDefault();util.toggleLock('main', true)" data-lock-btn="main">
+                <i class="mdui-icon material-icons-outlined">lock_open</i>
+            </span> --}}
             @auth
                 <span class="mdui-btn mdui-btn-icon mdui-ripple mdui-ripple-white" mdui-menu="{target: '#app-menu'}">
                     <i class="mdui-icon material-icons-outlined">more_vert</i>
@@ -51,7 +55,7 @@
         @yield('app-menu', View::make('components.app-menu'))
     </div>
 
-    <div class="mdui-container pjax-container" id="main">
+    <div class="mdui-container pjax-container" id="main" data-lock-form="main">
         <div class="mdui-m-t-3">
             @yield('content')
         </div>
