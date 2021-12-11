@@ -19,10 +19,11 @@
         <ul class="mdui-list">
             @foreach ($role->permissions as $permission)
                 <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons">group_work</i>
                     <div class="mdui-list-item-content">
                         <div class="mdui-list-item-title mdui-list-item-one-line">
-                            {{ tr('Permission name: ') }}{{ $permission->name }}</div>
-                        <div class="mdui-list-item-text mdui-list-item-two-line">{{ tr($permission->display_name) }}</div>
+                            <span class="mdui-hidden-sm-down">{{ tr('Permission name: ') }}</span>{{ $permission->name }}
+                        </div>
                     </div>
                     <a href="javascript: util.team.permission.role.removePermission({{ $role->id }}, '{{ $permission->name }}')"
                         mdui-tooltip="{content: '{{ tr('Delete') }}', position: 'left'}"
