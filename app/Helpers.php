@@ -38,11 +38,32 @@ if (!function_exists('userInTeam')) {
         return TeamUser::where('team_id', $team_id)->where('user_id', auth()->id())->exists();
     }
 }
+
 if (!function_exists('userInTeamFail')) {
     function userInTeamFail($team_id)
     {
         if (!TeamUser::where('team_id', $team_id)->where('user_id', auth()->id())->exists()) {
             abort(403);
+        }
+    }
+}
+
+if (!function_exists('can')) {
+    function can($permission)
+    {
+        if (!auth()->user()->can($permission)) {
+            return false;
+        }
+
+        return true;
+    }
+}
+
+if (!function_exists('canFail')) {
+    function canFail($permission)
+    {
+        if (!auth()->user()->can($permission)) {
+            return response()->json(['status' => 0, 'data' => 'Permission denied.']);
         }
     }
 }
