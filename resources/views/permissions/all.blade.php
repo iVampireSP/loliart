@@ -12,7 +12,8 @@
             </i>
             <div class="mdui-list-item-content">
                 <div class="mdui-list-item-title mdui-list-item-one-line">
-                    {{ tr('Role name: ') }}Super Admin</div>
+                    <span class="mdui-hidden-sm-down">{{ tr('Role name: ') }}</span>Super Admin
+                </div>
                 <div class="mdui-list-item-text mdui-list-item-two-line">{{ tr('Team super admin.') }}</div>
             </div>
         </li>
@@ -23,7 +24,8 @@
                 </i>
                 <div class="mdui-list-item-content">
                     <div class="mdui-list-item-title mdui-list-item-one-line">
-                        {{ tr('Permission name: ') }}{{ $permission->name }}</div>
+                        <span class="mdui-hidden-sm-down">{{ tr('Permission name: ') }}</span>{{ $permission->name }}
+                    </div>
                     <div class="mdui-list-item-text mdui-list-item-two-line">{{ tr($permission->display_name) }}</div>
                 </div>
             </li>
