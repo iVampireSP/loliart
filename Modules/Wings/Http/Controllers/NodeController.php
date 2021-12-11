@@ -33,9 +33,8 @@ class NodeController extends Controller
      */
     public function create(Request $request)
     {
-        if (!auth()->user()->can('node.edit')) {
-            return redirect()->route('wings.locations.index')->with('message', 'You do not have sufficient privileges to create a new node.');
-        }
+        canFail('wings.nodes.edit');
+
         // 检测 location 是否存在
         if (!WingsLocation::where('id', $request->route('location'))->exists()) {
             return redirect()->route('wings.locations.index')->with('message', 'Location does not exist.');
@@ -52,9 +51,8 @@ class NodeController extends Controller
      */
     public function store(Request $request, WingsNode $wingsNode)
     {
-        if (!auth()->user()->can('node.edit')) {
-            return response()->json(['status' => 0, 'data' => 'Permission denied.']);
-        }
+        canFail('wings.nodes.edit');
+
         $request->validate([
             'name' => 'required',
             'location_id' => 'integer|required',
@@ -134,9 +132,8 @@ class NodeController extends Controller
     {
         $panel = new PanelController();
 
-        if (!auth()->user()->can('team.access')) {
-            return response()->json(['status' => 0, 'data' => 'Permission denied.']);
-        }
+        canFail('wings.nodes.show');
+
         $locations = WingsLocation::where('team_id', session('team_id'))->get();
         $allocations = WingsAllocation::where('node_id', $node->id)->simplePaginate();
 
@@ -172,6 +169,8 @@ class NodeController extends Controller
      */
     public function update(Request $request)
     {
+        canFail('wings.nodes.edit');
+
         $request->validate([
             'name' => 'required|max:20',
             'location_id' => 'integer|required',
@@ -187,9 +186,7 @@ class NodeController extends Controller
             'maintenance_mode' => 'boolean',
         ]);
 
-        if (!auth()->user()->can('node.edit')) {
-            return response()->json(['status' => 0, 'data' => 'Permission denied.']);
-        }
+        canFail('wings.nodes.edit');
 
         $location = WingsLocation::where('team_id', session('team_id'))->where('id', $request->location_id)->first();
         if (is_null($location)) {
@@ -258,9 +255,7 @@ class NodeController extends Controller
      */
     public function destroy(Request $request)
     {
-        if (!auth()->user()->can('node.edit')) {
-            return response()->json(['status' => 0, 'data' => 'Permission denied.']);
-        }
+        canFail('wings.nodes.edit');
 
         $node = WingsNode::where('id', $request->route('node'))->where('location_id', $request->route('location'))->first();
 

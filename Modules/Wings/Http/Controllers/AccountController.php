@@ -39,6 +39,8 @@ class AccountController extends Controller
      */
     public function store(Request $request)
     {
+        canFail('wings.accounts.edit');
+
         $request->validate([
             'first_name' => 'required|max:10',
             'last_name' => 'required|max:10',

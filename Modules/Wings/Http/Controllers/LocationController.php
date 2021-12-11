@@ -39,6 +39,8 @@ class LocationController extends Controller
      */
     public function store(Request $request, WingsLocation $wingsLocation)
     {
+        canFail('wings.locations.edit');
+
         $request->validate([
             'name' => 'required',
         ]);
