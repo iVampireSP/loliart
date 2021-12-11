@@ -104,6 +104,7 @@ class TeamInvitationsController extends Controller
             // give team.invitations.access to user
             setPermissionsTeamId($invitation->team_id);
             auth()->user()->givePermissionTo('team.invitations.access');
+            auth()->user()->givePermissionTo('team.access');
 
 
             broadcast(new \App\Events\TeamEvent($invitation->team, [
