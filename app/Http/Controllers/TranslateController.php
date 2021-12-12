@@ -54,14 +54,17 @@ class TranslateController extends Controller
             }
 
             // Search cache
-            $cache_key = 'language_' . $lang . '_' . md5($str);
-            if (Cache::has($cache_key)) {
-                return Cache::get($cache_key);
+            $cache_key = 'language_' . $lang;
+            $cache_data = Cache::get($cache_key, []);
+            $str_md5 =  $cache_key . '_' . md5($str);
+            if (isset($cache_data[$str_md5])) {
+                return $cache_data[$str_md5];
             } else {
                 // Search str from language list
-                $output = $language_translates->where('sign', $cache_key)->first();
+                $output = $language_translates->where('sign', $str_md5)->first();
                 if (!is_null($output)) {
-                    Cache::add($cache_key, $output->output, 1800);
+                    $cache_data[$str_md5] = $output->output;
+                    Cache::put($cache_key, $cache_data, 1800);
                     return $output->output;
                 }
             }
