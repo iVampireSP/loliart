@@ -21,5 +21,7 @@ Route::prefix('/wings')->middleware(['teams_permission', 'auth'])->name('wings.'
     Route::resource('/locations/{location}/nodes', NodeController::class, ['as' => 'locations']);
     Route::resource('/nests', NestsController::class);
     Route::resource('/nests/{nest}/eggs', NestEggsController::class, ['as' => 'nests']);
+    Route::resource('/servers', ServerController::class);
+
     // Route::resource('/nodes', NodeController::class)->except('store');
 });

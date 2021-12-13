@@ -6,6 +6,7 @@ use App\Http\Controllers;
 Route::name('main.')->group(function () {
     Route::view('/', 'index')->name('index');
     Route::get('/version', [Controllers\AppController::class, 'index'])->name('version');
+    Route::get('/about:edge', [Controllers\AppController::class, 'index'])->name('about');
 });
 
 Route::prefix('login')->name('login.')->group(function () {

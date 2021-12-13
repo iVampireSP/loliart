@@ -5,6 +5,7 @@ namespace Modules\Wings\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Modules\Wings\Entities\WingsServer;
 
 class ServerController extends Controller
 {
@@ -14,7 +15,8 @@ class ServerController extends Controller
      */
     public function index()
     {
-        return view('wings::index');
+        $servers = WingsServer::where('team_id', session('team_id'))->simplePaginate();
+        return view('wings::servers.index', compact('servers'));
     }
 
     /**
@@ -23,7 +25,7 @@ class ServerController extends Controller
      */
     public function create()
     {
-        return view('wings::create');
+        return view('wings::servers.create');
     }
 
     /**
