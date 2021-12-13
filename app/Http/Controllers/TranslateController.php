@@ -56,7 +56,7 @@ class TranslateController extends Controller
             // Search cache
             $cache_key = 'language_' . $lang;
             $cache_data = Cache::get($cache_key, []);
-            $str_md5 =  $cache_key . '_' . md5($str);
+            $str_md5 = $cache_key . '_' . md5($str);
             if (isset($cache_data[$str_md5])) {
                 return $cache_data[$str_md5];
             } else {
@@ -104,7 +104,6 @@ class TranslateController extends Controller
                 $language_translates->output = $dst;
                 $language_translates->sign = $cache_key;
                 $language_translates->save();
-
                 return $dst;
             }
         }
