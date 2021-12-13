@@ -1,4 +1,5 @@
 window.jQuery = window.$ = require('jquery')
+window.axios = require('axios')
 require('jquery-pjax');
 require('./util');
 require('./util.event');
