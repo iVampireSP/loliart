@@ -102,7 +102,7 @@ class TranslateController extends Controller
                 $language_translates->language = $lang;
                 $language_translates->string = $str;
                 $language_translates->output = $dst;
-                $language_translates->sign = $cache_key;
+                $language_translates->sign = $str_md5;
                 $language_translates->save();
                 return $dst;
             }
