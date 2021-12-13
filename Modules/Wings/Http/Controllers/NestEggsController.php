@@ -49,6 +49,12 @@ class NestEggsController extends Controller
         return view('wings::nests.egg', compact('egg'));
     }
 
+    public function images($id)
+    {
+        $egg = WingsNestEgg::where('found', 1)->findOrFail($id);
+        return response()->json(['status' => 1, 'data' => $egg]);
+    }
+
     /**
      * Show the form for editing the specified resource.
      * @param int $id

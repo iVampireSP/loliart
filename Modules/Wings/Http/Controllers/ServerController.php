@@ -2,10 +2,14 @@
 
 namespace Modules\Wings\Http\Controllers;
 
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Modules\Wings\Entities\WingsNest;
+use Modules\Wings\Entities\WingsNode;
 use Modules\Wings\Entities\WingsServer;
+use Modules\Wings\Entities\WingsLocation;
+use Illuminate\Contracts\Support\Renderable;
+use Modules\Wings\Entities\WingsPanelAccount;
 
 class ServerController extends Controller
 {
@@ -25,7 +29,11 @@ class ServerController extends Controller
      */
     public function create()
     {
-        return view('wings::servers.create');
+        $accounts = WingsPanelAccount::where('team_id', session('team_id'))->where('status', 'created')->get();
+        $locations = WingsLocation::where('team_id', session('team_id'))->where('status', 'created')->get();
+        $nests = WingsNest::get();
+        // dd($accounts);
+        return view('wings::servers.create', compact('accounts', 'locations', 'nests'));
     }
 
     /**

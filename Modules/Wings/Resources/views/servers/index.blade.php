@@ -11,7 +11,7 @@
 
     <div class="mdui-row mdui-p-b-2 mdui-p-l-1 mdui-m-t-2">
         <a class="mdui-btn mdui-btn-outlined mdui-ripple"
-            href="javascript: util.wings.servers.create()">{{ tr('Create Server') }}</a>
+        href="{{ route('wings.servers.create') }}">{{ tr('Create Server') }}</a>
     </div>
 
     <div class="mdui-table-fluid">

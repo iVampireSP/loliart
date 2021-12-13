@@ -79,11 +79,9 @@ class LocationController extends Controller
      */
     public function show(WingsLocation $location)
     {
-        if (session('team_id') != $location->team_id) {
-            abort(404);
-        }
+        userInTeamFail($location->team_id);
 
-        $nodes = WingsNode::where('location_id', $location->id)->where('status', 'created')->simplePaginate();
+        $nodes = WingsNode::where('location_id', $location->id)->where('status', 'created')->get();
 
         return view('wings::locations.show', compact('location', 'nodes'));
     }
@@ -159,5 +157,17 @@ class LocationController extends Controller
         ]));
 
         return response()->json(['status' => 1, 'data' => 'pending'], 200);
+    }
+
+    public function nodes(WingsLocation $location)
+    {
+        userInTeamFail($location->team_id);
+        $nodes = WingsNode::where('location_id', $location->id)->where('status', 'created')->select(['id', 'display_name'])->get();
+
+        return response()->json([
+            'status' => 1,
+            'data' => $nodes
+        ]);
+        return view('wings::locations.show', compact('location', 'nodes'));
     }
 }

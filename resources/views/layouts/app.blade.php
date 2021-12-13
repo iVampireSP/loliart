@@ -98,7 +98,7 @@
         </script>
     @endif
 
-    <script src="{{ mix('/js/alpine.js') }}" defer></script>
+    {{-- <script src="{{ mix('/js/alpine.js') }}" defer></script> --}}
 </body>
 
 </html>

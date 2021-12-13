@@ -50,6 +50,15 @@ class NestsController extends Controller
         return view('wings::nests.show', compact('nest'));
     }
 
+    public function list($id)
+    {
+        $nest = WingsNest::with('eggsList')->where('id', $id)->where('display', 1)->where('found', 1)->firstOrFail();
+        return response()->json([
+            'status' => 1,
+            'data' => $nest->eggsList
+        ]);
+    }
+
     /**
      * Show the form for editing the specified resource.
      * @param int $id
