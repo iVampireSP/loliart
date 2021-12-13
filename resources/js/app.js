@@ -9,6 +9,8 @@ require('./util.wings');
 require('./ziggy');
 require('./echo');
 
+window.e = {}
+
 window.ui = window.mdui = require('./mdui');
 
 window.currentRoute = null;
@@ -78,6 +80,10 @@ $(() => {
         event.preventDefault()
         util.play('alert.mp3', 0.2)
 
+    });
+
+    $(document).on("pjax:beforeReplace", () => {
+        window.m = {};
     });
 
     $(document).on("pjax:error", (event, xhr) => {
