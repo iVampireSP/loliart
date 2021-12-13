@@ -12,4 +12,9 @@ class WingsNestEgg extends Model
     protected $fillable = [
         'name', 'nest_id', 'author', 'description', 'docker_image', 'docker_images', 'startup', 'egg_id', 'environment'
     ];
+
+    protected $casts = [
+        'docker_images' => 'json',
+        'environment' => 'json',
+    ];
 }
