@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers;
 
 Route::name('main.')->group(function () {
-    Route::view('/', 'index')->name('index');
+    Route::get('/', [Controllers\IndexController::class, 'index'])->name('index');
     Route::get('/version', [Controllers\AppController::class, 'index'])->name('version');
     Route::get('/about:edge', [Controllers\AppController::class, 'index'])->name('about');
 });
