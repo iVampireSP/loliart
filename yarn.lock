@@ -1093,6 +1093,18 @@
   resolved "https://registry.npmmirror.com/@types/validator/download/@types/validator-13.7.0.tgz"
   integrity sha512-+jBxVvXVuggZOrm04NR8z+5+bgoW4VZyLzUO+hmPPW1mVFL/HaitLAkizfv4yg9TbG8lkfHWVMQ11yDqrVVCzA==
 
+"@vue/reactivity@~3.1.1":
+  version "3.1.5"
+  resolved "https://registry.npmmirror.com/@vue/reactivity/download/@vue/reactivity-3.1.5.tgz#dbec4d9557f7c8f25c2635db1e23a78a729eb991"
+  integrity sha1-2+xNlVf3yPJcJjXbHiOninKeuZE=
+  dependencies:
+    "@vue/shared" "3.1.5"
+
+"@vue/shared@3.1.5":
+  version "3.1.5"
+  resolved "https://registry.npmmirror.com/@vue/shared/download/@vue/shared-3.1.5.tgz#74ee3aad995d0a3996a6bb9533d4d280514ede03"
+  integrity sha1-dO46rZldCjmWpruVM9TSgFFO3gM=
+
 "@webassemblyjs/ast@1.11.1":
   version "1.11.1"
   resolved "https://registry.nlark.com/@webassemblyjs/ast/download/@webassemblyjs/ast-1.11.1.tgz?cache=0&sync_timestamp=1625473420080&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40webassemblyjs%2Fast%2Fdownload%2F%40webassemblyjs%2Fast-1.11.1.tgz"
@@ -1320,6 +1332,13 @@ alphanum-sort@^1.0.2:
   version "1.0.2"
   resolved "https://registry.nlark.com/alphanum-sort/download/alphanum-sort-1.0.2.tgz"
   integrity sha1-l6ERlkmyEa0zaR2fn0hqjsn74KM=
+
+alpinejs@^3.7.0:
+  version "3.7.0"
+  resolved "https://registry.npmmirror.com/alpinejs/download/alpinejs-3.7.0.tgz#5aa4d286e69c2772b32be335129e81cac074a4ef"
+  integrity sha512-FL+DHOsO5gfE2YZqKoXUrNEOoaZnxta4Z+eZvJU6KEAwCW1ZnDEppUJ1Yo6MIBKLrVbB0ZnWphJyotX9khkm6A==
+  dependencies:
+    "@vue/reactivity" "~3.1.1"
 
 ansi-escapes@^4.2.1:
   version "4.3.2"
