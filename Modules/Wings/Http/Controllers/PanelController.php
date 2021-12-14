@@ -188,6 +188,21 @@ class PanelController extends Controller
         return $this->delete('/servers', $id);
     }
 
+    public function updateServerDetails($server_id, $data)
+    {
+        return $this->patch('/servers/' . $server_id . '/details', $data);
+    }
+
+    public function updateServerStartup($server_id, $data)
+    {
+        return $this->patch('/servers/' . $server_id . '/startup', $data);
+    }
+
+    public function updateServerBuild($server_id, $data)
+    {
+        return $this->patch('/servers/' . $server_id . '/build', $data);
+    }
+
     public function get($url, $data = null)
     {
         try {
