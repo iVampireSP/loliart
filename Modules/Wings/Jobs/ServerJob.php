@@ -112,31 +112,29 @@ class ServerJob implements ShouldQueue
                 $this->broadcast('info:done, next allocation is ' . $allocation);
 
                 $this->broadcast('info:creating server.');
-                // $result = $panel->createServer([
-                //     "name" => $data->name,
-                //     "user" => $user->user_id,
-                //     "egg" => $data->egg_id,
-                //     "docker_image" => $docker_image,
-                //     "startup" => $egg->startup,
-                //     "environment" => $environment,
-                //     "limits" => [
-                //         "memory" => $data->memory,
-                //         "swap" => 100,
-                //         "disk" => $data->disk,
-                //         "io" => 500,
-                //         "cpu" => $data->cpu_limit
-                //     ],
-                //     "feature_limits" => [
-                //         "databases" => 1,
-                //         "backups" => $data->backups,
-                //         "allocations" => $data->allocation_limit,
-                //     ],
-                //     "allocation" => [
-                //         "default" => $allocation
-                //     ]
-                // ]);
-                $result = true;
-                sleep(3);
+                $result = $panel->createServer([
+                    "name" => $data->name,
+                    "user" => $user->user_id,
+                    "egg" => $data->egg_id,
+                    "docker_image" => $docker_image,
+                    "startup" => $egg->startup,
+                    "environment" => $environment,
+                    "limits" => [
+                        "memory" => $data->memory,
+                        "swap" => 100,
+                        "disk" => $data->disk,
+                        "io" => 500,
+                        "cpu" => $data->cpu_limit
+                    ],
+                    "feature_limits" => [
+                        "databases" => 1,
+                        "backups" => $data->backups,
+                        "allocations" => $data->allocation_limit,
+                    ],
+                    "allocation" => [
+                        "default" => $allocation
+                    ]
+                ]);
                 if (!$result) {
                     $this->broadcast('failed');
                     $this->broadcast('info::fail to create server.');
