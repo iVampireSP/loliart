@@ -12,6 +12,10 @@ class WingsServer extends Model
     protected $fillable = [];
 
     public function node() {
-        return $this->belongsTo(WIngsNode::class, 'node_id', 'id');
+        return $this->belongsTo(WingsNode::class, 'node_id', 'id');
+    }
+
+    public function account() {
+        return $this->belongsTo(WingsPanelAccount::class, 'user_id', 'id');
     }
 }

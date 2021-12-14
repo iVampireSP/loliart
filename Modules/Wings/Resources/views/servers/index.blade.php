@@ -20,17 +20,17 @@
                 <tr>
                     <th>ID</th>
                     <th>{{ tr('Name') }}</th>
-                    <th>{{ tr('Nodes') }}</th>
-                    <th>{{ tr('Servers') }}</th>
+                    <th>{{ tr('Node') }}</th>
+                    <th>{{ tr('Owner') }}</th>
                 </tr>
             </thead>
             <tbody class="mdui-typo">
                 @foreach ($servers as $server)
                     <tr id="server-{{ $server->id }}}">
                         <td nowrap>{{ $server->id }}</td>
-                        <td nowrap><a href="{{ route('wings.servers.show', $server->id) }}">{{ $server->name }}</a></td>
-                        <td nowrap>{{ $server->node_count }}</td>
-                        <td nowrap>{{ $server->servers }}</td>
+                        <td nowrap><a href="{{ route('wings.servers.show', $server->id) }}">{{ $server->display_name }}</a></td>
+                        <td nowrap>{{ $server->node->display_name }}</td>
+                        <td nowrap>{{ $server->account->username }}</td>
                     </tr>
                 @endforeach
             </tbody>

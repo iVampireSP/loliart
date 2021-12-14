@@ -22,7 +22,7 @@ class ServerController extends Controller
      */
     public function index()
     {
-        $servers = WingsServer::where('team_id', session('team_id'))->simplePaginate();
+        $servers = WingsServer::where('team_id', session('team_id'))->with(['node', 'account'])->simplePaginate();
         return view('wings::servers.index', compact('servers'));
     }
 
