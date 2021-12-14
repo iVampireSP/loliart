@@ -455,6 +455,14 @@ a.mdui-btn-outlined {
     -o-border-radius: 0 0 8px 8px;
 }
 
+.logger {
+    margin-top: 10px;
+}
+.logger span {
+    display: block;
+    font-family: 'Courier New', Courier, monospace;
+}
+
 @media (prefers-color-scheme: dark) {
     .mdui-drawer {
         background-color: #303030 !important;
