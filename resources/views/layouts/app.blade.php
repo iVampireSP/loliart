@@ -29,7 +29,7 @@
 
     <header class="mdui-appbar mdui-appbar-fixed" id="top-appbar">
         <div class="mdui-toolbar mdui-color-white top-bar">
-            <span class="mdui-btn mdui-btn-icon mdui-ripple mdui-ripple-white"
+            <span class="mdui-btn mdui-btn-icon mdui-ripple mdui-ripple-gray"
                 mdui-drawer="{target: '#main-drawer', swipe: true, overlay:true}"><i
                     class="mdui-icon material-icons-outlined">menu</i></span>
             <a href="{{ route('main.index') }}" class="mdui-typo-headline" style="font-weight: 400;"
@@ -43,7 +43,7 @@
                 <i class="mdui-icon material-icons-outlined">lock_open</i>
             </span> --}}
             @auth
-                <span class="mdui-btn mdui-btn-icon mdui-ripple mdui-ripple-white" mdui-menu="{target: '#app-menu'}">
+                <span class="mdui-btn mdui-btn-icon mdui-ripple mdui-ripple-gray" mdui-menu="{target: '#app-menu'}">
                     <i class="mdui-icon material-icons-outlined">more_vert</i>
                 </span>
                 <x-tool-menu />
