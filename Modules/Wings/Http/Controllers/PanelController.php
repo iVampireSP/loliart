@@ -156,7 +156,7 @@ class PanelController extends Controller
     // Allocation
     public function allocations($node_id, $page = 1)
     {
-        return $this->get('/nodes/' . $node_id . '/allocations??include=server&page=' . $page);
+        return $this->get('/nodes/' . $node_id . '/allocations?include=server&page=' . $page);
     }
 
     public function createAllocation($node_id, $data)
@@ -167,6 +167,25 @@ class PanelController extends Controller
     public function deleteAllocation($node_id, $allocation_id)
     {
         return $this->delete('/nodes/' . $node_id . '/allocations/' . $allocation_id);
+    }
+
+    // Server
+    // public function servers()
+    // {
+    // }
+
+    // public function server($id)
+    // {
+    // }
+
+    public function createServer($data)
+    {
+        return $this->post('/servers', $data);
+    }
+
+    public function deleteServer($id)
+    {
+        return $this->delete('/servers', $id);
     }
 
     public function get($url, $data = null)
