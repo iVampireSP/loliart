@@ -10,7 +10,8 @@
     <div class="mdui-typo-display-1">{{ $server->display_name }}</div>
     @if ($server->status != 'created')
         <div class="logger">
-            <span>Waiting</span>
+            <span>Listening event.</span>
         </div>
+        <button class="mdui-btn mdui-btn-outlined" onclick="util.reload()">{{ tr('Reload') }}</button>
     @endif
 @endsection
