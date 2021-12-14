@@ -49,7 +49,6 @@ class ServerController extends Controller
         $request->validate([
             'name' => 'required|max:20',
             'owner' => 'integer|required',
-            'location' => 'integer|required',
             'node' => 'integer|required',
             'database_limit' => 'sometimes|integer|max:10',
             'cpu_limit' => 'integer|required',
@@ -77,8 +76,8 @@ class ServerController extends Controller
 
         // Save then dispatch
         $server->save();
-        $server->type = 'create';
         $server->docker_image = $request->docker_image;
+        $server->type = 'create';
 
         broadcast(new TeamEvent(
             $server->team_id,
@@ -103,8 +102,11 @@ class ServerController extends Controller
     {
         if (!$server->public) {
             userInTeamFail($server->team_id);
+            $accounts = WingsPanelAccount::where('team_id', session('team_id'))->where('status', 'created')->get();
+            $nests = WingsNest::get();
+            return view('wings::servers.show', compact('server', 'accounts', 'nests'));
         }
-        return view('wings::servers.show', compact('server'));
+        return view('wings::servers.public', compact('server'));
     }
 
     /**
@@ -120,12 +122,53 @@ class ServerController extends Controller
     /**
      * Update the specified resource in storage.
      * @param Request $request
-     * @param int $id
+     * @param WingsServer $server
      * @return Renderable
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, WingsServer $server)
     {
-        //
+        $request->validate([
+            'name' => 'required|max:20',
+            'database_limit' => 'sometimes|integer|max:10',
+            'cpu_limit' => 'integer|required',
+            'disk' => 'integer|required',
+            'memory' => 'integer|required',
+            'nest' => 'integer|required',
+            'egg' => 'integer|required',
+            'docker_image' => 'integer|required',
+            'backup_limit' => 'integer|required',
+        ]);
+
+        userInTeamFail($server->team_id);
+
+        $server->display_name = $request->name;
+        $server->user_id = $request->owner;
+        $server->cpu_limit = $request->cpu_limit * 100;
+        $server->memory = $request->memory;
+        $server->disk = $request->disk;
+        $server->databases = 1;
+        $server->allocation_limit = $request->allocation_limit;
+        $server->egg_id = $request->egg;
+        $server->backups = $request->backup_limit;
+
+        // Save then dispatch
+        $server->status = 'pending';
+        $server->save();
+        $server->type = 'update';
+        $server->docker_image = $request->docker_image;
+
+        broadcast(new TeamEvent(
+            $server->team_id,
+            [
+                'type' => 'wings.server.pending',
+                'data' => $server->id,
+                'status' => 'pending'
+            ]
+        ));
+
+        dispatch(new ServerJob($server->toArray()));
+
+        return response()->json(['status' => 1, 'data' => $server->id]);
     }
 
     /**

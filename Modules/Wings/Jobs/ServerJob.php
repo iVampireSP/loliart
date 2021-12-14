@@ -79,6 +79,12 @@ class ServerJob implements ShouldQueue
                     $server->delete();
 
                     return false;
+                } else {
+                    if ($node->location->team_id != $data->team_id) {
+                        $this->broadcast('failed');
+                        $this->broadcast('info:node not found');
+                        return false;
+                    }
                 }
 
                 // 检查 docker 镜像
@@ -137,7 +143,7 @@ class ServerJob implements ShouldQueue
                 ]);
                 if (!$result) {
                     $this->broadcast('failed');
-                    $this->broadcast('info::fail to create server.');
+                    $this->broadcast('info:fail to create server.');
 
                     $server->delete();
                 } else {
@@ -150,7 +156,116 @@ class ServerJob implements ShouldQueue
                 }
 
                 $this->broadcast('info:script finished successfully.');
-                $this->broadcast('info:server created, you can reload the page.');
+                $this->broadcast('info:server created, you can reload the page now.');
+
+                break;
+
+            case 'update':
+                $this->broadcast('info: searching infomations');
+                $this->broadcast('updating');
+                // 检查 user_id 是否存在
+                $user = WingsPanelAccount::find($data->user_id);
+                if (is_null($user)) {
+                    $this->broadcast('failed');
+                    $this->broadcast('info:account not found');
+
+                    return false;
+                }
+                // 检查 egg_id 是否存在
+                $egg = WingsNestEgg::find($data->egg_id);
+                if (is_null($egg)) {
+                    $this->broadcast('failed');
+                    $this->broadcast('info:egg not found');
+
+                    return false;
+                }
+                // 检查 node_id 是否存在
+                $node = WingsNode::find($data->node_id);
+                if (is_null($node)) {
+                    $this->broadcast('failed');
+                    $this->broadcast('info:node not found');
+
+                    return false;
+                }
+
+                // 检查 docker 镜像
+                if (array_key_exists($data->docker_image, $egg->docker_images)) {
+                    $this->broadcast('info:setting up docker image.');
+                    $docker_image = $egg->docker_images[$data->docker_image];
+                } else {
+                    $this->broadcast('info:docker image not found.');
+                    return false;
+                }
+
+                $this->broadcast('info:setting up environment.');
+                $environment = [];
+                foreach ($egg->environment as $env) {
+                    $env = $env['attributes'];
+                    $environment[$env['env_variable']] = $env['default_value'];
+                }
+
+                $this->broadcast('info:environment setup complete.');
+
+                $this->broadcast('info:setting server details.');
+
+                $details = [
+                    'name' => $data->name,
+                    'user' => $user->user_id,
+                    'description' => now()
+                ];
+
+                $result = $panel->updateServerDetails($data->server_id, $details);
+                $this->broadcast('info:OK!');
+
+                $this->broadcast('info:building server data.');
+                $build_data = [
+                    "allocation" => $data->allocation_id,
+                    "memory" => $data->memory,
+                    "swap" => 100,
+                    "disk" => $data->disk,
+                    "io" => 500,
+                    "cpu" => $data->cpu_limit,
+                    "feature_limits" => [
+                        "databases" => $data->databases,
+                        "backups" => $data->backups,
+                    ]
+                ];
+                $this->broadcast('info:updating server build data.');
+                $result = $panel->updateServerBuild($data->server_id, $build_data);
+
+                $this->broadcast('info:OK!');
+
+                $this->broadcast('info:building server startup data.');
+                $startup_data = [
+                    "egg" => $egg->egg_id,
+                    "image" => $docker_image,
+                    "startup" => $egg->startup,
+                    "environment" => $environment,
+                    'skip_scripts' => false
+                ];
+                $this->broadcast('info:updating server startup data.');
+                $result = $panel->updateServerStartup($data->server_id, $startup_data);
+
+                var_dump($startup_data);
+                $this->broadcast('info:OK!');
+
+                $server->status = 'created';
+                $server->save();
+                $this->broadcast('info:script finished successfully.');
+
+                if (!$result) {
+                    $this->broadcast('failed');
+                    $this->broadcast('info:fail to update server.');
+
+                } else {
+                    $this->broadcast('updated');
+                    $this->broadcast('info:update server successfully.');
+                    $server->status = 'created';
+                    $server->save();
+                }
+
+                $this->broadcast('info:script finished successfully.');
+                $this->broadcast('info:server update finished, you can reload the page now.');
 
                 break;
         }
