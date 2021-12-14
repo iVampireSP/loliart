@@ -21,6 +21,7 @@ window.util = {
             $(`${form} input:not([data-lock-pass])`).attr('readonly', false)
             $(`${form} input:not([data-lock-pass]`).attr('disabled', false)
             $(`${form} button:not([data-lock-pass]`).attr('disabled', false)
+            $(`${form} span:not([data-lock-pass]`).attr('disabled', false)
             $(`${form} a:not([data-lock-pass]`).attr('disabled', false)
             $(`${form} *:not([data-lock-pass]`).css('pointer-events', 'auto')
             if (play) {
@@ -33,6 +34,7 @@ window.util = {
             $(`${form} input:not([data-lock-pass]`).attr('disabled', true)
             $(`${form} input:not([data-lock-pass]`).attr('readonly', true)
             $(`${form} button:not([data-lock-pass]`).attr('disabled', true)
+            $(`${form} span:not([data-lock-pass]`).attr('disabled', true)
             $(`${form} a:not([data-lock-pass]`).attr('disabled', true)
             $(`${form} *:not([data-lock-pass]`).css('pointer-events', 'none')
             if (play) {
