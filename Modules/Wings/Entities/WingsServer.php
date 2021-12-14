@@ -10,9 +10,8 @@ class WingsServer extends Model
     use HasFactory;
 
     protected $fillable = [];
-    
-    protected static function newFactory()
-    {
-        return \Modules\Wings\Database\factories\WingsServerFactory::new();
+
+    public function node() {
+        return $this->belongsTo(WIngsNode::class, 'node_id', 'node_id');
     }
 }
