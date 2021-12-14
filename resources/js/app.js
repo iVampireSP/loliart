@@ -172,3 +172,9 @@ window.addEventListener('offline', () => {
     $('#offline_tip').fadeIn()
     util.play('error_1.wav')
 })
+
+window.onerror = (err) => {
+    ui.snackbar({
+        message: err
+    });
+}
