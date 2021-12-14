@@ -2,7 +2,10 @@
 
 namespace Modules\Wings\Http\Controllers;
 
+use App\Events\TeamEvent;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Modules\Wings\Jobs\ServerJob;
 use Illuminate\Routing\Controller;
 use Modules\Wings\Entities\WingsNest;
 use Modules\Wings\Entities\WingsNode;
@@ -41,9 +44,52 @@ class ServerController extends Controller
      * @param Request $request
      * @return Renderable
      */
-    public function store(Request $request)
+    public function store(Request $request, WingsServer $server)
     {
-        //
+        $request->validate([
+            'name' => 'required|max:20',
+            'owner' => 'integer|required',
+            'location' => 'integer|required',
+            'node' => 'integer|required',
+            'database_limit' => 'sometimes|integer|max:10',
+            'cpu_limit' => 'integer|required',
+            'disk' => 'integer|required',
+            'memory' => 'integer|required',
+            'nest' => 'integer|required',
+            'egg' => 'integer|required',
+            'docker_image' => 'integer|required',
+            'backup_limit' => 'integer|required',
+        ]);
+
+        $real_server_name = 'edge-' . Str::random(10);
+        $server->name = $real_server_name;
+        $server->display_name = $request->name;
+        $server->user_id = $request->owner;
+        $server->cpu_limit = $request->cpu_limit * 100;
+        $server->memory = $request->memory;
+        $server->disk = $request->disk;
+        $server->databases = $request->database_limit;
+        $server->egg_id = $request->egg;
+        $server->node_id = $request->node;
+        $server->backups = $request->backup_limit;
+        $server->team_id = session('team_id');
+
+        // Save then dispatch
+        $server->save();
+        $server->type = 'create';
+
+        broadcast(new TeamEvent(
+            $server->team_id,
+            [
+                'type' => 'wings.server.pending',
+                'data' => $server->id,
+                'status' => 'pending'
+            ]
+        ));
+
+        dispatch(new ServerJob($server->toArray()));
+
+        return response()->json(['status' => 1, 'data' => $server->id]);
     }
 
     /**

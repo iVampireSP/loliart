@@ -42,6 +42,7 @@
 
                         <select class="mdui-select" mdui-select name="location" onchange="m.getNodes($(this).val())">
                             @foreach ($locations as $location)
+                                <option>{{ tr('Select locatiom.') }}</option>
                                 <option value="{{ $location->id }}">{{ $location->name }}</option>
                             @endforeach
                         </select>
@@ -77,10 +78,7 @@
                     <div class="mdui-col-xs-6 mdui-col-sm-4">
                         <div class="mdui-textfield mdui-textfield-floating-label">
                             <label class="mdui-textfield-label">{{ tr('Database Limit') }}</label>
-                            <input class="mdui-textfield-input" type="text" name="database_limit" />
-                            <div class="mdui-textfield-helper">
-                                {{ tr('The total number of databases a user is allowed to create for this server.') }}
-                            </div>
+                            <input class="mdui-textfield-input" type="text" name="database_limit" value="1" readonly />
                         </div>
                     </div>
 
@@ -145,6 +143,7 @@
 
                         <select class="mdui-select" mdui-select="{position: 'top'}" name="nest" id="nest_select"
                             onchange="m.getEggs($(this).val())">
+                            <option>{{ tr('Select a nest') }}</option>
                             @foreach ($nests as $nest)
                                 <option value="{{ $nest->id }}">{{ $nest->name }}</option>
                             @endforeach
@@ -224,15 +223,12 @@
                 });
             },
             create: (ele) => {
+                let data = ele.serializeArray();
                 $.ajax({
                     method: 'POST',
-                    url: route('teams.team.store'),
-                    data: {
-                        name: value,
-                    },
-                    success(data) {
-
-                    }
+                    url: route('wings.servers.store'),
+                    data: data,
+                    success(data) {}
                 });
             }
         }
