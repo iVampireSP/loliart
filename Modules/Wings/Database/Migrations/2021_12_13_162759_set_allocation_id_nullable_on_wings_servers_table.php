@@ -16,6 +16,7 @@ class SetAllocationIdNullableOnWingsServersTable extends Migration
         Schema::table('wings_servers', function (Blueprint $table) {
             $table->unsignedBigInteger('allocation_id')->nullable()->change();
             $table->unsignedBigInteger('server_id')->nullable()->change();
+            $table->string('status')->default('pending')->change();
         });
     }
 
