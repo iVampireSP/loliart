@@ -21,21 +21,20 @@
 
     <div class="mdui-typo-headline mdui-m-t-3">{{ tr('Variables') }}</div>
     <div class="mdui-row masonry">
-        @php($egg->environment = json_decode($egg->environment))
         @foreach ($egg->environment as $env)
-            @php($env = $env->attributes)
-            @if ($env->user_viewable)
+            @php($env = $env['attributes'])
+            @if ($env['user_viewable'])
                 <div class="mdui-col-xs-12 mdui-col-sm-4 mdui-m-t-1">
                     <div class="mdui-card">
                         <div class="mdui-card-primary">
-                            <div class="mdui-card-primary-title">{{ tr($env->name) }}</div>
-                            <div class="mdui-card-primary-subtitle">{{ tr($env->description) }}</div>
+                            <div class="mdui-card-primary-title">{{ tr($env['name']) }}</div>
+                            <div class="mdui-card-primary-subtitle">{{ tr($env['description']) }}</div>
                         </div>
                         <div class="mdui-card-content">
-                            <div class="mdui-textfield @if (!is_null($env->default_value)) mdui-textfield-floating-label @endif">
-                                <label class="mdui-textfield-label">{{ tr($env->name) }}</label>
-                                <input class="mdui-textfield-input" name="{{ $env->env_variable }}"
-                                    value="{{ $env->default_value }}" type="text" @if (!$env->user_editable) readonly @endif />
+                            <div class="mdui-textfield @if (!is_null($env['default_value'])) mdui-textfield-floating-label @endif">
+                                <label class="mdui-textfield-label">{{ tr($env['name']) }}</label>
+                                <input class="mdui-textfield-input" name="{{ $env['env_variable'] }}"
+                                    value="{{ $env['default_value'] }}" type="text" @if (!$env['user_editable']) readonly @endif />
                             </div>
                         </div>
                     </div>
