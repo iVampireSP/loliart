@@ -96,12 +96,15 @@ class ServerController extends Controller
 
     /**
      * Show the specified resource.
-     * @param int $id
+     * @param Server $server
      * @return Renderable
      */
-    public function show($id)
+    public function show(WingsServer $server)
     {
-        return view('wings::show');
+        if (!$server->public) {
+            userInTeamFail($server->team_id);
+        }
+        return view('wings::servers.show', compact('server'));
     }
 
     /**

@@ -16,6 +16,7 @@ window.util.event = {
     },
     process: (event) => {
         $('.queue_message').text(event.data.type);
+        $('.logger').append(`<span>${event.data.type}</span>`);
         switch (event.data.type) {
             case 'team.invitation.received':
                 if (currentRoute == 'teams.invite.received') {

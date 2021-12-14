@@ -10,7 +10,7 @@
     <div class="mdui-typo-display-1">{{ $server->display_name }}</div>
     @if ($server->status != 'created')
         <div class="logger">
-            <span>Pending</span>
+            <span>Waiting</span>
         </div>
     @endif
 @endsection
