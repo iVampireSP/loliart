@@ -68,7 +68,8 @@ class ServerController extends Controller
         $server->cpu_limit = $request->cpu_limit * 100;
         $server->memory = $request->memory;
         $server->disk = $request->disk;
-        $server->databases = $request->database_limit;
+        $server->databases = 1;
+        $server->allocation_limit = $request->allocation_limit;
         $server->egg_id = $request->egg;
         $server->node_id = $request->node;
         $server->backups = $request->backup_limit;
@@ -77,6 +78,7 @@ class ServerController extends Controller
         // Save then dispatch
         $server->save();
         $server->type = 'create';
+        $server->docker_image = $request->docker_image;
 
         broadcast(new TeamEvent(
             $server->team_id,
