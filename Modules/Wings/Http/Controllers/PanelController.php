@@ -185,7 +185,27 @@ class PanelController extends Controller
 
     public function deleteServer($id)
     {
-        return $this->delete('/servers', $id);
+        return $this->delete('/servers/' . $id);
+    }
+
+    public function deleteServerForce($id)
+    {
+        return $this->delete('/servers/' . $id . '/force');
+    }
+
+    public function suspendServer($id)
+    {
+        return $this->post('/servers/' . $id . '/suspend');
+    }
+
+    public function unsuspendServer($id)
+    {
+        return $this->post('/servers/' . $id . '/unsuspend');
+    }
+
+    public function reinstallServer($id)
+    {
+        return $this->post('/servers/' . $id . '/reinstall');
     }
 
     public function updateServerDetails($server_id, $data)

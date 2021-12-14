@@ -83,21 +83,24 @@
                         <div class="mdui-col-xs-6 mdui-col-sm-4">
                             <div class="mdui-textfield mdui-textfield-floating-label">
                                 <label class="mdui-textfield-label">{{ tr('CPU Limit') }}</label>
-                                <input class="mdui-textfield-input" type="text" name="cpu_limit" value="{{ $server->cpu_limit / 100 }}" />
+                                <input class="mdui-textfield-input" type="text" name="cpu_limit"
+                                    value="{{ $server->cpu_limit / 100 }}" />
                             </div>
                         </div>
 
                         <div class="mdui-col-xs-6 mdui-col-sm-4">
                             <div class="mdui-textfield mdui-textfield-floating-label">
                                 <label class="mdui-textfield-label">{{ tr('Disk Space(MB)') }}</label>
-                                <input class="mdui-textfield-input" type="text" name="disk" value="{{ $server->disk }}" />
+                                <input class="mdui-textfield-input" type="text" name="disk"
+                                    value="{{ $server->disk }}" />
                             </div>
                         </div>
 
                         <div class="mdui-col-xs-6 mdui-col-sm-4">
                             <div class="mdui-textfield mdui-textfield-floating-label">
                                 <label class="mdui-textfield-label">{{ tr('Memory Limit(MB)') }}</label>
-                                <input class="mdui-textfield-input" type="text" name="memory" value="{{ $server->memory }}" />
+                                <input class="mdui-textfield-input" type="text" name="memory"
+                                    value="{{ $server->memory }}" />
                             </div>
                         </div>
                     </div>
@@ -137,7 +140,10 @@
 
             <button class="mdui-float-right mdui-m-t-4 mdui-btn mdui-ripple mdui-btn-outlined"
                 type="submit">{{ tr('Update Server') }}</button>
-
+            <span class="mdui-float-right mdui-m-t-4 mdui-btn mdui-ripple mdui-btn-outlined"
+                onclick="m.delete(0)">{{ tr('Delete Server') }}</span>
+            <span class="mdui-float-right mdui-m-t-4 mdui-btn mdui-ripple mdui-btn-outlined"
+                onclick="m.delete(1)">{{ tr('Force Delete Server') }}</span>
         </form>
 
         <script>
@@ -203,7 +209,19 @@
                             util.reload();
                         }
                     });
-                }
+                },
+                delete: (force) => {
+                    $.ajax({
+                        method: 'DELETE',
+                        url: route('wings.servers.destroy', route().params.server),
+                        data: {
+                            force: force
+                        },
+                        success(data) {
+                            util.url.to(route('wings.servers.index'))
+                        }
+                    });
+                },
             }
         </script>
     @endif

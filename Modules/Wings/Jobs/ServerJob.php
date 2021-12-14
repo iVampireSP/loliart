@@ -256,7 +256,6 @@ class ServerJob implements ShouldQueue
                 if (!$result) {
                     $this->broadcast('failed');
                     $this->broadcast('info:fail to update server.');
-
                 } else {
                     $this->broadcast('updated');
                     $this->broadcast('info:update server successfully.');
@@ -267,6 +266,41 @@ class ServerJob implements ShouldQueue
                 $this->broadcast('info:script finished successfully.');
                 $this->broadcast('info:server update finished, you can reload the page now.');
 
+                break;
+
+            case 'delete':
+                $this->broadcast('deleting');
+                $result = $panel->deleteServer($data->server_id);
+                if (!$result) {
+                    return false;
+                    $this->broadcast('failed');
+                }
+                $this->broadcast('deleted');
+                $server->delete();
+
+                break;
+
+            case 'force-delete':
+                $this->broadcast('force-deleting');
+                $result = $panel->deleteServerForce($data->server_id);
+                if (!$result) {
+                    return false;
+                    $this->broadcast('failed');
+                }
+                $this->broadcast('deleted');
+                $server->delete();
+                break;
+
+            case 'suspend':
+                break;
+
+            case 'unsuspend':
+                break;
+
+            case 'reinstall':
+                break;
+
+            case 'toggle-install-status':
                 break;
         }
     }

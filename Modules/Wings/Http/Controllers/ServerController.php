@@ -173,11 +173,43 @@ class ServerController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     * @param int $id
+     * @param Request $request
+     * @param WingsServer $server
      * @return Renderable
      */
-    public function destroy($id)
+    public function destroy(Request $request, WingsServer $server)
     {
-        //
+        $request->validate(
+            [
+                'force' => 'required|boolean'
+            ]
+        );
+        broadcast(new TeamEvent(
+            $server->team_id,
+            [
+                'type' => 'wings.server.pending',
+                'data' => $server->id,
+                'status' => 'pending'
+            ]
+        ));
+
+        userInTeamFail($server->team_id);
+        if ($request->force) {
+            $arr = [
+                'type' => 'force-delete',
+                'id' => $server->id,
+            ];
+            $arr = array_merge($arr, $server->toArray());
+            dispatch(new ServerJob($arr));
+        } else {
+            $arr = [
+                'type' => 'delete',
+                'id' => $server->id,
+            ];
+            $arr = array_merge($arr, $server->toArray());
+            dispatch(new ServerJob($arr));
+        }
+
+        return response()->json(['status' => 1, 'data' => $server->id]);
     }
 }
