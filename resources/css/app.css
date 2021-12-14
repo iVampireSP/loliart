@@ -370,9 +370,14 @@ a {
     border: 1px solid #4285f4 !important;
     font-weight: 400 !important;
     line-height: 1 !important;
+    margin-left: 5px
 }
 
 a.mdui-btn-outlined {
+    line-height: 2.5 !important;
+}
+
+span.mdui-btn-outlined {
     line-height: 2.5 !important;
 }
 
@@ -460,7 +465,7 @@ a.mdui-btn-outlined {
 }
 .logger span {
     display: block;
-    font-family: 'Courier New', Courier, monospace;
+    font-family: "Courier New", Courier, monospace;
 }
 
 @media (prefers-color-scheme: dark) {
