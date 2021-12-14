@@ -229,7 +229,6 @@
                     url: route('wings.servers.store'),
                     data: data,
                     success(data) {
-                        console.log(data)
                         util.url.to(route('wings.servers.show', data.data));
                     }
                 });
