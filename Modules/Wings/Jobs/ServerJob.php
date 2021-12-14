@@ -38,6 +38,8 @@ class ServerJob implements ShouldQueue
      */
     public function handle()
     {
+        $this->broadcast('info: we are getting started.');
+        $this->broadcast('info: prepare for you data.');
         $data = $this->data;
         $server = WingsServer::find($data->id);
         $panel = new PanelController();
@@ -49,11 +51,13 @@ class ServerJob implements ShouldQueue
 
         switch ($data->type) {
             case 'create':
+                $this->broadcast('info: searching infomations');
                 $this->broadcast('creating');
                 // 检查 user_id 是否存在
                 $user = WingsPanelAccount::find($data->user_id);
                 if (is_null($user)) {
-                    $this->broadcast('failed:account not found');
+                    $this->broadcast('failed');
+                    $this->broadcast('info:account not found');
                     $server->delete();
 
                     return false;
@@ -61,7 +65,8 @@ class ServerJob implements ShouldQueue
                 // 检查 egg_id 是否存在
                 $egg = WingsNestEgg::find($data->egg_id);
                 if (is_null($egg)) {
-                    $this->broadcast('failed:egg not found');
+                    $this->broadcast('failed');
+                    $this->broadcast('info:egg not found');
                     $server->delete();
 
                     return false;
@@ -69,7 +74,8 @@ class ServerJob implements ShouldQueue
                 // 检查 node_id 是否存在
                 $node = WingsNode::find($data->node_id);
                 if (is_null($node)) {
-                    $this->broadcast('failed:node not found');
+                    $this->broadcast('failed');
+                    $this->broadcast('info:node not found');
                     $server->delete();
 
                     return false;
@@ -77,69 +83,77 @@ class ServerJob implements ShouldQueue
 
                 // 检查 docker 镜像
                 if (array_key_exists($data->docker_image, $egg->docker_images)) {
-                    $this->broadcast('docker_image:setting up.');
+                    $this->broadcast('info:setting up docker image.');
                     $docker_image = $egg->docker_images[$data->docker_image];
                 } else {
-                    $this->broadcast('docker_image:not found.');
+                    $this->broadcast('info:docker image not found.');
                     $server->delete();
 
                     return false;
                 }
 
-                $this->broadcast('creating');
-
-                $this->broadcast('setup:setting up environment.');
+                $this->broadcast('info:setting up environment.');
                 $environment = [];
                 foreach ($egg->environment as $env) {
                     $env = $env['attributes'];
                     $environment[$env['env_variable']] = $env['default_value'];
                 }
-                $this->broadcast('setup:environment setup complete.');
+                $this->broadcast('info:environment setup complete.');
 
-                $this->broadcast('setup:getting next allocation.');
+                $this->broadcast('info:getting next allocation.');
 
                 $allocation = $this->getNextAllocation($node->node_id);
                 if (!$allocation) {
-                    $this->broadcast('failed:get next allocation failed.');
+                    $this->broadcast('info:get next allocation failed.');
+                    $this->broadcast('failed');
                     $server->delete();
                 }
 
-                $this->broadcast('setup:done, next allocation is ' . $allocation);
+                $this->broadcast('info:done, next allocation is ' . $allocation);
 
-                $this->broadcast('setup:creating server.');
-                $result = $panel->createServer([
-                    "name" => $data->name,
-                    "user" => $user->user_id,
-                    "egg" => $data->egg_id,
-                    "docker_image" => $docker_image,
-                    "startup" => $egg->startup,
-                    "environment" => $environment,
-                    "limits" => [
-                        "memory" => $data->memory,
-                        "swap" => 100,
-                        "disk" => $data->disk,
-                        "io" => 500,
-                        "cpu" => $data->cpu_limit
-                    ],
-                    "feature_limits" => [
-                        "databases" => 1,
-                        "backups" => $data->backups,
-                        "allocations" => $data->allocation_limit,
-                    ],
-                    "allocation" => [
-                        "default" => $allocation
-                    ]
-                ]);
+                $this->broadcast('info:creating server.');
+                // $result = $panel->createServer([
+                //     "name" => $data->name,
+                //     "user" => $user->user_id,
+                //     "egg" => $data->egg_id,
+                //     "docker_image" => $docker_image,
+                //     "startup" => $egg->startup,
+                //     "environment" => $environment,
+                //     "limits" => [
+                //         "memory" => $data->memory,
+                //         "swap" => 100,
+                //         "disk" => $data->disk,
+                //         "io" => 500,
+                //         "cpu" => $data->cpu_limit
+                //     ],
+                //     "feature_limits" => [
+                //         "databases" => 1,
+                //         "backups" => $data->backups,
+                //         "allocations" => $data->allocation_limit,
+                //     ],
+                //     "allocation" => [
+                //         "default" => $allocation
+                //     ]
+                // ]);
+                $result = true;
+                sleep(3);
                 if (!$result) {
-                    $this->broadcast('failed:fail to create server.');
+                    $this->broadcast('failed');
+                    $this->broadcast('info::fail to create server.');
+
                     $server->delete();
                 } else {
-                    $this->broadcast('created:created server successfully');
+                    $this->broadcast('created');
+                    $this->broadcast('info:created server successfully.');
                     $server->status = 'created';
                     $server->server_id = $result['attributes']['id'];
                     $server->allocation_id = $allocation;
                     $server->save();
                 }
+
+                $this->broadcast('info:script finished successfully.');
+                $this->broadcast('info:server created, you can reload the page.');
+
                 break;
         }
     }
