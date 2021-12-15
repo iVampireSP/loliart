@@ -283,12 +283,8 @@ class ServerJob implements ShouldQueue
             case 'force-delete':
                 $this->broadcast('force-deleting');
                 $result = $panel->deleteServerForce($data->server_id);
-                if (!$result) {
-                    return false;
-                    $this->broadcast('failed');
-                }
-                $this->broadcast('deleted');
                 $server->delete();
+                $this->broadcast('deleted');
                 break;
 
             case 'suspend':
