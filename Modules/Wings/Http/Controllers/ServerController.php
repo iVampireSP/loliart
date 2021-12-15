@@ -219,4 +219,9 @@ class ServerController extends Controller
 
         return response()->json(['status' => 1, 'data' => $server->id]);
     }
+
+    public function explore() {
+        $servers = WingsServer::where('public', 1)->simplePaginate();
+        return view('wings::servers.explore', compact('servers'));
+    }
 }

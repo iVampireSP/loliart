@@ -13,7 +13,6 @@ Route::prefix('/wings')->middleware(['teams_permission', 'auth'])->name('wings.'
     Route::resource('/nests/{nest}/eggs', NestEggsController::class, ['as' => 'nests']);
     Route::get('/nests/{nest_id}/list', 'NestsController@list')->name('nests.list');
     Route::get('/eggs/{id}', 'NestEggsController@images')->name('egg.images');
+    Route::get('/servers/explore', 'ServerController@explore')->name('servers.explore');
     Route::resource('/servers', ServerController::class);
-
-    // Route::resource('/nodes', NodeController::class)->except('store');
 });
