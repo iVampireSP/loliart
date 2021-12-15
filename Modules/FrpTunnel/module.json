@@ -1,0 +1,13 @@
+{
+    "name": "FrpTunnel",
+    "alias": "frptunnel",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\FrpTunnel\\Providers\\FrpTunnelServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}
