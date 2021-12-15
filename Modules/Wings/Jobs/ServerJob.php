@@ -5,6 +5,7 @@ namespace Modules\Wings\Jobs;
 use ErrorException;
 use App\Events\TeamEvent;
 use Illuminate\Bus\Queueable;
+use Modules\Wings\Entities\WingsNest;
 use Modules\Wings\Entities\WingsNode;
 use Illuminate\Queue\SerializesModels;
 use Modules\Wings\Entities\WingsServer;
@@ -149,6 +150,12 @@ class ServerJob implements ShouldQueue
                 } else {
                     $this->broadcast('created');
                     $this->broadcast('info:created server successfully.');
+                    // increment
+                    $nest = WingsNest::find($egg->nest_id);
+                    $user->increment('servers');
+                    $egg->increment('servers');
+                    $node->increment('server_count');
+                    $nest->increment('servers');
                     $server->status = 'created';
                     $server->server_id = $result['attributes']['id'];
                     $server->allocation_id = $allocation;
@@ -246,7 +253,6 @@ class ServerJob implements ShouldQueue
                 $this->broadcast('info:updating server startup data.');
                 $result = $panel->updateServerStartup($data->server_id, $startup_data);
 
-                var_dump($startup_data);
                 $this->broadcast('info:OK!');
 
                 $server->status = 'created';
@@ -277,6 +283,15 @@ class ServerJob implements ShouldQueue
                 }
                 $this->broadcast('deleted');
                 $server->delete();
+                $user = WingsPanelAccount::find($server->user_id);
+                $egg = WingsNestEgg::find($server->egg_id);
+                $node = WingsNode::find($server->node_id);
+                $nest = WingsNode::find($egg->nest_id);
+                // decrement
+                $user->decrement('servers');
+                $egg->decrement('servers');
+                $node->decrement('server_count');
+                $nest->decrement('servers');
 
                 break;
 
@@ -285,6 +300,16 @@ class ServerJob implements ShouldQueue
                 $result = $panel->deleteServerForce($data->server_id);
                 $server->delete();
                 $this->broadcast('deleted');
+                $user = WingsPanelAccount::find($server->user_id);
+                $egg = WingsNestEgg::find($server->egg_id);
+                $nest = WingsNest::find($egg->nest_id);
+                $node = WingsNode::find($server->node_id);
+                // decrement
+                $user->decrement('servers');
+                $egg->decrement('servers');
+                $nest->decrement('servers');
+                $node->decrement('server_count');
+
                 break;
 
             case 'suspend':
