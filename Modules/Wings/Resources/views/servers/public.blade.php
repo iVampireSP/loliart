@@ -14,165 +14,85 @@
         </div>
         <button class="mdui-btn mdui-btn-outlined" onclick="util.reload()">{{ tr('Reload') }}</button>
     @else
-        <form action="#" id="new" onsubmit="event.preventDefault();m.create($(this))">
-            <div class="mdui-row mdui-m-t-5">
-                <div class="mdui-col-md-6 mdui-col-sm-12">
-                    <div class="mdui-typo-headline">{{ tr('Core Details') }}</div>
+        <div class="mdui-row mdui-m-t-5">
+            <div class="mdui-col-md-6 mdui-col-sm-12">
+                <div class="mdui-typo-headline">{{ tr('Core Details') }}</div>
 
-                    <div class="mdui-textfield mdui-textfield-floating-label">
-                        <label class="mdui-textfield-label">{{ tr('Server Name') }}</label>
-                        <input class="mdui-textfield-input" type="text" name="name" />
-                        <div class="mdui-textfield-helper">{{ tr('Your server need a name.') }}</div>
+                <div class="mdui-textfield mdui-textfield-floating-label">
+                    <label class="mdui-textfield-label">{{ tr('Server Name') }}</label>
+                    <input class="mdui-textfield-input" type="text" name="name" value="{{ $server->display_name }}" />
+                    <div class="mdui-textfield-helper">{{ tr('Your server need a name.') }}</div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="mdui-row mdui-m-t-5">
+            <div class="mdui-col-sm-12">
+                <div class="mdui-typo-headline">{{ tr('Application Feature Limits') }}</div>
+
+                <div class="mdui-row">
+                    <div class="mdui-col-xs-6 mdui-col-sm-4">
+                        <div class="mdui-textfield mdui-textfield-floating-label">
+                            <label class="mdui-textfield-label">{{ tr('Database Limit') }}</label>
+                            <input class="mdui-textfield-input" type="text" name="database_limit" value="1" readonly />
+                        </div>
                     </div>
 
-                </div>
-
-                <div class="mdui-col-md-6 mdui-col-sm-12">
-                    <div class="mdui-typo-headline">{{ tr('Who is the owner of this server?') }}</div>
-                    <select class="mdui-select" mdui-select style="margin-top: 34px;" name="owner">
-                        @foreach ($accounts as $account)
-                            <option value="{{ $account->id }}">{{ $account->username }}</option>
-                        @endforeach
-                    </select>
-                </div>
-            </div>
-
-
-            <div class="mdui-row mdui-m-t-5">
-                <div class="mdui-col-sm-12">
-                    <div class="mdui-typo-headline">{{ tr('Allocation Management') }}</div>
-
-                    <div class="mdui-row">
-                        <div class="mdui-col-xs-6 mdui-col-sm-4">
-                            <div class="mdui-typo-body-1 mdui-m-b-1">{{ tr('Location') }}</div>
-
-                            <select class="mdui-select" mdui-select name="location" onchange="m.getNodes($(this).val())">
-                                @foreach ($locations as $location)
-                                    <option>{{ tr('Select locatiom.') }}</option>
-                                    <option value="{{ $location->id }}">{{ $location->name }}</option>
-                                @endforeach
-                            </select>
-
+                    <div class="mdui-col-xs-6 mdui-col-sm-4">
+                        <div class="mdui-textfield mdui-textfield-floating-label">
+                            <label class="mdui-textfield-label">{{ tr('Allocation Limit') }}</label>
+                            <input class="mdui-textfield-input" type="text" name="allocation_limit"
+                                value="{{ $server->allocation_limit }}" />
+                            <div class="mdui-textfield-helper">
+                                {{ tr('The total number of allocations a user is allowed to create for this server.') }}
+                            </div>
                         </div>
-
-                        <div class="mdui-col-xs-6 mdui-col-sm-4">
-                            <div class="mdui-typo-body-1 mdui-m-b-1">{{ tr('Node') }}</div>
-
-                            <select class="mdui-select" name="node" id="nodes_select">
-                                <option disabled>{{ tr('Select location first.') }}</option>
-                            </select>
-
-                            <div class="mdui-typo-body-1 mdui-m-t-1">
-                                {{ tr('The main allocation that will be assigned to this server automatically.') }}</div>
-
-                        </div>
-                        <div class="mdui-col-xs-6 mdui-col-sm-4">
-                            <div class="mdui-typo-body-1 mdui-m-b-1">{{ tr('Additional Allocation(s)') }}</div>
-                            <div class="mdui-typo-body-1 mdui-m-t-1">
-                                {{ tr('Additional allocations can be assigned to this server after the server created.') }}
+                    </div>
+                    <div class="mdui-col-xs-6 mdui-col-sm-4">
+                        <div class="mdui-textfield mdui-textfield-floating-label">
+                            <label class="mdui-textfield-label">{{ tr('Backup Limit') }}</label>
+                            <input class="mdui-textfield-input" type="text" name="backup_limit"
+                                value="{{ $server->backups }}" />
+                            <div class="mdui-textfield-helper">
+                                {{ tr('The total number of backups that can be created for this server.') }}
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div class="mdui-row mdui-m-t-5">
-                <div class="mdui-col-sm-12">
-                    <div class="mdui-typo-headline">{{ tr('Application Feature Limits') }}</div>
+        <div class="mdui-row mdui-m-t-5">
+            <div class="mdui-col-sm-12">
+                <div class="mdui-typo-headline">{{ tr('Resource Management') }}</div>
 
-                    <div class="mdui-row">
-                        <div class="mdui-col-xs-6 mdui-col-sm-4">
-                            <div class="mdui-textfield mdui-textfield-floating-label">
-                                <label class="mdui-textfield-label">{{ tr('Database Limit') }}</label>
-                                <input class="mdui-textfield-input" type="text" name="database_limit" value="1" readonly />
-                            </div>
+                <div class="mdui-row">
+                    <div class="mdui-col-xs-6 mdui-col-sm-4">
+                        <div class="mdui-textfield mdui-textfield-floating-label">
+                            <label class="mdui-textfield-label">{{ tr('CPU Limit') }}</label>
+                            <input class="mdui-textfield-input" type="text" name="cpu_limit"
+                                value="{{ $server->cpu_limit / 100 }}" />
                         </div>
+                    </div>
 
-                        <div class="mdui-col-xs-6 mdui-col-sm-4">
-                            <div class="mdui-textfield mdui-textfield-floating-label">
-                                <label class="mdui-textfield-label">{{ tr('Allocation Limit') }}</label>
-                                <input class="mdui-textfield-input" type="text" name="allocation_limit" />
-                                <div class="mdui-textfield-helper">
-                                    {{ tr('The total number of allocations a user is allowed to create for this server.') }}
-                                </div>
-                            </div>
+                    <div class="mdui-col-xs-6 mdui-col-sm-4">
+                        <div class="mdui-textfield mdui-textfield-floating-label">
+                            <label class="mdui-textfield-label">{{ tr('Disk Space(MB)') }}</label>
+                            <input class="mdui-textfield-input" type="text" name="disk" value="{{ $server->disk }}" />
                         </div>
-                        <div class="mdui-col-xs-6 mdui-col-sm-4">
-                            <div class="mdui-textfield mdui-textfield-floating-label">
-                                <label class="mdui-textfield-label">{{ tr('Backup Limit') }}</label>
-                                <input class="mdui-textfield-input" type="text" name="backup_limit" />
-                                <div class="mdui-textfield-helper">
-                                    {{ tr('The total number of backups that can be created for this server.') }}
-                                </div>
-                            </div>
+                    </div>
+
+                    <div class="mdui-col-xs-6 mdui-col-sm-4">
+                        <div class="mdui-textfield mdui-textfield-floating-label">
+                            <label class="mdui-textfield-label">{{ tr('Memory Limit(MB)') }}</label>
+                            <input class="mdui-textfield-input" type="text" name="memory"
+                                value="{{ $server->memory }}" />
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div class="mdui-row mdui-m-t-5">
-                <div class="mdui-col-sm-12">
-                    <div class="mdui-typo-headline">{{ tr('Resource Management') }}</div>
-
-                    <div class="mdui-row">
-                        <div class="mdui-col-xs-6 mdui-col-sm-4">
-                            <div class="mdui-textfield mdui-textfield-floating-label">
-                                <label class="mdui-textfield-label">{{ tr('CPU Limit') }}</label>
-                                <input class="mdui-textfield-input" type="text" name="cpu_limit" value="1" />
-                            </div>
-                        </div>
-
-                        <div class="mdui-col-xs-6 mdui-col-sm-4">
-                            <div class="mdui-textfield mdui-textfield-floating-label">
-                                <label class="mdui-textfield-label">{{ tr('Disk Space(MB)') }}</label>
-                                <input class="mdui-textfield-input" type="text" name="disk" value="1024" />
-                            </div>
-                        </div>
-
-                        <div class="mdui-col-xs-6 mdui-col-sm-4">
-                            <div class="mdui-textfield mdui-textfield-floating-label">
-                                <label class="mdui-textfield-label">{{ tr('Memory Limit(MB)') }}</label>
-                                <input class="mdui-textfield-input" type="text" name="memory" value="1024" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="mdui-row mdui-m-t-5">
-                <div class="mdui-col-sm-12">
-                    <div class="mdui-typo-headline">{{ tr('Build Configuration') }}</div>
-
-                    <div class="mdui-row">
-                        <div class="mdui-col-xs-6">
-                            <div class="mdui-typo-headline">Nest</div>
-
-                            <select class="mdui-select" mdui-select="{position: 'top'}" name="nest" id="nest_select"
-                                onchange="m.getEggs($(this).val())">
-                                <option>{{ tr('Select a nest') }}</option>
-                                @foreach ($nests as $nest)
-                                    <option value="{{ $nest->id }}">{{ $nest->name }}</option>
-                                @endforeach
-                            </select>
-
-                            <select class="mdui-select" name="egg" id="egg_select" onchange="m.getImages($(this).val())">
-                            </select>
-                        </div>
-
-                        <div class="mdui-col-xs-6">
-                            <div class="mdui-typo-headline">{{ tr('Docker Image') }}</div>
-
-                            <select class="mdui-select" name="docker_image" id="docker_images">
-                            </select>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <button class="mdui-float-right mdui-m-t-4 mdui-btn mdui-ripple mdui-btn-outlined"
-                type="submit">{{ tr('Create Server') }}</button>
-
-        </form>
     @endif
 @endsection
