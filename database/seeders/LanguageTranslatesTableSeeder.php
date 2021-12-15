@@ -2645,7 +2645,7 @@ Please enter domain name (e.g node.example.com) to be used for connecting to the
                 'id' => 264,
                 'language' => 'zh',
                 'string' => 'Memory',
-                'output' => '记忆力',
+                'output' => '内存',
                 'sign' => 'language_zh_4789f23283b3a61f858b641a1bef19a3',
                 'created_at' => '2021-12-12 13:13:55',
                 'updated_at' => '2021-12-12 13:13:55',
@@ -2695,10 +2695,240 @@ Please enter domain name (e.g node.example.com) to be used for connecting to the
                 'id' => 269,
                 'language' => 'zh',
                 'string' => 'Nest',
-                'output' => '巢',
+                'output' => 'Nest',
                 'sign' => 'language_zh_fe60251dcd22da35121fa717b142baa0',
                 'created_at' => '2021-12-12 14:45:09',
                 'updated_at' => '2021-12-12 14:45:09',
+            ),
+            268 => 
+            array (
+                'id' => 325,
+                'language' => 'zh',
+                'string' => 'Location',
+                'output' => '位置',
+                'sign' => 'language_zh_ce5bf551379459c1c61d2a204061c455',
+                'created_at' => '2021-12-13 11:03:36',
+                'updated_at' => '2021-12-13 11:03:36',
+            ),
+            269 => 
+            array (
+                'id' => 326,
+                'language' => 'zh',
+                'string' => 'Select location first.',
+                'output' => '首先选择位置。',
+                'sign' => 'language_zh_7f12b4e87321a43c37145a100f00673e',
+                'created_at' => '2021-12-13 11:03:38',
+                'updated_at' => '2021-12-13 11:03:38',
+            ),
+            270 => 
+            array (
+                'id' => 327,
+                'language' => 'zh',
+                'string' => 'The main allocation that will be assigned to this server automatically.',
+                'output' => '将自动分配给此服务器的主分配。',
+                'sign' => 'language_zh_360f0b832207886a729bde0c268b50d5',
+                'created_at' => '2021-12-13 11:31:15',
+                'updated_at' => '2021-12-13 11:31:15',
+            ),
+            271 => 
+            array (
+                'id' => 328,
+                'language' => 'zh',
+            'string' => 'Disk Space(MB)',
+                'output' => '磁盘空间（MB）',
+                'sign' => 'language_zh_bbc17ca4d48c33a13d4d08b5ed552ee1',
+                'created_at' => '2021-12-13 12:13:46',
+                'updated_at' => '2021-12-13 12:13:46',
+            ),
+            272 => 
+            array (
+                'id' => 329,
+                'language' => 'zh',
+            'string' => 'Memory Limit(MB)',
+                'output' => '内存限制（MB）',
+                'sign' => 'language_zh_3dae91ca7fffab920e108fb62183f829',
+                'created_at' => '2021-12-13 12:28:26',
+                'updated_at' => '2021-12-13 12:28:26',
+            ),
+            273 => 
+            array (
+                'id' => 330,
+                'language' => 'zh',
+                'string' => 'Select locatiom.',
+                'output' => '选择位置。',
+                'sign' => 'language_zh_117b624d286256b40f0512c2a62a0427',
+                'created_at' => '2021-12-13 19:54:02',
+                'updated_at' => '2021-12-13 19:54:02',
+            ),
+            274 => 
+            array (
+                'id' => 331,
+                'language' => 'zh',
+                'string' => 'Select a nest',
+                'output' => '选择一个 Nest',
+                'sign' => 'language_zh_0c5ed9232f050eb745728df3b45d0cd0',
+                'created_at' => '2021-12-13 20:08:21',
+                'updated_at' => '2021-12-13 20:08:21',
+            ),
+            275 => 
+            array (
+                'id' => 332,
+                'language' => 'zh',
+                'string' => 'The name of the Jarfile to use when running Bungeecord.',
+                'output' => '运行Bungeecord时要使用的JAR文件的名称。',
+                'sign' => 'language_zh_bed765cdcbe8987c7e123ce247916013',
+                'created_at' => '2021-12-14 09:17:12',
+                'updated_at' => '2021-12-14 09:17:12',
+            ),
+            276 => 
+            array (
+                'id' => 333,
+                'language' => 'zh',
+                'string' => 'File Transfer Port',
+                'output' => '文件传输端口',
+                'sign' => 'language_zh_baee85f3d807ba97a36a0f634a0b6f23',
+                'created_at' => '2021-12-14 10:06:02',
+                'updated_at' => '2021-12-14 10:06:02',
+            ),
+            277 => 
+            array (
+                'id' => 334,
+                'language' => 'zh',
+            'string' => 'As a man or woman stranded, naked, freezing, and starving on the unforgiving shores of a mysterious island called ARK, use your skill and cunning to kill or tame and ride the plethora of leviathan dinosaurs and other primeval creatures roaming the land. Hunt, harvest resources, craft items, grow crops, research technologies, and build shelters to withstand the elements and store valuables, all while teaming up with (or preying upon) hundreds of other players to survive, dominate... and escape! — Gamepedia: ARK',
+                'output' => '当一个男人或女人被困在一个叫方舟的神秘岛屿上，赤身裸体，冻僵着，饥肠辘辘时，用你的技巧和狡猾去杀死、驯服和骑上大量在陆地上游荡的巨兽恐龙和其他原始生物。狩猎、收获资源、制作物品、种植作物、研究技术、建造庇护所以抵御恶劣天气并储存贵重物品，同时与数百名其他玩家合作（或掠夺）生存、主宰。。。然后逃走方舟',
+                'sign' => 'language_zh_4ea6b3794004c292f496703448397d8f',
+                'created_at' => '2021-12-14 16:02:34',
+                'updated_at' => '2021-12-14 16:02:34',
+            ),
+            278 => 
+            array (
+                'id' => 335,
+                'language' => 'zh',
+                'string' => 'Counter-Strike: Global Offensive is a multiplayer first-person shooter video game developed by Hidden Path Entertainment and Valve Corporation.',
+                'output' => '反击：全球进攻是一款多人第一人称射击游戏，由Hidden Path Entertainment and Valve Corporation开发。',
+                'sign' => 'language_zh_d5c4ace890e34313f1fa39ca7bb3d51c',
+                'created_at' => '2021-12-14 16:02:36',
+                'updated_at' => '2021-12-14 16:02:36',
+            ),
+            279 => 
+            array (
+                'id' => 336,
+                'language' => 'zh',
+                'string' => 'This option allows modifying the startup arguments and other details to run a custom SRCDS based game on the panel.',
+                'output' => '此选项允许修改启动参数和其他详细信息，以便在面板上运行基于SRCDS的自定义游戏。',
+                'sign' => 'language_zh_ba3d76fa4a05fa19826e79b923c6e50b',
+                'created_at' => '2021-12-14 16:02:37',
+                'updated_at' => '2021-12-14 16:02:37',
+            ),
+            280 => 
+            array (
+                'id' => 337,
+                'language' => 'zh',
+                'string' => 'Garrys Mod, is a sandbox physics game created by Garry Newman, and developed by his company, Facepunch Studios.',
+                'output' => 'GarrysMod是一款沙盒物理游戏，由GarryNewman创建，由他的公司Facepunch工作室开发。',
+                'sign' => 'language_zh_7519de7dd5ae81b51a2476c7dbf95da7',
+                'created_at' => '2021-12-14 16:02:38',
+                'updated_at' => '2021-12-14 16:02:38',
+            ),
+            281 => 
+            array (
+                'id' => 338,
+                'language' => 'zh',
+                'string' => 'Take to the streets for intense close quarters combat, where a team\'s survival depends upon securing crucial strongholds and destroying enemy supply in this multiplayer and cooperative Source Engine based experience.',
+                'output' => '走上街头进行密集的近距离战斗，团队的生存取决于在这一基于多人和合作源引擎的体验中确保关键据点的安全和摧毁敌人的补给。',
+                'sign' => 'language_zh_64c556ba4bbb894ddc81844aad9f298f',
+                'created_at' => '2021-12-14 16:02:40',
+                'updated_at' => '2021-12-14 16:02:40',
+            ),
+            282 => 
+            array (
+                'id' => 339,
+                'language' => 'zh',
+                'string' => 'Team Fortress 2 is a team-based first-person shooter multiplayer video game developed and published by Valve Corporation. It is the sequel to the 1996 mod Team Fortress for Quake and its 1999 remake.',
+                'output' => 'TeamFortress 2是由Valve公司开发和发布的基于团队的第一人称射击多人游戏。这是1996年国防部团队《地震堡垒》及其1999年翻拍版的续集。',
+                'sign' => 'language_zh_9e8cddbecfd788de5b6be2717240c835',
+                'created_at' => '2021-12-14 16:02:41',
+                'updated_at' => '2021-12-14 16:02:41',
+            ),
+            283 => 
+            array (
+                'id' => 340,
+                'language' => 'zh',
+                'string' => 'Map',
+                'output' => '地图',
+                'sign' => 'language_zh_46f3ea056caa3126b91f3f70beea068c',
+                'created_at' => '2021-12-14 16:02:50',
+                'updated_at' => '2021-12-14 16:02:50',
+            ),
+            284 => 
+            array (
+                'id' => 341,
+                'language' => 'zh',
+                'string' => 'The default map for the server.',
+                'output' => '服务器的默认映射。',
+                'sign' => 'language_zh_a55e9b8590b55d41d7483e491d2f1c60',
+                'created_at' => '2021-12-14 16:02:51',
+                'updated_at' => '2021-12-14 16:02:51',
+            ),
+            285 => 
+            array (
+                'id' => 342,
+                'language' => 'zh',
+                'string' => 'Steam Account Token',
+                'output' => '蒸汽账户代币',
+                'sign' => 'language_zh_dbeac5a1f45bf92251276927fa5ba570',
+                'created_at' => '2021-12-14 16:02:52',
+                'updated_at' => '2021-12-14 16:02:52',
+            ),
+            286 => 
+            array (
+                'id' => 343,
+                'language' => 'zh',
+                'string' => 'The Steam Account Token required for the server to be displayed publicly.',
+                'output' => '服务器公开显示所需的Steam帐户令牌。',
+                'sign' => 'language_zh_d3fda51c96944b7915ab6c99d5cef268',
+                'created_at' => '2021-12-14 16:02:53',
+                'updated_at' => '2021-12-14 16:02:53',
+            ),
+            287 => 
+            array (
+                'id' => 344,
+                'language' => 'zh',
+                'string' => 'Reload',
+                'output' => '重新加载',
+                'sign' => 'language_zh_4d1c8263ba1036754f8db14a98f9f006',
+                'created_at' => '2021-12-14 16:32:54',
+                'updated_at' => '2021-12-14 16:32:54',
+            ),
+            288 => 
+            array (
+                'id' => 345,
+                'language' => 'zh',
+                'string' => 'Update Server',
+                'output' => '更新服务器',
+                'sign' => 'language_zh_9e8078f2f1c57c8df7d1fee8930b3c38',
+                'created_at' => '2021-12-14 18:58:59',
+                'updated_at' => '2021-12-14 18:58:59',
+            ),
+            289 => 
+            array (
+                'id' => 346,
+                'language' => 'zh',
+                'string' => 'Delete Server',
+                'output' => '删除服务器',
+                'sign' => 'language_zh_2c064f2911d5f9ec56816e11245f9bf8',
+                'created_at' => '2021-12-14 22:23:38',
+                'updated_at' => '2021-12-14 22:23:38',
+            ),
+            290 => 
+            array (
+                'id' => 347,
+                'language' => 'zh',
+                'string' => 'Force Delete Server',
+                'output' => '强制删除服务器',
+                'sign' => 'language_zh_51e9802c3088d23e1f8d4a60f36e18b2',
+                'created_at' => '2021-12-14 22:23:43',
+                'updated_at' => '2021-12-14 22:23:43',
             ),
         ));
         
