@@ -30,7 +30,7 @@
                         <td nowrap>{{ $server->id }}</td>
                         <td nowrap><a href="{{ route('wings.servers.show', $server->id) }}">{{ $server->display_name }}</a></td>
                         <td nowrap>{{ $server->node->display_name }}</td>
-                        <td nowrap>{{ $server->account->username }}</td>
+                        <td nowrap>{{ $server->account->username ?? tr('User not exists') }}</td>
                     </tr>
                 @endforeach
             </tbody>
