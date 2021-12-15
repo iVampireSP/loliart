@@ -31,7 +31,7 @@
                         <td nowrap><a href="{{ route('wings.accounts.show', $account->id) }}">{{ $account->email }}</a>
                         </td>
                         <td nowrap>{{ $account->username }}</td>
-                        <td nowrap>{{ $account->server_count }}</td>
+                        <td nowrap>{{ $account->servers }}</td>
                     </tr>
                 @endforeach
             </tbody>
