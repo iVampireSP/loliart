@@ -29,13 +29,30 @@
                 </div>
 
                 <div class="mdui-col-md-6 mdui-col-sm-12">
-                    <div class="mdui-typo-headline">{{ tr('Who is the owner of this server?') }}</div>
-                    <select class="mdui-select" mdui-select style="margin-top: 34px;" name="owner">
-                        @foreach ($accounts as $account)
-                            <option value="{{ $account->id }}" @if ($server->user_id == $account->id) selected @endif>{{ $account->username }}
-                            </option>
-                        @endforeach
-                    </select>
+                    <div class="mdui-row">
+                        <div class="mdui-row">
+                            <div class="mdui-col-xs-6">
+                                <div class="mdui-typo-headline">{{ tr('Who is the owner of this server?') }}</div>
+                                <select class="mdui-select" mdui-select style="margin-top: 34px;" name="owner">
+                                    @foreach ($accounts as $account)
+                                        <option value="{{ $account->id }}" @if ($server->user_id == $account->id) selected @endif>
+                                            {{ $account->username }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="mdui-col-xs-6">
+                                <div class="mdui-typo-headline">{{ tr('Is the server visible?') }}</div>
+                                <br />
+                                <label class="mdui-checkbox mdui-m-t-2">
+                                    <input type="checkbox" name="public" value="1" @if ($server->public) checked @endif />
+                                    <i class="mdui-checkbox-icon"></i>
+                                    {{ tr('Visible') }}
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 

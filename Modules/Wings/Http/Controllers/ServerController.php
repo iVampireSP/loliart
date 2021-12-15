@@ -105,7 +105,12 @@ class ServerController extends Controller
             $accounts = WingsPanelAccount::where('team_id', session('team_id'))->where('status', 'created')->get();
             $nests = WingsNest::get();
             return view('wings::servers.show', compact('server', 'accounts', 'nests'));
+        } elseif (userInTeam($server->team_id)) {
+            $accounts = WingsPanelAccount::where('team_id', session('team_id'))->where('status', 'created')->get();
+            $nests = WingsNest::get();
+            return view('wings::servers.show', compact('server', 'accounts', 'nests'));
         }
+
         return view('wings::servers.public', compact('server'));
     }
 
@@ -137,6 +142,7 @@ class ServerController extends Controller
             'egg' => 'integer|required',
             'docker_image' => 'integer|required',
             'backup_limit' => 'integer|required',
+            'public' => 'boolean',
         ]);
 
         userInTeamFail($server->team_id);
@@ -150,6 +156,7 @@ class ServerController extends Controller
         $server->allocation_limit = $request->allocation_limit;
         $server->egg_id = $request->egg;
         $server->backups = $request->backup_limit;
+        $server->public = $request->public ?? false;
 
         // Save then dispatch
         $server->status = 'pending';
