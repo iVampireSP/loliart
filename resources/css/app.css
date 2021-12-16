@@ -474,6 +474,14 @@ span.mdui-btn-outlined {
     background-color: rgb(175 175 175 / 19%);
 }
 
+.edge-bottom {
+    position: static;
+    bottom: 0;
+    margin-bottom: 10px;
+    margin-top: 20px;
+    width: 100%;
+}
+
 @media (prefers-color-scheme: dark) {
     .mdui-drawer {
         background-color: #303030 !important;
