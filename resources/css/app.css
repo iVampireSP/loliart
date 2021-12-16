@@ -370,7 +370,7 @@ a {
     border: 1px solid #4285f4 !important;
     font-weight: 400 !important;
     line-height: 1 !important;
-    margin-left: 5px
+    margin-left: 5px;
 }
 
 a.mdui-btn-outlined {
@@ -463,9 +463,15 @@ span.mdui-btn-outlined {
 .logger {
     margin-top: 10px;
 }
+
 .logger span {
     display: block;
     font-family: "Courier New", Courier, monospace;
+}
+
+.mdui-toolbar[class*="mdui-color-"]:not(.mdui-color-transparent)
+    .mdui-btn:hover {
+    background-color: rgb(175 175 175 / 19%);
 }
 
 @media (prefers-color-scheme: dark) {
