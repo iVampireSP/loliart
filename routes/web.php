@@ -60,6 +60,7 @@ Route::prefix('permission')->name('permission.')->middleware(['auth', 'teams_per
 });
 
 Route::post('logout', [Controllers\AuthController::class, 'logout'])->name('logout');
+Route::get('/', [Controllers\IndexController::class, 'index'])->name('home');
 
 
 Route::fallback(function () {
