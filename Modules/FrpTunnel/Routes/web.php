@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,6 +13,6 @@
 |
 */
 
-Route::prefix('frptunnel')->group(function() {
-    Route::get('/', 'FrpTunnelController@index');
+Route::prefix('frpTunnel')->middleware(['teams_permission', 'auth'])->name('frpTunnel.')->group(function() {
+    Route::get('/', 'FrpTunnelController@index')->name('index');
 });

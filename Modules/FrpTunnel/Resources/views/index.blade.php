@@ -1,9 +1,15 @@
-@extends('frptunnel::layouts.master')
+@extends('layouts.app')
+
+@section('app-menu')
+    @include('frptunnel::layouts.menu')
+@endsection
+
+@section('title', 'Frp Tunnel')
 
 @section('content')
-    <h1>Hello World</h1>
+    <h1 class="mdui-typo-display-1">Frp Tunnel</h1>
 
-    <p>
-        This view is loaded from module: {!! config('frptunnel.name') !!}
-    </p>
+    <script>
+        util.m()
+    </script>
 @endsection

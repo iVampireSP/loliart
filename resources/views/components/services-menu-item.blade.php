@@ -5,7 +5,7 @@
         <i class="mdui-collapse-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
     </div>
     <div class="mdui-collapse-item-body mdui-list">
-        {{-- <a href="{{ route('teams.index') }}" class="mdui-list-item mdui-ripple">{{ tr('Teams') }}</a> --}}
         <a href="{{ route('wings.index') }}" class="mdui-list-item mdui-ripple">{{ tr('Game Containers') }}</a>
+        <a href="{{ route('frpTunnel.index') }}" class="mdui-list-item mdui-ripple">{{ tr('Frp Tunnel') }}</a>
     </div>
 </div>
