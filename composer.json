@@ -31,7 +31,7 @@
         "beyondcode/laravel-query-detector": "^1.5",
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",
-        "laravel/sail": "^1.12",
+        "laravel/sail": "1.12.12",
         "laravel/telescope": "^4.6",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^5.10",
