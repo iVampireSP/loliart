@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "069a30dcf077321d79b0f3400500bbaa",
+    "content-hash": "dd639a4b0019af8fd77945e82cc8949d",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -4395,23 +4395,17 @@
         },
         {
             "name": "spatie/laravel-permission",
-            "version": "5.4.0",
+            "version": "5.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-permission.git",
-                "reference": "e54f376517f698e058c518f73703a0ee59b26521"
+                "reference": "79f7dbf2b6b21d81209774f5726a0e9f4222dd92"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-permission/zipball/e54f376517f698e058c518f73703a0ee59b26521",
-                "reference": "e54f376517f698e058c518f73703a0ee59b26521",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "url": "https://api.github.com/repos/spatie/laravel-permission/zipball/79f7dbf2b6b21d81209774f5726a0e9f4222dd92",
+                "reference": "79f7dbf2b6b21d81209774f5726a0e9f4222dd92",
+                "shasum": ""
             },
             "require": {
                 "illuminate/auth": "^7.0|^8.0",
@@ -4471,7 +4465,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/laravel-permission/issues",
-                "source": "https://github.com/spatie/laravel-permission/tree/5.4.0"
+                "source": "https://github.com/spatie/laravel-permission/tree/5.4.1"
             },
             "funding": [
                 {
@@ -4479,7 +4473,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-11-17T11:47:22+00:00"
+            "time": "2021-12-17T10:18:05+00:00"
         },
         {
             "name": "spatie/laravel-pjax",
