@@ -21,17 +21,29 @@ class BalanceController extends Controller
         ]);
     }
 
-    public function updatePayment(Request $request)
+    public function addPayment(Request $request)
     {
         $user = auth()->user();
-        return  $user->addPaymentMethod($request->paymentMethod);
-        return $user->updateDefaultPaymentMethod($request->paymentMethod);
+        return $user->addPaymentMethod($request->paymentMethod);
+    }
 
-        // if ($user->hasPaymentMethod()) {
-        //     return $user->updateDefaultPaymentMethod($request->paymentMethod);
-        // } else {
+    public function updateDefaultPayment($id)
+    {
+        $user = auth()->user();
+        $paymentMethod = $user->findPaymentMethod($id);
+        if (is_null($paymentMethod)) {
+            return response()->json(['status' => 0]);
+        }
+        $user->updateDefaultPaymentMethod($paymentMethod->id);
 
-        // }
-        // return $user->updateDefaultPaymentMethod($request->paymentMethod);
+        return response()->json(['status' => 1]);
+    }
+
+    public function removePayment($id)
+    {
+        $user = auth()->user();
+        $paymentMethod = $user->findPaymentMethod($id);
+        $paymentMethod->delete();
+        return response()->json(['status' => 1]);
     }
 }

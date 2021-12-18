@@ -19,7 +19,9 @@ Route::prefix('user')->name('user.')->group(function () {
     Route::prefix('balance')->name('balance.')->group(function () {
         Route::get('/manage', [Controllers\BalanceController::class, 'payments'])->name('manage');
         Route::get('/add', [Controllers\BalanceController::class, 'paymentMethod'])->name('add');
-        Route::post('/manage', [Controllers\BalanceController::class, 'updatePayment'])->name('manage.update');
+        Route::post('/payments', [Controllers\BalanceController::class, 'addPayment'])->name('payments.add');
+        Route::put('/manage/{id}', [Controllers\BalanceController::class, 'updateDefaultPayment'])->name('payments.update');
+        Route::delete('/manage/{id}', [Controllers\BalanceController::class, 'removePayment'])->name('payments.delete');
     });
     Route::get('callback', [Controllers\AuthController::class, 'callback'])->name('callback');
 });

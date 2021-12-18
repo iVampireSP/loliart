@@ -45,7 +45,7 @@
                     ui.alert('{{ tr('Add Payment Failed') }}');
                 } else {
                     $.ajax({
-                        url: route('user.balance.manage.update'),
+                        url: route('user.balance.payments.add'),
                         method: 'POST',
                         data: {
                             paymentMethod: paymentMethod.id
