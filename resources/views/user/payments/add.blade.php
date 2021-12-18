@@ -15,7 +15,7 @@
     <button id="stripe-process-button" data-secret="{{ $intent->client_secret }}"
         class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent">{{ tr('Process Payment') }}</button>
 
-    <script async src="https://js.stripe.com/v3/"></script>
+    <script src="https://js.stripe.com/v3/"></script>
 
     <script>
         $(() => {
