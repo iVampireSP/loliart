@@ -482,6 +482,10 @@ span.mdui-btn-outlined {
     width: 100%;
 }
 
+#stripe-card {
+    margin: 10px;
+}
+
 @media (prefers-color-scheme: dark) {
     .mdui-drawer {
         background-color: #303030 !important;

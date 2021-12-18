@@ -14,6 +14,10 @@ class FrpTunnelController extends Controller
      */
     public function index()
     {
+        $user = auth()->user();
+        dd($user->balance());
+
+        return auth()->user()->redirectToBillingPortal();
         return view('frptunnel::index');
     }
 

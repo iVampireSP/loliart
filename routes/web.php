@@ -15,6 +15,15 @@ Route::prefix('login')->name('login.')->group(function () {
     Route::get('callback', [Controllers\AuthController::class, 'callback'])->name('callback');
 });
 
+Route::prefix('user')->name('user.')->group(function () {
+    Route::prefix('balance')->name('balance.')->group(function () {
+        Route::get('/manage', [Controllers\BalanceController::class, 'payments'])->name('manage');
+        Route::get('/add', [Controllers\BalanceController::class, 'paymentMethod'])->name('add');
+        Route::post('/manage', [Controllers\BalanceController::class, 'updatePayment'])->name('manage.update');
+    });
+    Route::get('callback', [Controllers\AuthController::class, 'callback'])->name('callback');
+});
+
 
 Route::prefix('teams')->name('teams.')->middleware(['teams_permission', 'auth'])->group(function () {
     Route::get('/', [Controllers\TeamController::class, 'index'])->name('index')->withoutMiddleware(['teams_permission']);
@@ -60,7 +69,7 @@ Route::prefix('permission')->name('permission.')->middleware(['auth', 'teams_per
 });
 
 Route::post('logout', [Controllers\AuthController::class, 'logout'])->name('logout');
-Route::get('/', [Controllers\IndexController::class, 'index'])->name('home');
+Route::get('/home', [Controllers\IndexController::class, 'index'])->name('home');
 
 
 Route::fallback(function () {
