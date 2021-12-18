@@ -83,7 +83,7 @@ $(() => {
     });
 
     $(document).on("pjax:beforeReplace", () => {
-        window.m = {};
+        // window.m = {};
     });
 
     $(document).on("pjax:error", (event, xhr) => {
