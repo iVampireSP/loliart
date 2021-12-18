@@ -49,5 +49,11 @@ window.util.theme = {
             $('#main').css('cssText', 'transform: unset')
             $('#main').css('cssText', 'unset')
         }, 200)
+    },
+    pop: (str) => {
+        ui.snackbar({
+            message: str,
+            position: 'bottom',
+        })
     }
 }

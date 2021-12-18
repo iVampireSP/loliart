@@ -60,5 +60,8 @@ window.util = {
     },
     m: () => {
         $.pjax.reload('#main-list');
+    },
+    pop: (str) => {
+        util.theme.pop(str)
     }
 }
