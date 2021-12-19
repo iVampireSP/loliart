@@ -46,4 +46,8 @@ class BalanceController extends Controller
         $paymentMethod->delete();
         return response()->json(['status' => 1]);
     }
+
+    public function charge() {
+
+    }
 }

@@ -2,6 +2,8 @@
 
 namespace Modules\FrpTunnel\Http\Controllers;
 
+use App\Http\Controllers\OrderController;
+use App\Models\Order;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -15,11 +17,18 @@ class FrpTunnelController extends Controller
     public function index()
     {
         $user = auth()->user();
-        dd($user->checkoutCharge(1200, 'T-Shirt', 5)->toArray());
-        dd($user->balance());
+        $order = new OrderController();
+        $checkout = $order->checkout(100, 'Test', 1);
+        return view('order.checkout', [
+            'checkout' => $checkout,
+            'success_url' => route('order.success'),
+            'cancel_url' => route('order.cancel'),
+        ]);
+//        dd($user->checkoutCharge(1200, 'T-Shirt', 5)->toArray());
+//        dd($user->balance());
 
-        return auth()->user()->redirectToBillingPortal();
-        return view('frptunnel::index');
+//        return auth()->user()->redirectToBillingPortal();
+//        return view('frptunnel::index');
     }
 
     /**

@@ -7,15 +7,12 @@ use Illuminate\Http\Request;
 class OrderController extends Controller
 {
 
-    public function checkout($value, $name, $num) {
+    public function checkout($amount, $name, $quantity) {
         $user = auth()->user();
 
-        $checkout = $user->checkoutCharge(1200, 'T-Shirt', 5);
+        $checkout = $user->checkoutCharge($amount, $name, $quantity);
 
-        return view('order.checkout', [
-            'checkout' => $checkout,
-        ]);
-
+        return $checkout;
     }
 
     public function all(Request $request)

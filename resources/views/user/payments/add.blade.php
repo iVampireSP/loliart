@@ -19,42 +19,43 @@
 
     <script>
         $(() => {
-            const stripe = Stripe('{{ config('cashier.key') }}');
+            $.getScript("https://js.stripe.com/v3/", function() {
+                const stripe = Stripe('{{ config('cashier.key') }}');
+                const elements = stripe.elements();
+                const cardElement = elements.create('card');
 
-            const elements = stripe.elements();
-            const cardElement = elements.create('card');
+                cardElement.mount('#stripe-card');
 
-            cardElement.mount('#stripe-card');
+                const cardHolderName = document.getElementById('stripe-holder-name');
+                const cardButton = document.getElementById('stripe-process-button');
 
-            const cardHolderName = document.getElementById('stripe-holder-name');
-            const cardButton = document.getElementById('stripe-process-button');
-
-            cardButton.addEventListener('click', async (e) => {
-                const {
-                    paymentMethod,
-                    error
-                } = await stripe.createPaymentMethod(
-                    'card', cardElement, {
-                        billing_details: {
-                            name: cardHolderName.value
+                cardButton.addEventListener('click', async () => {
+                    const {
+                        paymentMethod,
+                        error
+                    } = await stripe.createPaymentMethod(
+                        'card', cardElement, {
+                            billing_details: {
+                                name: cardHolderName.value
+                            }
                         }
+                    );
+
+                    if (error) {
+                        ui.alert('{{ tr('Add Payment Failed') }}');
+                    } else {
+                        $.ajax({
+                            url: route('user.balance.payments.add'),
+                            method: 'POST',
+                            data: {
+                                paymentMethod: paymentMethod.id
+                            },
+                            success() {
+                                util.url.to(route('user.balance.manage'))
+                            }
+                        });
                     }
-                );
-
-                if (error) {
-                    ui.alert('{{ tr('Add Payment Failed') }}');
-                } else {
-                    $.ajax({
-                        url: route('user.balance.payments.add'),
-                        method: 'POST',
-                        data: {
-                            paymentMethod: paymentMethod.id
-                        },
-                        success() {
-                            util.url.to(route('user.balance.manage'))
-                        }
-                    });
-                }
+                });
             });
         })
     </script>

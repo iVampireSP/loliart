@@ -5,7 +5,7 @@
 @section('content')
     <div class="mdui-typo-display-1">{{ tr('Payments') }}</div>
 
-    <a onclick="window.location='{{ route('user.balance.add') }}'"
+    <a href="{{ route('user.balance.add') }}"
         class="mdui-btn mdui-btn-outlined mdui-ripple mdui-m-t-2+">{{ tr('New Payment') }}</a>
 
     <div class="mdui-row payments">
@@ -41,7 +41,7 @@
                 $.ajax({
                     url: route('user.balance.payments.update', id),
                     type: 'PUT',
-                    success(data) {
+                    success() {
                         util.reload('.payments')
                         util.theme.pop('{{ tr('Set default payment method success.') }}')
                     }
@@ -51,7 +51,7 @@
                 $.ajax({
                     url: route('user.balance.payments.delete', id),
                     type: 'DELETE',
-                    success(data) {
+                    success() {
                         util.reload('.payments')
                     }
                 })

@@ -17,6 +17,7 @@ Route::prefix('login')->name('login.')->group(function () {
 
 Route::prefix('user')->name('user.')->middleware('auth')->group(function () {
     Route::prefix('balance')->name('balance.')->group(function () {
+        Route::get('/charge', [Controllers\BalanceController::class, 'payments'])->name('manage');
         Route::get('/manage', [Controllers\BalanceController::class, 'payments'])->name('manage');
         Route::get('/add', [Controllers\BalanceController::class, 'paymentMethod'])->name('add');
         Route::post('/payments', [Controllers\BalanceController::class, 'addPayment'])->name('payments.add');
