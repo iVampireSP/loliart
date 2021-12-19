@@ -24,6 +24,10 @@ class Team extends Model
         return $this->hasMany(TeamInvitation::class);
     }
 
+    public function orders() {
+        return $this->hasMany(Order::class, 'team_id', 'id');
+    }
+
     public static function boot()
     {
         parent::boot();
