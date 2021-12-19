@@ -156,6 +156,12 @@ $(() => {
             util.play('error_1.wav', 0)
             util.play('success_1.wav', 0)
             util.play('alert.mp3', 0)
+
+            // 防止误退出
+            window.onbeforeunload = () => {
+                return true;
+            };
+
         }
         util.masonry('.masonry')
 
