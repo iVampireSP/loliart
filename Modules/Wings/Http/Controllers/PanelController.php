@@ -67,7 +67,7 @@ class PanelController extends Controller
             }
         } else {
             Cache::put($cache_key, $this->get('/nodes/' . $id), 600);
-            return Cache::get($cache_key);;
+            return Cache::get($cache_key);
         }
     }
 

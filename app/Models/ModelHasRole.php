@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Permission\Models\Role;
 
 class ModelHasRole extends Model
 {
@@ -11,6 +12,6 @@ class ModelHasRole extends Model
 
     public function role()
     {
-        return $this->hasOne(\Spatie\Permission\Models\Role::class, 'id', 'role_id');
+        return $this->hasOne(Role::class, 'id', 'role_id');
     }
 }

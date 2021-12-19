@@ -24,7 +24,6 @@ Route::prefix('user')->name('user.')->middleware('auth')->group(function () {
         Route::put('/manage/{id}', [Controllers\BalanceController::class, 'updateDefaultPayment'])->name('payments.update');
         Route::delete('/manage/{id}', [Controllers\BalanceController::class, 'removePayment'])->name('payments.delete');
     });
-    Route::get('callback', [Controllers\AuthController::class, 'callback'])->name('callback');
 });
 
 Route::prefix('order')->name('order.')->middleware('auth')->group(function () {

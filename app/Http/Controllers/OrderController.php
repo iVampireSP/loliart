@@ -17,6 +17,7 @@ class OrderController extends Controller
 
     public function all(Request $request)
     {
+
     }
 
     public function you(Request $request)

@@ -17,12 +17,16 @@ class FrpTunnelController extends Controller
     public function index()
     {
         $user = auth()->user();
+//        $checkout = $user->checkout('price_1K7aOIKX2JWJed1K2GC3crSr', [
+//            'success_url' => route('order.success'),
+//            'cancel_url' => route('order.cancel'),
+//        ]);
+//        dd($checkout);
+
         $order = new OrderController();
         $checkout = $order->checkout(100, 'Test', 1);
         return view('order.checkout', [
             'checkout' => $checkout,
-            'success_url' => route('order.success'),
-            'cancel_url' => route('order.cancel'),
         ]);
 //        dd($user->checkoutCharge(1200, 'T-Shirt', 5)->toArray());
 //        dd($user->balance());

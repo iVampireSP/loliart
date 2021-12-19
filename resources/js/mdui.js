@@ -656,7 +656,7 @@
                             toCreate = parentTag;
                             return false;
                         }
-                        return;
+
                     });
                     return new JQ(getChildNodesArray(html, toCreate));
                 }
@@ -2051,7 +2051,7 @@
                     return this;
                 }
             }
-            return;
+
         });
     };
 
@@ -5538,7 +5538,7 @@
                             }
                             return false;
                         }
-                        return;
+
                     });
                 }
                 // 如果是多行输入框，监听输入框的 input 事件，更新对话框高度

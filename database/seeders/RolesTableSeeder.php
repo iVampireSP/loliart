@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use DB;
 use Illuminate\Database\Seeder;
 
 class RolesTableSeeder extends Seeder
@@ -14,12 +15,12 @@ class RolesTableSeeder extends Seeder
      */
     public function run()
     {
-        
 
-        \DB::table('roles')->delete();
-        
-        \DB::table('roles')->insert(array (
-            0 => 
+
+        DB::table('roles')->delete();
+
+        DB::table('roles')->insert(array (
+            0 =>
             array (
                 'created_at' => '2021-12-01 15:03:53',
                 'display_name' => 'Super Admin',
@@ -30,7 +31,7 @@ class RolesTableSeeder extends Seeder
                 'updated_at' => '2021-12-01 15:03:53',
             ),
         ));
-        
-        
+
+
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Exceptions\PlatformNotSupported;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
@@ -34,7 +35,7 @@ class AppServiceProvider extends ServiceProvider
         // });
 
         if (PHP_OS_FAMILY === 'Windows') {
-            throw new \App\Exceptions\PlatformNotSupported();
+            throw new PlatformNotSupported();
         }
 
         Paginator::defaultSimpleView('vendor.pagination.simple-default');

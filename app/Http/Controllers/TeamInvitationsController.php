@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\TeamEvent;
+use App\Events\UserEvent;
 use App\Models\Team;
 use App\Models\User;
 use App\Models\TeamUser;
@@ -46,11 +48,11 @@ class TeamInvitationsController extends Controller
             'team_id' => session('team_id')
         ]);
 
-        broadcast(new \App\Events\TeamEvent($team, [
+        broadcast(new TeamEvent($team, [
             'type' => 'team.invitations.updated',
         ]));
 
-        broadcast(new \App\Events\UserEvent($user->id, [
+        broadcast(new UserEvent($user->id, [
             'type' => 'team.invitation.received',
             'name' => $team->name,
         ]));
@@ -71,12 +73,12 @@ class TeamInvitationsController extends Controller
         if (!is_null($invitation)) {
             TeamInvitation::where('id', $id)->where('team_id', session('team_id'))->delete();
 
-            broadcast(new \App\Events\UserEvent($invitation->user_id, [
+            broadcast(new UserEvent($invitation->user_id, [
                 'type' => 'team.invitation.deleted',
                 'name' => $invitation->team->name,
             ]));
 
-            broadcast(new \App\Events\TeamEvent($invitation->team, [
+            broadcast(new TeamEvent($invitation->team, [
                 'type' => 'team.invitations.updated',
             ]));
 
@@ -107,7 +109,7 @@ class TeamInvitationsController extends Controller
             auth()->user()->givePermissionTo('team.access');
 
 
-            broadcast(new \App\Events\TeamEvent($invitation->team, [
+            broadcast(new TeamEvent($invitation->team, [
                 'type' => 'team.invitations.updated',
             ]));
 
@@ -126,11 +128,11 @@ class TeamInvitationsController extends Controller
             // delete invitation
             $invitation->delete();
 
-            broadcast(new \App\Events\TeamEvent($invitation->team, [
+            broadcast(new TeamEvent($invitation->team, [
                 'type' => 'team.invitations.updated',
             ]));
 
-            return response()->json(['status' => 1, 'data' => 'Rejected successfully.']);;
+            return response()->json(['status' => 1, 'data' => 'Rejected successfully.']);
         }
     }
 }

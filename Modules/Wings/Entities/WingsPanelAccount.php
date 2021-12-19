@@ -2,6 +2,7 @@
 
 namespace Modules\Wings\Entities;
 
+use App\Models\Team;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -17,6 +18,6 @@ class WingsPanelAccount extends Model
 
     public function team()
     {
-        return $this->belongsTo(\App\Models\Team::class);
+        return $this->belongsTo(Team::class);
     }
 }

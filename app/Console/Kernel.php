@@ -4,13 +4,16 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Modules\Wings\Http\Controllers\JobController;
+use Modules\Wings\Jobs\RefreshNestJob;
+use Modules\Wings\Jobs\UpdateNodeInfoJob;
 
 class Kernel extends ConsoleKernel
 {
     /**
      * Define the application's command schedule.
      *
-     * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
+     * @param Schedule $schedule
      * @return void
      */
     protected function schedule(Schedule $schedule)
@@ -18,9 +21,9 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')->hourly();
 
         $schedule->call(function () {
-            \Modules\Wings\Http\Controllers\JobController::refresh_wings();
-            dispatch(new \Modules\Wings\Jobs\RefreshNestJob());
-            dispatch(new \Modules\Wings\Jobs\UpdateNodeInfoJob());
+            JobController::refresh_wings();
+            dispatch(new RefreshNestJob());
+            dispatch(new UpdateNodeInfoJob());
         })->hourly()->name('Wings');
     }
 

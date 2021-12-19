@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use DB;
 use Illuminate\Database\Seeder;
 
 class PermissionsTableSeeder extends Seeder
@@ -14,12 +15,12 @@ class PermissionsTableSeeder extends Seeder
      */
     public function run()
     {
-        
 
-        \DB::table('permissions')->delete();
-        
-        \DB::table('permissions')->insert(array (
-            0 => 
+
+        DB::table('permissions')->delete();
+
+        DB::table('permissions')->insert(array (
+            0 =>
             array (
                 'id' => 1,
                 'name' => 'team.invitations.access',
@@ -28,7 +29,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2021-12-01 03:03:38',
                 'updated_at' => '2021-12-01 03:03:38',
             ),
-            1 => 
+            1 =>
             array (
                 'id' => 3,
                 'name' => 'team.edit',
@@ -37,7 +38,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2021-12-01 23:50:22',
                 'updated_at' => '2021-12-01 23:50:22',
             ),
-            2 => 
+            2 =>
             array (
                 'id' => 4,
                 'name' => 'role.show',
@@ -46,7 +47,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2021-12-02 02:46:45',
                 'updated_at' => '2021-12-02 02:46:45',
             ),
-            3 => 
+            3 =>
             array (
                 'id' => 5,
                 'name' => 'role.edit',
@@ -55,7 +56,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2021-12-02 02:47:27',
                 'updated_at' => '2021-12-02 02:47:27',
             ),
-            4 => 
+            4 =>
             array (
                 'id' => 6,
                 'name' => 'team.access',
@@ -64,7 +65,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2021-12-07 14:37:13',
                 'updated_at' => '2021-12-07 14:37:13',
             ),
-            5 => 
+            5 =>
             array (
                 'id' => 8,
                 'name' => 'wings.accounts.edit',
@@ -73,7 +74,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2021-12-09 02:39:29',
                 'updated_at' => '2021-12-09 02:39:29',
             ),
-            6 => 
+            6 =>
             array (
                 'id' => 11,
                 'name' => 'wings.locations.edit',
@@ -82,7 +83,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2021-12-11 19:09:19',
                 'updated_at' => '2021-12-11 19:09:19',
             ),
-            7 => 
+            7 =>
             array (
                 'id' => 12,
                 'name' => 'wings.nodes.edit',
@@ -91,7 +92,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2021-12-11 19:09:24',
                 'updated_at' => '2021-12-11 19:09:24',
             ),
-            8 => 
+            8 =>
             array (
                 'id' => 13,
                 'name' => 'wings.servers.edit',
@@ -100,7 +101,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2021-12-11 19:09:29',
                 'updated_at' => '2021-12-11 19:09:29',
             ),
-            9 => 
+            9 =>
             array (
                 'id' => 14,
                 'name' => 'wings.nodes.show',
@@ -109,7 +110,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2021-12-11 19:11:20',
                 'updated_at' => '2021-12-11 19:11:20',
             ),
-            10 => 
+            10 =>
             array (
                 'id' => 15,
                 'name' => 'admin',
@@ -119,7 +120,7 @@ class PermissionsTableSeeder extends Seeder
                 'updated_at' => '2021-12-11 19:31:30',
             ),
         ));
-        
-        
+
+
     }
 }

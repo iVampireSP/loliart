@@ -1,5 +1,7 @@
 <?php
 
+use BeyondCode\QueryDetector\Outputs\Alert;
+
 return [
     /*
      * Enable or disable the query detection.
@@ -63,7 +65,7 @@ return [
      * \BeyondCode\QueryDetector\Outputs\Log::class
      */
     'output' => [
-        \BeyondCode\QueryDetector\Outputs\Alert::class,
+        Alert::class,
         \BeyondCode\QueryDetector\Outputs\Log::class,
     ]
 ];

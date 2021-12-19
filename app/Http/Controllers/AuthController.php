@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use GuzzleHttp\Client;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -44,7 +45,7 @@ class AuthController extends Controller
             InvalidArgumentException::class
         );
 
-        $http = new \GuzzleHttp\Client;
+        $http = new Client;
 
         $authorize = $http->post(config('oauth.oauth_token_url'), [
             'form_params' => [

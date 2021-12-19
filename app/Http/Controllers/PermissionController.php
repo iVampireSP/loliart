@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\UserEvent;
 use App\Models\ModelHasRole;
 use App\Models\User;
 use App\Models\TeamUser;
@@ -118,7 +119,7 @@ class PermissionController extends Controller
 
         $user->givePermissionTo($request->permission_name);
 
-        broadcast(new \App\Events\UserEvent($user->id, [
+        broadcast(new UserEvent($user->id, [
             'type' => 'team.permission.updated',
         ]));
 
@@ -147,7 +148,7 @@ class PermissionController extends Controller
         $role = Role::where('display_name', $request->name)->where('team_id', session('team_id'))->firstOrFail();
         $user->assignRole($role->name);
 
-        broadcast(new \App\Events\UserEvent($user->id, [
+        broadcast(new UserEvent($user->id, [
             'type' => 'team.permission.updated',
         ]));
 
@@ -181,7 +182,7 @@ class PermissionController extends Controller
         // find name by display name
         $user->removeRole($request->name);
 
-        broadcast(new \App\Events\UserEvent($user->id, [
+        broadcast(new UserEvent($user->id, [
             'type' => 'team.permission.updated',
         ]));
 
@@ -194,7 +195,7 @@ class PermissionController extends Controller
     {
         $user->revokePermissionTo($permission->name);
 
-        broadcast(new \App\Events\UserEvent($user->id, [
+        broadcast(new UserEvent($user->id, [
             'type' => 'team.permission.updated',
         ]));
 
