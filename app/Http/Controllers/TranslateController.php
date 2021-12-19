@@ -4,19 +4,43 @@ namespace App\Http\Controllers;
 
 use App\Models\LanguageBlackList;
 use App\Models\LanguageTranslate;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Http;
 
 class TranslateController extends Controller
 {
     public $locate;
     public $black_list;
+    protected $language_translates;
+    protected $language_blacklist;
+    public $cache_key;
+    public $cache_data;
 
-    public function translate($str)
+    public function __construct()
     {
-        if (is_null($str)) {
-            return $str;
+        // session()->forget('lang_prepared');
+        $this->prepare();
+    }
+
+    public function prepare()
+    {
+        $prepare = session('lang_prepared');
+        // dd($prepare);
+        if ($prepare) {
+            $this->locate = $prepare[0];
+            $this->black_list = $prepare[1];
+            $this->language_translates = $prepare[2];
+            $this->language_blacklist = $prepare[3];
+            $this->cache_key = $prepare[4];
+            $this->cache_data = $prepare[5];
+
+            return true;
         }
+        // dd(1);
+        $language_blacklist = new LanguageBlackList();
+        $this->language_translates = new LanguageTranslate();
+        $this->language_blacklist = $language_blacklist;
+
         if (is_null($this->locate)) {
             $this->locate = $languages = session()->get('locate');
         } else {
@@ -24,29 +48,57 @@ class TranslateController extends Controller
         }
 
         if (strpos($languages[0], 'en') !== false) {
+            $this->locate = 0;
+        } else {
+            if (is_null($this->black_list)) {
+                $this->black_list = Cache::has('language_blacklist') ?? $language_blacklist->get();
+                if (Cache::has('language_blacklist')) {
+                    $this->black_list = Cache::get('language_blacklist');
+                } else {
+                    $this->black_list = $language_blacklist->get();
+                    $temp_arr = [];
+                    foreach ($this->black_list as $block) {
+                        array_push($temp_arr, $block->language);
+                    }
+                    $this->black_list = $temp_arr;
+                    unset($temp_arr);
+                    Cache::put('language_blacklist', $this->black_list, 1800);
+                }
+            }
+
+            foreach ($languages as $lang) {
+                if (in_array($lang, $this->black_list)) {
+                    continue;
+                }
+
+                $this->cache_key = 'language_' . $lang;
+                $this->cache_data = Cache::get($this->cache_key, []);
+
+                break;
+            }
+        }
+
+        session()->put('lang_prepared', [$this->locate, $this->black_list, $this->language_translates, $this->language_blacklist, $this->cache_key, $this->cache_data]);
+
+        return 1;
+    }
+
+    public function translate($str)
+    {
+        if (is_null($str)) {
             return $str;
         }
 
-        $salt = rand(1, 100);
+        $languages = $this->locate;
 
-        $language_blacklist = new LanguageBlackList();
-        $language_translates = new LanguageTranslate();
-
-        if (is_null($this->black_list)) {
-            $this->black_list = Cache::has('language_blacklist') ?? $language_blacklist->get();
-            if (Cache::has('language_blacklist')) {
-                $this->black_list = Cache::get('language_blacklist');
-            } else {
-                $this->black_list = $language_blacklist->get();
-                $temp_arr = [];
-                foreach ($this->black_list as $block) {
-                    array_push($temp_arr, $block->language);
-                }
-                $this->black_list = $temp_arr;
-                unset($temp_arr);
-                Cache::put('language_blacklist', $this->black_list, 1800);
-            }
+        if (!$this->locate) {
+            return $str;
         }
+
+        $language_translates = $this->language_translates;
+        $language_blacklist = $this->language_blacklist;
+
+        $salt = rand(1, 100);
 
         foreach ($languages as $lang) {
             if (in_array($lang, $this->black_list)) {
@@ -54,8 +106,14 @@ class TranslateController extends Controller
             }
 
             // Search cache
-            $cache_key = 'language_' . $lang;
-            $cache_data = Cache::get($cache_key, []);
+            if (is_null($this->cache_key) && is_null($this->cache_data)) {
+                $this->cache_key = 'language_' . $lang;
+                $this->cache_data = Cache::get($this->cache_key, []);
+            }
+
+            $cache_key = $this->cache_key;
+            $cache_data = $this->cache_data;
+
             $str_md5 = $cache_key . '_' . md5($str);
             if (isset($cache_data[$str_md5])) {
                 return $cache_data[$str_md5];
@@ -79,7 +137,7 @@ class TranslateController extends Controller
                 'to' => $lang,
                 'appid' => $app_id,
                 'salt' => $salt,
-                'sign' => $sign
+                'sign' => $sign,
             ];
 
             $res = Http::asForm()->post('https://fanyi-api.baidu.com/api/trans/vip/translate', $arr)->json();
