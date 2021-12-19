@@ -15,6 +15,7 @@ class FrpTunnelController extends Controller
     public function index()
     {
         $user = auth()->user();
+        dd($user->checkoutCharge(1200, 'T-Shirt', 5)->toArray());
         dd($user->balance());
 
         return auth()->user()->redirectToBillingPortal();

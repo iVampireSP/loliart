@@ -15,7 +15,7 @@ Route::prefix('login')->name('login.')->group(function () {
     Route::get('callback', [Controllers\AuthController::class, 'callback'])->name('callback');
 });
 
-Route::prefix('user')->name('user.')->group(function () {
+Route::prefix('user')->name('user.')->middleware('auth')->group(function () {
     Route::prefix('balance')->name('balance.')->group(function () {
         Route::get('/manage', [Controllers\BalanceController::class, 'payments'])->name('manage');
         Route::get('/add', [Controllers\BalanceController::class, 'paymentMethod'])->name('add');
@@ -24,6 +24,14 @@ Route::prefix('user')->name('user.')->group(function () {
         Route::delete('/manage/{id}', [Controllers\BalanceController::class, 'removePayment'])->name('payments.delete');
     });
     Route::get('callback', [Controllers\AuthController::class, 'callback'])->name('callback');
+});
+
+Route::prefix('order')->name('order.')->middleware('auth')->group(function () {
+    Route::get('/all', [Controllers\OrderController::class, 'all'])->name('all');
+    Route::get('/you', [Controllers\OrderController::class, 'you'])->name('you');
+    Route::get('/team', [Controllers\OrderController::class, 'team'])->name('team')->middleware(['teams_permission']);
+    Route::get('/cancel', [Controllers\OrderController::class, 'cancel'])->name('cancel');
+    Route::get('/success', [Controllers\OrderController::class, 'payments'])->name('success');
 });
 
 
