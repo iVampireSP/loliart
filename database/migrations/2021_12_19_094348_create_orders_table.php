@@ -19,6 +19,8 @@ class CreateOrdersTable extends Migration
             $table->string('name')->index();
             $table->string('order_id')->index();
 
+            $table->double('value')->index()->default(0.00);
+            $table->string('payment')->index()->nullable();
             $table->string('comment')->index()->nullable();
             $table->string('status')->index()->default('pending');
 
