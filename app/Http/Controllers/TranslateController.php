@@ -18,13 +18,13 @@ class TranslateController extends Controller
 
     public function __construct()
     {
-        // session()->forget('lang_prepared');
         $this->prepare();
     }
 
     public function prepare()
     {
         $prepare = session('lang_prepared');
+        
         // dd($prepare);
         if ($prepare) {
             $this->locate = $prepare[0];
@@ -72,20 +72,36 @@ class TranslateController extends Controller
                 }
 
                 $this->cache_key = 'language_' . $lang;
-                $this->cache_data = Cache::get($this->cache_key, []);
+                $this->cache_data = Cache::get($this->cache_key, false);
+                if (!$this->cache_data) {
+                    $langs = LanguageTranslate::where('language', $lang)->get()->toArray();
+                    $arr = [];
+                    foreach ($langs as $lang) {
+                        $arr[$lang['sign']] = $lang['output'];
+                    }
+
+                    Cache::put($this->cache_key, $arr, 1800);
+
+                }
 
                 break;
             }
         }
 
-        session()->put('lang_prepared', [$this->locate, $this->black_list, $this->language_translates, $this->language_blacklist, $this->cache_key, $this->cache_data]);
+        $this->freshSession();
 
+        return 1;
+    }
+
+    protected function freshSession()
+    {
+        session()->put('lang_prepared', [$this->locate, $this->black_list, $this->language_translates, $this->language_blacklist, $this->cache_key, $this->cache_data]);
         return 1;
     }
 
     public function translate($str)
     {
-        if (is_null($str)) {
+        if (is_null($str) || empty($str)) {
             return $str;
         }
 
@@ -122,6 +138,9 @@ class TranslateController extends Controller
                 $output = $language_translates->where('sign', $str_md5)->first();
                 if (!is_null($output)) {
                     $cache_data[$str_md5] = $output->output;
+                    $this->cache_data = $cache_data;
+                    $this->freshSession();
+
                     Cache::put($cache_key, $cache_data, 1800);
                     return $output->output;
                 }
@@ -143,7 +162,7 @@ class TranslateController extends Controller
             $res = Http::asForm()->post('https://fanyi-api.baidu.com/api/trans/vip/translate', $arr)->json();
 
             if (isset($res['error_code'])) {
-                if ($res['error_code'] == '58001') {
+                if ($res['error_code'] == '54000') {
                     // 加入语言黑名单（不支持翻译的语言）
                     array_push($this->black_list, $lang);
                     Cache::forever('language_blacklist', $this->black_list);
@@ -162,6 +181,9 @@ class TranslateController extends Controller
                 $language_translates->output = $dst;
                 $language_translates->sign = $str_md5;
                 $language_translates->save();
+
+                session()->put('lang_prepared', 0);
+
                 return $dst;
             }
         }
