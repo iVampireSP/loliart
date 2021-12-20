@@ -11,7 +11,6 @@
     <div class="mdui-row payments">
         @foreach ($payments as $payment)
             <div class="mdui-col-xs-12 mdui-col-sm-4 mdui-m-t-3">
-                {{-- {{ dd($payment->toArray()) }} --}}
                 <div class="mdui-card">
                     <div class="mdui-card-media">
                         <div style="height: 100px;width: 100%"></div>
