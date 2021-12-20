@@ -63,5 +63,70 @@ window.util = {
     },
     pop: (str) => {
         util.theme.pop(str)
-    }
+    },
+    get: (url = null, data = null) => {
+        $.ajax({
+            url: url,
+            method: 'GET',
+            data: data,
+            success: (data) => {
+                return data
+            },
+            failed: (error) => {
+                return error
+            }
+        });
+    },
+    post: (url = null, data = null) => {
+        $.ajax({
+            url: url,
+            method: 'POST',
+            data: data,
+            success: (data) => {
+                return data
+            },
+            failed: (error) => {
+                return error
+            }
+        });
+    },
+    delete: (url = null, data = null) => {
+        $.ajax({
+            url: url,
+            method: 'DELETE',
+            data: data,
+            success: (data) => {
+                return data
+            },
+            failed: (error) => {
+                return error
+            }
+        });
+    },
+    patch: (url = null, data = null) => {
+        $.ajax({
+            url: url,
+            method: 'PATCH',
+            data: data,
+            success: (data) => {
+                return data
+            },
+            failed: (error) => {
+                return error
+            }
+        });
+    },
+    put: (url = null, data = null) => {
+        $.ajax({
+            url: url,
+            method: 'PUT',
+            data: data,
+            success: (data) => {
+                return data
+            },
+            failed: (error) => {
+                return error
+            }
+        });
+    },
 }
