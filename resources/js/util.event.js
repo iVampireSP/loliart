@@ -17,7 +17,18 @@ window.util.event = {
     process: (event) => {
         $('.queue_message').text(event.data.type);
         $('.logger').append(`<span>${event.data.type}</span>`);
+
+        if (typeof m != 'undefined' && typeof m.e != 'undefined') {
+            m.e(event.data.type, event.data.data);
+        }
+
         switch (event.data.type) {
+            case 'message':
+                ui.snackbar({
+                    message: event.data.data,
+                    position: 'bottom',
+                });
+                break;
             case 'team.invitation.received':
                 if (currentRoute == 'teams.invite.received') {
                     util.reload()
