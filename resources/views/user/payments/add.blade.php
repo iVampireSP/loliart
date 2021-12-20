@@ -44,16 +44,12 @@
                     if (error) {
                         ui.alert('{{ tr('Add Payment Failed') }}');
                     } else {
-                        $.ajax({
-                            url: route('user.balance.payments.add'),
-                            method: 'POST',
-                            data: {
+                        util.post(
+                            route('user.balance.payments.add'), {
                                 paymentMethod: paymentMethod.id
                             },
-                            success() {
-                                util.url.to(route('user.balance.manage'))
-                            }
-                        });
+                            route('user.balance.manage')
+                        )
                     }
                 });
             });
