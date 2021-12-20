@@ -4,6 +4,7 @@
  * Helpers
  */
 
+use App\Events\UserEvent;
 use App\Models\TeamUser;
 use App\Http\Controllers\AppController;
 use App\Http\Controllers\TranslateController;
@@ -72,5 +73,20 @@ if (!function_exists('canFail')) {
         if (!auth()->user()->can($permission)) {
             abort(403);
         }
+    }
+}
+
+if (!function_exists('write')) {
+    function write($msg, $user_id = 0)
+    {
+        if (!$user_id) {
+            $user_id = auth()->id();
+        }
+
+        broadcast(new UserEvent($user_id, [
+            'type' => 'message',
+            'data' => $msg
+        ]));
+
     }
 }
