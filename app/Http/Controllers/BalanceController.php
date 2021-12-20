@@ -36,7 +36,6 @@ class BalanceController extends Controller
             return response()->json(['status' => 0]);
         }
         $user->updateDefaultPaymentMethod($paymentMethod->id);
-        write(tr('Payment method successfully updated.'));
         return response()->json(['status' => 1]);
     }
 
