@@ -24,10 +24,16 @@ window.util.event = {
 
         switch (event.data.type) {
             case 'message':
-                ui.snackbar({
-                    message: event.data.data,
-                    position: 'bottom',
-                });
+                let reg = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\*\+,;=.]+$/
+                if (reg.test(event.data.data)) {
+                    util.url.to(event.data.data)
+                } else {
+                    ui.snackbar({
+                        message: event.data.data,
+                        position: 'bottom',
+                    });
+                }
+
                 break;
             case 'team.invitation.received':
                 if (currentRoute == 'teams.invite.received') {
