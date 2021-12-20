@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "177fa620ea2344bbcc673242cf6c5dc2",
+    "content-hash": "452f09556d05fba521a18431e14615e5",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -7348,23 +7348,23 @@
         },
         {
             "name": "torann/geoip",
-            "version": "3.0.2",
+            "version": "3.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Torann/laravel-geoip.git",
-                "reference": "f16d5df66ecb6ba4ffaef52abef519fbc19596d3"
+                "reference": "ec99531b32ddbc42233cc8f6e651f6b39c3cf8a3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Torann/laravel-geoip/zipball/f16d5df66ecb6ba4ffaef52abef519fbc19596d3",
-                "reference": "f16d5df66ecb6ba4ffaef52abef519fbc19596d3",
+                "url": "https://api.github.com/repos/Torann/laravel-geoip/zipball/ec99531b32ddbc42233cc8f6e651f6b39c3cf8a3",
+                "reference": "ec99531b32ddbc42233cc8f6e651f6b39c3cf8a3",
                 "shasum": ""
             },
             "require": {
                 "illuminate/cache": "^8.0",
                 "illuminate/console": "^8.0",
                 "illuminate/support": "^8.0",
-                "php": "^7.2 || ^8.0"
+                "php": "^8.0"
             },
             "require-dev": {
                 "geoip2/geoip2": "~2.1",
@@ -7422,9 +7422,9 @@
             ],
             "support": {
                 "issues": "https://github.com/Torann/laravel-geoip/issues",
-                "source": "https://github.com/Torann/laravel-geoip/tree/3.0.2"
+                "source": "https://github.com/Torann/laravel-geoip/tree/3.0.3"
             },
-            "time": "2020-12-21T19:12:11+00:00"
+            "time": "2021-12-20T16:27:11+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
