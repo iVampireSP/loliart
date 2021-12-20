@@ -64,12 +64,15 @@ window.util = {
     pop: (str) => {
         util.theme.pop(str)
     },
-    get: (url = null, data = null) => {
+    get: (url = null, data = null, back = null) => {
         $.ajax({
             url: url,
             method: 'GET',
             data: data,
             success: (data) => {
+                if (back != null) {
+                    util.url.to(back)
+                }
                 return data
             },
             failed: (error) => {
@@ -77,12 +80,15 @@ window.util = {
             }
         });
     },
-    post: (url = null, data = null) => {
+    post: (url = null, data = null, back = null) => {
         $.ajax({
             url: url,
             method: 'POST',
             data: data,
             success: (data) => {
+                if (back != null) {
+                    util.url.to(back)
+                }
                 return data
             },
             failed: (error) => {
@@ -90,12 +96,15 @@ window.util = {
             }
         });
     },
-    delete: (url = null, data = null) => {
+    delete: (url = null, data = null, back = null) => {
         $.ajax({
             url: url,
             method: 'DELETE',
             data: data,
             success: (data) => {
+                if (back != null) {
+                    util.url.to(back)
+                }
                 return data
             },
             failed: (error) => {
@@ -103,12 +112,15 @@ window.util = {
             }
         });
     },
-    patch: (url = null, data = null) => {
+    patch: (url = null, data = null, back = null) => {
         $.ajax({
             url: url,
             method: 'PATCH',
             data: data,
             success: (data) => {
+                if (back != null) {
+                    util.url.to(back)
+                }
                 return data
             },
             failed: (error) => {
@@ -116,12 +128,15 @@ window.util = {
             }
         });
     },
-    put: (url = null, data = null) => {
+    put: (url = null, data = null, back = null) => {
         $.ajax({
             url: url,
             method: 'PUT',
             data: data,
             success: (data) => {
+                if (back != null) {
+                    util.url.to(back)
+                }
                 return data
             },
             failed: (error) => {
