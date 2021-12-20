@@ -17,7 +17,7 @@
         "postcss": "^8.1.14"
     },
     "dependencies": {
-        "alpinejs": "^3.7.0",
+        "alpinejs": "3.7.1",
         "javascript-obfuscator": "^3.0.0",
         "jquery": "^3.6.0",
         "jquery-pjax": "^2.0.1",
