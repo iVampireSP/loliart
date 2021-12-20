@@ -6,7 +6,7 @@
     <div class="mdui-typo-display-1">{{ tr('Payments') }}</div>
 
     <a href="{{ route('user.balance.add') }}"
-        class="mdui-btn mdui-btn-outlined mdui-ripple mdui-m-t-2+">{{ tr('New Payment') }}</a>
+        class="mdui-btn mdui-btn-outlined mdui-ripple mdui-m-t-2">{{ tr('New Payment') }}</a>
 
     <div class="mdui-row payments">
         @foreach ($payments as $payment)
