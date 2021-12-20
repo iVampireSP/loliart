@@ -24,6 +24,7 @@ class BalanceController extends Controller
     public function addPayment(Request $request)
     {
         $user = auth()->user();
+        write(tr('Payment method added.'));
         return $user->addPaymentMethod($request->paymentMethod);
     }
 
@@ -35,7 +36,7 @@ class BalanceController extends Controller
             return response()->json(['status' => 0]);
         }
         $user->updateDefaultPaymentMethod($paymentMethod->id);
-
+        write(tr('Payment method successfully updated.'));
         return response()->json(['status' => 1]);
     }
 
@@ -44,6 +45,7 @@ class BalanceController extends Controller
         $user = auth()->user();
         $paymentMethod = $user->findPaymentMethod($id);
         $paymentMethod->delete();
+        write(tr('Payment method successfully removed.'));
         return response()->json(['status' => 1]);
     }
 
