@@ -24,6 +24,31 @@
             class="mdui-btn mdui-btn-outlined mdui-ripple mdui-m-t-2">{{ tr('New Payment') }}</a>
 
         <div class="mdui-row payments">
+            @php($user = auth()->user())
+            <div class="mdui-col-xs-12 mdui-col-sm-4 mdui-m-t-3">
+                <div class="mdui-card">
+                    <div class="mdui-card-media">
+                        <div style="height: 100px;width: 100%"></div>
+                        <div class="mdui-card-media-covered mdui-card-media-covered-top">
+                            <div class="mdui-card-primary">
+                                <div class="mdui-card-primary-title">{{ tr('Default Payment Method') }}</div>
+                                <div class="mdui-card-primary-subtitle"><small
+                                        style="font-size: 10%;">{{ Str::upper($user->pm_type) }}</small>:&nbsp;****
+                                    **** **** {{ $user->pm_last_four }}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mdui-card-actions">
+                        <button class="mdui-btn mdui-ripple">
+                            @if (is_null($user->trial_ends_at))
+                                {{ tr('Not in trial') }}
+                            @else
+                                {{ $user->trial_ends_at->toHumanDiff() }}
+                            @endif
+                        </button>
+                    </div>
+                </div>
+            </div>
             @foreach ($payments as $payment)
                 <div class="mdui-col-xs-12 mdui-col-sm-4 mdui-m-t-3">
                     <div class="mdui-card">
