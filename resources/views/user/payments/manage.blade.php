@@ -90,7 +90,14 @@
                             })
                         }
                     );
+                },
+                e: (type, data) => {
+                    switch (type) {
+                        case 'balance.updated':
+                            util.reload('.balance')
 
+                            break;
+                    }
                 }
             }
         </script>
