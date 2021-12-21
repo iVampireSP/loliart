@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use Illuminate\Http\Request;
 use Laravel\Cashier\Exceptions\IncompletePayment;
+use Stripe\Exception\InvalidRequestException;
 
 class BalanceController extends Controller
 {
@@ -12,7 +13,12 @@ class BalanceController extends Controller
     {
         $user = auth()->user();
 
-        $payments = $user->paymentMethods();
+        try {
+            $payments = $user->paymentMethods();
+
+        }catch(InvalidRequestException $e) {
+            $payments = [];
+        }
         return view('user.payments.manage', compact('payments'));
     }
 
