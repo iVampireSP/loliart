@@ -23,6 +23,8 @@ Route::prefix('user')->name('user.')->middleware('auth')->group(function () {
         Route::post('/payments', [Controllers\BalanceController::class, 'addPayment'])->name('payments.add');
         Route::put('/manage/{id}', [Controllers\BalanceController::class, 'updateDefaultPayment'])->name('payments.update');
         Route::delete('/manage/{id}', [Controllers\BalanceController::class, 'removePayment'])->name('payments.delete');
+        Route::post('/charge', [Controllers\BalanceController::class, 'charge'])->name('charge');
+
     });
 });
 
