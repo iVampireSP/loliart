@@ -24,7 +24,7 @@ window.util.event = {
 
         switch (event.data.type) {
             case 'message':
-                let reg = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\*\+,;=.]+$/
+                let reg = /http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/
                 if (reg.test(event.data.data)) {
                     try {
                         util.url.to(event.data.data)
