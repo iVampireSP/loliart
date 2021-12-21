@@ -26,7 +26,11 @@ window.util.event = {
             case 'message':
                 let reg = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\*\+,;=.]+$/
                 if (reg.test(event.data.data)) {
-                    util.url.to(event.data.data)
+                    try {
+                        util.url.to(event.data.data)
+                    } catch(e) {
+                        util.url.open(event.data.data)
+                    }
                 } else {
                     ui.snackbar({
                         message: event.data.data,
@@ -78,7 +82,7 @@ window.util.event = {
                     util.reload()
                 } else {
                     ui.snackbar({
-                        message: event.data.name + '\'s invitation has been deleted.',
+                        message: event.data.name + "'s invitation has been deleted.",
                         buttonText: 'View another.',
                         onButtonClick: () => {
                             util.team.invitation.list()
