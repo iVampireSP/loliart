@@ -94,13 +94,13 @@ if (!function_exists('write')) {
 if (!function_exists('success')) {
     function success($data = null)
     {
-        return response()->json(['status' => 1, $data => $data]);
+        return response()->json(['status' => 1, 'data' => $data]);
     }
 }
 
 if (!function_exists('fail')) {
     function fail($data = null)
     {
-        return response()->json(['status' => 0, $data => $data]);
+        return response()->json(['status' => 0, 'data' => $data]);
     }
 }
