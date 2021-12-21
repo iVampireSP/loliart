@@ -5,9 +5,9 @@
  */
 
 use App\Events\UserEvent;
-use App\Models\TeamUser;
 use App\Http\Controllers\AppController;
 use App\Http\Controllers\TranslateController;
+use App\Models\TeamUser;
 
 if (!function_exists('tr')) {
     function tr($str)
@@ -85,7 +85,22 @@ if (!function_exists('write')) {
 
         broadcast(new UserEvent($user_id, [
             'type' => 'message',
-            'data' => $msg
+            'data' => $msg,
+        ]));
+
+    }
+}
+
+if (!function_exists('userEvent')) {
+    function userEvent($event, $data = null, $user_id = 0)
+    {
+        if (!$user_id) {
+            $user_id = auth()->id();
+        }
+
+        broadcast(new UserEvent($user_id, [
+            'type' => $event,
+            'data' => $data,
         ]));
 
     }
