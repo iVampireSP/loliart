@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use Illuminate\Http\Request;
 use Laravel\Cashier\Exceptions\IncompletePayment;
 
@@ -63,8 +64,8 @@ class BalanceController extends Controller
         try {
             $paymentMethod = $user->findPaymentMethod($request->id);
             $resp = $user->charge($request->amount, $paymentMethod->id);
-            $user->addBalance($request->amount);
-            write(tr('Charge successful.'));
+            Order::setup($resp->id, $request->amount, 'Charge');
+            write(tr('Order created successfully.'));
             return success();
         } catch (IncompletePayment $exception) {
             write(route(
