@@ -2,11 +2,9 @@
 
 namespace Modules\FrpTunnel\Http\Controllers;
 
-use App\Models\Order;
+use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use App\Http\Controllers\OrderController;
-use Illuminate\Contracts\Support\Renderable;
 use Laravel\Cashier\Exceptions\IncompletePayment;
 
 class FrpTunnelController extends Controller
@@ -17,26 +15,29 @@ class FrpTunnelController extends Controller
      */
     public function index()
     {
+
         $user = auth()->user();
-        // dd($user->paymentMethods());
-        try {
-            $resp = $user->charge(100, 'pm_1K8kVXKX2JWJed1KgyMhEJrg');
-            dd($resp->toArray());
-        } catch (IncompletePayment $exception) {
-            dd($exception);
-            return redirect()->route(
-                'cashier.payment',
-                [$exception->payment->id, 'redirect' => route('home')]
-            );
-        }
+        $user->cost(100);
+        return view('index.cn');
+    //     // dd($user->paymentMethods());
+    //     // $user->defaultPaymentMethod()->idx
+    //     try {
+    //         $checkout = $user->checkoutCharge(100, 'T-Shirt', 5);
+    //     } catch (IncompletePayment $exception) {
+    //         dd($exception);
+    //         return redirect()->route(
+    //             'cashier.payment',
+    //             [$exception->payment->id, 'redirect' => route('home')]
+    //         );
+    //     }
 
         // dd($user->charge(100, 'pm_1K8kVXKX2JWJed1KgyMhEJrg'));
         // dd($user->invoiceFor('One Time Fee', 500));
         // dd($user->invoices());
-//        $checkout = $user->checkout('price_1K7aOIKX2JWJed1K2GC3crSr', [
-//            'success_url' => route('order.success'),
-//            'cancel_url' => route('order.cancel'),
-//        ]);
+    //    $checkout = $user->checkout('price_1K7aOIKX2JWJed1K2GC3crSr', [
+    //        'success_url' => route('order.success'),
+    //        'cancel_url' => route('order.cancel'),
+    //    ]);
 //        dd($checkout);
 
         // $order = new OrderController();
