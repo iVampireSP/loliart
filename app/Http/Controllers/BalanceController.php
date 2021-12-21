@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Laravel\Cashier\Exceptions\IncompletePayment;
 
 class BalanceController extends Controller
 {
@@ -17,13 +18,17 @@ class BalanceController extends Controller
     public function paymentMethod()
     {
         return view('user.payments.add', [
-            'intent' => auth()->user()->createSetupIntent()
+            'intent' => auth()->user()->createSetupIntent(),
         ]);
     }
 
     public function addPayment(Request $request)
     {
         $user = auth()->user();
+        if (is_null($user->stripe_id)) {
+            $user->createAsStripeCustomer();
+            write(tr('Billing account actived.'));
+        }
         write(tr('Payment method added.'));
         return $user->addPaymentMethod($request->paymentMethod);
     }
@@ -48,7 +53,28 @@ class BalanceController extends Controller
         return response()->json(['status' => 1]);
     }
 
-    public function charge() {
+    public function charge(Request $request)
+    {
+        $request->validate([
+            'id' => 'required',
+            'amount' => 'integer|min:50|required',
+        ]);
+        $user = auth()->user();
+        try {
+            $paymentMethod = $user->findPaymentMethod($request->id);
+            $resp = $user->charge($request->amount, $paymentMethod->id);
+            $user->addBalance($request->amount);
+            write(tr('Charge successful.'));
+            return success();
+        } catch (IncompletePayment $exception) {
+            write(route(
+                'cashier.payment',
+                [$exception->payment->id, 'redirect' => route('home')]
+            ));
+            write(tr('Need confirm the payment.'));
+            return success();
+        }
 
+        return success();
     }
 }
