@@ -91,10 +91,10 @@ $(() => {
             event.preventDefault();
         } else {
             window.history.back();
+            util.theme.warning();
+            util.play('error_1.wav')
         }
-        util.theme.warning();
 
-        util.play('error_1.wav')
     });
 
     $(document).ajaxError((event, xhr, options, data) => {
@@ -106,10 +106,10 @@ $(() => {
                     message: json.errors[i]
                 })
             }
-        } else {
+        } else if (xhr.statusText !== 'abort') {
+            util.play('error_1.wav')
             util.theme.warning();
         }
-        util.play('error_1.wav')
     });
 
     if (window.history && window.history.pushState) {
