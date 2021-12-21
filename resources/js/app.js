@@ -158,9 +158,9 @@ $(() => {
             util.play('alert.mp3', 0)
 
             // 防止误退出
-            window.onbeforeunload = () => {
-                return true;
-            };
+            // window.onbeforeunload = () => {
+            //     return true;
+            // };
 
         }
         util.masonry('.masonry')
