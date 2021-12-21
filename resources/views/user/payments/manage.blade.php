@@ -3,9 +3,15 @@
 @section('title', tr('Payments'))
 
 @section('content')
+
+    <div class="mdui-typo-display-1">{{ tr('Balance') }}</div>
+    <span class="mdui-typo-display-3 balance"><small>HKD </small>{{ auth()->user()->balance }}</span>
+    <div class="mdui-typo-display-1 mdui-m-t-4">{{ tr('Payments') }}</div>
+
     @if (is_null(auth()->user()->stripe_id))
         <div class="mdui-typo-display-1">{{ tr('Your billing account is not active.') }}</div>
         <p>{{ tr('To active your billing account, please add your billing information to your account.') }}</p>
+        <p>{{ tr('If not, you can only use your balance.') }}</p>
 
         <a href="{{ route('user.balance.add') }}"
             class="mdui-btn mdui-btn-outlined mdui-ripple mdui-m-t-2">{{ tr('New Payment') }}</a>
@@ -13,9 +19,6 @@
 
 
     @if (!is_null(auth()->user()->stripe_id))
-        <div class="mdui-typo-display-1">{{ tr('Balance') }}</div>
-        <span class="mdui-typo-display-3 balance"><small>HKD </small>{{ auth()->user()->balance }}</span>
-        <div class="mdui-typo-display-1 mdui-m-t-4">{{ tr('Payments') }}</div>
 
         <a href="{{ route('user.balance.add') }}"
             class="mdui-btn mdui-btn-outlined mdui-ripple mdui-m-t-2">{{ tr('New Payment') }}</a>
