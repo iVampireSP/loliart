@@ -71,4 +71,33 @@ class User extends Authenticatable
         }
         return true;
     }
+
+    public function cost($amount, $user_id = false)
+    {
+        if (!$user_id) {
+            $user = auth()->user();
+        } else {
+            $user = self::find($user_id);
+        }
+        $lock = Cache::lock("user_balance_" . $user->id, $user->balance);
+        $lock->block(5);
+        try {
+            $user->balance -= $amount;
+            if ($user->balance <= 0) {
+                write('Balance not enough.');
+            } else {
+                $user->save();
+                write('Order successfully updated.');
+                userEvent('balance.updated');
+                write('Your balance is now: ' . $user->balance);
+            }
+        } catch (LockTimeoutException $e) {
+            unset($e);
+            write('Unable to update user balance');
+            return false;
+        } finally {
+            optional($lock)->release();
+        }
+        return true;
+    }
 }
