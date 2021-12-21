@@ -5,7 +5,7 @@ window.util = {
             $.pjax.reload(ele);
         },
         open: (url) => {
-            window.location.open = url
+            window.location = url
         }
     },
     reload: (ele = '.pjax-container') => {
