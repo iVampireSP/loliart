@@ -2,14 +2,13 @@
 
 namespace App\Listeners;
 
-use App\Models\User;
 use App\Models\Order;
-use Illuminate\Support\Facades\Log;
+use App\Models\User;
 use Laravel\Cashier\Events\WebhookReceived;
 
 class StripeEventListener
 {
-    private $order;
+    protected $order, $order_orm;
     /**
      * Create the event listener.
      *
@@ -28,8 +27,10 @@ class StripeEventListener
      */
     public function handle(WebhookReceived $event)
     {
-        $this->order = Order::where('order_id', $event->payload['data']['object']['id'])->first();
-        $user = User::where('stripe_id', $event->payload['data']['object']['customer'])->first();
+        $this->order_orm = Order::where('order_id', $event->payload['data']['object']['id']);
+        $this->order = $this->order_orm->first();
+        $user_class = new User();
+        $user = $user_class->where('stripe_id', $event->payload['data']['object']['customer'])->first();
         switch ($event->payload['type']) {
             case 'payment_intent.created':
                 // 更新订单状态
@@ -38,15 +39,14 @@ class StripeEventListener
                 break;
 
             case 'payment_intent.succeeded':
-                $this->order->update([
+                $this->update([
                     'amount_received' => $event->payload['data']['object']['amount_received'],
                     'status' => 'intent.succeeded',
                 ]);
-                write('Payment status updated.', $user->id);
-                break;
-            case 'charge.succeeded':
-                userEvent('balance.update');
-                write('Charge succeed.', $user->id);
+                $user_class->addBalance($event->payload['data']['object']['amount_received'], $user->id);
+                userEvent('balance.updated', null, $user->id);
+                write('Charge successfully.', $user->id);
+
                 break;
 
         }
@@ -55,10 +55,13 @@ class StripeEventListener
         // }
     }
 
+    protected function update($data)
+    {
+        $this->order_orm->update($data);
+    }
+
     protected function status($status)
     {
-        $this->order->query()->update([
-            'status' => $status,
-        ]);
+        $this->update(['status' => $status]);
     }
 }
