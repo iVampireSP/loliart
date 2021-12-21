@@ -57,6 +57,9 @@ class User extends Authenticatable
         } else {
             $user = self::find($user_id);
         }
+
+        $result = true;
+
         $lock = Cache::lock("user_balance_" . $user->id, $user->balance);
         $lock->block(5);
         try {
@@ -65,11 +68,12 @@ class User extends Authenticatable
         } catch (LockTimeoutException $e) {
             unset($e);
             write('Unable to update user balance');
-            return false;
+            $result = false;
         } finally {
             optional($lock)->release();
         }
-        return true;
+
+        return $result;
     }
 
     public function cost($amount, $user_id = false)
@@ -79,6 +83,7 @@ class User extends Authenticatable
         } else {
             $user = self::find($user_id);
         }
+        $result = false;
         $lock = Cache::lock("user_balance_" . $user->id, $user->balance);
         $lock->block(5);
         try {
@@ -90,14 +95,14 @@ class User extends Authenticatable
                 write('Order successfully updated.');
                 userEvent('balance.updated');
                 write('Your balance is now: ' . $user->balance);
+                $result = true;
             }
         } catch (LockTimeoutException $e) {
             unset($e);
             write('Unable to update user balance');
-            return false;
         } finally {
             optional($lock)->release();
         }
-        return true;
+        return $result;
     }
 }
