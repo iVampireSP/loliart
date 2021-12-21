@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
-@section('title', tr('Charge'))
+@section('title', tr('Add Payment Method'))
 
 @section('content')
-    <div class="mdui-typo-display-1">{{ tr('Charge') }}</div>
+    <div class="mdui-typo-display-1">{{ tr('Add Payment Method') }}</div>
 
     <div class="mdui-textfield mdui-textfield-floating-label">
         <label class="mdui-textfield-label">{{ tr('Name') }}</label>
