@@ -14417,11 +14417,11 @@ body.mdui-loaded .mdui-drawer {
     }
     75% {
         left: 0;
-        width: 25%;
+        width: 30%;
     }
     100% {
         left: 100%;
-        width: 25%;
+        width: 10%;
     }
 }
 @keyframes mdui-progress-indeterminate-short {
@@ -14435,11 +14435,11 @@ body.mdui-loaded .mdui-drawer {
     }
     75% {
         left: 0;
-        width: 25%;
+        width: 30%;
     }
     100% {
         left: 100%;
-        width: 25%;
+        width: 10%;
     }
 }
 /**
