@@ -18,9 +18,9 @@ class FrpTunnelController extends Controller
         $user = auth()->user();
 
         // dd($subscriptions = $user->subscriptions()->active()->get()->toArray());
-        $user->newSubscription(
-            'default', 'price_1K9JLiHNOuHfVX37944m2fmE'
-        )->create($user->defaultPaymentMethod()->id);
+        // $user->newSubscription(
+        //     'test_order', 'price_1K9JLiHNOuHfVX37944m2fmE'
+        // )->create($user->defaultPaymentMethod()->id);
         // $user->cost(1000);
         // return view('index.cn');
         //     // dd($user->paymentMethods());
