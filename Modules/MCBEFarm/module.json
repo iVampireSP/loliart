@@ -1,0 +1,13 @@
+{
+    "name": "MCBEFarm",
+    "alias": "mcbefarm",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\MCBEFarm\\Providers\\MCBEFarmServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}
