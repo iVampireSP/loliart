@@ -12,7 +12,7 @@
     <x-lock for="account-edit" lock="1" />
 
     <form action="#" class="mdui-m-t-5"
-        onsubmit="event.preventDefault();util.wings.accounts.edit({{ $user->id }},$(this))"
+        onsubmit="event.preventDefault();util.wings.accounts.edit({{ $user->id }},$(this));util.toggleLock('account-edit', true)"
         data-lock-form="account-edit">
 
         <div class="mdui-textfield">
@@ -44,8 +44,7 @@
 
         </div>
 
-        <button class="mdui-btn mdui-btn-outlined mdui-ripple mdui-m-t-4"
-            onclick="util.toggleLock('account-edit', true)">{{ tr('Save') }}</button>
+        <button class="mdui-btn mdui-btn-outlined mdui-ripple mdui-m-t-4">{{ tr('Save') }}</button>
         <button class="mdui-btn mdui-btn-outlined mdui-ripple mdui-m-t-4"
             onclick="event.preventDefault();util.wings.accounts.delete({{ $user->id }})">{{ tr('Delete') }}</button>
 
