@@ -17,15 +17,18 @@ Route::prefix('login')->name('login.')->group(function () {
 
 Route::prefix('user')->name('user.')->middleware('auth')->group(function () {
     Route::prefix('balance')->name('balance.')->group(function () {
-        Route::get('/charge', [Controllers\BalanceController::class, 'payments'])->name('manage');
         Route::get('/manage', [Controllers\BalanceController::class, 'payments'])->name('manage');
         Route::get('/add', [Controllers\BalanceController::class, 'paymentMethod'])->name('add');
         Route::post('/payments', [Controllers\BalanceController::class, 'addPayment'])->name('payments.add');
         Route::put('/manage/{id}', [Controllers\BalanceController::class, 'updateDefaultPayment'])->name('payments.update');
         Route::delete('/manage/{id}', [Controllers\BalanceController::class, 'removePayment'])->name('payments.delete');
         Route::post('/charge', [Controllers\BalanceController::class, 'charge'])->name('charge');
-
     });
+
+    Route::get('/orders', [Controllers\OrderController::class, 'orders'])->name('orders');
+    Route::get('/subscriptions', [Controllers\OrderController::class, 'subscriptions'])->name('subscriptions');
+    Route::get('/redirectToBillingPortal', [Controllers\OrderController::class, 'redirectToBillingPortal'])->name('redirectToBillingPortal');
+
 });
 
 Route::prefix('order')->name('order.')->middleware('auth')->group(function () {
@@ -35,7 +38,6 @@ Route::prefix('order')->name('order.')->middleware('auth')->group(function () {
     Route::get('/cancel', [Controllers\OrderController::class, 'cancel'])->name('cancel');
     Route::get('/success', [Controllers\OrderController::class, 'payments'])->name('success');
 });
-
 
 Route::prefix('teams')->name('teams.')->middleware(['teams_permission', 'auth'])->group(function () {
     Route::get('/', [Controllers\TeamController::class, 'index'])->name('index')->withoutMiddleware(['teams_permission']);
@@ -82,7 +84,6 @@ Route::prefix('permission')->name('permission.')->middleware(['auth', 'teams_per
 
 Route::post('logout', [Controllers\AuthController::class, 'logout'])->name('logout');
 Route::get('/home', [Controllers\IndexController::class, 'index'])->name('home');
-
 
 Route::fallback(function () {
     return response()->json([
