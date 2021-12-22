@@ -32,7 +32,7 @@
                 </div>
 
                 <div class="mdui-collapse-item-body mdui-list">
-                    <a href="{{ route('user.subscriptions') }}"
+                    <a href="{{ route('orders.all') }}"
                         class="mdui-list-item mdui-ripple">{{ tr('Orders') }}</a>
                 </div>
 

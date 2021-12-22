@@ -25,13 +25,12 @@ Route::prefix('user')->name('user.')->middleware('auth')->group(function () {
         Route::post('/charge', [Controllers\BalanceController::class, 'charge'])->name('charge');
     });
 
-    Route::get('/orders', [Controllers\OrderController::class, 'orders'])->name('orders');
     Route::get('/subscriptions', [Controllers\OrderController::class, 'subscriptions'])->name('subscriptions');
     Route::get('/redirectToBillingPortal', [Controllers\OrderController::class, 'redirectToBillingPortal'])->name('redirectToBillingPortal');
 
 });
 
-Route::prefix('order')->name('order.')->middleware('auth')->group(function () {
+Route::prefix('orders')->name('orders.')->middleware('auth')->group(function () {
     Route::get('/all', [Controllers\OrderController::class, 'all'])->name('all');
     Route::get('/you', [Controllers\OrderController::class, 'you'])->name('you');
     Route::get('/team', [Controllers\OrderController::class, 'team'])->name('team')->middleware(['teams_permission']);

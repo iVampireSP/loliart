@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -18,7 +19,8 @@ class OrderController extends Controller
 
     public function all(Request $request)
     {
-
+        $orders = Order::where('user_id', auth()->id())->simplePaginate(15);
+        return view('user.orders', compact('orders'));
     }
 
     public function you(Request $request)
