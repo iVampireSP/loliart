@@ -16,7 +16,7 @@ mix
     .js('resources/js/alpine.js', 'public/js')
 
     .styles([
-        'node_modules/mdui/dist/css/mdui.min.css',
+        'resources/css/mdui.css',
         'resources/css/app.css',
     ], 'public/css/app.css')
 
