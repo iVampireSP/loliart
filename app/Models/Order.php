@@ -9,12 +9,17 @@ class Order extends Model
 {
     use HasFactory;
 
-    public $fillable = [
+    protected $fillable = [
         'name', 'order_id', 'amount', 'amount_received', 'payment', 'comment', 'status', 'product',
-        'product_id', 'user_id', 'team_id'
+        'product_id', 'user_id', 'team_id', 'metadata',
     ];
 
-    public static function setup($order_id, $amount, $product, $user_id = false) {
+    protected $casts = [
+        'metadata' => 'json',
+    ];
+
+    public static function setup($order_id, $amount, $product, $user_id = false)
+    {
         if (!$user_id) {
             $user_id = auth()->id();
         }
@@ -23,7 +28,7 @@ class Order extends Model
             'order_id' => $order_id,
             'amount' => $amount,
             'product' => $product,
-            'user_id' => $user_id
+            'user_id' => $user_id,
         ]);
     }
 }
