@@ -22,6 +22,8 @@
 
         <a href="{{ route('user.balance.add') }}"
             class="mdui-btn mdui-btn-outlined mdui-ripple mdui-m-t-2">{{ tr('New Payment') }}</a>
+        <a href="{{ route('user.redirectToBillingPortal') }}"
+            class="mdui-btn mdui-btn-outlined mdui-ripple mdui-m-t-2">{{ tr('Billing Portal') }}</a>
 
         <div class="mdui-row payments">
             @php($user = auth()->user())
