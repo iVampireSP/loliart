@@ -29,11 +29,16 @@ class StripeEventListener
     {
         $this->order_orm = Order::where('order_id', $event->payload['data']['object']['id']);
         $this->order = $this->order_orm->first();
+        $metadata = [];
+        if (isset($event->payload['data']['object']['metadata'])) {
+            $metadata = $event->payload['data']['object']['metadata'];
+        }
         $user_class = new User();
         $user = $user_class->where('stripe_id', $event->payload['data']['object']['customer'])->first();
         switch ($event->payload['type']) {
             case 'payment_intent.created':
                 // 更新订单状态
+                $this->metadata($metadata);
                 $this->status('created');
                 write('Order updated.', $user->id);
                 break;
@@ -43,9 +48,20 @@ class StripeEventListener
                     'amount_received' => $event->payload['data']['object']['amount_received'],
                     'status' => 'intent.succeeded',
                 ]);
-                $user_class->addBalance($event->payload['data']['object']['amount_received'], $user->id);
-                userEvent('balance.updated', null, $user->id);
-                write('Charge successfully.', $user->id);
+                if (isset($metadata['type']) && $metadata['type'] == 'charge_to_account') {
+                    $user_class->addBalance($event->payload['data']['object']['amount_received'], $user->id);
+                    userEvent('balance.updated', null, $user->id);
+                    write('Charge successfully.', $user->id);
+                }
+
+                write('Order paid successfully.', $user->id);
+
+                break;
+
+            case 'customer.subscription.updated':
+            case 'customer.subscription.created':
+                write('Subscription updated.', $user->id);
+                userEvent('subscription.updated', null, $user->id);
 
                 break;
 
@@ -63,5 +79,10 @@ class StripeEventListener
     protected function status($status)
     {
         $this->update(['status' => $status]);
+    }
+
+    protected function metadata($status)
+    {
+        $this->update(['metadata' => $status]);
     }
 }

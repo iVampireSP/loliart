@@ -16,7 +16,7 @@ class BalanceController extends Controller
         try {
             $payments = $user->paymentMethods();
 
-        }catch(InvalidRequestException $e) {
+        } catch (InvalidRequestException $e) {
             $payments = [];
         }
         return view('user.payments.manage', compact('payments'));
@@ -69,7 +69,9 @@ class BalanceController extends Controller
         $user = auth()->user();
         try {
             $paymentMethod = $user->findPaymentMethod($request->id);
-            $resp = $user->charge($request->amount, $paymentMethod->id);
+            $resp = $user->charge($request->amount, $paymentMethod->id, ['metadata' => [
+                'type' => 'charge_to_account',
+            ]]);
             Order::setup($resp->id, $request->amount, 'Charge');
             write(tr('Order created successfully.'));
             return success();

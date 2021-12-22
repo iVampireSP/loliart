@@ -7,7 +7,8 @@ use Illuminate\Http\Request;
 class OrderController extends Controller
 {
 
-    public function checkout($amount, $name, $quantity) {
+    public function checkout($amount, $name, $quantity)
+    {
         $user = auth()->user();
 
         $checkout = $user->checkoutCharge($amount, $name, $quantity);
@@ -36,7 +37,18 @@ class OrderController extends Controller
     {
     }
 
-    public function createUser($user_id, ) {
+    public function subscriptions()
+    {
+        $user = auth()->user();
 
+        $cancelled = $user->subscriptions()->cancelled()->get();
+        $actives = $user->subscriptions()->active()->get();
+
+        return view('user.subscriptions', compact('cancelled', 'actives'));
+    }
+
+    public function redirectToBillingPortal(Request $request)
+    {
+        return $request->user()->redirectToBillingPortal(route('user.balance.manage'));
     }
 }
