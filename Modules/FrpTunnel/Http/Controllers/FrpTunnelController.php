@@ -5,7 +5,6 @@ namespace Modules\FrpTunnel\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Laravel\Cashier\Exceptions\IncompletePayment;
 
 class FrpTunnelController extends Controller
 {
@@ -17,27 +16,32 @@ class FrpTunnelController extends Controller
     {
 
         $user = auth()->user();
-        $user->cost(100);
-        return view('index.cn');
-    //     // dd($user->paymentMethods());
-    //     // $user->defaultPaymentMethod()->idx
-    //     try {
-    //         $checkout = $user->checkoutCharge(100, 'T-Shirt', 5);
-    //     } catch (IncompletePayment $exception) {
-    //         dd($exception);
-    //         return redirect()->route(
-    //             'cashier.payment',
-    //             [$exception->payment->id, 'redirect' => route('home')]
-    //         );
-    //     }
+
+        // dd($subscriptions = $user->subscriptions()->active()->get()->toArray());
+        $user->newSubscription(
+            'default', 'price_1K9JLiHNOuHfVX37944m2fmE'
+        )->create($user->defaultPaymentMethod()->id);
+        // $user->cost(1000);
+        // return view('index.cn');
+        //     // dd($user->paymentMethods());
+        //     // $user->defaultPaymentMethod()->id
+        //     try {
+        //         $checkout = $user->checkoutCharge(100, 'T-Shirt', 5);
+        //     } catch (IncompletePayment $exception) {
+        //         dd($exception);
+        //         return redirect()->route(
+        //             'cashier.payment',
+        //             [$exception->payment->id, 'redirect' => route('home')]
+        //         );
+        //     }
 
         // dd($user->charge(100, 'pm_1K8kVXKX2JWJed1KgyMhEJrg'));
         // dd($user->invoiceFor('One Time Fee', 500));
         // dd($user->invoices());
-    //    $checkout = $user->checkout('price_1K7aOIKX2JWJed1K2GC3crSr', [
-    //        'success_url' => route('order.success'),
-    //        'cancel_url' => route('order.cancel'),
-    //    ]);
+        //    $checkout = $user->checkout('price_1K7aOIKX2JWJed1K2GC3crSr', [
+        //        'success_url' => route('order.success'),
+        //        'cancel_url' => route('order.cancel'),
+        //    ]);
 //        dd($checkout);
 
         // $order = new OrderController();
