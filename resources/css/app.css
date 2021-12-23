@@ -501,6 +501,10 @@ span.mdui-btn-outlined {
     margin: 10px;
 }
 
+.sub-menu-title {
+    font-size: inherit;
+}
+
 @media (prefers-color-scheme: dark) {
     .mdui-drawer {
         background-color: #303030 !important;
