@@ -167,6 +167,8 @@ $(() => {
 
     })
     util.masonry('.masonry')
+
+    $('.copy-year').text(new Date().getFullYear())
 })
 
 window.addEventListener('online', () => {
