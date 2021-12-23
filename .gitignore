@@ -18,6 +18,6 @@ laravel-echo-server.lock
 /public/js
 /public/css/app.css
 /public/js/app.js
+public/js/alpine.js
 .gitignore
 /public/mix-manifest.json
-
