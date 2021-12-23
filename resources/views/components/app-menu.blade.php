@@ -45,7 +45,7 @@
         </div>
 
         <div class="edge-bottom">
-            <div class="mdui-typo-caption-opacity mdui-text-center">&copy; 2021 Edge Stading. All rights reserved.
+            <div class="mdui-typo-caption-opacity mdui-text-center">&copy; <span class="copy-year"></span> Edge Stading. All rights reserved.
             </div>
         </div>
     </div>
