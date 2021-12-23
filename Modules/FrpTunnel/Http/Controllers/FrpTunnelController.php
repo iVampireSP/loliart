@@ -15,6 +15,7 @@ class FrpTunnelController extends Controller
     public function index()
     {
 
+        return view('frptunnel::index');
         $user = auth()->user();
 
         // dd($subscriptions = $user->subscriptions()->active()->get()->toArray());

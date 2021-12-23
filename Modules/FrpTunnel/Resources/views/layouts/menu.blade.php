@@ -17,10 +17,22 @@
                 <div class="mdui-list-item-content">{{ tr('Create Tunnel') }}</div>
             </a>
 
+            <a class="mdui-list-item mdui-ripple" href="{{ route('wings.accounts.index') }}">
+                <span class="mdui-list-item-icon mdui-icon material-icons-outlined">manage_accounts</span>
+                <div class="mdui-list-item-content">{{ tr('Accounts') }}</div>
+            </a>
+
+            <a class="mdui-list-item mdui-ripple" href="{{ route('wings.accounts.index') }}">
+                <span class="mdui-list-item-icon mdui-icon material-icons-outlined">traffic</span>
+                <div class="mdui-list-item-content">{{ tr('Traffic') }}</div>
+            </a>
+
+
             <a class="mdui-list-item mdui-ripple" href="{{ route('wings.servers.create') }}">
                 <span class="mdui-list-item-icon mdui-icon material-icons-outlined">supervisor_account</span>
                 <div class="mdui-list-item-content">{{ tr('Tunnel Servers') }}</div>
             </a>
+
         </div>
     </div>
 </div>
