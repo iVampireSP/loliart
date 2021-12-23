@@ -1,12 +1,12 @@
 <?php
 
-namespace Modules\MCBEFarm\Http\Controllers;
+namespace Modules\MinecraftBEFlow\Http\Controllers;
 
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
-class MCBEFarmController extends Controller
+class MinecraftBEFlowController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class MCBEFarmController extends Controller
      */
     public function index()
     {
-        return view('mcbefarm::index');
+        return view('minecraftbeflow::index');
     }
 
     /**
@@ -23,7 +23,7 @@ class MCBEFarmController extends Controller
      */
     public function create()
     {
-        return view('mcbefarm::create');
+        return view('minecraftbeflow::create');
     }
 
     /**
@@ -43,7 +43,7 @@ class MCBEFarmController extends Controller
      */
     public function show($id)
     {
-        return view('mcbefarm::show');
+        return view('minecraftbeflow::show');
     }
 
     /**
@@ -53,7 +53,7 @@ class MCBEFarmController extends Controller
      */
     public function edit($id)
     {
-        return view('mcbefarm::edit');
+        return view('minecraftbeflow::edit');
     }
 
     /**

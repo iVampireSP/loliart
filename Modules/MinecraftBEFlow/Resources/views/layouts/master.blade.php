@@ -4,16 +4,16 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Module MCBEFarm</title>
+        <title>Module MinecraftBEFlow</title>
 
        {{-- Laravel Mix - CSS File --}}
-       {{-- <link rel="stylesheet" href="{{ mix('css/mcbefarm.css') }}"> --}}
+       {{-- <link rel="stylesheet" href="{{ mix('css/minecraftbeflow.css') }}"> --}}
 
     </head>
     <body>
         @yield('content')
 
         {{-- Laravel Mix - JS File --}}
-        {{-- <script src="{{ mix('js/mcbefarm.js') }}"></script> --}}
+        {{-- <script src="{{ mix('js/minecraftbeflow.js') }}"></script> --}}
     </body>
 </html>

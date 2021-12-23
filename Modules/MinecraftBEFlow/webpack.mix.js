@@ -6,8 +6,8 @@ require('laravel-mix-merge-manifest');
 
 mix.setPublicPath('../../public').mergeManifest();
 
-mix.js(__dirname + '/Resources/assets/js/app.js', 'js/mcbefarm.js')
-    .sass( __dirname + '/Resources/assets/sass/app.scss', 'css/mcbefarm.css');
+mix.js(__dirname + '/Resources/assets/js/app.js', 'js/minecraftbeflow.js')
+    .sass( __dirname + '/Resources/assets/sass/app.scss', 'css/minecraftbeflow.css');
 
 if (mix.inProduction()) {
     mix.version();

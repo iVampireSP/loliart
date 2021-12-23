@@ -11,6 +11,6 @@
 |
 */
 
-Route::prefix('mcbefarm')->group(function() {
-    Route::get('/', 'MCBEFarmController@index');
+Route::prefix('minecraftbeflow')->group(function() {
+    Route::get('/', 'MinecraftBEFlowController@index');
 });

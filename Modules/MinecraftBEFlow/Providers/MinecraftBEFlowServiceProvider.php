@@ -1,21 +1,21 @@
 <?php
 
-namespace Modules\MCBEFarm\Providers;
+namespace Modules\MinecraftBEFlow\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
 
-class MCBEFarmServiceProvider extends ServiceProvider
+class MinecraftBEFlowServiceProvider extends ServiceProvider
 {
     /**
      * @var string $moduleName
      */
-    protected $moduleName = 'MCBEFarm';
+    protected $moduleName = 'MinecraftBEFlow';
 
     /**
      * @var string $moduleNameLower
      */
-    protected $moduleNameLower = 'mcbefarm';
+    protected $moduleNameLower = 'minecraftbeflow';
 
     /**
      * Boot the application events.

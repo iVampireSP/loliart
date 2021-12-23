@@ -1,11 +1,11 @@
 <?php
 
-namespace Modules\MCBEFarm\Database\Seeders;
+namespace Modules\MinecraftBEFlow\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 
-class MCBEFarmDatabaseSeeder extends Seeder
+class MinecraftBEFlowDatabaseSeeder extends Seeder
 {
     /**
      * Run the database seeds.

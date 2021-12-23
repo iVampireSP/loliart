@@ -7,5 +7,6 @@
     <div class="mdui-collapse-item-body mdui-list">
         <a href="{{ route('wings.index') }}" class="mdui-list-item mdui-ripple">{{ tr('Game Containers') }}</a>
         <a href="{{ route('frpTunnel.index') }}" class="mdui-list-item mdui-ripple">{{ tr('Frp Tunnel') }}</a>
+        <a href="{{ route('frpTunnel.index') }}" class="mdui-list-item mdui-ripple">{{ tr('Frp Tunnel') }}</a>
     </div>
 </div>

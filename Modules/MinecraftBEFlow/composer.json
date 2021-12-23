@@ -1,5 +1,5 @@
 {
-    "name": "ivampiresp/mcbefarm",
+    "name": "ivampiresp/minecraftbeflow",
     "description": "",
     "authors": [
         {
@@ -17,7 +17,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Modules\\MCBEFarm\\": ""
+            "Modules\\MinecraftBEFlow\\": ""
         }
     }
 }

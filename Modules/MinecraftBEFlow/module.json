@@ -1,11 +1,11 @@
 {
-    "name": "MCBEFarm",
-    "alias": "mcbefarm",
+    "name": "MinecraftBEFlow",
+    "alias": "minecraftbeflow",
     "description": "",
     "keywords": [],
     "priority": 0,
     "providers": [
-        "Modules\\MCBEFarm\\Providers\\MCBEFarmServiceProvider"
+        "Modules\\MinecraftBEFlow\\Providers\\MinecraftBEFlowServiceProvider"
     ],
     "aliases": {},
     "files": [],
