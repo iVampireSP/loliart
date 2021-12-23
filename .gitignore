@@ -15,9 +15,9 @@ yarn-error.log
 /.vscode
 laravel-echo-server.lock
 .DS_Store
+/public/js
 /public/css/app.css
 /public/js/app.js
 .gitignore
 /public/mix-manifest.json
-public/js
-/public/js
+
