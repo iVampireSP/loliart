@@ -11,6 +11,6 @@
 |
 */
 
-Route::prefix('minecraftbeflow')->group(function() {
-    Route::get('/', 'MinecraftBEFlowController@index');
+Route::prefix('minecraftBeFlow')->middleware(['teams_permission', 'auth'])->name('minecraftBeFlow.')->group(function() {
+    Route::get('/', 'MinecraftBEFlowController@index')->name('index');
 });
