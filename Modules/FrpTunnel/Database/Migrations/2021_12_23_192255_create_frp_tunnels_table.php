@@ -20,16 +20,23 @@ class CreateFrpTunnelsTable extends Migration
 
             $table->char('protocol', 5)->index()->default("tcp");
 
-            $table->string('custom_domain')->nullable()->nullable();
+            $table->string('custom_domain')->nullable()->index();
+
             $table->string('local_address')->index();
-            $table->integer('remote_port')->index()->nullable();
+
+            $table->unsignedSmallInteger('remote_port')->index()->nullable();
+
             $table->uuid('client_token')->index()->unique();
+
+            $table->string('sk')->index()->nullable();
+
             $table->boolean('status')->default(false)->index();
 
-            $table->string('sk')->index()->nullable()->after('client_token');
-
             $table->unsignedBigInteger('server_id')->index();
-            $table->foreign('server_id')->references('id')->on('servers');
+            $table->foreign('server_id')->references('id')->on('frp_servers');
+
+            $table->unsignedBigInteger('user_id')->index();
+            $table->foreign('user_id')->references('id')->on('frp_users');
 
             $table->unsignedBigInteger('team_id')->index();
             $table->foreign('team_id')->references('id')->on('teams');
