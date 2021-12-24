@@ -17,7 +17,7 @@ class CreateFrpUsersTable extends Migration
             $table->id();
 
             $table->string('name')->index();
-            $table->uuid('client_token')->index()->unique();
+            $table->uuid('token')->index()->unique();
 
             $table->timestamps();
         });

@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateFrpTunnelTrafficTable extends Migration
 {
@@ -15,6 +15,12 @@ class CreateFrpTunnelTrafficTable extends Migration
     {
         Schema::create('frp_tunnel_traffic', function (Blueprint $table) {
             $table->id();
+
+            $table->date('date')->index();
+            $table->unsignedBigInteger('bytes')->nullable()->index();
+
+            $table->unsignedBigInteger('tunnel_id')->index();
+            $table->foreign('tunnel_id')->references('id')->on('frp_tunnels');
 
             $table->timestamps();
         });
