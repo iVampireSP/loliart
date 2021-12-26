@@ -28,7 +28,7 @@
             </a>
 
 
-            <a class="mdui-list-item mdui-ripple" href="{{ route('wings.servers.create') }}">
+            <a class="mdui-list-item mdui-ripple" href="{{ route('frpTunnel.servers.index') }}">
                 <span class="mdui-list-item-icon mdui-icon material-icons-outlined">supervisor_account</span>
                 <div class="mdui-list-item-content">{{ tr('Tunnel Servers') }}</div>
             </a>
