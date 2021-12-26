@@ -19,8 +19,10 @@ class CreateFrpServersTable extends Migration
             $table->string('name')->index();
 
             $table->string('server_address')->index();
-
-            $table->string('display_address')->index()->nullable();
+            $table->string('server_port')->index();
+            $table->unsignedSmallInteger('dashboard_port');
+            $table->string('dashboard_user')->nullable();
+            $table->string('dashboard_password')->nullable();
 
             $table->string('token')->nullable()->index();
 
