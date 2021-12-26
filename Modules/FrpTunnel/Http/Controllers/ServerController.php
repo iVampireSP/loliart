@@ -16,7 +16,7 @@ class ServerController extends Controller
     public function index()
     {
         $servers = FrpServer::where('team_id', session('team_id'))->simplePaginate(10);
-        return view('frptunnel::index');
+        return view('frptunnel::index', compact('servers'));
     }
 
     /**
