@@ -35,6 +35,9 @@ class CreateFrpServersTable extends Migration
 
             $table->unsignedInteger('max_tunnels')->default(100)->index();
 
+            $table->unsignedBigInteger('team_id')->index();
+            $table->foreign('team_id')->references('id')->on('teams');
+
             $table->timestamps();
         });
     }

@@ -38,9 +38,6 @@ class CreateFrpTunnelsTable extends Migration
             $table->unsignedBigInteger('user_id')->index();
             $table->foreign('user_id')->references('id')->on('frp_users');
 
-            $table->unsignedBigInteger('team_id')->index();
-            $table->foreign('team_id')->references('id')->on('teams');
-
             $table->timestamps();
         });
     }
