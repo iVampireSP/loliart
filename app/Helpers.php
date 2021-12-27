@@ -4,6 +4,7 @@
  * Helpers
  */
 
+use App\Events\TeamEvent;
 use App\Events\UserEvent;
 use App\Http\Controllers\AppController;
 use App\Http\Controllers\TranslateController;
@@ -84,6 +85,21 @@ if (!function_exists('write')) {
         }
 
         broadcast(new UserEvent($user_id, [
+            'type' => 'message',
+            'data' => $msg,
+        ]));
+
+    }
+}
+
+if (!function_exists('writeTeam')) {
+    function write($msg, $team_id = 0)
+    {
+        if (!$team_id) {
+            $team_id = session('team_id') ?? 0;
+        }
+
+        broadcast(new TeamEvent($team_id, [
             'type' => 'message',
             'data' => $msg,
         ]));
