@@ -5,6 +5,7 @@ namespace Modules\FrpTunnel\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Validation\Rule;
 use Modules\FrpTunnel\Entities\FrpServer;
 
 class ServerController extends Controller
@@ -16,7 +17,7 @@ class ServerController extends Controller
     public function index()
     {
         $servers = FrpServer::where('team_id', session('team_id'))->simplePaginate(10);
-        return view('frptunnel::index', compact('servers'));
+        return view('frptunnel::servers.index', compact('servers'));
     }
 
     /**
@@ -25,7 +26,7 @@ class ServerController extends Controller
      */
     public function create()
     {
-        return view('frptunnel::create');
+        return view('frptunnel::servers.create');
     }
 
     /**
@@ -33,19 +34,31 @@ class ServerController extends Controller
      * @param Request $request
      * @return Renderable
      */
-    public function store(Request $request)
+    public function store(Request $request, FrpServer $frpServer)
     {
-        //
+        $request->validate($this->rules());
+
+        $request_data = $request->toArray();
+        $request_data['team_id'] = session('team_id');
+
+        $frpServer->create($request_data);
+
+        write(route('frpTunnel.servers.index'));
+        writeTeam('Frp Server created successfully.');
+
+        return response()->json(['status' => 1]);
+
     }
 
     /**
      * Show the specified resource.
-     * @param int $id
+     * @param FrpServer $server
      * @return Renderable
      */
-    public function show($id)
+    public function show(FrpServer $server)
     {
-        return view('frptunnel::show');
+        userInTeamFail($server->team_id);
+        return view('frptunnel::servers.show', compact('server'));
     }
 
     /**
@@ -61,12 +74,19 @@ class ServerController extends Controller
     /**
      * Update the specified resource in storage.
      * @param Request $request
-     * @param int $id
+     * @param FrpServer $server
      * @return Renderable
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, FrpServer $server)
     {
-        //
+        $request->validate($this->rules($server->id));
+        userInTeamFail($server->team_id);
+        $server->update($request->toArray());
+
+        write(route('frpTunnel.servers.index'));
+        writeTeam('Frp Server updated successfully.');
+
+        return response()->json(['status' => 1]);
     }
 
     /**
@@ -74,8 +94,37 @@ class ServerController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function destroy($id)
+    public function destroy(FrpServer $server)
     {
-        //
+        userInTeamFail($server->team_id);
+        $server->delete();
+        write(route('frpTunnel.servers.index'));
+        writeTeam('Frp Server deleted successfully.');
+
+        return response()->json(['status' => 1]);
+    }
+
+    public function rules($id = null)
+    {
+        return [
+            'name' => 'required|max:20',
+            'server_address' => [
+                'required',
+                Rule::unique('frp_servers')->ignore($id),
+            ],
+            'server_port' => 'required|integer|max:65535|min:1',
+            'token' => 'required|max:50',
+            'dashboard_port' => 'required|integer|max:65535|min:1',
+            'dashboard_user' => 'required|max:20',
+            'dashboard_password' => 'required|max:30',
+            'allow_http' => 'boolean',
+            'allow_https' => 'boolean',
+            'allow_tcp' => 'boolean',
+            'allow_udp' => 'boolean',
+            'allow_stcp' => 'boolean',
+            'min_port' => 'required|integer|max:65535|min:1',
+            'max_port' => 'required|integer|max:65535|min:1',
+            'max_tunnels' => 'required|integer|max:65535|min:1',
+        ];
     }
 }
