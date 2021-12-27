@@ -82,9 +82,18 @@ class ServerController extends Controller
     {
         $request->validate($this->rules($server->id));
         userInTeamFail($server->team_id);
-        $server->update($request->toArray());
 
-        write(route('frpTunnel.servers.show', $server->id));
+        $data = $request->toArray();
+
+        $data['allow_http'] = $request->allow_http ?? 0;
+        $data['allow_https'] = $request->allow_https ?? 0;
+        $data['allow_tcp'] = $request->allow_tcp ?? 0;
+        $data['allow_udp'] = $request->allow_udp ?? 0;
+        $data['allow_stcp'] = $request->allow_stcp ?? 0;
+
+        $server->update($data);
+
+        // write(route('frpTunnel.servers.show', $server->id));
         writeTeam('Frp Server updated successfully.');
 
         return response()->json(['status' => 1]);
