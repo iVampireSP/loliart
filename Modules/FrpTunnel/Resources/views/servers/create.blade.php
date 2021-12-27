@@ -103,7 +103,7 @@
 
                         <div class="mdui-textfield mdui-textfield-floating-label">
                             <label class="mdui-textfield-label">{{ tr('Min Port') }}</label>
-                            <input class="mdui-textfield-input" type="text" name="min_port" value="60000" />
+                            <input class="mdui-textfield-input" type="text" name="min_port" value="10000" />
                         </div>
 
                         <div class="mdui-textfield mdui-textfield-floating-label">
@@ -127,8 +127,9 @@
 
     <script>
         m = {
-            create: () => {
-
+            create: (ele) => {
+                let arr = $(ele).serializeArray();
+                util.post(route('frpTunnel.servers.store'), arr)
             }
         }
     </script>
