@@ -16,13 +16,13 @@
     </div>
 
     <div id="infomations">
-        <div class="mdui-typo-headline">{{ tr('Server Details') }}</div>
+        <div class="mdui-typo-headline mdui-m-t-2">{{ tr('Server Details') }}</div>
     </div>
 
     <div id="configuration">
         <x-lock for="update" />
 
-        <div class="mdui-row mdui-m-t-5">
+        <div class="mdui-row mdui-m-t-2">
             <form action="#" id="new" onsubmit="event.preventDefault();m.update($(this))" data-lock-form="update">
                 <div class="mdui-col-md-6 mdui-col-sm-12">
                     <div class="mdui-typo-headline">{{ tr('Server Configuration') }}</div>
