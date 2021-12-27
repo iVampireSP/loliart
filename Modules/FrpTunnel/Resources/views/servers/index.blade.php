@@ -20,7 +20,7 @@
                 <tr>
                     <th>ID</th>
                     <th>{{ tr('Name') }}</th>
-                    <th>{{ tr('Tunnels') }}</th>
+                    <th>{{ tr('Client Counts') }}</th>
                     <th>{{ tr('Traffic In') }}</th>
                     <th>{{ tr('Traffic Out') }}</th>
                     <th>{{ tr('Health') }}</th>
@@ -30,12 +30,21 @@
                 @foreach ($servers as $server)
                     <tr id="item-{{ $server->id }}}">
                         <td nowrap>{{ $server->id }}</td>
-                        <td nowrap><a href="{{ route('frpTunnel.servers.show', $server->id) }}">{{ $server->name }}</a>
+                        <td nowrap><a
+                                href="{{ route('frpTunnel.servers.show', $server->id) }}">{{ $server->name }}</a>
                         </td>
-                        <td nowrap>{{ $server->tunnels }}</td>
-                        <td nowrap>0</td>
-                        <td nowrap>0</td>
-                        <td nowrap>OK</td>
+                        @php($serverInfo = (new \Modules\FrpTunnel\Http\Controllers\FrpController($server->id))->serverInfo())
+                        <td nowrap>{{ $serverInfo['client_counts'] }}</td>
+                        <td nowrap>{{ unitConversion($serverInfo['total_traffic_in']) }}</td>
+                        <td nowrap>{{ unitConversion($serverInfo['total_traffic_out']) }}</td>
+
+                        <td nowrap>
+                            @if (!$serverInfo)
+                                <i class="mdui-icon material-icons mdui-text-color-red">close</i>
+                            @else
+                                <i class="mdui-icon material-icons mdui-text-color-green">done</i>
+                            @endif
+                        </td>
                     </tr>
                 @endforeach
             </tbody>

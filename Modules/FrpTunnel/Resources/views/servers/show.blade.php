@@ -9,6 +9,8 @@
 @section('content')
     <h1 class="mdui-typo-display-1">{{ $server->name }}</h1>
 
+    @php($serverInfo = (object) (new \Modules\FrpTunnel\Http\Controllers\FrpController($server->id))->serverInfo())
+
     <div class="mdui-tab" mdui-tab>
         <a href="#infomations" class="mdui-ripple">{{ tr('Information') }}</a>
         <a href="#configuration" class="mdui-ripple">{{ tr('Basic Configuration') }}</a>
@@ -17,6 +19,85 @@
 
     <div id="infomations">
         <div class="mdui-typo-headline mdui-m-t-2">{{ tr('Server Details') }}</div>
+        <div class="mdui-table-fluid mdui-m-t-2">
+            <table class="mdui-table mdui-table-hoverable">
+                <tbody class="mdui-typo">
+                    <tr>
+                        <td>Frps {{ tr('Version') }}</td>
+                        <td>{{ $serverInfo->version }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ tr('Bind Port') }}</td>
+                        <td>{{ $serverInfo->bind_port }}</td>
+                    </tr>
+
+                    @if ($serverInfo->bind_udp_port)
+                        <tr>
+                            <td>{{ tr('Bind UDP Port') }}</td>
+                            <td>{{ $serverInfo->bind_udp_port }}</td>
+                        </tr>
+                    @endif
+
+                    <tr>
+                        <td>{{ tr('HTTP Port') }}</td>
+                        <td>{{ $serverInfo->vhost_http_port }}</td>
+                    </tr>
+
+                    <tr>
+                        <td>{{ tr('HTTPS Port') }}</td>
+                        <td>{{ $serverInfo->vhost_https_port }}</td>
+                    </tr>
+
+                    <tr>
+                        <td>KCP {{ tr('Bind Port') }}</td>
+                        <td>{{ $serverInfo->kcp_bind_port }}</td>
+                    </tr>
+
+                    @if (!empty($serverInfo->subdomain_host))
+                        <tr>
+                            <td>{{ tr('Subdomain host') }}</td>
+                            <td>{{ $serverInfo->subdomain_host }}</td>
+                        </tr>
+                    @endif
+
+                    <tr>
+                        <td>{{ tr('Max PoolCount') }}</td>
+                        <td>{{ $serverInfo->max_pool_count }}</td>
+                    </tr>
+
+                    <tr>
+                        <td>{{ tr('Max Ports Peer Client') }}</td>
+                        <td>{{ $serverInfo->max_ports_per_client }}</td>
+                    </tr>
+
+                    <tr>
+                        <td>{{ tr('Heartbeat timeout') }}</td>
+                        <td>{{ $serverInfo->heart_beat_timeout }}</td>
+                    </tr>
+
+                    <tr>
+                        <td>{{ tr('Total traffic in') }}</td>
+                        <td>{{ $serverInfo->total_traffic_in }}</td>
+                    </tr>
+
+                    <tr>
+                        <td>{{ tr('Total traffic out') }}</td>
+                        <td>{{ $serverInfo->total_traffic_out }}</td>
+                    </tr>
+
+                    <tr>
+                        <td>{{ tr('Client counts') }}</td>
+                        <td>{{ $serverInfo->client_counts }}</td>
+                    </tr>
+
+                    <tr>
+                        <td>{{ tr('Current connections counts') }}</td>
+                        <td>{{ $serverInfo->cur_conns }}</td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
     </div>
 
     <div id="configuration">
