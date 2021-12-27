@@ -30,7 +30,7 @@
     },
     "require-dev": {
         "beyondcode/laravel-query-detector": "^1.5",
-        "facade/ignition": "^2.5",
+        "facade/ignition": "2.17.4",
         "fakerphp/faker": "^1.9.1",
         "laravel/sail": "^1.12",
         "laravel/telescope": "^4.6",
