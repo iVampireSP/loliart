@@ -23,6 +23,7 @@
                     <th>{{ tr('Tunnels') }}</th>
                     <th>{{ tr('Traffic In') }}</th>
                     <th>{{ tr('Traffic Out') }}</th>
+                    <th>{{ tr('Health') }}</th>
                 </tr>
             </thead>
             <tbody class="mdui-typo">
@@ -34,6 +35,7 @@
                         <td nowrap>{{ $server->tunnels }}</td>
                         <td nowrap>0</td>
                         <td nowrap>0</td>
+                        <td nowrap>OK</td>
                     </tr>
                 @endforeach
             </tbody>
