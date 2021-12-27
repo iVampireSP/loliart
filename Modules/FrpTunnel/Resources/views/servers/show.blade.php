@@ -17,8 +17,8 @@
         <a href="#delete" class="mdui-ripple">{{ tr('Delete') }}</a>
     </div>
 
-    <div class="frpServers">
-        <div id="infomations">
+    <div>
+        <div id="infomations" class="frpServers">
             <div class="mdui-typo-headline mdui-m-t-2">{{ tr('Server Details') }}</div>
             <div class="mdui-table-fluid mdui-m-t-2">
                 <table class="mdui-table mdui-table-hoverable">
