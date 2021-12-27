@@ -84,7 +84,7 @@ class ServerController extends Controller
         userInTeamFail($server->team_id);
         $server->update($request->toArray());
 
-        write(route('frpTunnel.servers.index'));
+        write(route('frpTunnel.servers.show', $server->id));
         writeTeam('Frp Server updated successfully.');
 
         return response()->json(['status' => 1]);
@@ -129,7 +129,7 @@ class ServerController extends Controller
         ];
     }
 
-    public function checkServer($id)
+    public function checkServer($id = null)
     {
         if (is_null($id)) {
             // refresh all

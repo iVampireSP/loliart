@@ -25,6 +25,11 @@ class Kernel extends ConsoleKernel
             dispatch(new RefreshNestJob());
             dispatch(new UpdateNodeInfoJob());
         })->hourly()->name('Wings');
+
+        $schedule->call(function () {
+            (new \Modules\FrpTunnel\Http\Controllers\ServerController())->checkServer();
+        })->everyMinute()->name('FrpServer')->withoutOverlapping()->onOneServer();
+
     }
 
     /**
