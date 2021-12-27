@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Validation\Rule;
 use Modules\FrpTunnel\Entities\FrpServer;
+use Modules\FrpTunnel\Jobs\ServerCheckJob;
 
 class ServerController extends Controller
 {
@@ -126,5 +127,25 @@ class ServerController extends Controller
             'max_port' => 'required|integer|max:65535|min:1',
             'max_tunnels' => 'required|integer|max:65535|min:1',
         ];
+    }
+
+    public function checkServer($id)
+    {
+        if (is_null($id)) {
+            // refresh all
+            $servers = FrpServer::all();
+            FrpServer::chunk(100, function () use ($servers) {
+                foreach ($servers as $server) {
+                    dispatch(new ServerCheckJob($server->id));
+                }
+            });
+        } else {
+            if (FrpServer::where('id', $id)->exists()) {
+                dispatch(new ServerCheckJob($id));
+                return true;
+            } else {
+                return false;
+            }
+        }
     }
 }
