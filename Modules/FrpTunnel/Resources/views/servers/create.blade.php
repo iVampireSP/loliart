@@ -92,16 +92,6 @@
                         <div class="mdui-typo-headline">{{ tr('Limit') }}</div>
 
                         <div class="mdui-textfield mdui-textfield-floating-label">
-                            <label class="mdui-textfield-label">{{ tr('HTTP Port') }}</label>
-                            <input class="mdui-textfield-input" type="text" name="http_port" value="80" />
-                        </div>
-
-                        <div class="mdui-textfield mdui-textfield-floating-label">
-                            <label class="mdui-textfield-label">{{ tr('HTTPS Port') }}</label>
-                            <input class="mdui-textfield-input" type="text" name="https_port" value="443" />
-                        </div>
-
-                        <div class="mdui-textfield mdui-textfield-floating-label">
                             <label class="mdui-textfield-label">{{ tr('Min Port') }}</label>
                             <input class="mdui-textfield-input" type="text" name="min_port" value="10000" />
                         </div>

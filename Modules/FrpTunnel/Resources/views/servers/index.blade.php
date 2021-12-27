@@ -34,9 +34,9 @@
                                 href="{{ route('frpTunnel.servers.show', $server->id) }}">{{ $server->name }}</a>
                         </td>
                         @php($serverInfo = (new \Modules\FrpTunnel\Http\Controllers\FrpController($server->id))->serverInfo())
-                        <td nowrap>{{ $serverInfo['client_counts'] }}</td>
-                        <td nowrap>{{ unitConversion($serverInfo['total_traffic_in']) }}</td>
-                        <td nowrap>{{ unitConversion($serverInfo['total_traffic_out']) }}</td>
+                        <td nowrap>{{ $serverInfo['client_counts'] ?? tr('Wait refresh') }}</td>
+                        <td nowrap>{{ unitConversion($serverInfo['total_traffic_in'] ?? 0 ) }}</td>
+                        <td nowrap>{{ unitConversion($serverInfo['total_traffic_out'] ?? 0) }}</td>
 
                         <td nowrap>
                             @if (!$serverInfo)
