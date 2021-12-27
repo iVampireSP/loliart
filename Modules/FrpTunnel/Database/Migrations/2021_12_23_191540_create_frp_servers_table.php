@@ -32,9 +32,6 @@ class CreateFrpServersTable extends Migration
             $table->boolean('allow_udp')->index()->default(1);
             $table->boolean('allow_stcp')->index()->default(1);
 
-            $table->unsignedSmallInteger('http_port')->default(80)->index()->nullable();
-            $table->unsignedSmallInteger('https_port')->default(443)->index()->nullable();
-
             $table->unsignedSmallInteger('min_port')->default(10000)->index();
             $table->unsignedSmallInteger('max_port')->default(60000)->index();
 
