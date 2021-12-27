@@ -14,4 +14,30 @@
             href="{{ route('frpTunnel.servers.create') }}">{{ tr('New Server') }}</a>
     </div>
 
+    <div class="mdui-table-fluid">
+        <table class="mdui-table mdui-table-hoverable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>{{ tr('Name') }}</th>
+                    <th>{{ tr('Tunnels') }}</th>
+                    <th>{{ tr('Traffic In') }}</th>
+                    <th>{{ tr('Traffic Out') }}</th>
+                </tr>
+            </thead>
+            <tbody class="mdui-typo">
+                @foreach ($servers as $server)
+                    <tr id="item-{{ $server->id }}}">
+                        <td nowrap>{{ $server->id }}</td>
+                        <td nowrap><a href="{{ route('frpTunnel.servers.show', $server->id) }}">{{ $server->name }}</a>
+                        </td>
+                        <td nowrap>{{ $server->tunnels }}</td>
+                        <td nowrap>0</td>
+                        <td nowrap>0</td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+
 @endsection
