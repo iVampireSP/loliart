@@ -16,8 +16,6 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('frpTunnel')->middleware(['teams_permission', 'auth'])->name('frpTunnel.')->group(function () {
     Route::get('/', 'FrpTunnelController@index')->name('index');
 
-    Route::prefix('servers')->name('servers.')->group(function () {
-        Route::get('/', 'ServerController@index')->name('index');
-    });
+    Route::resource('/servers', 'ServerController');
 
 });
