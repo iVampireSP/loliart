@@ -31,6 +31,9 @@ class TeamsPermission
                 session()->forget('team_id');
                 return redirect()->route('teams.index')->with('message', 'Your team does not exist, please create or select a team.');
             } else {
+                if (!userInTeam($team->id)) {
+                    return session()->put('team', 0);
+                }
                 session()->put('team_id', $team->id);
                 app(PermissionRegistrar::class)->setPermissionsTeamId($team->id);
             }
