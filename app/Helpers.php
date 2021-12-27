@@ -122,6 +122,20 @@ if (!function_exists('userEvent')) {
     }
 }
 
+if (!function_exists('teamEvent')) {
+    function teamEvent($event, $data = null, $team_id = 0)
+    {
+        if (!$team_id) {
+            $team_id = session('team_id') ?? 0;
+        }
+
+        broadcast(new TeamEvent($team_id, [
+            'type' => $event,
+            'data' => $data,
+        ]));
+    }
+}
+
 if (!function_exists('success')) {
     function success($data = null)
     {
