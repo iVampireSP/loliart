@@ -14,7 +14,7 @@
             href="{{ route('frpTunnel.servers.create') }}">{{ tr('New Server') }}</a>
     </div>
 
-    <div class="mdui-table-fluid">
+    <div class="mdui-table-fluid frpServers">
         <table class="mdui-table mdui-table-hoverable">
             <thead>
                 <tr>
@@ -50,5 +50,18 @@
             </tbody>
         </table>
     </div>
+
+    <script>
+        m = {
+            e: (type, data) => {
+                switch (type) {
+                    case 'frpServer.tunnel.server.updated':
+                        util.reload('.frpServers')
+
+                        break;
+                }
+            }
+        }
+    </script>
 
 @endsection

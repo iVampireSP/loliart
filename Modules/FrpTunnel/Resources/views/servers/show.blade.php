@@ -243,6 +243,14 @@
             delete: () => {
                 util.delete(route('frpTunnel.servers.destroy', {{ $server->id }}))
             },
+            e: (type, data) => {
+                switch (type) {
+                    case 'frpServer.tunnel.server.updated':
+                        util.reload('.frpServers')
+
+                        break;
+                }
+            }
         }
     </script>
 @endsection
