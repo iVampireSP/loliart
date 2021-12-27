@@ -93,7 +93,7 @@ if (!function_exists('write')) {
 }
 
 if (!function_exists('writeTeam')) {
-    function write($msg, $team_id = 0)
+    function writeTeam($msg, $team_id = 0)
     {
         if (!$team_id) {
             $team_id = session('team_id') ?? 0;
