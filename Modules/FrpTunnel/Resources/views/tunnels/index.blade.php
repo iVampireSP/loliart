@@ -24,6 +24,7 @@
                         <th>{{ tr('Protocol') }}</th>
                         <th>{{ tr('Local Address') }}</th>
                         <th>{{ tr('Remote Address or Domain') }}</th>
+                        <th>{{ tr('Online') }}</th>
                     </tr>
                 </thead>
                 <tbody class="mdui-typo">
@@ -39,6 +40,14 @@
                             @else
                                 <td>{{ $tunnel->server->server_address . ':' . $tunnel->remote_port }}</td>
                             @endif
+
+                            <td nowrap>
+                                @if (!false)
+                                    <i class="mdui-icon material-icons mdui-text-color-red">close</i>
+                                @else
+                                    <i class="mdui-icon material-icons mdui-text-color-green">done</i>
+                                @endif
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
