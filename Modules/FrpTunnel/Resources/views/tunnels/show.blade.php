@@ -4,10 +4,10 @@
     @include('frptunnel::layouts.menu')
 @endsection
 
-@section('title', 'New Tunnel')
+@section('title', $tunnel->name)
 
 @section('content')
-    <h1 class="mdui-typo-display-1">{{ tr('New Tunnel') }}</h1>
+    <h1 class="mdui-typo-display-1">{{ $tunnel->name }}</h1>
 
     <div class="mdui-tab" mdui-tab>
         <a href="#infomations" class="mdui-ripple">{{ tr('Information') }}</a>
