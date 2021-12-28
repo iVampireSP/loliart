@@ -5,7 +5,7 @@
 @section('content')
 
     <div class="mdui-typo-display-1">{{ tr('Balance') }}</div>
-    <span class="mdui-typo-display-3 balance"><small>HKD </small>{{ auth()->user()->balance }}</span>
+    <span class="mdui-typo-display-3 balance"><small>GBP </small>{{ auth()->user()->balance }}</span>
     <div class="mdui-typo-display-1 mdui-m-t-4">{{ tr('Payments') }}</div>
 
     @if (is_null(auth()->user()->stripe_id))
