@@ -26,7 +26,7 @@ class CreateFrpTunnelsTable extends Migration
 
             $table->unsignedSmallInteger('remote_port')->index()->nullable();
 
-            $table->uuid('client_token')->index()->unique();
+            $table->string('client_token')->index()->unique();
 
             $table->string('sk')->index()->nullable();
 
