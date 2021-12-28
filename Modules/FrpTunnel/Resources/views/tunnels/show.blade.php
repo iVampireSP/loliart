@@ -83,7 +83,7 @@
                 <div class="mdui-col-sm-12">
                     <div id="choose-addr">
                         <div class="mdui-row mdui-p-t-4">
-                            <div class="mdui-col-xs-12">
+                            <div class="mdui-col-xs-12 mdui-p-b-3">
                                 <span class="mdui-typo-headline">{{ tr('Local Network Address') }}</span>
                                 <p>{{ tr('The address of the mapped host, such as 127.0 0.1:80') }}</p>
                                 <div class="mdui-textfield mdui-textfield-floating-label">
