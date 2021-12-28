@@ -14,4 +14,8 @@ class FrpTunnel extends Model
         'sk', 'status', 'server_id', 'team_id',
     ];
 
+    public function server() {
+        return $this->belongsTo(FrpServer::class);
+    }
+
 }

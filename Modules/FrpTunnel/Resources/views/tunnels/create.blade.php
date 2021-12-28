@@ -93,7 +93,7 @@
                             </p>
                             <div class="mdui-textfield mdui-textfield-floating-label">
                                 <label class="mdui-textfield-label">STCP {{ tr('secret key') }}</label>
-                                <input class="mdui-textfield-input" type="text" name="sk" s />
+                                <input class="mdui-textfield-input" type="text" name="sk" />
                             </div>
                         </div>
                     </div>
@@ -131,5 +131,6 @@
                 $('#sk-input').show()
             }
         })
+
     </script>
 @endsection
