@@ -115,7 +115,7 @@
             }
         }
 
-        $('#protocol').change(function() {
+        $('#protocol').change(() => {
             let val = $('#protocol').val()
             if (val == 'http' || val == 'https') {
                 $('#sk-input').hide()
