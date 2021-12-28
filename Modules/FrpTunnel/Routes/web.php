@@ -17,5 +17,6 @@ Route::prefix('frpTunnel')->middleware(['teams_permission', 'auth'])->name('frpT
     Route::get('/', 'FrpTunnelController@index')->name('index');
 
     Route::resource('/servers', 'ServerController');
+    Route::resource('/tunnels', 'TunnelController');
 
 });
