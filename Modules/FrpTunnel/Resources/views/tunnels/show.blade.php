@@ -12,6 +12,7 @@
     <div class="mdui-tab" mdui-tab>
         <a href="#infomations" class="mdui-ripple">{{ tr('Information') }}</a>
         <a href="#configuration" class="mdui-ripple">{{ tr('Basic Configuration') }}</a>
+        <a href="#configure-file" class="mdui-ripple">{{ tr('Configure file') }}</a>
         <a href="#delete" class="mdui-ripple">{{ tr('Delete') }}</a>
     </div>
 
@@ -28,7 +29,7 @@
                     </div>
 
                     <div class="mdui-row">
-                        <div class="mdui-col-xs-6">
+                        <div class="mdui-col-xs-4">
                             <div id="choose-protocol">
                                 <div class="mdui-row mdui-p-t-4 mdui-p-l-1 mdui-m-b-2">
                                     <span class="mdui-typo-headline">{{ tr('Protocol') }}</span>
@@ -44,7 +45,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="mdui-col-xs-6">
+                        <div class="mdui-col-xs-4">
                             <div id="choose-server">
                                 <div class="mdui-row mdui-p-t-4 mdui-p-l-1 mdui-m-b-2">
                                     <span class="mdui-typo-headline">{{ tr('Choose Server') }}</span>
@@ -55,6 +56,23 @@
                                             <option value="{{ $server->id }}">{{ $server->name }}</option>
                                         @endforeach
                                     </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mdui-col-xs-4">
+                            <div id="reset-token">
+                                <div class="mdui-row mdui-p-t-4 mdui-p-l-1 mdui-m-b-2">
+                                    <span class="mdui-typo-headline">{{ tr('Reset token') }}</span>
+                                    <br />
+                                    <div class="mdui-col">
+                                        <label class="mdui-checkbox"
+                                            mdui-tooltip="{content: 'If your tunnel configuration\'s name has been leaked, it may be useful to check this. When you check and submit, the client using the tunnel will be forced to offline, and you must also apply for a new tunnel profile.', position: 'right'}">
+                                            <input type="checkbox" id="reset_token" name="reset_token" value="1" />
+                                            <i class="mdui-checkbox-icon"></i>
+                                            {{ tr('Reset tunnel token.') }}
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -122,12 +140,23 @@
             onclick="event.preventDefault();m.delete()">{{ tr('Delete Tunnel') }}</button>
     </div>
 
+    <div id="configure-file">
+        <div class="mdui-textfield">
+            <textarea readonly class="mdui-textfield-input" id="frp-configure-file"></textarea>
+            <div class="mdui-textfield-helper">{{ tr('This field should be security sensitive, Please use ') }} <kbd>Ctrl
+                    + C {{ tr('to copy the configuration.') }}</kbd></div>
+        </div>
+    </div>
 
     <script>
         m = {
             update: (ele) => {
                 let arr = $(ele).serializeArray();
-                util.put(route('frpTunnel.tunnels.update', {{ $tunnel->id }}), arr)
+                util.put(route('frpTunnel.tunnels.update', {{ $tunnel->id }}), arr);
+                $('#reset_token').prop('checked', 0)
+                setTimeout(() => {
+                    util.reload('.reload-config')
+                }, 500)
             },
             change: () => {
                 let val = $('#protocol').val()
@@ -145,9 +174,57 @@
                     $('#sk-input').show()
                 }
             },
+            tunnel_config: {},
             delete: () => {
                 util.delete(route('frpTunnel.tunnels.destroy', {{ $tunnel->id }}))
             },
+            put_config: () => {
+                let local_addr = m.tunnel_config.local_address.split(':')
+                let config = `[common]
+server_addr = ${m.tunnel_config.server.server_address}
+server_port = ${m.tunnel_config.server.server_port}
+user = client
+token = ${m.tunnel_config.server.token}
+
+# Team ${m.tunnel_config.team.name}'s ${m.tunnel_config.name} at server ${m.tunnel_config.server.name}
+[${m.tunnel_config.client_token}]
+type = ${m.tunnel_config.protocol}
+local_ip = ${local_addr[0]}
+local_port = ${local_addr[1]}
+`;
+
+                if (m.tunnel_config.protocol == 'tcp' || m.tunnel_config.protocol == 'udp') {
+                    config += `remote_port = ${m.tunnel_config.remote_port}
+
+`;
+                } else if (m.tunnel_config.protocol == 'http' || m.tunnel_config.protocol == 'https') {
+                    config += `custom_domains = ${m.tunnel_config.custom_domain}
+`;
+                } else if (m.tunnel_config.protocol == 'stcp') {
+                    let random = Math.floor(Math.random() * 50);
+                    config += `sk = ${m.tunnel_config.sk}
+
+#------ Visitor config file --------
+[common]
+server_addr = ${m.tunnel_config.server.server_address}
+server_port = ${m.tunnel_config.server.server_port}
+user = client
+token = ${m.tunnel_config.server.token}
+
+[client_visitor_${random}]
+type = stcp
+role = visitor
+server_name = ${m.tunnel_config.client_token}
+sk = ${m.tunnel_config.sk}
+bind_addr = 127.0.0.1
+bind_port = ${local_addr[1]}
+
+#------ Visitor config file --------
+`
+                }
+
+                $('#frp-configure-file').val(config)
+            }
         }
 
         $(() => {
@@ -178,4 +255,12 @@
 
         $('#protocol').change(m.change)
     </script>
+
+
+    <div class="reload-config">
+        <script>
+            m.tunnel_config = {!! $tunnel !!}
+            m.put_config()
+        </script>
+    </div>
 @endsection
