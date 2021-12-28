@@ -68,6 +68,11 @@ $(() => {
         util.menu.update();
         ui.mutation()
         currentRoute = route().current();
+
+        if (typeof m != 'undefined' && typeof m.loaded != 'undefined') {
+            m.loaded();
+        }
+
         // if ($('.pages-link').length > 0) {
         //     if (!links_loaded) {
         //         util.reload('.pages-link')
