@@ -7,22 +7,17 @@
                 <div class="mdui-list-item-content">Frp Tunnel</div>
             </a>
 
-            <a class="mdui-list-item mdui-ripple" href="{{ route('wings.servers.index') }}">
+            <a class="mdui-list-item mdui-ripple" href="{{ route('frpTunnel.tunnels.index') }}">
                 <span class="mdui-list-item-icon mdui-icon material-icons-outlined">view_list</span>
                 <div class="mdui-list-item-content">{{ tr('All Tunnel') }}</div>
             </a>
 
-            <a class="mdui-list-item mdui-ripple" href="{{ route('wings.servers.create') }}">
+            <a class="mdui-list-item mdui-ripple" href="{{ route('frpTunnel.tunnels.create') }}">
                 <span class="mdui-list-item-icon mdui-icon material-icons-outlined">add</span>
                 <div class="mdui-list-item-content">{{ tr('Create Tunnel') }}</div>
             </a>
 
-            <a class="mdui-list-item mdui-ripple" href="{{ route('wings.accounts.index') }}">
-                <span class="mdui-list-item-icon mdui-icon material-icons-outlined">manage_accounts</span>
-                <div class="mdui-list-item-content">{{ tr('Accounts') }}</div>
-            </a>
-
-            <a class="mdui-list-item mdui-ripple" href="{{ route('wings.accounts.index') }}">
+            <a class="mdui-list-item mdui-ripple" href="{{ route('frpTunnel.tunnels.index') }}">
                 <span class="mdui-list-item-icon mdui-icon material-icons-outlined">traffic</span>
                 <div class="mdui-list-item-content">{{ tr('Traffic') }}</div>
             </a>
