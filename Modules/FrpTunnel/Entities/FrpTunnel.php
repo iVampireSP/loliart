@@ -2,17 +2,16 @@
 
 namespace Modules\FrpTunnel\Entities;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class FrpTunnel extends Model
 {
     use HasFactory;
 
-    protected $fillable = [];
-    
-    protected static function newFactory()
-    {
-        return \Modules\FrpTunnel\Database\factories\FrpTunnelFactory::new();
-    }
+    protected $fillable = [
+        'name', 'protocol', 'custom_domain', 'local_address', 'remote_port', 'client_token',
+        'sk', 'status', 'server_id', 'team_id',
+    ];
+
 }
