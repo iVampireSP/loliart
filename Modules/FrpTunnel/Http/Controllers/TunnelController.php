@@ -5,10 +5,10 @@ namespace Modules\FrpTunnel\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use Modules\FrpTunnel\Entities\FrpServer;
 use Modules\FrpTunnel\Entities\FrpTunnel;
-use Ramsey\Uuid\Uuid;
 
 class TunnelController extends Controller
 {
@@ -18,7 +18,9 @@ class TunnelController extends Controller
      */
     public function index()
     {
-        $tunnels = FrpTunnel::where('team_id', session('team_id'))->with('server')->simplePaginate(10);
+        $tunnels = FrpTunnel::where('team_id', session('team_id'))->with(['server' => function ($query) {
+            $query->select(['name', 'id', 'server_address', 'token', 'server_port']);
+        }])->simplePaginate(10);
         return view('frptunnel::tunnels.index', compact('tunnels'));
     }
 
@@ -29,6 +31,9 @@ class TunnelController extends Controller
     public function create()
     {
         $servers = FrpServer::where('team_id', session('team_id'))->get();
+        if ($servers->isEmpty()) {
+            return view('frptunnel::servers.create', compact('servers'));
+        }
         return view('frptunnel::tunnels.create', compact('servers'));
     }
 
@@ -46,11 +51,24 @@ class TunnelController extends Controller
             'server_id' => 'required',
         ]);
 
+        if (!strpos($request->local_address, ':')) {
+            write('Local address must contain port.');
+            return response()->json(['status', 0]);
+        }
+
+        $server = FrpServer::find($request->server_id);
+        if (is_null($server)) {
+            write('Server not found.');
+            return response()->json(['status', 0], 404);
+        }
+
         if ($request->protocol == 'http' || $request->protocol == 'https') {
             $request->remote_port = 0;
             $request->validate([
                 "custom_domain" => 'required|unique:frp_tunnels,custom_domain',
             ]);
+
+            $request->custom_domain = strtolower($request->custom_domain);
 
             if (str_contains($request->custom_domain, ',')) {
                 write('Only support one domain per request');
@@ -59,13 +77,19 @@ class TunnelController extends Controller
         } elseif ($request->protocol == 'tcp' || $request->protocol == 'udp') {
             $request->custom_domain = null;
             $request->validate([
-                "remote_port" => 'required',
+                "remote_port" => "required|integer|max:$server->max_port|min:$server->min_port|bail",
             ]);
 
-            if ($request->remote_port < 1025 || $request->remote_port >= 65535) {
-                write('The port must be between 1025 and 65535');
-                return response()->json(['status' => 0]);
+            if ($request->remote_port == $server->server_port || $request->remote_port == $server->dashboard_port) {
+                write('The remote port cannot be used.');
             }
+
+            $remote_port_search = FrpTunnel::where('server_id', $server->id)->where('remote_port', $request->remote_port)->where('protocol', strtolower($request->protocol))->exists();
+            if ($remote_port_search) {
+                write('The remote port is already in use.');
+                return response()->json(['status', 0]);
+            }
+
         } else if ($request->protocol == 'stcp') {
             $request->custom_domain = null;
             $request->remote_port = null;
@@ -78,13 +102,21 @@ class TunnelController extends Controller
         }
 
         $data = $request->toArray();
+        $data['protocol'] = strtolower($data['protocol']);
 
-        $data['client_token'] = Uuid::uuid6()->toString();
+        $test_protocol = 'allow_' . $data['protocol'];
+
+        if (!$server->$test_protocol) {
+            write('The protocol is not allowed by the server.');
+            return response()->json(['status' => 0]);
+        }
+
+        $data['client_token'] = Str::random(50);
         $data['team_id'] = session('team_id');
 
-        FrpTunnel::create($data);
+        $tunnel = FrpTunnel::create($data);
 
-        // write(route());
+        write(route('frpTunnel.tunnels.show', $tunnel->id));
         writeTeam('FrpTunnel ' . $request->name . ' created.');
         return response()->json(['status' => 1]);
     }
@@ -97,6 +129,9 @@ class TunnelController extends Controller
     public function show(FrpTunnel $tunnel)
     {
         userInTeamFail($tunnel->team_id);
+        $tunnel->load(['team', 'server' => function ($query) {
+            $query->select(['name', 'id', 'server_address', 'token', 'server_port']);
+        }]);
         $servers = FrpServer::where('team_id', session('team_id'))->get();
         return view('frptunnel::tunnels.show', compact('servers', 'tunnel'));
     }
@@ -119,6 +154,11 @@ class TunnelController extends Controller
      */
     public function update(Request $request, FrpTunnel $tunnel)
     {
+        if (!strpos($request->local_address, ':')) {
+            write('Local address must contain port.');
+            return response()->json(['status', 0]);
+        }
+
         userInTeamFail($tunnel->team_id);
 
         $request->validate([
@@ -127,6 +167,12 @@ class TunnelController extends Controller
             'local_address' => 'required',
             'server_id' => 'required',
         ]);
+
+        $server = FrpServer::find($request->server_id);
+        if (is_null($server)) {
+            write('Server not found.');
+            return response()->json(['status', 0], 404);
+        }
 
         $data = $request->toArray();
 
@@ -142,13 +188,19 @@ class TunnelController extends Controller
             }
         } elseif ($request->protocol == 'tcp' || $request->protocol == 'udp') {
             $request->validate([
-                "remote_port" => 'required',
+                "remote_port" => "required|integer|max:$server->max_port|min:$server->min_port|bail",
             ]);
 
-            if ($request->remote_port < 1025 || $request->remote_port >= 65535) {
-                write('The port must be between 1025 and 65535');
-                return response()->json(['status' => 0]);
+            if ($request->remote_port == $server->server_port || $request->remote_port == $server->dashboard_port) {
+                write('The remote port cannot be used.');
             }
+
+            $remote_port_search = FrpTunnel::where('server_id', $server->id)->where('remote_port', $request->remote_port)->where('protocol', strtolower($request->protocol))->first();
+            if ($remote_port_search->id !== $tunnel->id) {
+                write('The remote port is already in use.');
+                return response()->json(['status', 0]);
+            }
+
         } else if ($request->protocol == 'stcp') {
             $request->validate([
                 "sk" => 'required|alpha_dash|min:3|max:15',
@@ -156,6 +208,19 @@ class TunnelController extends Controller
         } else {
             write('Unsupported protocol.');
             return response()->json(['status' => 0]);
+        }
+
+        $data['protocol'] = strtolower($data['protocol']);
+
+        $test_protocol = 'allow_' . $data['protocol'];
+
+        if (!$server->$test_protocol) {
+            write('The protocol is not allowed by the server.');
+            return response()->json(['status' => 0]);
+        }
+
+        if ($request->reset_token) {
+            $data['client_token'] = Str::random(50);
         }
 
         $data['local_address'] = trim($data['local_address']);
