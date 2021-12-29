@@ -29,12 +29,16 @@ class PortManagerController extends Controller
             return $this->failed('Tunnel not found.');
         }
 
+        if ($request->content['proxy_type'] !== $tunnel->protocol) {
+            return $this->failed('Tunnel proxy type not allowed.');
+        }
+
         if ($request->content['proxy_type'] == 'tcp' || $request->content['proxy_type'] == 'udp') {
-            if ($request->content['proxy_type'] == $tunnel->proxy_type || $request->content['remote_port'] != $tunnel->remote_port || $tunnel->remote_port < 1024) {
+            if ($request->content['remote_port'] !== $tunnel->remote_port || $tunnel->remote_port < $server->min_port || $tunnel->remote_port > $server->max_port) {
                 return $this->failed('Tunnel not allowed.');
             }
         } elseif ($request->content['proxy_type'] == 'http' || $request->content['proxy_type'] == 'https') {
-            if ($request->content['proxy_type'] == $tunnel->proxy_type || $request->content['custom_domains'][0] != $tunnel->custom_domain) {
+            if ($request->content['custom_domains'][0] != $tunnel->custom_domain) {
                 return $this->failed('Tunnel configuration error.');
             }
         }
