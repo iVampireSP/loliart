@@ -43,7 +43,7 @@ class PortManagerController extends Controller
             }
         }
 
-        writeTeam('Tunnel ' . $tunnel->name . 'login success.', $tunnel->team_id);
+        writeTeam('Tunnel ' . $tunnel->name . ' login success.', $tunnel->team_id);
         teamEvent('frpServer.tunnel.server.updated', null, $tunnel->team_id);
         teamEvent('frpServer.tunnels.updated', null, $tunnel->team_id);
 
