@@ -59,30 +59,43 @@
                             <td>{{ $cache['last_close_time'] ?? tr('Wait refresh') }}</td>
                         </tr>
 
-                        <tr>
-                            <td>{{ tr('Type') }}</td>
-                            <td>{{ $cache['type'] ?? tr('Wait refresh') }}</td>
-                        </tr>
+                        @if (isset($cache['type']))
+                            <tr>
+                                <td>{{ tr('Type') }}</td>
+                                <td>{{ $cache['type'] ?? tr('Wait refresh') }}</td>
+                            </tr>
+                        @endif
 
-                        <tr>
-                            <td>{{ tr('Use Encryption') }}</td>
-                            <td>{{ $cache['use_encryption'] ?? tr('Wait refresh') }}</td>
-                        </tr>
+                        @if (isset($cache['use_encryption']))
+                            <tr>
+                                <td>{{ tr('Use Encryption') }}</td>
+                                <td>{{ $cache['use_encryption'] ?? tr('Wait refresh') }}</td>
+                            </tr>
+                        @endif
 
-                        <tr>
-                            <td>{{ tr('Use compression') }}</td>
-                            <td>{{ $cache['use_compression'] ?? tr('Wait refresh') }}</td>
-                        </tr>
+                        @if (isset($cache['use_compression']))
+                            <tr>
+                                <td>{{ tr('Use compression') }}</td>
+                                <td>{{ $cache['use_compression'] ?? tr('Wait refresh') }}</td>
+                            </tr>
+                        @endif
 
-                        <tr>
-                            <td>{{ tr('Proxy Protocol Version') }}</td>
-                            <td>{{ $cache['proxy_protocol_version'] ?? tr('Wait refresh') }}</td>
-                        </tr>
 
-                        <tr>
-                            <td>{{ tr('Bandwidth limit') }}</td>
-                            <td>{{ $cache['bandwidth_limit'] ?? tr('Wait refresh') }}</td>
-                        </tr>
+                        @if (isset($cache['proxy_protocol_version']))
+                            <tr>
+                                <td>{{ tr('Proxy Protocol Version') }}</td>
+                                <td>{{ $cache['proxy_protocol_version'] ?? tr('Wait refresh') }}</td>
+                            </tr>
+                        @endif
+
+                        @if (isset($cache['bandwidth_limit']))
+                            <tr>
+                                <td>{{ tr('Bandwidth limit') }}</td>
+                                <td>{{ $cache['bandwidth_limit'] ?? tr('Wait refresh') }}</td>
+                            </tr>
+                        @endif
+
+
 
                     </tbody>
                 </table>
