@@ -14,47 +14,7 @@ class FrpTunnelController extends Controller
      */
     public function index()
     {
-
         return view('frptunnel::index');
-        $user = auth()->user();
-
-        // dd($subscriptions = $user->subscriptions()->active()->get()->toArray());
-        // $user->newSubscription(
-        //     'test_order', 'price_1K9JLiHNOuHfVX37944m2fmE'
-        // )->create($user->defaultPaymentMethod()->id);
-        // $user->cost(1000);
-        // return view('index.cn');
-        //     // dd($user->paymentMethods());
-        //     // $user->defaultPaymentMethod()->id
-        //     try {
-        //         $checkout = $user->checkoutCharge(100, 'T-Shirt', 5);
-        //     } catch (IncompletePayment $exception) {
-        //         dd($exception);
-        //         return redirect()->route(
-        //             'cashier.payment',
-        //             [$exception->payment->id, 'redirect' => route('home')]
-        //         );
-        //     }
-
-        // dd($user->charge(100, 'pm_1K8kVXKX2JWJed1KgyMhEJrg'));
-        // dd($user->invoiceFor('One Time Fee', 500));
-        // dd($user->invoices());
-        //    $checkout = $user->checkout('price_1K7aOIKX2JWJed1K2GC3crSr', [
-        //        'success_url' => route('order.success'),
-        //        'cancel_url' => route('order.cancel'),
-        //    ]);
-//        dd($checkout);
-
-        // $order = new OrderController();
-        // $checkout = $order->checkout(100, 'Test', 1);
-        // return view('order.checkout', [
-        //     'checkout' => $checkout,
-        // ]);
-//        dd($user->checkoutCharge(1200, 'T-Shirt', 5)->toArray());
-//        dd($user->balance());
-
-//        return auth()->user()->redirectToBillingPortal();
-//        return view('frptunnel::index');
     }
 
     /**
