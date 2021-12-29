@@ -14,5 +14,5 @@ use Illuminate\Http\Request;
  */
 
 Route::prefix('frpTunnel')->name('api.frpTunnel.')->group(function () {
-    Route::get('/handler/{tunnel}', 'PortManagerController@handler')->name('handler');
+    Route::post('/handler/{server}', 'PortManagerController@handler')->name('handler');
 });
