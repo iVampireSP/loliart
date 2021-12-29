@@ -21,6 +21,7 @@
                     <th>ID</th>
                     <th>{{ tr('Name') }}</th>
                     <th>{{ tr('Client Counts') }}</th>
+                    <th>{{ tr('Connections') }}</th>
                     <th>{{ tr('Traffic In') }}</th>
                     <th>{{ tr('Traffic Out') }}</th>
                     <th>{{ tr('Health') }}</th>
@@ -35,6 +36,7 @@
                         </td>
                         @php($serverInfo = (new \Modules\FrpTunnel\Http\Controllers\FrpController($server->id))->serverInfo())
                         <td nowrap>{{ $serverInfo['client_counts'] ?? tr('Wait refresh') }}</td>
+                        <td nowrap>{{ $serverInfo['cur_conns'] ?? tr('Wait refresh') }}</td>
                         <td nowrap>{{ unitConversion($serverInfo['total_traffic_in'] ?? 0 ) }}</td>
                         <td nowrap>{{ unitConversion($serverInfo['total_traffic_out'] ?? 0) }}</td>
 
