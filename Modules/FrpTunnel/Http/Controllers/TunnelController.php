@@ -196,7 +196,7 @@ class TunnelController extends Controller
             }
 
             $remote_port_search = FrpTunnel::where('server_id', $server->id)->where('remote_port', $request->remote_port)->where('protocol', strtolower($request->protocol))->first();
-            if ($remote_port_search->id !== $tunnel->id) {
+            if (!is_null($remote_port_search) && $remote_port_search->id !== $tunnel->id) {
                 write('The remote port is already in use.');
                 return response()->json(['status', 0]);
             }
