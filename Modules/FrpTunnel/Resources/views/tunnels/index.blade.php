@@ -34,6 +34,8 @@
                             <td><a href="{{ route('frpTunnel.tunnels.show', $tunnel->id) }}">{{ $tunnel->name }}</a>
                             </td>
                             <td>{{ Str::upper($tunnel->protocol) }}</td>
+                            @php($cache = Cache::get('frpTunnel_data_' . $tunnel->client_token, []))
+
                             <td>{{ $tunnel->local_address }}</td>
                             @if ($tunnel->protocol == 'http' || $tunnel->protocol == 'https')
                                 <td>{{ $tunnel->custom_domain }}</td>
@@ -41,11 +43,11 @@
                                 <td>{{ $tunnel->server->server_address . ':' . $tunnel->remote_port }}</td>
                             @endif
 
-                            <td nowrap>
-                                @if (!false)
-                                    <i class="mdui-icon material-icons mdui-text-color-red">close</i>
-                                @else
+                            <td>
+                                @if ($cache['status'] ?? false === 'online')
                                     <i class="mdui-icon material-icons mdui-text-color-green">done</i>
+                                @else
+                                    <i class="mdui-icon material-icons mdui-text-color-red">close</i>
                                 @endif
                             </td>
                         </tr>
