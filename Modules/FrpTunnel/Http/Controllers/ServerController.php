@@ -5,6 +5,7 @@ namespace Modules\FrpTunnel\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Validation\Rule;
 use Modules\FrpTunnel\Entities\FrpServer;
 use Modules\FrpTunnel\Jobs\ServerCheckJob;
@@ -156,5 +157,54 @@ class ServerController extends Controller
                 return false;
             }
         }
+    }
+
+    public function scanTunnel($server_id)
+    {
+        $server = FrpServer::find($server_id);
+        if (is_null($server)) {
+            return false;
+        }
+
+        $frp = new FrpController($server->id);
+
+        if ($server->allow_http) {
+            $proxies = $frp->httpTunnels()['proxies'];
+            $this->cacheProxies($proxies);
+        }
+
+        if ($server->allow_https) {
+            $proxies = $frp->httpsTunnels()['proxies'];
+            $this->cacheProxies($proxies);
+        }
+
+        if ($server->allow_tcp) {
+            $proxies = $frp->tcpTunnels()['proxies'];
+            $this->cacheProxies($proxies);
+        }
+
+        if ($server->allow_udp) {
+            $proxies = $frp->udpTunnels()['proxies'];
+            $this->cacheProxies($proxies);
+        }
+
+        if ($server->allow_stcp) {
+            $proxies = $frp->stcpTunnels()['proxies'];
+            $this->cacheProxies($proxies);
+        }
+    }
+
+    private function cacheProxies($proxies)
+    {
+        foreach ($proxies as $proxy) {
+            $cache_key = 'frpTunnel_data_' . $proxy['name'];
+            Cache::put($cache_key, $proxy, 90);
+        }
+    }
+
+    public function getTunnel($name)
+    {
+        $cache_key = 'frpTunnel_data_' . $name;
+        return Cache::get($cache_key);
     }
 }
