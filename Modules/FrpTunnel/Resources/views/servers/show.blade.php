@@ -244,8 +244,8 @@ dashboard_user = {{ $server->dashboard_user }}
 dashboard_pwd = {{ $server->dashboard_password }}
 
 [plugin.port-manager]
-addr = {{ config('app.url') }}/api/frpTunnel/port-manager/handler
-path = /{{ $server->id }}
+addr = {{ route('api.frpTunnel.handler', $server->id) }}
+path = /
 ops = NewProxy
 
     </textarea>
