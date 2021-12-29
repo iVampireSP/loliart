@@ -57,6 +57,12 @@ class TunnelController extends Controller
         }
 
         $server = FrpServer::find($request->server_id);
+
+        if (FrpTunnel::where('server_id', $server->id)->count() > $server->max_tunnels) {
+            write('This server is full.');
+            return response()->json(['status', 0]);
+        }
+
         if (is_null($server)) {
             write('Server not found.');
             return response()->json(['status', 0], 404);
