@@ -24,6 +24,36 @@ class FrpController extends Controller
         return $this->cache('serverinfo', '/serverinfo');
     }
 
+    public function tcpTunnels()
+    {
+        return $this->cache('tcpTunnels', '/proxy/tcp');
+    }
+
+    public function udpTunnels()
+    {
+        return $this->cache('udpTunnels', '/proxy/udp');
+    }
+
+    public function httpTunnels()
+    {
+        return $this->cache('httpTunnels', '/proxy/http');
+    }
+
+    public function httpsTunnels()
+    {
+        return $this->cache('httpsTunnels', '/proxy/https');
+    }
+
+    public function stcpTunnels()
+    {
+        return $this->cache('stcpTunnels', '/proxy/stcp');
+    }
+
+    public function traffic($name)
+    {
+        return $this->cache('traffic_' . $name, '/traffic/' . $name);
+    }
+
     protected function get($url)
     {
         $addr = 'http://' . $this->frpServer->server_address . ':' . $this->frpServer->dashboard_port . '/api' . $url;
