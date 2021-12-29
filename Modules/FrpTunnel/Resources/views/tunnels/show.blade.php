@@ -183,7 +183,6 @@
                 let config = `[common]
 server_addr = ${m.tunnel_config.server.server_address}
 server_port = ${m.tunnel_config.server.server_port}
-user = client
 token = ${m.tunnel_config.server.token}
 
 # Team ${m.tunnel_config.team.name}'s ${m.tunnel_config.name} at server ${m.tunnel_config.server.name}
