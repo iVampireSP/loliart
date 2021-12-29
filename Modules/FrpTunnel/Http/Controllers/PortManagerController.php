@@ -39,6 +39,8 @@ class PortManagerController extends Controller
             }
         }
 
+        writeTeam('Tunnel ' . $tunnel->name . 'login success.', $tunnel->team_id);
+
         return $this->success();
     }
 
