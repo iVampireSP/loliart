@@ -14,6 +14,7 @@
     <div class="mdui-tab" mdui-tab>
         <a href="#infomations" class="mdui-ripple">{{ tr('Information') }}</a>
         <a href="#configuration" class="mdui-ripple">{{ tr('Basic Configuration') }}</a>
+        <a href="#serverIni" class="mdui-ripple">Frps {{ tr('Config file') }}</a>
         <a href="#delete" class="mdui-ripple">{{ tr('Delete') }}</a>
     </div>
 
@@ -224,11 +225,42 @@
             onclick="event.preventDefault();m.delete()">{{ tr('Delete Server') }}</button>
     </div>
 
+    <div id="serverIni">
+        <div class="mdui-textfield">
+            <textarea readonly class="mdui-textfield-input">[common]
+bind_port = {{ $server->server_port }}
+
+token = {{ $server->token }}
+
+@if ($server->allow_http)
+vhost_http_port = 80
+@endif
+@if ($server->allow_https)
+vhost_https_port = 443
+@endif
+
+dashboard_port = {{ $server->dashboard_port }}
+dashboard_user = {{ $server->dashboard_user }}
+dashboard_pwd = {{ $server->dashboard_password }}
+
+[plugin.port-manager]
+addr = {{ config('app.url') }}/api/frpTunnel/port-manager/handler
+path = /{{ $server->id }}
+ops = NewProxy
+
+    </textarea>
+            <div class="mdui-textfield-helper">{{ tr('Put configure file to your') }} frps.ini</div>
+        </div>
+    </div>
+
     <script>
         m = {
             update: (ele) => {
                 let arr = $(ele).serializeArray();
                 util.put(route('frpTunnel.servers.update', {{ $server->id }}), arr)
+                $(() => {
+                    util.reload('#serverIni')
+                }, 500)
             },
             delete: () => {
                 util.delete(route('frpTunnel.servers.destroy', {{ $server->id }}))
