@@ -24,6 +24,8 @@
                         <th>{{ tr('Protocol') }}</th>
                         <th>{{ tr('Local Address') }}</th>
                         <th>{{ tr('Remote Address or Domain') }}</th>
+                        <th>{{ tr('Download') }}</th>
+                        <th>{{ tr('Upload') }}</th>
                         <th>{{ tr('Online') }}</th>
                     </tr>
                 </thead>
@@ -42,6 +44,10 @@
                             @else
                                 <td>{{ $tunnel->server->server_address . ':' . $tunnel->remote_port }}</td>
                             @endif
+
+                            <td>{{ unitConversion($cache['today_traffic_in'] ?? 0) }}</td>
+
+                            <td>{{ unitConversion($cache['today_traffic_out'] ?? 0) }}</td>
 
                             <td>
                                 @if ($cache['status'] ?? false === 'online')
