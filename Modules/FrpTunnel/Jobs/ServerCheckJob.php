@@ -10,6 +10,7 @@ use Modules\FrpTunnel\Entities\FrpServer;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Modules\FrpTunnel\Http\Controllers\FrpController;
+use Modules\FrpTunnel\Http\Controllers\ServerController;
 
 class ServerCheckJob implements ShouldQueue
 {
@@ -37,6 +38,8 @@ class ServerCheckJob implements ShouldQueue
         $frpServer = FrpServer::find($this->id);
         if (!is_null($frpServer)) {
             $frp = new FrpController($this->id);
+            $s = new ServerController();
+            $s->scanTunnel($frpServer->id);
             if ($frp) {
                 teamEvent('frpServer.tunnel.server.updated', null, $frpServer->team_id);
             }
