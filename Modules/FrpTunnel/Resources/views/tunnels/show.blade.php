@@ -25,7 +25,13 @@
                     <tbody class="mdui-typo">
                         <tr>
                             <td>{{ tr('Status') }}</td>
-                            <td>{{ $cache['status'] ?? tr('Wait refresh') }}</td>
+                            <td>
+                                @if ($cache['status'] ?? false === 'online')
+                                    <i class="mdui-icon material-icons mdui-text-color-green">done</i>
+                                @else
+                                    <i class="mdui-icon material-icons mdui-text-color-red">close</i>
+                                @endif
+                            </td>
                         </tr>
 
                         <tr>
