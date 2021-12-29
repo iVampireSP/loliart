@@ -4760,6 +4760,226 @@ Please enter domain name (e.g node.example.com) to be used for connecting to the
                 'created_at' => '2021-12-28 19:11:02',
                 'updated_at' => '2021-12-28 19:11:02',
             ),
+            474 => 
+            array (
+                'id' => 532,
+                'language' => 'zh',
+                'string' => 'Config file',
+                'output' => '配置文件',
+                'sign' => 'language_zh_7ed8e56da5be1cfed4c5a791637645bf',
+                'created_at' => '2021-12-29 15:12:13',
+                'updated_at' => '2021-12-29 15:12:13',
+            ),
+            475 => 
+            array (
+                'id' => 533,
+                'language' => 'zh',
+                'string' => 'Put configure file to your frps.ini',
+                'output' => '将配置文件放入frps.ini',
+                'sign' => 'language_zh_e8c31fc52f3131cec6956e2724e0b83c',
+                'created_at' => '2021-12-29 15:14:09',
+                'updated_at' => '2021-12-29 15:14:09',
+            ),
+            476 => 
+            array (
+                'id' => 534,
+                'language' => 'zh',
+                'string' => 'Put configure file to your',
+                'output' => '将配置文件放到您的',
+                'sign' => 'language_zh_5117730e5e5a3c25e37e688a1d014638',
+                'created_at' => '2021-12-29 15:14:24',
+                'updated_at' => '2021-12-29 15:14:24',
+            ),
+            477 => 
+            array (
+                'id' => 535,
+                'language' => 'zh',
+                'string' => 'Connections',
+                'output' => '连接数',
+                'sign' => 'language_zh_98a2bc79c11d0cbb19f99b2b8c70e6e3',
+                'created_at' => '2021-12-29 19:07:16',
+                'updated_at' => '2021-12-29 19:07:16',
+            ),
+            478 => 
+            array (
+                'id' => 536,
+                'language' => 'zh',
+                'string' => 'Today traffic in/out',
+                'output' => '今日入/出站流量',
+                'sign' => 'language_zh_877153759ef70af9d67711a04d540c73',
+                'created_at' => '2021-12-29 21:12:45',
+                'updated_at' => '2021-12-29 21:12:45',
+            ),
+            479 => 
+            array (
+                'id' => 537,
+                'language' => 'zh',
+                'string' => 'Traffic in/out',
+                'output' => '入/出站流量',
+                'sign' => 'language_zh_87793e606a48108f8415785b71527cc8',
+                'created_at' => '2021-12-29 21:14:10',
+                'updated_at' => '2021-12-29 21:14:10',
+            ),
+            480 => 
+            array (
+                'id' => 538,
+                'language' => 'zh',
+                'string' => 'Traffic in',
+                'output' => '入站流量',
+                'sign' => 'language_zh_451916961271c9027b4ba286331499a4',
+                'created_at' => '2021-12-29 21:14:26',
+                'updated_at' => '2021-12-29 21:14:26',
+            ),
+            481 => 
+            array (
+                'id' => 539,
+                'language' => 'zh',
+                'string' => 'Today Traffic in',
+                'output' => '今日入站流量',
+                'sign' => 'language_zh_4d45137c02e59b8334df53211e6834b9',
+                'created_at' => '2021-12-29 21:14:39',
+                'updated_at' => '2021-12-29 21:14:39',
+            ),
+            482 => 
+            array (
+                'id' => 540,
+                'language' => 'zh',
+                'string' => 'Today Traffic out',
+                'output' => '今日出站流量',
+                'sign' => 'language_zh_e74d2a324ee025f9e4c52c0c158f075d',
+                'created_at' => '2021-12-29 21:14:39',
+                'updated_at' => '2021-12-29 21:14:39',
+            ),
+            483 => 
+            array (
+                'id' => 541,
+                'language' => 'zh',
+                'string' => 'Download',
+                'output' => '下载',
+                'sign' => 'language_zh_801ab24683a4a8c433c6eb40c48bcd9d',
+                'created_at' => '2021-12-29 21:15:01',
+                'updated_at' => '2021-12-29 21:15:01',
+            ),
+            484 => 
+            array (
+                'id' => 542,
+                'language' => 'zh',
+                'string' => 'Upload',
+                'output' => '上载',
+                'sign' => 'language_zh_91412465ea9169dfd901dd5e7c96dd99',
+                'created_at' => '2021-12-29 21:15:04',
+                'updated_at' => '2021-12-29 21:15:04',
+            ),
+            485 => 
+            array (
+                'id' => 543,
+                'language' => 'zh',
+                'string' => 'Tunnel is offline.',
+                'output' => '隧道处于脱机状态。',
+                'sign' => 'language_zh_e9f03cf1c4f9c9a1958840789ded3a83',
+                'created_at' => '2021-12-29 21:30:46',
+                'updated_at' => '2021-12-29 21:30:46',
+            ),
+            486 => 
+            array (
+                'id' => 544,
+                'language' => 'zh',
+                'string' => 'Today traffic in',
+                'output' => '今日入站流量',
+                'sign' => 'language_zh_27ed6558dfffa5c2a6cd377ce3c698ee',
+                'created_at' => '2021-12-29 21:35:24',
+                'updated_at' => '2021-12-29 21:35:24',
+            ),
+            487 => 
+            array (
+                'id' => 545,
+                'language' => 'zh',
+                'string' => 'Today traffic out',
+                'output' => '今日出站流量',
+                'sign' => 'language_zh_8d09eb61e0fa27b12affb1bd28c9db09',
+                'created_at' => '2021-12-29 21:35:25',
+                'updated_at' => '2021-12-29 21:35:25',
+            ),
+            488 => 
+            array (
+                'id' => 546,
+                'language' => 'zh',
+                'string' => 'Status',
+                'output' => '状态',
+                'sign' => 'language_zh_ec53a8c4f07baed5d8825072c89799be',
+                'created_at' => '2021-12-29 21:37:14',
+                'updated_at' => '2021-12-29 21:37:14',
+            ),
+            489 => 
+            array (
+                'id' => 547,
+                'language' => 'zh',
+                'string' => 'Last start time',
+                'output' => '最后开始时间',
+                'sign' => 'language_zh_d76d9c77e7ac8f92117eb673245f05f6',
+                'created_at' => '2021-12-29 21:39:40',
+                'updated_at' => '2021-12-29 21:39:40',
+            ),
+            490 => 
+            array (
+                'id' => 548,
+                'language' => 'zh',
+                'string' => 'Type',
+                'output' => '类型',
+                'sign' => 'language_zh_a1fa27779242b4902f7ae3bdd5c6d508',
+                'created_at' => '2021-12-29 21:39:41',
+                'updated_at' => '2021-12-29 21:39:41',
+            ),
+            491 => 
+            array (
+                'id' => 549,
+                'language' => 'zh',
+                'string' => 'Use compression',
+                'output' => '使用压缩',
+                'sign' => 'language_zh_84b8403f81c1428d8cf4e14a80d6cd2f',
+                'created_at' => '2021-12-29 21:39:42',
+                'updated_at' => '2021-12-29 21:39:42',
+            ),
+            492 => 
+            array (
+                'id' => 550,
+                'language' => 'zh',
+                'string' => 'Last close time',
+                'output' => '最后关闭时间',
+                'sign' => 'language_zh_447140e3a6b1b03cb7684baa94820a08',
+                'created_at' => '2021-12-29 21:40:38',
+                'updated_at' => '2021-12-29 21:40:38',
+            ),
+            493 => 
+            array (
+                'id' => 551,
+                'language' => 'zh',
+                'string' => 'Proxy Protocol Version',
+                'output' => '代理协议版本',
+                'sign' => 'language_zh_1c36edd46f80a1ba4cefb7fa346ff314',
+                'created_at' => '2021-12-29 21:40:39',
+                'updated_at' => '2021-12-29 21:40:39',
+            ),
+            494 => 
+            array (
+                'id' => 552,
+                'language' => 'zh',
+                'string' => 'Bandwidth limit',
+                'output' => '带宽限制',
+                'sign' => 'language_zh_32a93e33cecc7835042d62702613f2d6',
+                'created_at' => '2021-12-29 21:40:40',
+                'updated_at' => '2021-12-29 21:40:40',
+            ),
+            495 => 
+            array (
+                'id' => 553,
+                'language' => 'zh',
+                'string' => 'Use Encryption',
+                'output' => '使用加密',
+                'sign' => 'language_zh_08fb54598fd58996c9997edcb6d761ce',
+                'created_at' => '2021-12-29 21:40:42',
+                'updated_at' => '2021-12-29 21:40:42',
+            ),
         ));
         
         
