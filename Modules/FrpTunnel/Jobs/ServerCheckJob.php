@@ -42,6 +42,7 @@ class ServerCheckJob implements ShouldQueue
             $s->scanTunnel($frpServer->id);
             if ($frp) {
                 teamEvent('frpServer.tunnel.server.updated', null, $frpServer->team_id);
+                teamEvent('frpServer.tunnels.updated', null, $frpServer->team_id);
             }
         }
     }
