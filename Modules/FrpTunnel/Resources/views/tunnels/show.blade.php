@@ -16,6 +16,76 @@
         <a href="#delete" class="mdui-ripple">{{ tr('Delete') }}</a>
     </div>
 
+    <div id="infomations" class="tunnel">
+        @php($cache = Cache::get('frpTunnel_data_' . $tunnel->client_token, []))
+        @if (!empty($cache))
+            <div class="mdui-typo-headline mdui-m-t-2">{{ tr('Server Details') }}</div>
+            <div class="mdui-table-fluid mdui-m-t-2">
+                <table class="mdui-table mdui-table-hoverable">
+                    <tbody class="mdui-typo">
+                        <tr>
+                            <td>{{ tr('Status') }}</td>
+                            <td>{{ $cache['status'] ?? tr('Wait refresh') }}</td>
+                        </tr>
+
+                        <tr>
+                            <td>{{ tr('Download') }}</td>
+                            <td>{{ unitConversion($cache['today_traffic_in'] ?? 0) }}</td>
+                        </tr>
+
+                        <tr>
+                            <td>{{ tr('Upload') }}</td>
+                            <td>{{ unitConversion($cache['today_traffic_out'] ?? 0) }}</td>
+                        </tr>
+
+                        <tr>
+                            <td>{{ tr('Connections') }}</td>
+                            <td>{{ $cache['cur_conns'] ?? 0 }}</td>
+                        </tr>
+
+                        <tr>
+                            <td>{{ tr('Last start time') }}</td>
+                            <td>{{ $cache['last_start_time'] ?? tr('Wait refresh') }}</td>
+                        </tr>
+
+                        <tr>
+                            <td>{{ tr('Last close time') }}</td>
+                            <td>{{ $cache['last_close_time'] ?? tr('Wait refresh') }}</td>
+                        </tr>
+
+                        <tr>
+                            <td>{{ tr('Type') }}</td>
+                            <td>{{ $cache['type'] ?? tr('Wait refresh') }}</td>
+                        </tr>
+
+                        <tr>
+                            <td>{{ tr('Use Encryption') }}</td>
+                            <td>{{ $cache['use_encryption'] ?? tr('Wait refresh') }}</td>
+                        </tr>
+
+                        <tr>
+                            <td>{{ tr('Use compression') }}</td>
+                            <td>{{ $cache['use_compression'] ?? tr('Wait refresh') }}</td>
+                        </tr>
+
+                        <tr>
+                            <td>{{ tr('Proxy Protocol Version') }}</td>
+                            <td>{{ $cache['proxy_protocol_version'] ?? tr('Wait refresh') }}</td>
+                        </tr>
+
+                        <tr>
+                            <td>{{ tr('Bandwidth limit') }}</td>
+                            <td>{{ $cache['bandwidth_limit'] ?? tr('Wait refresh') }}</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        @else
+            <p>{{ tr('Tunnel is offline.') }}</p>
+        @endif
+    </div>
+
     <div id="configuration">
         <form action="#" id="new" onsubmit="event.preventDefault();m.update($(this))">
 
@@ -172,6 +242,14 @@
                     $('#remote-input').hide()
                     $('#domain-input').hide()
                     $('#sk-input').show()
+                }
+            },
+            e: (type, data) => {
+                switch (type) {
+                    case 'frpServer.tunnels.updated':
+                        util.reload('.tunnel')
+
+                        break;
                 }
             },
             tunnel_config: {},
