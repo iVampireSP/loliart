@@ -17,12 +17,6 @@
                 <div class="mdui-list-item-content">{{ tr('Create Tunnel') }}</div>
             </a>
 
-            <a class="mdui-list-item mdui-ripple" href="{{ route('frpTunnel.tunnels.index') }}">
-                <span class="mdui-list-item-icon mdui-icon material-icons-outlined">traffic</span>
-                <div class="mdui-list-item-content">{{ tr('Traffic') }}</div>
-            </a>
-
-
             <a class="mdui-list-item mdui-ripple" href="{{ route('frpTunnel.servers.index') }}">
                 <span class="mdui-list-item-icon mdui-icon material-icons-outlined">supervisor_account</span>
                 <div class="mdui-list-item-content">{{ tr('Tunnel Servers') }}</div>
