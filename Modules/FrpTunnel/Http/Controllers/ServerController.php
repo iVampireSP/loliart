@@ -175,27 +175,27 @@ class ServerController extends Controller
         $frp = new FrpController($server->id);
 
         if ($server->allow_http) {
-            $proxies = $frp->httpTunnels()['proxies'];
+            $proxies = $frp->httpTunnels()['proxies'] ?? ['proxies' => []];
             $this->cacheProxies($proxies);
         }
 
         if ($server->allow_https) {
-            $proxies = $frp->httpsTunnels()['proxies'];
+            $proxies = $frp->httpsTunnels()['proxies'] ?? ['proxies' => []];
             $this->cacheProxies($proxies);
         }
 
         if ($server->allow_tcp) {
-            $proxies = $frp->tcpTunnels()['proxies'];
+            $proxies = $frp->tcpTunnels()['proxies'] ?? ['proxies' => []];
             $this->cacheProxies($proxies);
         }
 
         if ($server->allow_udp) {
-            $proxies = $frp->udpTunnels()['proxies'];
+            $proxies = $frp->udpTunnels()['proxies'] ?? ['proxies' => []];
             $this->cacheProxies($proxies);
         }
 
         if ($server->allow_stcp) {
-            $proxies = $frp->stcpTunnels()['proxies'];
+            $proxies = $frp->stcpTunnels()['proxies'] ?? ['proxies' => []];
             $this->cacheProxies($proxies);
         }
     }
