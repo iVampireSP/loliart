@@ -8,6 +8,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Validation\Rule;
 use Modules\FrpTunnel\Entities\FrpServer;
+use Modules\FrpTunnel\Entities\FrpTunnel;
 use Modules\FrpTunnel\Jobs\ServerCheckJob;
 
 class ServerController extends Controller
@@ -108,6 +109,11 @@ class ServerController extends Controller
     public function destroy(FrpServer $server)
     {
         userInTeamFail($server->team_id);
+        if (FrpTunnel::where('server_id', $server->id)->exists()) {
+            write('Unable to delete server, because the server has tunnels.');
+            return response()->json(['status' => 0]);
+
+        }
         $server->delete();
         write(route('frpTunnel.servers.index'));
         writeTeam('Frp Server deleted successfully.');
