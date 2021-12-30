@@ -69,9 +69,16 @@ class BalanceController extends Controller
         $user = auth()->user();
         try {
             $paymentMethod = $user->findPaymentMethod($request->id);
-            $resp = $user->charge($request->amount, $paymentMethod->id, ['metadata' => [
-                'type' => 'charge_to_account',
-            ]]);
+            try {
+                $resp = $user->charge($request->amount * 100, $paymentMethod->id, ['metadata' => [
+                    'type' => 'charge_to_account',
+                ]]);
+
+            } catch (InvalidRequestException $e) {
+                write($e->getMessage());
+                return response()->json(['status' => 0]);
+            }
+
             Order::setup($resp->id, $request->amount, 'Charge');
             write(tr('Order created successfully.'));
             return success();

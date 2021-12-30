@@ -49,7 +49,7 @@ class StripeEventListener
                     'status' => 'intent.succeeded',
                 ]);
                 if (isset($metadata['type']) && $metadata['type'] == 'charge_to_account') {
-                    $user_class->addBalance($event->payload['data']['object']['amount_received'], $user->id);
+                    $user_class->addBalance($event->payload['data']['object']['amount_received'] / 100, $user->id);
                     userEvent('balance.updated', null, $user->id);
                     write('Charge successfully.', $user->id);
                 }
