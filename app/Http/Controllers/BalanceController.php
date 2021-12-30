@@ -93,4 +93,26 @@ class BalanceController extends Controller
 
         return success();
     }
+
+    // public function refund(Order $order)
+    // {
+    //     if (is_null($order)) {
+    //         write('Unable to refund.');
+    //         return response()->json(['status' => 0]);
+    //     }
+
+    //     if ($order->user_id !== auth()->id()) {
+    //         write('Permission denied.');
+    //         return response()->json(['status' => 0]);
+    //     }
+
+    //     if (!is_null($order->refunded_at)) {
+    //         write('The order is already refunded at ' . $order->refunded_at);
+    //         return response()->json(['status' => 0]);
+    //     }
+
+    //     auth()->user()->refund($order->order_id);
+    //     write('Refund successful.');
+    //     return response()->json(['status' => 1]);
+    // }
 }
