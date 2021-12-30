@@ -28,6 +28,7 @@
                         <th>{{ tr('Download') }}</th>
                         <th>{{ tr('Upload') }}</th>
                         <th>{{ tr('Online') }}</th>
+                        <th>{{ tr('Server') }}</th>
                     </tr>
                 </thead>
                 <tbody class="mdui-typo">
@@ -58,6 +59,8 @@
                                     <i class="mdui-icon material-icons mdui-text-color-red">close</i>
                                 @endif
                             </td>
+
+                            <td><a href="{{ route('frpTunnel.servers.show', $tunnel->server->id) }}">{{ $tunnel->server->name }}</a></td>
                         </tr>
                     @endforeach
                 </tbody>
