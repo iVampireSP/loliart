@@ -33,6 +33,11 @@ class PortManagerController extends Controller
             return $this->failed('Tunnel proxy type not allowed.');
         }
 
+        $test_protocol = 'allow_' . $request->content['proxy_type'];
+        if (!$server->$test_protocol) {
+            return $this->failed('This server does not support proxy type.');
+        }
+
         if ($request->content['proxy_type'] == 'tcp' || $request->content['proxy_type'] == 'udp') {
             if ($request->content['remote_port'] !== $tunnel->remote_port || $tunnel->remote_port < $server->min_port || $tunnel->remote_port > $server->max_port) {
                 return $this->failed('Tunnel not allowed.');
