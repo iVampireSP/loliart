@@ -156,7 +156,7 @@
                                     <br />
                                     <div class="mdui-col">
                                         <label class="mdui-checkbox"
-                                            mdui-tooltip="{content: 'If your tunnel configuration\'s name has been leaked, it may be useful to check this. When you check and submit, the client using the tunnel will be forced to offline, and you must also apply for a new tunnel profile.', position: 'right'}">
+                                            mdui-tooltip="{content: 'If your tunnel configuration\'s name has been leaked, it may be useful to check this. When you check and submit, you must also apply for a new tunnel profile.', position: 'right'}">
                                             <input type="checkbox" id="reset_token" name="reset_token" value="1" />
                                             <i class="mdui-checkbox-icon"></i>
                                             {{ tr('Reset tunnel token.') }}
