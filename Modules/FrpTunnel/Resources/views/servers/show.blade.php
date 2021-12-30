@@ -263,7 +263,9 @@ ops = NewProxy
                 }, 500)
             },
             delete: () => {
-                util.delete(route('frpTunnel.servers.destroy', {{ $server->id }}))
+                ui.confirm('{{ tr('You can delete this server when there is no tunnel under the server. ') }}', () => {
+                    util.delete(route('frpTunnel.servers.destroy', {{ $server->id }}))
+                });
             },
             e: (type, data) => {
                 switch (type) {
