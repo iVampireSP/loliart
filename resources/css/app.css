@@ -504,6 +504,9 @@ span.mdui-btn-outlined {
 .sub-menu-title {
     font-size: inherit;
 }
+.mdui-tooltip {
+    border-radius: 10px !important;
+}
 
 @media (prefers-color-scheme: dark) {
     .mdui-drawer {
