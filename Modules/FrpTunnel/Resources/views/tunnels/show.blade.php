@@ -273,7 +273,9 @@
             },
             tunnel_config: {},
             delete: () => {
-                util.delete(route('frpTunnel.tunnels.destroy', {{ $tunnel->id }}))
+                ui.confirm('{{ tr('Are you sure you want to delete this tunnel? ') }}', () => {
+                    util.delete(route('frpTunnel.tunnels.destroy', {{ $tunnel->id }}));
+                });
             },
             put_config: () => {
                 let local_addr = m.tunnel_config.local_address.split(':')
