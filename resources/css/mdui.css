@@ -13598,8 +13598,8 @@ body.mdui-loaded .mdui-drawer {
     color: #000;
     background-color: #fff;
     border-radius: 2px;
-    -webkit-transform: scale(0.95);
-    transform: scale(0.95);
+    -webkit-transform: scale(0.7);
+    transform: scale(0.7);
     opacity: 0;
     -webkit-transition-duration: 0.3s;
     transition-duration: 0.3s;
@@ -13608,10 +13608,11 @@ body.mdui-loaded .mdui-drawer {
     transition-property: transform, opacity, visibility;
     transition-property: transform, opacity, visibility, -webkit-transform;
     will-change: top, opacity, transform;
-    -webkit-box-shadow: 0 11px 15px -7px rgba(0, 0, 0, 0.2),
-        0 24px 38px 3px rgba(0, 0, 0, 0.14), 0 9px 46px 8px rgba(0, 0, 0, 0.12);
-    box-shadow: 0 11px 15px -7px rgba(0, 0, 0, 0.2),
-        0 24px 38px 3px rgba(0, 0, 0, 0.14), 0 9px 46px 8px rgba(0, 0, 0, 0.12);
+    -webkit-box-shadow: 0 11px 15px -7px rgba(0, 0, 0, 0.2),        0 24px 38px 3px rgba(0, 0, 0, 0.14), 0 9px 46px 8px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 11px 15px -7px rgba(0, 0, 0, 0.2),        0 24px 38px 3px rgba(0, 0, 0, 0.14), 0 9px 46px 8px rgba(0, 0, 0, 0.12);
+    -moz-transform: scale(0.7);
+    -ms-transform: scale(0.7);
+    -o-transform: scale(0.7);
 }
 @media (min-width: 600px) {
     .mdui-dialog {
