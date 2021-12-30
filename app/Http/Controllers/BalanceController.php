@@ -64,7 +64,7 @@ class BalanceController extends Controller
     {
         $request->validate([
             'id' => 'required',
-            'amount' => 'integer|min:50|required',
+            'amount' => 'integer|min:1|required',
         ]);
         $user = auth()->user();
         try {
