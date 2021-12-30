@@ -203,6 +203,9 @@ class ServerController extends Controller
     private function cacheProxies($proxies)
     {
         foreach ($proxies as $proxy) {
+            if (!isset($proxy['name'])) {
+                continue;
+            }
             $cache_key = 'frpTunnel_data_' . $proxy['name'];
             Cache::put($cache_key, $proxy, 90);
         }
