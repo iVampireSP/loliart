@@ -389,5 +389,15 @@ window.util.team = {
             .listen('TeamEvent', (e) => {
                 util.event.process(e)
             });
+    },
+    broadcast: () => {
+        ui.prompt('Broadcast message',
+            (content) => {
+                util.post(route('teams.team.broadcast'), {content: content});
+            },
+        );
+    },
+    writeToAdmin: (content) => {
+        util.post(route('teams.team.writeToAdmin'), {content: content});
     }
 }

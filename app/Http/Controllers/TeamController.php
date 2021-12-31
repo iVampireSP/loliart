@@ -6,15 +6,11 @@ use App\Events\TeamEvent;
 use App\Events\UserEvent;
 use App\Models\Team;
 use App\Models\TeamInvitation;
-use App\Models\User;
-use App\Traits\Teams;
 use App\Models\TeamUser;
+use App\Traits\Teams;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Spatie\Permission\Models\Role;
-use Illuminate\Support\Facades\Log;
-use Ramsey\Uuid\Nonstandard\UuidV6;
 use Spatie\Permission\PermissionRegistrar;
 
 class TeamController extends Controller
@@ -51,7 +47,7 @@ class TeamController extends Controller
     public function store(Request $request, Team $team)
     {
         $this->validate($request, [
-            'name' => 'required|max:20'
+            'name' => 'required|max:20',
         ]);
 
         $team->name = $request->name;
@@ -89,7 +85,7 @@ class TeamController extends Controller
         $this->switchToTeam(0);
         return response()->json([
             'status' => 1,
-            'data' => tr('You are offline now!')
+            'data' => tr('You are offline now!'),
         ]);
     }
 
@@ -126,7 +122,7 @@ class TeamController extends Controller
 
         broadcast(new TeamEvent($team, [
             'type' => 'team.updated',
-            'data' => $team
+            'data' => $team,
         ]))->toOthers();
 
         return response()->json(['status' => 1, 'data' => $team->toArray()]);
@@ -153,7 +149,7 @@ class TeamController extends Controller
         } catch (Exception $e) {
             return response()->json([
                 'status' => 0,
-                'data' => $e->getMessage()
+                'data' => $e->getMessage(),
             ]);
         }
     }
@@ -165,7 +161,7 @@ class TeamController extends Controller
         if ($id == $team->user_id) {
             return response()->json([
                 'status' => 0,
-                'data' => 'You are not allowed to kick youself.'
+                'data' => 'You are not allowed to kick youself.',
             ]);
         }
 
@@ -173,7 +169,7 @@ class TeamController extends Controller
         TeamInvitation::where('user_id', $id)->where('team_id', session('team_id'))->delete();
 
         broadcast(new TeamEvent($team, [
-            'type' => 'team.users.updated'
+            'type' => 'team.users.updated',
         ]));
 
         broadcast(new UserEvent($id, [
@@ -194,7 +190,7 @@ class TeamController extends Controller
         if ($user_id == $team->user_id) {
             return response()->json([
                 'status' => 0,
-                'data' => 'Super admin is not allowed to leave.'
+                'data' => 'Super admin is not allowed to leave.',
             ]);
         }
 
@@ -202,8 +198,26 @@ class TeamController extends Controller
         TeamInvitation::where('user_id', $user_id)->where('team_id', session('team_id'))->delete();
 
         broadcast(new TeamEvent($team, [
-            'type' => 'team.users.updated'
+            'type' => 'team.users.updated',
         ]));
+
+        return response()->json([
+            'status' => 1,
+        ]);
+    }
+
+    public function broadcast(Request $request)
+    {
+        teamEvent('team.broadcast', $request->content);
+
+        return response()->json([
+            'status' => 1,
+        ]);
+    }
+
+    public function writeToAdmin(Request $request)
+    {
+        write(auth()->user()->name . ' says ' . $request->content, session('team')->user_id);
 
         return response()->json([
             'status' => 1,

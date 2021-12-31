@@ -41,6 +41,13 @@ window.util.event = {
                 util.console.append(event.data.data)
 
                 break;
+
+            case 'team.broadcast':
+                mdui.alert(event.data.data, () => {
+                    util.post(route('teams.team.writeToAdmin'), {'content': 'I\'m received.'});
+                });
+                break;
+
             case 'team.invitation.received':
                 if (currentRoute == 'teams.invite.received') {
                     util.reload()

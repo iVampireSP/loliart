@@ -55,6 +55,8 @@ Route::prefix('teams')->name('teams.')->middleware(['teams_permission', 'auth'])
     Route::post('/invitation/{id}/reject', [Controllers\TeamInvitationsController::class, 'reject'])->name('invite.reject')->withoutMiddleware('teams_permission');
     Route::delete('/team/user/kick/{id}', [Controllers\TeamController::class, 'kick'])->name('user.kick')->middleware(['permission:team.edit']);
     Route::post('/team/leave', [Controllers\TeamController::class, 'leave'])->name('team.leave');
+    Route::post('/team/broadcast', [Controllers\TeamController::class, 'broadcast'])->name('team.broadcast');
+    Route::post('/team/writeToAdmin', [Controllers\TeamController::class, 'writeToAdmin'])->name('team.writeToAdmin');
 });
 
 Route::prefix('password')->name('password.')->middleware(['auth', 'password.confirm'])->withoutMiddleware(['teams_permission'])->group(function () {
