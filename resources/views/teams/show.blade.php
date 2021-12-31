@@ -28,6 +28,9 @@
         @else
             <a onclick="util.team.user.leave()" class="mdui-btn mdui-color-theme-accent mdui-ripple">{{ tr('Leave Team') }}</a>
         @endrole
+
+        <a onclick="util.team.broadcast()"
+            class="mdui-btn mdui-color-theme-accent mdui-ripple">{{ tr('Broadcast') }}</a>
     </div>
 
 

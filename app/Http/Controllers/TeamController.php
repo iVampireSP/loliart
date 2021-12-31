@@ -210,6 +210,8 @@ class TeamController extends Controller
     {
         teamEvent('team.broadcast', $request->content);
 
+        write('Broadcasting message.');
+
         return response()->json([
             'status' => 1,
         ]);
