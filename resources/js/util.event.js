@@ -42,9 +42,15 @@ window.util.event = {
 
                 break;
 
+            case 'log':
+                util.console.append(event.data.data)
+                break;
+
             case 'team.broadcast':
                 mdui.alert(event.data.data, () => {
-                    util.post(route('teams.team.writeToAdmin'), {'content': 'I\'m received.'});
+                    util.post(route('teams.team.writeToAdmin'), {
+                        'content': 'I\'m received.'
+                    });
                 });
                 break;
 
