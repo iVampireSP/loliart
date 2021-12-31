@@ -524,6 +524,7 @@ span.mdui-btn-outlined {
     -ms-transition: all 0.3s ease-in-out;
     -o-transition: all 0.3s ease-in-out;
     padding: 10px;
+    overflow-y: scroll;
 }
 
 .console-opened {
