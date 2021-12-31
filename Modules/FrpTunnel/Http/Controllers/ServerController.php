@@ -44,6 +44,12 @@ class ServerController extends Controller
         $request_data = $request->toArray();
         $request_data['team_id'] = session('team_id');
 
+        $request_data['allow_http'] = $request->allow_http ?? 0;
+        $request_data['allow_https'] = $request->allow_https ?? 0;
+        $request_data['allow_tcp'] = $request->allow_tcp ?? 0;
+        $request_data['allow_udp'] = $request->allow_udp ?? 0;
+        $request_data['allow_stcp'] = $request->allow_stcp ?? 0;
+
         $frpServer->create($request_data);
 
         write(route('frpTunnel.servers.index'));
