@@ -9,7 +9,9 @@ window.util = {
         }
     },
     reload: (ele = '.pjax-container') => {
-        $.pjax.reload(ele)
+        if ($(ele).length > 0) {
+            $.pjax.reload(ele)
+        }
         $('.mdui-tooltip-open').remove()
     },
     toggleLock: (id, play = false) => {
