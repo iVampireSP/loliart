@@ -144,4 +144,19 @@ window.util = {
             }
         });
     },
+    console: {
+        open: () => {
+            ui.$.showOverlay()
+            $('#console').addClass('console-opened')
+            $('.mdui-overlay-show').css('cssText', 'backdrop-filter: blur(20px) saturate(20%) opacity(0.9) brightness(0.4)');
+            $('.mdui-overlay-show').bind('click', () => {
+                util.console.close()
+            })
+        },
+        close: () => {
+            ui.$.hideOverlay()
+            $('#console').removeClass('console-opened')
+            $('.mdui-overlay-show').unbind('click')
+        }
+    }
 }

@@ -63,7 +63,7 @@
         </div>
     </div>
 
-    <div class="mdui-container mdui-m-t-5">
+    <div class="mdui-container mdui-m-t-5 edge-standing">
         <div class="mdui-typo">
             <p class="mdui-typo-caption-opacity mdui-text-center">
                 {{ config('app.name') }}
@@ -79,6 +79,12 @@
     </div>
 
     <div class="mdui-m-t-5 mdui-m-b-5"></div>
+
+    <div id="console">
+        <div class="logger">
+            <span>Listening event.</span>
+        </div>
+    </div>
 
     <a aria-hidden="true" href="#" id="helper-link"
         data-console-alert="{{ tr('Donnnnnnnnnnnnnn \'t paste any code hereeeeeeeeee! It\'s very dangerous dangerous and also may cause security issues!') }}"></a>

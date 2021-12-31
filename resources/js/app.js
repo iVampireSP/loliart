@@ -174,6 +174,10 @@ $(() => {
     util.masonry('.masonry')
 
     $('.copy-year').text(new Date().getFullYear())
+
+    $('.edge-standing').click(() => {
+        util.console.open()
+    })
 })
 
 window.addEventListener('online', () => {

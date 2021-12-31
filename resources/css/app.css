@@ -508,6 +508,28 @@ span.mdui-btn-outlined {
     border-radius: 10px !important;
 }
 
+#console {
+    z-index: 2001;
+    width: 100%;
+    height: 30vh;
+    background-color: #f5f5f587;
+    color: #c9f0ff;
+    position: fixed;
+    bottom: -40vh;
+    left: 0;
+    right: 0;
+    transition: all 0.3s ease-in-out;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    padding: 10px;
+}
+
+.console-opened {
+    bottom: 0 !important;
+}
+
 @media (prefers-color-scheme: dark) {
     .mdui-drawer {
         background-color: #303030 !important;
