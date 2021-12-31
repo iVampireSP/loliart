@@ -171,6 +171,9 @@ window.util = {
             if ($('#console .logger span').length > 100) {
                 $('#console .logger span')[0].remove()
             }
+
+            let scrollHeight = $('#console').prop("scrollHeight");
+            $('#console').scrollTop(scrollHeight, 200);
         }
     }
 }

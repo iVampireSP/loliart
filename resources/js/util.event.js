@@ -42,7 +42,7 @@ window.util.event = {
 
                 break;
 
-            case 'log':
+            case 'team.log':
                 util.console.append(event.data.data)
                 break;
 

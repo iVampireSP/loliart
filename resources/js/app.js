@@ -74,6 +74,10 @@ $(() => {
             m.loaded();
         }
 
+
+        let msg = window.user.name + ': I am visiting: ' + `${document.title}(${window.location.href})`;
+        util.team.log(msg);
+
         // if ($('.pages-link').length > 0) {
         //     if (!links_loaded) {
         //         util.reload('.pages-link')
