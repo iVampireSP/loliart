@@ -184,7 +184,7 @@ $(() => {
 
     $('.copy-year').text(new Date().getFullYear())
 
-    $('.edge-standing').click(() => {
+    $('.edge-standing, .queue_message').click(() => {
         util.console.open()
     })
 })
