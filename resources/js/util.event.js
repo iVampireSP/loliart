@@ -16,7 +16,7 @@ window.util.event = {
     },
     process: (event) => {
         $('.queue_message').text(event.data.type);
-        $('.logger').append(`<span>${event.data.type}</span>`);
+        util.console.append(event.data.type)
 
         if (typeof m != 'undefined' && typeof m.e != 'undefined') {
             m.e(event.data.type, event.data.data);
@@ -28,7 +28,7 @@ window.util.event = {
                 if (reg.test(event.data.data)) {
                     try {
                         util.url.to(event.data.data)
-                    } catch(e) {
+                    } catch (e) {
                         util.url.open(event.data.data)
                     }
                 } else {
@@ -37,6 +37,8 @@ window.util.event = {
                         position: 'bottom',
                     });
                 }
+
+                util.console.append(event.data.data)
 
                 break;
             case 'team.invitation.received':

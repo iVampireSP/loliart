@@ -157,6 +157,15 @@ window.util = {
             ui.$.hideOverlay()
             $('#console').removeClass('console-opened')
             $('.mdui-overlay-show').unbind('click')
+        },
+        append: (content) => {
+            let date = new Date();
+            date = date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds()
+            $('.logger').append(`<span>[${++window.console.line}] ${date}: ${content}</span>`);
+
+            if ($('#console .logger span').length > 100) {
+                $('#console .logger span')[0].remove()
+            }
         }
     }
 }

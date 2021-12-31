@@ -42,6 +42,7 @@ $.ajaxSetup({
     dataType: "json",
 });
 
+window.console.line = 0;
 
 document.onreadystatechange = Progress.done;
 
