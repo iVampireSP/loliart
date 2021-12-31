@@ -160,12 +160,18 @@ window.util = {
         },
         append: (content) => {
             let date = new Date();
+
+            let hour = date.getHours();
+            if (hour < 10) {
+                hour = '0' + hour;
+            }
+
             let second = date.getSeconds();
             if (second < 10) {
                 second = '0' + second;
             }
 
-            date = date.getHours() + ':' + date.getMinutes() + ':' + second
+            date = hour + ':' + date.getMinutes() + ':' + second
             $('.logger').append(`<span>[${++window.console.line}] ${date}: ${content}</span>`);
 
             if ($('#console .logger span').length > 100) {
