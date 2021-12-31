@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Nwidart\Modules\Facades\Module;
 use Illuminate\Support\Facades\Cache;
+use Nwidart\Modules\Facades\Module;
 
 class AppController extends Controller
 {
@@ -21,9 +21,9 @@ class AppController extends Controller
                 'name' => config('app.name'),
                 'url' => config('app.url'),
                 'node' => config('app.node'),
-                'version' => [self::getVersion(), self::commit()],
-                'modules' => Module::all()
-            ]
+                'version' => self::getVersion(),
+                'modules' => Module::all(),
+            ],
         ];
     }
 
