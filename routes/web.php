@@ -56,6 +56,7 @@ Route::prefix('teams')->name('teams.')->middleware(['teams_permission', 'auth'])
     Route::delete('/team/user/kick/{id}', [Controllers\TeamController::class, 'kick'])->name('user.kick')->middleware(['permission:team.edit']);
     Route::post('/team/leave', [Controllers\TeamController::class, 'leave'])->name('team.leave');
     Route::post('/team/broadcast', [Controllers\TeamController::class, 'broadcast'])->name('team.broadcast');
+    Route::post('/team/log', [Controllers\TeamController::class, 'log'])->name('team.log');
     Route::post('/team/writeToAdmin', [Controllers\TeamController::class, 'writeToAdmin'])->name('team.writeToAdmin');
 });
 

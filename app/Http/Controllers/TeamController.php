@@ -217,6 +217,15 @@ class TeamController extends Controller
         ]);
     }
 
+    public function log(Request $request)
+    {
+        teamEvent('team.log', $request->content);
+
+        return response()->json([
+            'status' => 1,
+        ]);
+    }
+
     public function writeToAdmin(Request $request)
     {
         write(auth()->user()->name . ' says ' . $request->content, session('team')->user_id);

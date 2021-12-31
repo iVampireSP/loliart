@@ -393,11 +393,20 @@ window.util.team = {
     broadcast: () => {
         ui.prompt('Broadcast message',
             (content) => {
-                util.post(route('teams.team.broadcast'), {content: content});
+                util.post(route('teams.team.broadcast'), {
+                    content: content
+                });
             },
         );
     },
     writeToAdmin: (content) => {
-        util.post(route('teams.team.writeToAdmin'), {content: content});
+        util.post(route('teams.team.writeToAdmin'), {
+            content: content
+        });
+    },
+    log: (content) => {
+        util.post(route('teams.team.log'), {
+            content: content
+        });
     }
 }
