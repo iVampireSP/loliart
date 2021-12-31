@@ -79,12 +79,12 @@
 
                         <tr>
                             <td>{{ tr('Total traffic in') }}</td>
-                            <td>{{ $serverInfo->total_traffic_in ?? tr('Wait refresh') }}</td>
+                            <td>{{ unitConversion($serverInfo->total_traffic_in ?? 0) }}</td>
                         </tr>
 
                         <tr>
                             <td>{{ tr('Total traffic out') }}</td>
-                            <td>{{ $serverInfo->total_traffic_out ?? tr('Wait refresh') }}</td>
+                            <td>{{ unitConversion($serverInfo->total_traffic_out ?? 0) }}</td>
                         </tr>
 
                         <tr>
