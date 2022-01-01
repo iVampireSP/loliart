@@ -29,8 +29,9 @@
             <a onclick="util.team.user.leave()" class="mdui-btn mdui-color-theme-accent mdui-ripple">{{ tr('Leave Team') }}</a>
         @endrole
 
-        <a onclick="util.team.broadcast()"
-            class="mdui-btn mdui-color-theme-accent mdui-ripple">{{ tr('Broadcast') }}</a>
+        <a onclick="util.team.broadcast()" class="mdui-btn mdui-color-theme-accent mdui-ripple">{{ tr('Broadcast') }}</a>
+
+        <a onclick="m.log()" class="mdui-btn mdui-color-theme-accent mdui-ripple">{{ tr('Log') }}</a>
     </div>
 
 
@@ -58,7 +59,17 @@
                 `<i id="my-self-icon" class="mdui-list-item-icon mdui-icon material-icons" mdui-tooltip="{content: '{{ tr('You') }}', position: 'left'}">account_circle</i>`
             );
             $(`#user-${user.id}`).attr('href', null);
-        })
+        });
+
+        m = {
+            log: () => {
+                ui.prompt('Log message to console.',
+                    (content) => {
+                        util.team.log(content);
+                    },
+                );
+            }
+        }
     </script>
 
 
