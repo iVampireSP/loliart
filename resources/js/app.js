@@ -137,7 +137,10 @@ $(() => {
             }
 
             setTimeout(() => {
-                $('.mdui-ripple-wave').remove()
+                let total = $('.mdui-ripple-wave').length;
+                for (let i = 0; i < total; i++) {
+                    $($('.mdui-ripple-wave')[i]).remove()
+                }
             }, 1000)
         };
     }
