@@ -19,7 +19,7 @@
     <div id="infomations" class="tunnel">
         @php($cache = Cache::get('frpTunnel_data_' . $tunnel->client_token, []))
         @if (!empty($cache))
-            <div class="mdui-typo-headline mdui-m-t-2">{{ tr('Server Details') }}</div>
+            <div class="mdui-typo-headline mdui-m-t-2">{{ tr('Tunnel Details') }}</div>
             <div class="mdui-table-fluid mdui-m-t-2">
                 <table class="mdui-table mdui-table-hoverable">
                     <tbody class="mdui-typo">
