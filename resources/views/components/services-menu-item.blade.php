@@ -9,7 +9,7 @@
         <a href="{{ route('frpTunnel.index') }}" class="mdui-list-item mdui-ripple">{{ tr('Frp Tunnel') }}</a>
 
         <!-- Minecraft -->
-        {{-- <div>
+        <div>
             <div class="mdui-list" mdui-collapse="{accordion: true}">
                 <div class="mdui-collapse-item">
                     <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
@@ -22,7 +22,7 @@
                     </div>
                 </div>
             </div>
-        </div> --}}
+        </div>
         <!-- End Minecraft -->
 
     </div>

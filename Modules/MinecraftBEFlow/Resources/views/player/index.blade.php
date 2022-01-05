@@ -8,8 +8,6 @@
 
 @section('content')
     <h1 class="mdui-typo-display-1">Bedrock Server Flow</h1>
+    You
 
-    <script>
-        util.m()
-    </script>
 @endsection
