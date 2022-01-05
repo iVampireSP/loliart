@@ -12,6 +12,8 @@
     <div class="mdui-row mdui-p-b-2 mdui-p-l-1 mdui-m-t-2">
         <a class="mdui-btn mdui-btn-outlined mdui-ripple"
             href="{{ route('wings.accounts.create') }}">{{ tr('New Account') }}</a>
+
+        <a target="_blank" class="mdui-btn mdui-btn-outlined mdui-ripple" href="{{ config('wings.url') }}">{{ tr('Go to panel') }}</a>
     </div>
 
     <div class="mdui-table-fluid">
@@ -28,7 +30,8 @@
                 @foreach ($accounts as $account)
                     <tr id="user-{{ $account->id }}}">
                         <td nowrap>{{ $account->id }}</td>
-                        <td nowrap><a href="{{ route('wings.accounts.show', $account->id) }}">{{ $account->email }}</a>
+                        <td nowrap><a
+                                href="{{ route('wings.accounts.show', $account->id) }}">{{ $account->email }}</a>
                         </td>
                         <td nowrap>{{ $account->username }}</td>
                         <td nowrap>{{ $account->servers }}</td>
