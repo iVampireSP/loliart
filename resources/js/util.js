@@ -180,8 +180,9 @@ window.util = {
 
             date = hour + ':' + minutes + ':' + second;
 
-            // let html = `[${++window.console.line}] ${date}: ${content}`
-            $('.logger').append(`<span>[${++window.console.line}] ${date}: ${content}</span>`);
+            let html = `[${++window.console.line}] ${date}: ${content}`
+            $('.logger').append(`<span date-console-line="${window.console.line}"></span>`);
+            $(`[date-console-line=${window.console.line}]`).text(html);
 
             if ($('#console .logger span').length > 100) {
                 $('#console .logger span')[0].remove()
