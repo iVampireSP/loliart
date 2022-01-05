@@ -168,12 +168,19 @@ window.util = {
                 hour = '0' + hour;
             }
 
+            let minutes = date.getMinutes();
+            if (minutes < 10) {
+                minutes = '0' + minutes
+            }
+
             let second = date.getSeconds();
             if (second < 10) {
                 second = '0' + second;
             }
 
-            date = hour + ':' + date.getMinutes() + ':' + second
+            date = hour + ':' + minutes + ':' + second;
+
+            // let html = `[${++window.console.line}] ${date}: ${content}`
             $('.logger').append(`<span>[${++window.console.line}] ${date}: ${content}</span>`);
 
             if ($('#console .logger span').length > 100) {
