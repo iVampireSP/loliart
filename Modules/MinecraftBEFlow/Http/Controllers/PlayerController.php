@@ -6,7 +6,7 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Str;
-use Modules\MinecraftBEFlow\Entities\mcbeFlowPlayers;
+use Modules\MinecraftBEFlow\Entities\McbeFlowPlayers;
 
 class PlayerController extends Controller
 {
