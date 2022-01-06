@@ -56,6 +56,7 @@ return [
     'domain' => env('APP_DOMAIN'),
 
     'node' => env('NODE', 'standalone'),
+    'token' => env('TOKEN', null),
 
     'asset_url' => env('ASSET_URL', null),
 
