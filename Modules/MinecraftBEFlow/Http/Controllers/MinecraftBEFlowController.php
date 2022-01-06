@@ -2,9 +2,10 @@
 
 namespace Modules\MinecraftBEFlow\Http\Controllers;
 
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Redis;
+use Illuminate\Contracts\Support\Renderable;
 
 class MinecraftBEFlowController extends Controller
 {
@@ -14,6 +15,8 @@ class MinecraftBEFlowController extends Controller
      */
     public function index()
     {
+        // Redis::connection('channel')->publish('channel_test', json_encode(['id' => 1, 'data' => 'test']));
+
         return view('minecraftbeflow::index');
     }
 
