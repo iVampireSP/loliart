@@ -139,14 +139,14 @@ if (!function_exists('teamEvent')) {
 if (!function_exists('success')) {
     function success($data = null)
     {
-        return response()->json(['status' => 1, 'data' => $data]);
+        return response()->json(['status' => 1, 'data' => $data], 200);
     }
 }
 
 if (!function_exists('fail')) {
     function fail($data = null)
     {
-        return response()->json(['status' => 0, 'data' => $data]);
+        return response()->json(['status' => 0, 'data' => $data], 400);
     }
 }
 
