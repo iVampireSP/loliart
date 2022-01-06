@@ -48,8 +48,6 @@ class PlayerController extends Controller
         $cache_key = 'mcbe_flow_player_bind_code_' . $request->code;
         $cache = cache($cache_key);
 
-        Log::debug($cache);
-
         if (is_null($cache)) {
             return fail();
         }
