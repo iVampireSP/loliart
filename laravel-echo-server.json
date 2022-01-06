@@ -1,5 +1,5 @@
 {
-    "authHost": "https://www.edge.test",
+    "authHost": "https://edge.bt.lo.li",
     "authEndpoint": "/broadcasting/auth",
     "clients": [],
     "database": "redis",
