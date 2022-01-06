@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +15,7 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/minecraftbeflow', function (Request $request) {
-    return $request->user();
+Route::prefix('minecraftBeFlow')->name('api.minecraftBeFlow.')->group(function () {
+    Route::post('/player/bind', 'PlayerController@bind')->name('player.bind');
+    Route::get('/player/is_bind/{xuid}', 'PlayerController@is_bind')->name('player.is_bind');
 });

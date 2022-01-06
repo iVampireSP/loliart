@@ -9,5 +9,7 @@ class mcbeFlowPlayers extends Model
 {
     use HasFactory;
 
-    protected $fillable = [];
+    protected $fillable = [
+        'xuid', 'name', 'user_id', 'nbt'
+    ];
 }
