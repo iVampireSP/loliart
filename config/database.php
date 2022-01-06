@@ -135,14 +135,6 @@ return [
             'database' => env('REDIS_DB', '0'),
         ],
 
-        'channel' => [
-            'url' => env('REDIS_URL'),
-            'host' => env('REDIS_CHANNEL_HOST', '127.0.0.1'),
-            'password' => env('REDIS_CHANNEL_PASSWORD', null),
-            'port' => env('REDIS_CHANNEL_PORT', '6378'),
-            'database' => env(0),
-        ],
-
         'cache' => [
             'url' => env('REDIS_URL'),
             'host' => env('REDIS_HOST', '127.0.0.1'),
