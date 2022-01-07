@@ -179,3 +179,7 @@ if (!function_exists('unitConversion')) {
         return number_format($num, 3) . ' ' . $format;
     }
 }
+
+function ipPort($ip, $port) {
+    return $ip . ':' . $port;
+}
