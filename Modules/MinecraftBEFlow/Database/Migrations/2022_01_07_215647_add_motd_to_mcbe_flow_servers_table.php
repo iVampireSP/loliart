@@ -14,7 +14,7 @@ class AddMotdToMcbeFlowServersTable extends Migration
     public function up()
     {
         Schema::table('mcbe_flow_servers', function (Blueprint $table) {
-            $table->string('motd')->nullable();
+            $table->string('motd')->default('Edge Flowing');
             $table->string('version')->index();
         });
     }
