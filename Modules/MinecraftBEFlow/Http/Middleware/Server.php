@@ -18,7 +18,7 @@ class Server
     public function handle(Request $request, Closure $next)
     {
         // 检测服务器是否存在
-        if (!McbeFlowServers::where('token', $request->token)->exists()) {
+        if (!McbeFlowServers::where('token', $request->route('token'))->exists()) {
             return fail();
         }
 
