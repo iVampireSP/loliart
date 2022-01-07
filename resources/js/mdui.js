@@ -5899,10 +5899,10 @@
             translateY = '0';
         } else {
             if (position === 'bottom') {
-                translateY = snackbarHeight + 15;
+                translateY = snackbarHeight + 30;
             }
             if (position === 'top') {
-                translateY = -snackbarHeight - 15;
+                translateY = -snackbarHeight - 30;
             }
             if (position === 'left-top' || position === 'right-top') {
                 translateY = -snackbarHeight - 24;
