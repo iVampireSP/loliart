@@ -18,9 +18,17 @@ class Server
     public function handle(Request $request, Closure $next)
     {
         // 检测服务器是否存在
-        if (!McbeFlowServers::where('token', $request->route('token'))->exists()) {
+        $server = McbeFlowServers::where('token', $request->route('token'))->first();
+        if (is_null($server)) {
             return fail();
+        } else {
+            if ($server->status == 'pending') {
+                $server->status = 'active';
+                $server->save();
+            }
         }
+
+        $request->mcbe_server = $server;
 
         return $next($request);
     }
