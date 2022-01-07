@@ -67,12 +67,12 @@ class ServerController extends Controller
 
     /**
      * Show the specified resource.
-     * @param int $id
+     * @param McbeFlowServers $id
      * @return Renderable
      */
-    public function show($id)
+    public function show(McbeFlowServers $server)
     {
-        return view('minecraftbeflow::show');
+        return view('minecraftbeflow::servers.show', compact('server'));
     }
 
     /**
@@ -98,11 +98,20 @@ class ServerController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     * @param int $id
+     * @param McbeFlowServers $server
      * @return Renderable
      */
-    public function destroy($id)
+    public function destroy(McbeFlowServers $server)
     {
-        //
+        if (userInTeam($server->team_id)) {
+            $server->delete();
+
+            write(route('minecraftBeFlow.servers.index'));
+            writeTeam('MCBE Server' . $server->name . ' deleted');
+
+            return success();
+        }
+
+        return fail();
     }
 }
