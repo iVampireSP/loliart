@@ -27,7 +27,7 @@
                 </thead>
                 <tbody class="mdui-typo">
                     @foreach ($servers as $server)
-                        <tr id="server-{{ $server->id }}}">
+                        <tr id="server-{{ $server->id }}">
                             <td nowrap>{{ $server->id }}</td>
                             <td nowrap><a
                                     href="{{ route('wings.servers.show', $server->id) }}">{{ $server->display_name }}</a>

@@ -21,7 +21,7 @@
             </thead>
             <tbody class="mdui-typo">
                 @foreach ($nest->eggsList as $egg)
-                    <tr id="nests-{{ $egg->id }}}">
+                    <tr id="nests-{{ $egg->id }}">
                         <td nowrap>{{ $egg->id }}</td>
                         <td nowarp><a
                                 href="{{ route('wings.nests.eggs.show', [$nest->id, $egg->id]) }}">{{ $egg->name }}</a>

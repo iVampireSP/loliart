@@ -33,7 +33,7 @@
                 </thead>
                 <tbody class="mdui-typo">
                     @foreach ($tunnels as $tunnel)
-                        <tr id="item-{{ $tunnel->id }}}">
+                        <tr id="item-{{ $tunnel->id }}">
                             <td>{{ $tunnel->id }}</td>
                             <td><a href="{{ route('frpTunnel.tunnels.show', $tunnel->id) }}">{{ $tunnel->name }}</a>
                             </td>

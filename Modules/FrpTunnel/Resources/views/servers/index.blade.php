@@ -29,7 +29,7 @@
             </thead>
             <tbody class="mdui-typo">
                 @foreach ($servers as $server)
-                    <tr id="item-{{ $server->id }}}">
+                    <tr id="item-{{ $server->id }}">
                         <td nowrap>{{ $server->id }}</td>
                         <td nowrap><a
                                 href="{{ route('frpTunnel.servers.show', $server->id) }}">{{ $server->name }}</a>

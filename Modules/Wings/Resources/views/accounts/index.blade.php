@@ -28,7 +28,7 @@
             </thead>
             <tbody class="mdui-typo">
                 @foreach ($accounts as $account)
-                    <tr id="user-{{ $account->id }}}">
+                    <tr id="user-{{ $account->id }}">
                         <td nowrap>{{ $account->id }}</td>
                         <td nowrap><a
                                 href="{{ route('wings.accounts.show', $account->id) }}">{{ $account->email }}</a>
