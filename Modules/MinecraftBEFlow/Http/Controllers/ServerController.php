@@ -16,7 +16,7 @@ class ServerController extends Controller
      */
     public function index()
     {
-        $servers = McbeFlowServers::where('team_id', session('team_id'))->paginate(10);
+        $servers = McbeFlowServers::where('team_id', session('team_id'))->where('status', '!=', 'deleted')->paginate(10);
         return view('minecraftbeflow::servers.index', compact('servers'));
     }
 
@@ -47,9 +47,23 @@ class ServerController extends Controller
         ]);
 
         // 检测服务器是否存在
-        if (McbeFlowServers::where('ip', $request->ip)->where('port', $request->port)->exists()) {
-            write('Server already added.');
-            return fail();
+        $found = McbeFlowServers::where('ip', $request->ip)->where('port', $request->port)->first();
+        if (!is_null($found)) {
+            if ($found->status == 'deleted') {
+                $found->query()->update([
+                    'status' => 'pending',
+                    'team_id' => session('team_id'),
+                    'token' => Str::random(10)
+                ]);
+
+                write('Server restored.');
+                write(route('minecraftBeFlow.servers.show', $found->id));
+                return success();
+
+            } else {
+                write('Server already added.');
+                return fail();
+            }
         }
 
         $req = $request->toArray();
@@ -104,7 +118,8 @@ class ServerController extends Controller
     public function destroy(McbeFlowServers $server)
     {
         if (userInTeam($server->team_id)) {
-            $server->delete();
+            $server->status = 'deleted';
+            $server->save();
 
             write(route('minecraftBeFlow.servers.index'));
             writeTeam('MCBE Server' . $server->name . ' deleted');
