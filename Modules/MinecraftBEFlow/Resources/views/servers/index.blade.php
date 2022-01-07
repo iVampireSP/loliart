@@ -11,7 +11,7 @@
 
     <div class="mdui-row mdui-p-b-2 mdui-p-l-1 mdui-m-t-2">
         <a class="mdui-btn mdui-btn-outlined mdui-ripple"
-        href="{{ route('wings.servers.create') }}">{{ tr('Create Server') }}</a>
+        href="{{ route('minecraftBeFlow.servers.create') }}">{{ tr('Create Server') }}</a>
     </div>
 
     <div class="mdui-table-fluid">
@@ -20,17 +20,19 @@
                 <tr>
                     <th>ID</th>
                     <th>{{ tr('Name') }}</th>
-                    <th>{{ tr('Node') }}</th>
-                    <th>{{ tr('Owner') }}</th>
+                    <th>IP Port</th>
+                    <th>{{ tr('Online') }}</th>
+                    <th>{{ tr('Status') }}</th>
                 </tr>
             </thead>
             <tbody class="mdui-typo">
                 @foreach ($servers as $server)
                     <tr id="server-{{ $server->id }}">
                         <td nowrap>{{ $server->id }}</td>
-                        <td nowrap><a href="{{ route('wings.servers.show', $server->id) }}">{{ $server->display_name }}</a></td>
-                        <td nowrap>{{ $server->node->display_name }}</td>
-                        <td nowrap>{{ $server->account->username ?? tr('User not exists') }}</td>
+                        <td nowrap><a href="{{ route('minecraftBeFlow.servers.show', $server->id) }}">{{ $server->name }}</a></td>
+                        <td nowrap><a href="minecraft://?addExternalServer={{ $server->name }}|{{ ipPort($server->ip, $server->port) }}">{{ ipPort($server->ip, $server->port) }}</a></td>
+                        <td nowrap>0</td>
+                        <td nowrap>{{ $server->status }}</td>
                     </tr>
                 @endforeach
             </tbody>
