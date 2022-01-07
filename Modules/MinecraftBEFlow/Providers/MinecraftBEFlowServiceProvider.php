@@ -4,6 +4,7 @@ namespace Modules\MinecraftBEFlow\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
+use Modules\MinecraftBEFlow\Http\Middleware\Server;
 
 class MinecraftBEFlowServiceProvider extends ServiceProvider
 {
@@ -22,12 +23,14 @@ class MinecraftBEFlowServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(\Illuminate\Routing\Router $router)
     {
         $this->registerTranslations();
         $this->registerConfig();
         $this->registerViews();
         $this->loadMigrationsFrom(module_path($this->moduleName, 'Database/Migrations'));
+
+        $router->aliasMiddleware('server', Server::class);
     }
 
     /**
@@ -51,7 +54,8 @@ class MinecraftBEFlowServiceProvider extends ServiceProvider
             module_path($this->moduleName, 'Config/config.php') => config_path($this->moduleNameLower . '.php'),
         ], 'config');
         $this->mergeConfigFrom(
-            module_path($this->moduleName, 'Config/config.php'), $this->moduleNameLower
+            module_path($this->moduleName, 'Config/config.php'),
+            $this->moduleNameLower
         );
     }
 
