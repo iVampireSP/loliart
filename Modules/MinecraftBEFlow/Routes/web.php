@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,4 +17,10 @@ Route::prefix('minecraftBeFlow')->middleware(['teams_permission', 'auth'])->name
     Route::get('/', 'MinecraftBEFlowController@index')->name('index');
     Route::get('/player', 'PlayerController@index')->name('player');
     Route::post('/player', 'PlayerController@store')->name('player.store');
+
+    Route::resource('/servers', 'ServerController');
+
+    // Route::prefix('/servers')->name('servers.')->group(function () {
+    //     // Route::resource('')
+    // });
 });
