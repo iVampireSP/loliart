@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Contracts\Support\Renderable;
 use Modules\MinecraftBEFlow\Entities\McbeFlowPlayers;
 use Modules\MinecraftBEFlow\Entities\McbeFlowServers;
@@ -82,12 +83,24 @@ class PlayerController extends Controller
     public function is_bind(Request $request)
     {
         // 检查是否已经存在绑定
-        $player = McbeFlowPlayers::where('xuid', $request->route('xuid'))->first();
+        $xuid = $request->route('xuid');
+
+        $player = McbeFlowPlayers::where('xuid', $xuid)->first();
+
+        $cache = cache('mcbe_flow_player_' . $xuid);
 
         if (is_null($player)) {
-            return fail('Not Found.');
+            return fail(404);
         } else {
-            return success([$player, $request->mcbe_server]);
+            if (is_null($cache)) {
+                return success([$player, $request->mcbe_server]);
+            } else {
+                if ($cache['at'] - time() < 2 && $cache['server_id'] !== $request->mcbe_server->id) {
+                    return success([$player, $request->mcbe_server]);
+                } else {
+                    return fail(403);
+                }
+            }
         }
     }
 
@@ -157,9 +170,13 @@ class PlayerController extends Controller
 
     public function save(Request $request)
     {
-        McbeFlowPlayers::where('xuid', $request->route('xuid'))->update([
+        $xuid = $request->route('xuid');
+        McbeFlowPlayers::where('xuid', $xuid)->update([
             'nbt' => $request->nbt
         ]);
+
+        $cache_key = 'mcbe_flow_player_' . $xuid;
+        Cache::forget($cache_key);
 
         return success();
     }

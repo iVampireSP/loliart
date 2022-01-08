@@ -6,6 +6,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Support\Facades\Cache;
 use Modules\MinecraftBEFlow\Entities\McbeFlowPlayers;
 use Modules\MinecraftBEFlow\Entities\McbeFlowServers;
 
@@ -205,8 +206,9 @@ class ServerController extends Controller
 
                 $pl['server_id'] = $request->mcbe_server->id;
                 $pl['server_name'] = $request->mcbe_server->name;
+                $pl['at'] = time();
 
-                cache(['mcbe_flow_player_' . $pl['xuid'] => $pl], 20);
+                Cache::put('mcbe_flow_player_' . $pl['xuid'], $pl, 3);
             }
         }
 
