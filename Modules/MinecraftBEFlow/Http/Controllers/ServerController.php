@@ -166,34 +166,19 @@ class ServerController extends Controller
         return success($request->mcbe_server);
     }
 
-    public function player(Request $request)
-    {
-        $req = $request->toArray();
+    // public function player(Request $request)
+    // {
+    //     $req = $request->toArray();
 
-        $player = new McbeFlowPlayers();
+    //     $req['players_count'] = count($req['players']);
 
-        $req['players_count'] = count($req['players']);
+    //     cache(['mcbe_flow_server_' . $request->mcbe_server->id => $req], 70);
 
-        cache(['mcbe_flow_server_' . $request->mcbe_server->id => $req], 70);
+    //     teamEvent('minecraftBeFlow.server.updated', $req, $request->mcbe_server->team_id);
+    //     teamEvent('minecraftBeFlow.server.list.updated', null, $request->mcbe_server->team_id);
 
-        // 更新玩家信息
-        foreach ($req['players'] as $pl) {
-            $pl_q = $player->where('xuid', $pl['xuid']);
-            if ($pl_q->exists()) {
-                $pl_q->update([
-                    'nbt' => $pl['nbt'],
-                    'name' => $pl['name']
-                ]);
-
-                cache(['mcbe_flow_player_' . $pl['xuid'] => $req], 20);
-            }
-        }
-
-        teamEvent('minecraftBeFlow.server.updated', $req, $request->mcbe_server->team_id);
-        teamEvent('minecraftBeFlow.server.list.updated', null, $request->mcbe_server->team_id);
-
-        return success($request->mcbe_server);
-    }
+    //     return success($request->mcbe_server);
+    // }
 
     public function heartbeat(Request $request)
     {
@@ -208,6 +193,22 @@ class ServerController extends Controller
         }
 
         $req['players_count'] = count($req['players']);
+
+        $player = new McbeFlowPlayers();
+        // 更新玩家信息
+        foreach ($req['players'] as $pl) {
+            $pl_q = $player->where('xuid', $pl['xuid']);
+            if ($pl_q->exists()) {
+                $pl_q->update([
+                    'name' => $pl['name']
+                ]);
+
+                $pl['server_id'] = $request->mcbe_server->id;
+                $pl['server_name'] = $request->mcbe_server->name;
+
+                cache(['mcbe_flow_player_' . $pl['xuid'] => $pl], 20);
+            }
+        }
 
         cache(['mcbe_flow_server_' . $request->mcbe_server->id => $req], 20);
 

@@ -12,4 +12,8 @@ class mcbeFlowPlayers extends Model
     protected $fillable = [
         'xuid', 'name', 'user_id', 'nbt', 'server_id'
     ];
+
+    public function server() {
+        return $this->belongsTo(McbeFlowServers::class);
+    }
 }

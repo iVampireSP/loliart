@@ -19,9 +19,13 @@ class PlayerController extends Controller
      */
     public function index()
     {
-        $player = McbeFlowPlayers::where('user_id', auth()->id())->first();
+
+        $player = McbeFlowPlayers::where('user_id', auth()->id())->with(['server'])->first();
         if (!is_null($player)) {
-            return view('minecraftbeflow::player.index', compact('player'));
+            $cache_key = 'mcbe_flow_player_' . $player->xuid;
+            $cache = cache($cache_key);
+
+            return view('minecraftbeflow::player.index', compact('player', 'cache'));
         } else {
             $cache_key = 'mcbe_flow_player_bind_' . auth()->id();
             $cache = cache($cache_key);
