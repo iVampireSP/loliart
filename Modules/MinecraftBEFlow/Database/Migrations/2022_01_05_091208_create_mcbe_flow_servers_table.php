@@ -20,12 +20,6 @@ class CreateMcbeFlowServersTable extends Migration
             $table->string('ip')->index();
             $table->string('port')->index();
 
-            $table->string('start_x')->index();
-            $table->string('start_z')->index();
-
-            $table->string('end_x')->index();
-            $table->string('end_z')->index();
-
             $table->unsignedBigInteger('team_id')->index();
             $table->foreign('team_id')->references('id')->on('teams');
 

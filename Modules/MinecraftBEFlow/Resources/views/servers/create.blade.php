@@ -27,26 +27,6 @@
             <input class="mdui-textfield-input" type="text" name="port" />
         </div>
 
-        <div class="mdui-textfield mdui-textfield-floating-label">
-            <label class="mdui-textfield-label">{{ tr('Start x') }}</label>
-            <input class="mdui-textfield-input" type="text" name="start_x" />
-        </div>
-
-        <div class="mdui-textfield mdui-textfield-floating-label">
-            <label class="mdui-textfield-label">{{ tr('End x') }}</label>
-            <input class="mdui-textfield-input" type="text" name="end_x" />
-        </div>
-
-        <div class="mdui-textfield mdui-textfield-floating-label">
-            <label class="mdui-textfield-label">{{ tr('Start z') }}</label>
-            <input class="mdui-textfield-input" type="text" name="start_z" />
-        </div>
-
-        <div class="mdui-textfield mdui-textfield-floating-label">
-            <label class="mdui-textfield-label">{{ tr('End z') }}</label>
-            <input class="mdui-textfield-input" type="text" name="end_z" />
-        </div>
-
         <button class="mdui-m-t-4 mdui-btn mdui-ripple mdui-btn-outlined" type="submit">{{ tr('Create Server') }}</button>
     </form>
 
