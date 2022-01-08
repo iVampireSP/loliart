@@ -40,10 +40,11 @@ class AuthController extends Controller
     {
         $state = $request->session()->pull('state');
 
-        throw_unless(
-            strlen($state) > 0 && $state === $request->state,
-            InvalidArgumentException::class
-        );
+        if (strlen($state) > 0 && $state === $request->state) {
+            // Go on
+        } else {
+            return redirect()->route('home')->with('message', 'Please try again.');
+        }
 
         $http = new Client;
 
