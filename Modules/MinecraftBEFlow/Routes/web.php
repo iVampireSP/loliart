@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('minecraftBeFlow')->middleware(['teams_permission', 'auth'])->name('minecraftBeFlow.')->group(function () {
     Route::get('/', 'MinecraftBEFlowController@index')->name('index');
+    Route::get('/explore', 'ServerController@explore')->name('servers.explore');
     Route::get('/player', 'PlayerController@index')->name('player');
     Route::post('/player', 'PlayerController@store')->name('player.store');
     Route::delete('/player', 'PlayerController@destroy')->name('player.destroy');

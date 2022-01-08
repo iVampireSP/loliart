@@ -17,7 +17,13 @@ class ServerController extends Controller
      */
     public function index()
     {
-        $servers = McbeFlowServers::where('team_id', session('team_id'))->where('status', '!=', 'deleted')->paginate(10);
+        $servers = McbeFlowServers::where('team_id', session('team_id'))->where('status', '!=', 'deleted')->simplePaginate(10);
+        return view('minecraftbeflow::servers.index', compact('servers'));
+    }
+
+    public function explore()
+    {
+        $servers = McbeFlowServers::where('status', '!=', 'deleted')->simplePaginate(10);
         return view('minecraftbeflow::servers.index', compact('servers'));
     }
 
