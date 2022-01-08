@@ -14,39 +14,55 @@
             href="{{ route('minecraftBeFlow.servers.create') }}">{{ tr('Create Server') }}</a>
     </div>
 
-    <div class="mdui-table-fluid">
-        <table class="mdui-table mdui-table-hoverable">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>{{ tr('Name') }}</th>
-                    <th>IP Port</th>
-                    <th>{{ tr('Online') }}</th>
-                    <th>{{ tr('Status') }}</th>
-                </tr>
-            </thead>
-            <tbody class="mdui-typo">
-                @foreach ($servers as $server)
-                    <tr id="server-{{ $server->id }}">
-                        <td nowrap>{{ $server->id }}</td>
-                        <td nowrap><a
-                                href="{{ route('minecraftBeFlow.servers.show', $server->id) }}">{{ $server->name }}</a>
-                        </td>
-                        <td nowrap><a
-                                href="minecraft://?addExternalServer={{ $server->name }}|{{ ipPort($server->ip, $server->port) }}">{{ ipPort($server->ip, $server->port) }}</a>
-                        </td>
-                        <td nowrap>0</td>
-                        <td nowrap>
-                            @if (cache('mcbe_flow_server_' . $server->id))
-                                <i class="mdui-icon material-icons mdui-text-color-green">done</i>
-                            @else
-                                <i class="mdui-icon material-icons mdui-text-color-red">close</i>
-                            @endif
-                        </td>
+    <div class="servers">
+        <div class="mdui-table-fluid">
+            <table class="mdui-table mdui-table-hoverable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>{{ tr('Name') }}</th>
+                        <th>IP Port</th>
+                        <th>{{ tr('Online Players') }}</th>
+                        <th>{{ tr('Status') }}</th>
                     </tr>
-                @endforeach
-            </tbody>
-        </table>
+                </thead>
+                <tbody class="mdui-typo">
+                    @foreach ($servers as $server)
+                        <tr id="server-{{ $server->id }}">
+                            <td nowrap>{{ $server->id }}</td>
+                            <td nowrap><a
+                                    href="{{ route('minecraftBeFlow.servers.show', $server->id) }}">{{ $server->name }}</a>
+                            </td>
+                            <td nowrap><a
+                                    href="minecraft://?addExternalServer={{ $server->name }}|{{ ipPort($server->ip, $server->port) }}">{{ ipPort($server->ip, $server->port) }}</a>
+                            </td>
+                            @php($cache = cache('mcbe_flow_server_' . $server->id, 0))
+                            <td nowrap>{{ $cache['players_count'] }}</td>
+                            <td nowrap>
+                                @if ($cache)
+                                    <i class="mdui-icon material-icons mdui-text-color-green">done</i>
+                                @else
+                                    <i class="mdui-icon material-icons mdui-text-color-red">close</i>
+                                @endif
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
+
+    <script>
+        m = {
+            e: (type, data) => {
+                switch (type) {
+                    case 'minecraftBeFlow.server.list.updated':
+                        util.reload('.servers')
+
+                        break;
+                }
+            },
+        }
+    </script>
 
 @endsection

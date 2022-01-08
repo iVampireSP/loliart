@@ -59,7 +59,6 @@ class ServerController extends Controller
                 write('Server restored.');
                 write(route('minecraftBeFlow.servers.show', $found->id));
                 return success();
-
             } else {
                 write('Server already added.');
                 return fail();
@@ -86,7 +85,9 @@ class ServerController extends Controller
      */
     public function show(McbeFlowServers $server)
     {
-        return view('minecraftbeflow::servers.show', compact('server'));
+        $cache = cache('mcbe_flow_server_' . $server->id, 0);
+
+        return view('minecraftbeflow::servers.show', compact('server', 'cache'));
     }
 
     /**
@@ -102,12 +103,34 @@ class ServerController extends Controller
     /**
      * Update the specified resource in storage.
      * @param Request $request
-     * @param int $id
+     * @param McbeFlowServers $server
      * @return Renderable
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, McbeFlowServers $server)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'ip' => 'required|ip',
+            'port' => 'integer|max:65535|min:1024',
+            'start_x' => 'integer|max:10240|min:0',
+            'start_z' => 'integer|max:10240|min:0',
+            'end_x' => 'integer|max:10240|min:0',
+            'end_z' => 'integer|max:10240|min:0',
+            'motd' => 'required|max:20'
+        ]);
+
+        userInTeamFail($server->team_id);
+
+        $req = $request->toArray();
+
+        $req['team_id'] = session('team_id');
+
+        $server->update($req);
+
+        teamEvent('minecraftBeFlow.server.list.updated', null, session('team_id'));
+        writeTeam('MCBE Server updated.');
+
+        return success();
     }
 
     /**
@@ -128,5 +151,27 @@ class ServerController extends Controller
         }
 
         return fail();
+    }
+
+    public function heartbeat(Request $request)
+    {
+        $request->validate([
+            'version' => 'required'
+        ]);
+
+        $req = $request->toArray();
+
+        if (count($req) > 2) {
+            return fail('Send data too big.');
+        }
+
+        $req['players_count'] = count($req['players']);
+
+        cache(['mcbe_flow_server_' . $request->mcbe_server->id => $req], 70);
+
+        teamEvent('minecraftBeFlow.server.updated', $req, $request->mcbe_server->team_id);
+        teamEvent('minecraftBeFlow.server.list.updated', null, $request->mcbe_server->team_id);
+
+        return success($request->mcbe_server);
     }
 }
