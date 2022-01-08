@@ -71,26 +71,6 @@
             </div>
 
             <div class="mdui-textfield mdui-textfield-floating-label">
-                <label class="mdui-textfield-label">Start X</label>
-                <input class="mdui-textfield-input" type="text" name="start_x" value="{{ $server->start_x }}" />
-            </div>
-
-            <div class="mdui-textfield mdui-textfield-floating-label">
-                <label class="mdui-textfield-label">End X</label>
-                <input class="mdui-textfield-input" type="text" name="end_x" value="{{ $server->end_x }}" />
-            </div>
-
-            <div class="mdui-textfield mdui-textfield-floating-label">
-                <label class="mdui-textfield-label">Start Z</label>
-                <input class="mdui-textfield-input" type="text" name="start_z" value="{{ $server->start_z }}" />
-            </div>
-
-            <div class="mdui-textfield mdui-textfield-floating-label">
-                <label class="mdui-textfield-label">End Z</label>
-                <input class="mdui-textfield-input" type="text" name="end_z" value="{{ $server->end_z }}" />
-            </div>
-
-            <div class="mdui-textfield mdui-textfield-floating-label">
                 <label class="mdui-textfield-label">Motd</label>
                 <input class="mdui-textfield-input" type="text" name="motd" value="{{ $server->motd }}" />
             </div>
