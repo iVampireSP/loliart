@@ -190,4 +190,26 @@ class ServerController extends Controller
 
         return success($request->mcbe_server);
     }
+
+    public function heartbeat(Request $request)
+    {
+        $request->validate([
+            'version' => 'required'
+        ]);
+
+        $req = $request->toArray();
+
+        if (count($req) > 2) {
+            return fail('Send data too big.');
+        }
+
+        $req['players_count'] = count($req['players']);
+
+        cache(['mcbe_flow_server_' . $request->mcbe_server->id => $req], 70);
+
+        teamEvent('minecraftBeFlow.server.updated', $req, $request->mcbe_server->team_id);
+        teamEvent('minecraftBeFlow.server.list.updated', null, $request->mcbe_server->team_id);
+
+        return success($request->mcbe_server);
+    }
 }
