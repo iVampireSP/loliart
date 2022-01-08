@@ -19,7 +19,7 @@ class CreateMcbeFlowPlayersTable extends Migration
             $table->string('xuid')->index();
             $table->string('name')->index();
 
-            $table->json('nbt')->nullable();
+            $table->text('nbt')->nullable();
 
             $table->unsignedBigInteger('user_id')->index();
             $table->foreign('user_id')->references('id')->on('users');
