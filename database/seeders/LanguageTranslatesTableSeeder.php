@@ -4980,6 +4980,328 @@ Please enter domain name (e.g node.example.com) to be used for connecting to the
                 'created_at' => '2021-12-29 21:40:42',
                 'updated_at' => '2021-12-29 21:40:42',
             ),
+            496 => 
+            array (
+                'id' => 554,
+                'language' => 'zh',
+                'string' => 'Broadcast',
+                'output' => '广播',
+                'sign' => 'language_zh_be55b6387170df0ca68f41225268e842',
+                'created_at' => '2022-01-06 20:59:02',
+                'updated_at' => '2022-01-06 20:59:02',
+            ),
+            497 => 
+            array (
+                'id' => 555,
+                'language' => 'zh',
+                'string' => 'Log',
+                'output' => '日志',
+                'sign' => 'language_zh_ce0be71e33226e4c1db2bcea5959f16b',
+                'created_at' => '2022-01-06 21:00:10',
+                'updated_at' => '2022-01-06 21:00:10',
+            ),
+            498 => 
+            array (
+                'id' => 556,
+                'language' => 'zh',
+                'string' => 'Hi, iVampireSP, welcome to server flow! Let\'s bind your Xbox account.',
+                'output' => '嗨，iVampireSP，欢迎来到服务器流！让我们绑定您的Xbox帐户。',
+                'sign' => 'language_zh_a5f09aebd0a43440c0b605fb0c6c9679',
+                'created_at' => '2022-01-06 21:04:06',
+                'updated_at' => '2022-01-06 21:04:06',
+            ),
+            499 => 
+            array (
+                'id' => 557,
+                'language' => 'zh',
+                'string' => 'Your code',
+                'output' => '你的代码',
+                'sign' => 'language_zh_30c2b4b5e19ac71fefa1b4d688a7a98f',
+                'created_at' => '2022-01-06 21:04:14',
+                'updated_at' => '2022-01-06 21:04:14',
+            ),
+        ));
+        \DB::table('language_translates')->insert(array (
+            0 => 
+            array (
+                'id' => 558,
+                'language' => 'zh',
+                'string' => 'the code will be expired in 10 minutes.',
+                'output' => '代码将在10分钟后过期。',
+                'sign' => 'language_zh_ff09a7d3f5292daa0003670d3bba4f59',
+                'created_at' => '2022-01-06 21:04:16',
+                'updated_at' => '2022-01-06 21:04:16',
+            ),
+            1 => 
+            array (
+                'id' => 559,
+                'language' => 'zh',
+                'string' => 'Hi',
+                'output' => '你好',
+                'sign' => 'language_zh_c1a5298f939e87e8f962a5edfc206918',
+                'created_at' => '2022-01-06 22:39:47',
+                'updated_at' => '2022-01-06 22:39:47',
+            ),
+            2 => 
+            array (
+                'id' => 560,
+                'language' => 'zh',
+                'string' => 'Address',
+                'output' => '住址',
+                'sign' => 'language_zh_dd7bf230fde8d4836917806aff6a6b27',
+                'created_at' => '2022-01-07 10:59:28',
+                'updated_at' => '2022-01-07 10:59:28',
+            ),
+            3 => 
+            array (
+                'id' => 561,
+                'language' => 'zh',
+                'string' => 'Create Servers',
+                'output' => '创建服务器',
+                'sign' => 'language_zh_8e5c06a39dcae29979ead3a3170e320c',
+                'created_at' => '2022-01-07 11:02:20',
+                'updated_at' => '2022-01-07 11:02:20',
+            ),
+            4 => 
+            array (
+                'id' => 562,
+                'language' => 'zh',
+                'string' => 'Your server name.',
+                'output' => '您的服务器名。',
+                'sign' => 'language_zh_bbe142a0fbcec81c5f6190a7364573de',
+                'created_at' => '2022-01-07 11:04:43',
+                'updated_at' => '2022-01-07 11:04:43',
+            ),
+            5 => 
+            array (
+                'id' => 563,
+                'language' => 'zh',
+                'string' => 'The address connect to your server.',
+                'output' => '连接到服务器的地址。',
+                'sign' => 'language_zh_9f0835465a0f1df562c574cceba64f04',
+                'created_at' => '2022-01-07 11:06:21',
+                'updated_at' => '2022-01-07 11:06:21',
+            ),
+            6 => 
+            array (
+                'id' => 564,
+                'language' => 'zh',
+                'string' => 'Server IP',
+                'output' => '服务器IP',
+                'sign' => 'language_zh_2574a7504573259f3b6d0abca86f49a0',
+                'created_at' => '2022-01-07 11:21:54',
+                'updated_at' => '2022-01-07 11:21:54',
+            ),
+            7 => 
+            array (
+                'id' => 565,
+                'language' => 'zh',
+                'string' => 'End z',
+                'output' => 'z端',
+                'sign' => 'language_zh_2a101c56e79d0c9caceeea788f8945e1',
+                'created_at' => '2022-01-07 11:21:55',
+                'updated_at' => '2022-01-07 11:21:55',
+            ),
+            8 => 
+            array (
+                'id' => 566,
+                'language' => 'zh',
+                'string' => 'Start x',
+                'output' => '开始x',
+                'sign' => 'language_zh_efb74d509ae9b6bfdefa2398a032fc92',
+                'created_at' => '2022-01-07 11:22:02',
+                'updated_at' => '2022-01-07 11:22:02',
+            ),
+            9 => 
+            array (
+                'id' => 567,
+                'language' => 'zh',
+                'string' => 'Start z',
+                'output' => '开始z',
+                'sign' => 'language_zh_e1378076cbe3a27e1eb9d15e0abb64d9',
+                'created_at' => '2022-01-07 11:22:04',
+                'updated_at' => '2022-01-07 11:22:04',
+            ),
+            10 => 
+            array (
+                'id' => 568,
+                'language' => 'zh',
+                'string' => 'End x',
+                'output' => 'x端',
+                'sign' => 'language_zh_440b6187b31e23864367ba601b7a93ac',
+                'created_at' => '2022-01-07 11:22:05',
+                'updated_at' => '2022-01-07 11:22:05',
+            ),
+            11 => 
+            array (
+                'id' => 569,
+                'language' => 'zh',
+                'string' => 'Token',
+                'output' => '代币',
+                'sign' => 'language_zh_459a6f79ad9b13cbcb5f692d2cc7a94d',
+                'created_at' => '2022-01-07 22:15:33',
+                'updated_at' => '2022-01-07 22:15:33',
+            ),
+            12 => 
+            array (
+                'id' => 570,
+                'language' => 'zh',
+                'string' => 'Online Players',
+                'output' => '在线玩家',
+                'sign' => 'language_zh_ccf4c59cfa0dba7b63811d654a6feb14',
+                'created_at' => '2022-01-07 22:22:45',
+                'updated_at' => '2022-01-07 22:22:45',
+            ),
+            13 => 
+            array (
+                'id' => 571,
+                'language' => 'zh',
+                'string' => 'Players list',
+                'output' => '球员名单',
+                'sign' => 'language_zh_bf8ae1ddb923a3a66bd919bf42c032d0',
+                'created_at' => '2022-01-07 22:44:53',
+                'updated_at' => '2022-01-07 22:44:53',
+            ),
+            14 => 
+            array (
+                'id' => 572,
+                'language' => 'zh',
+                'string' => 'Creative mode',
+                'output' => '创作模式',
+                'sign' => 'language_zh_f0625fcc57f04e76746ee7eba273a027',
+                'created_at' => '2022-01-07 23:05:09',
+                'updated_at' => '2022-01-07 23:05:09',
+            ),
+            15 => 
+            array (
+                'id' => 573,
+                'language' => 'zh',
+                'string' => 'Position',
+                'output' => '位置',
+                'sign' => 'language_zh_52f5e0bc3859bc5f5e25130b6c7e8881',
+                'created_at' => '2022-01-07 23:06:56',
+                'updated_at' => '2022-01-07 23:06:56',
+            ),
+            16 => 
+            array (
+                'id' => 574,
+                'language' => 'zh',
+                'string' => 'Game mode',
+                'output' => '游戏模式',
+                'sign' => 'language_zh_7f1a703907b0737180f09be87a9c6ceb',
+                'created_at' => '2022-01-07 23:07:00',
+                'updated_at' => '2022-01-07 23:07:00',
+            ),
+            17 => 
+            array (
+                'id' => 575,
+                'language' => 'zh',
+                'string' => 'Delete Profile',
+                'output' => '删除配置文件',
+                'sign' => 'language_zh_3e9983cf1885a5ec9f5a5d8127137bd2',
+                'created_at' => '2022-01-08 18:14:57',
+                'updated_at' => '2022-01-08 18:14:57',
+            ),
+            18 => 
+            array (
+                'id' => 576,
+                'language' => 'zh',
+                'string' => 'Please try again.',
+                'output' => '请再试一次。',
+                'sign' => 'language_zh_2d3cdcfdd4061212e4d4930a183dad2d',
+                'created_at' => '2022-01-08 21:41:07',
+                'updated_at' => '2022-01-08 21:41:07',
+            ),
+            19 => 
+            array (
+                'id' => 577,
+                'language' => 'zh',
+                'string' => 'Join Server',
+                'output' => '加入服务器',
+                'sign' => 'language_zh_431c9f302f18139bebfb66c84d3c57aa',
+                'created_at' => '2022-01-08 21:42:57',
+                'updated_at' => '2022-01-08 21:42:57',
+            ),
+            20 => 
+            array (
+                'id' => 578,
+                'language' => 'zh',
+                'string' => 'Hi, Yeestring, welcome to server flow! Let\'s bind your Xbox account.',
+                'output' => '嗨，Yeestring，欢迎来到服务器流！让我们绑定您的Xbox帐户。',
+                'sign' => 'language_zh_d5e44d7c18eb0f54be71bd2e5202f964',
+                'created_at' => '2022-01-08 21:44:04',
+                'updated_at' => '2022-01-08 21:44:04',
+            ),
+            21 => 
+            array (
+                'id' => 579,
+                'language' => 'zh',
+                'string' => 'Transfer to Server',
+                'output' => '传输到服务器',
+                'sign' => 'language_zh_f24fe3f5bb5c9d68725c3dbae7f06c8e',
+                'created_at' => '2022-01-08 21:44:40',
+                'updated_at' => '2022-01-08 21:44:40',
+            ),
+            22 => 
+            array (
+                'id' => 580,
+                'language' => 'zh',
+                'string' => 'Add Server',
+                'output' => '添加服务器',
+                'sign' => 'language_zh_003744a685f896a2d9764655f67f1a24',
+                'created_at' => '2022-01-08 21:44:43',
+                'updated_at' => '2022-01-08 21:44:43',
+            ),
+            23 => 
+            array (
+                'id' => 581,
+                'language' => 'zh',
+                'string' => 'Joined at',
+                'output' => '加入',
+                'sign' => 'language_zh_7c6ece92645244bc90e7cf99ebb0d2f2',
+                'created_at' => '2022-01-08 22:03:23',
+                'updated_at' => '2022-01-08 22:03:23',
+            ),
+            24 => 
+            array (
+                'id' => 582,
+                'language' => 'zh',
+                'string' => 'Joined at server',
+                'output' => '已在服务器上加入',
+                'sign' => 'language_zh_f9d8522680ac5d44474921c21d2e2b68',
+                'created_at' => '2022-01-08 22:03:26',
+                'updated_at' => '2022-01-08 22:03:26',
+            ),
+            25 => 
+            array (
+                'id' => 583,
+                'language' => 'zh',
+                'string' => 'Bind at server',
+                'output' => '在服务器上绑定',
+                'sign' => 'language_zh_d52196e9cbbb76b6840b0957d1af67d7',
+                'created_at' => '2022-01-08 22:03:39',
+                'updated_at' => '2022-01-08 22:03:39',
+            ),
+            26 => 
+            array (
+                'id' => 584,
+                'language' => 'zh',
+                'string' => 'Binding to server for the first time',
+                'output' => '首次绑定到服务器',
+                'sign' => 'language_zh_b1468f58012a8d1ef1d0d24f93dc5420',
+                'created_at' => '2022-01-08 22:04:10',
+                'updated_at' => '2022-01-08 22:04:10',
+            ),
+            27 => 
+            array (
+                'id' => 585,
+                'language' => 'zh',
+                'string' => 'Now at server',
+                'output' => '现在在服务器上',
+                'sign' => 'language_zh_75de565814a57f8fc42ba3f72e12f52a',
+                'created_at' => '2022-01-08 22:04:22',
+                'updated_at' => '2022-01-08 22:04:22',
+            ),
         ));
         
         
