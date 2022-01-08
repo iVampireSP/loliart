@@ -208,11 +208,4 @@ class ServerController extends Controller
 
         return success($request->mcbe_server);
     }
-
-    public function transfer(Request $request)
-    {
-        $server = McbeFlowServers::where('id', '!=', $request->mcbe_server->id)->where('status', 'active')->select(['id', 'name', 'ip', 'port', 'motd', 'version'])->first();
-
-        return success($server);
-    }
 }
