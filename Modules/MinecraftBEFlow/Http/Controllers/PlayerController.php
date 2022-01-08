@@ -182,4 +182,22 @@ class PlayerController extends Controller
 
         return fail();
     }
+
+    // public function web_transfer($server_id)
+    // {
+    //     $server = McbeFlowServers::where('id', $server_id)->first();
+
+    //     if (is_null($server)) {
+    //         return fail();
+    //     }
+
+    //     $cache_key = 'mcbe_flow_server_' . $server->id;
+    //     $cache = cache($cache_key);
+
+    //     if (is_null($cache)) {
+    //         return fail();
+    //     } else {
+    //         return success($server);
+    //     }
+    // }
 }
