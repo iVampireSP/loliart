@@ -162,12 +162,24 @@ class PlayerController extends Controller
 
     public function transfer(Request $request)
     {
-        $server = McbeFlowServers::where('id', '!=', $request->mcbe_server->id)
-            ->where('status', 'active')
-            ->where('version', $request->mcbe_server->version)
-            ->select(['id', 'name', 'ip', 'port', 'motd', 'version'])
-            ->first();
+        $i = 0;
+        while ($i < 3) {
+            $server = McbeFlowServers::where('id', '!=', $request->mcbe_server->id)
+                ->where('status', 'active')
+                ->where('version', $request->mcbe_server->version)
+                ->select(['id', 'name', 'ip', 'port', 'motd', 'version'])
+                ->first();
 
-        return success($server);
+            $cache_key = 'mcbe_flow_server_' . $server->id;
+            $cache = cache($cache_key);
+
+            if (is_null($cache)) {
+                $i++;
+            } else {
+                return success($server);
+            }
+        }
+
+        return fail();
     }
 }
