@@ -178,6 +178,8 @@ class ServerController extends Controller
                     'nbt' => $pl['nbt'],
                     'name' => $pl['name']
                 ]);
+
+                cache(['mcbe_flow_player_' . $pl['xuid'] => $req], 20);
             }
         }
 
