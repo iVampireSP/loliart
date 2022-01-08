@@ -154,17 +154,19 @@ class ServerController extends Controller
         return fail();
     }
 
-    public function heartbeat(Request $request)
+    public function version(Request $request)
     {
-        $request->validate([
-            'version' => 'required'
-        ]);
+        $cache_key = 'mcbe_flow_server_' . $request->mcbe_server->id;
+        $current = cache($cache_key) ?? [];
+        $current['version'] = $request->version;
+        cache([$cache_key => $current], 70);
 
+        return success($request->mcbe_server);
+    }
+
+    public function player(Request $request)
+    {
         $req = $request->toArray();
-
-        if (count($req) > 2) {
-            return fail('Send data too big.');
-        }
 
         $player = new McbeFlowPlayers();
 

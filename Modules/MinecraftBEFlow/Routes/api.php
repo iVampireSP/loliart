@@ -16,8 +16,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::prefix('minecraftBeFlow/{token}')->name('api.minecraftBeFlow.')->middleware('server')->group(function () {
-    Route::any('/server/heartbeat', 'ServerController@heartbeat')->name('server.heartbeat');
+    // Route::any('/server/version', 'ServerController@version')->name('server.version');
+    Route::any('/server/player', 'ServerController@player')->name('server.player');
+    Route::post('/server/version', 'ServerController@version')->name('server.version');
 
     Route::post('/player/bind', 'PlayerController@bind')->name('player.bind');
     Route::get('/player/is_bind/{xuid}', 'PlayerController@is_bind')->name('player.is_bind');
+    Route::post('/player/save/{xuid}', 'PlayerController@save')->name('player.save');
 });

@@ -82,7 +82,7 @@ class PlayerController extends Controller
         if (is_null($player)) {
             return fail('Not Found.');
         } else {
-            return success($player);
+            return success([$player, $request->mcbe_server]);
         }
     }
 
@@ -148,5 +148,9 @@ class PlayerController extends Controller
         write(route('minecraftBeFlow.player'));
 
         return success();
+    }
+
+    public function save($xuid) {
+        McbeFlowPlayers::where('xuid', $xuid)->update([]);
     }
 }
