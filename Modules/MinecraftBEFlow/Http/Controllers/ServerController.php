@@ -50,7 +50,7 @@ class ServerController extends Controller
                 $found->query()->update([
                     'status' => 'pending',
                     'team_id' => session('team_id'),
-                    'token' => Str::random(10)
+                    'token' => Str::random(20)
                 ]);
 
                 write('Server restored.');
@@ -152,6 +152,10 @@ class ServerController extends Controller
         $current = cache($cache_key) ?? [];
         $current['version'] = $request->version;
         cache([$cache_key => $current], 70);
+
+        if ($current['version'] != $request->mcbe_server->version) {
+            $request->mcbe_server->query()->update(['version' => $current['version']]);
+        }
 
         return success($request->mcbe_server);
     }
