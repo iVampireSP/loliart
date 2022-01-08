@@ -113,7 +113,7 @@ class ServerController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'ip' => 'required|ip',
+            'ip' => 'required|max:30',
             'port' => 'integer|max:65535|min:1024',
             'motd' => 'required|max:20'
         ]);
