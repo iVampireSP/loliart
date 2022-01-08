@@ -7,7 +7,7 @@
 @endsection
 
 @section('content')
-    <div class="mdui-typo-display-1">{{ $server->name }}</div>
+    <div class="mdui-typo-display-1 server-name">{{ $server->name }}</div>
 
     <div class="mdui-tab mdui-m-b-2" mdui-tab>
         <a href="#infomations" class="mdui-ripple">{{ tr('Information') }}</a>
@@ -49,7 +49,7 @@
         <form onsubmit="event.preventDefault();m.update(this)">
             <div class="mdui-textfield mdui-textfield-floating-label">
                 <label class="mdui-textfield-label">{{ tr('Server Name') }}</label>
-                <input class="mdui-textfield-input" type="text" name="name" value="{{ $server->name }}" />
+                <input class="mdui-textfield-input" type="text" name="name" value="{{ $server->name }}" oninput="$('.server-name').text(this.value)" />
                 <div class="mdui-textfield-helper">{{ tr('Your server name.') }}</div>
             </div>
 
