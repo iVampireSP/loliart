@@ -62,7 +62,8 @@ class PlayerController extends Controller
             McbeFlowPlayers::create([
                 'xuid' => $request->xuid,
                 'name' => $request->name,
-                'user_id' => $cache
+                'user_id' => $cache,
+                'server_id' => $request->mcbe_server->id,
             ]);
 
             userEvent('mcbe.flow.player.bind.refreshed', null, $cache);
@@ -137,11 +138,15 @@ class PlayerController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     * @param int $id
      * @return Renderable
      */
-    public function destroy($id)
+    public function destroy()
     {
-        //
+        McbeFlowPlayers::where('user_id', auth()->id())->delete();
+
+        write('Your MCBE account is deleted');
+        write(route('minecraftBeFlow.player'));
+
+        return success();
     }
 }

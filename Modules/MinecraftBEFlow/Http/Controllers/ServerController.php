@@ -6,6 +6,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Contracts\Support\Renderable;
+use Modules\MinecraftBEFlow\Entities\McbeFlowPlayers;
 use Modules\MinecraftBEFlow\Entities\McbeFlowServers;
 
 class ServerController extends Controller
@@ -165,9 +166,22 @@ class ServerController extends Controller
             return fail('Send data too big.');
         }
 
+        $player = new McbeFlowPlayers();
+
         $req['players_count'] = count($req['players']);
 
         cache(['mcbe_flow_server_' . $request->mcbe_server->id => $req], 70);
+
+        // 更新玩家信息
+        foreach ($req['players'] as $pl) {
+            $pl_q = $player->where('xuid', $pl['xuid']);
+            if ($pl_q->exists()) {
+                $pl_q->update([
+                    'nbt' => $pl['nbt'],
+                    'name' => $pl['name']
+                ]);
+            }
+        }
 
         teamEvent('minecraftBeFlow.server.updated', $req, $request->mcbe_server->team_id);
         teamEvent('minecraftBeFlow.server.list.updated', null, $request->mcbe_server->team_id);
