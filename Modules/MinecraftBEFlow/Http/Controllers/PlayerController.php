@@ -150,7 +150,11 @@ class PlayerController extends Controller
         return success();
     }
 
-    public function save($xuid) {
-        McbeFlowPlayers::where('xuid', $xuid)->update([]);
+    public function save(Request $request) {
+        McbeFlowPlayers::where('xuid', $request->route('xuid'))->update([
+            'nbt' => $request->nbt
+        ]);
+
+        return success();
     }
 }
