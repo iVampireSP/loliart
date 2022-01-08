@@ -27,6 +27,7 @@
         onclick="m.delete()">{{ tr('Delete Profile') }}</button>
 
     <script>
+        util.m()
         m = {
             delete: () => {
                 ui.confirm('You cannot restore if you delete your profile, are you sure?', () => {
@@ -34,12 +35,12 @@
                 })
             },
             // e: (type, data) {
-            //     switch (type) {
-            //         case 'mcbe.flow.player.updated':
-            //             util.reload('.player-online')
+            // switch (type) {
+            // case 'mcbe.flow.player.updated':
+            // util.reload('.player-online')
 
-            //             break;
-            //     }
+            // break;
+            // }
             // }
         }
     </script>
