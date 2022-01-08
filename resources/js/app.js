@@ -168,18 +168,22 @@ $(() => {
 
     // 监听用户点击，播放空音频
     window.addEventListener('click', () => {
-        if (!firstClick) {
-            firstClick = true
-            util.play('error_1.wav', 0)
-            util.play('success_1.wav', 0)
-            util.play('alert.mp3', 0)
+        let isSafari = /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor);
+        if (!isSafari) {
+            if (!firstClick) {
+                firstClick = true
+                util.play('error_1.wav', 0)
+                util.play('success_1.wav', 0)
+                util.play('alert.mp3', 0)
 
-            // 防止误退出
-            // window.onbeforeunload = () => {
-            //     return true;
-            // };
+                // 防止误退出
+                // window.onbeforeunload = () => {
+                //     return true;
+                // };
 
+            }
         }
+
         util.masonry('.masonry')
 
     })
