@@ -12,7 +12,7 @@
     <p>{{ tr('Joined at') }}: {{ $player->created_at }}</p>
     <p>{{ tr('Binding to server for the first time') }}: {{ $player->server->name }}</p>
 
-    <div class="player-online">
+    <div class="mdui-typo player-online">
         @if (!is_null($cache))
             <p>{{ tr('Position') }}: X={{ $cache['pos'][0] }} Y={{ $cache['pos'][1] }} Z={{ $cache['pos'][2] }}</p>
             <p>{{ tr('Now at server') }}: <a
