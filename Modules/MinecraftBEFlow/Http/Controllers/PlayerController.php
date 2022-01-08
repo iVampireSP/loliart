@@ -191,6 +191,10 @@ class PlayerController extends Controller
                 ->select(['id', 'name', 'ip', 'port', 'motd', 'version'])
                 ->first();
 
+            if (is_null($server)) {
+                break;
+            }
+
             $cache_key = 'mcbe_flow_server_' . $server->id;
             $cache = cache($cache_key);
 
