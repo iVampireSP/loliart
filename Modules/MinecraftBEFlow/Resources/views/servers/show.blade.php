@@ -117,7 +117,6 @@
             e: (type, data) => {
                 switch (type) {
                     case 'minecraftBeFlow.server.updated':
-                        console.log(data)
                         let html = ``;
                         for (i in data.players) {
                             let pl = data.players[i]
@@ -160,7 +159,9 @@
                         break;
                 }
             },
-        }
+        };
+
+        m.e('minecraftBeFlow.server.updated', {!! json_encode($cache) !!})
     </script>
 
 
