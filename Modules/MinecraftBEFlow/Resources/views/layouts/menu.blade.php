@@ -17,7 +17,7 @@
                 <div class="mdui-list-item-content">{{ tr('Create Server') }}</div>
             </a>
 
-            <a class="mdui-list-item mdui-ripple" href="{{ route('wings.servers.explore') }}">
+            <a class="mdui-list-item mdui-ripple" href="{{ route('minecraftBeFlow.servers.explore') }}">
                 <span class="mdui-list-item-icon mdui-icon material-icons-outlined">explore</span>
                 <div class="mdui-list-item-content">{{ tr('Browse Servers') }}</div>
             </a>
