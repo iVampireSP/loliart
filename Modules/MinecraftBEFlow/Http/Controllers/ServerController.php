@@ -41,10 +41,6 @@ class ServerController extends Controller
             'name' => 'required',
             'ip' => 'required|ip',
             'port' => 'integer|max:65535|min:1024',
-            'start_x' => 'integer|max:10240|min:0',
-            'start_z' => 'integer|max:10240|min:0',
-            'end_x' => 'integer|max:10240|min:0',
-            'end_z' => 'integer|max:10240|min:0',
         ]);
 
         // 检测服务器是否存在
@@ -113,10 +109,6 @@ class ServerController extends Controller
             'name' => 'required',
             'ip' => 'required|ip',
             'port' => 'integer|max:65535|min:1024',
-            'start_x' => 'integer|max:10240|min:0',
-            'start_z' => 'integer|max:10240|min:0',
-            'end_x' => 'integer|max:10240|min:0',
-            'end_z' => 'integer|max:10240|min:0',
             'motd' => 'required|max:20'
         ]);
 
