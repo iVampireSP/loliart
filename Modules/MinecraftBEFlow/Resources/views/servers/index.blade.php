@@ -37,7 +37,7 @@
                                     href="minecraft://?addExternalServer={{ $server->name }}|{{ ipPort($server->ip, $server->port) }}">{{ ipPort($server->ip, $server->port) }}</a>
                             </td>
                             @php($cache = cache('mcbe_flow_server_' . $server->id, 0))
-                            <td nowrap>{{ $cache['players_count'] }}</td>
+                            <td nowrap>{{ $cache['players_count'] ?? 0 }}</td>
                             <td nowrap>
                                 @if ($cache)
                                     <i class="mdui-icon material-icons mdui-text-color-green">done</i>

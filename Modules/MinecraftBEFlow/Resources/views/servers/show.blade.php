@@ -21,6 +21,12 @@
             <p>Your server need active, please download "EdgeFlow.lxl.js" to your plugins folder, then restart server.
             </p>
         @else
+            @php($cache = cache('mcbe_flow_server_' . $server->id, 0))
+            @if (!$cache)
+                Server offline
+            @else
+                version: {{ $cache['version'] ?? 0 }}
+            @endif
             {{-- @if (cache()) --}}
         @endif
     </div>
@@ -49,7 +55,8 @@
         <form onsubmit="event.preventDefault();m.update(this)">
             <div class="mdui-textfield mdui-textfield-floating-label">
                 <label class="mdui-textfield-label">{{ tr('Server Name') }}</label>
-                <input class="mdui-textfield-input" type="text" name="name" value="{{ $server->name }}" oninput="$('.server-name').text(this.value)" />
+                <input class="mdui-textfield-input" type="text" name="name" value="{{ $server->name }}"
+                    oninput="$('.server-name').text(this.value)" />
                 <div class="mdui-textfield-helper">{{ tr('Your server name.') }}</div>
             </div>
 
