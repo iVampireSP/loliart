@@ -10,6 +10,6 @@ class mcbeFlowPlayers extends Model
     use HasFactory;
 
     protected $fillable = [
-        'xuid', 'name', 'user_id', 'nbt'
+        'xuid', 'name', 'user_id', 'nbt', 'server_id'
     ];
 }
