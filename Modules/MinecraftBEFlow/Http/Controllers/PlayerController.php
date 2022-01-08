@@ -9,6 +9,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Contracts\Support\Renderable;
 use Modules\MinecraftBEFlow\Entities\McbeFlowPlayers;
+use Modules\MinecraftBEFlow\Entities\McbeFlowServers;
 
 class PlayerController extends Controller
 {
@@ -150,11 +151,23 @@ class PlayerController extends Controller
         return success();
     }
 
-    public function save(Request $request) {
+    public function save(Request $request)
+    {
         McbeFlowPlayers::where('xuid', $request->route('xuid'))->update([
             'nbt' => $request->nbt
         ]);
 
         return success();
+    }
+
+    public function transfer(Request $request)
+    {
+        $server = McbeFlowServers::where('id', '!=', $request->mcbe_server->id)
+            ->where('status', 'active')
+            ->where('version', $request->mcbe_server->version)
+            ->select(['id', 'name', 'ip', 'port', 'motd', 'version'])
+            ->first();
+
+        return success($server);
     }
 }
