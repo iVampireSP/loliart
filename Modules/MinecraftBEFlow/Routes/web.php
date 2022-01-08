@@ -17,6 +17,7 @@ Route::prefix('minecraftBeFlow')->middleware(['teams_permission', 'auth'])->name
     Route::get('/', 'MinecraftBEFlowController@index')->name('index');
     Route::get('/player', 'PlayerController@index')->name('player');
     Route::post('/player', 'PlayerController@store')->name('player.store');
+    Route::delete('/player', 'PlayerController@destroy')->name('player.destroy');
 
     Route::resource('/servers', 'ServerController');
 
