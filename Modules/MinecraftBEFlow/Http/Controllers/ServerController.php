@@ -201,7 +201,7 @@ class ServerController extends Controller
 
         $req['players_count'] = count($req['players']);
 
-        cache(['mcbe_flow_server_' . $request->mcbe_server->id => $req], 70);
+        cache(['mcbe_flow_server_' . $request->mcbe_server->id => $req], 20);
 
         teamEvent('minecraftBeFlow.server.updated', $req, $request->mcbe_server->team_id);
         teamEvent('minecraftBeFlow.server.list.updated', null, $request->mcbe_server->team_id);
