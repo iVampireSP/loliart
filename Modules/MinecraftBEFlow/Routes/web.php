@@ -22,6 +22,7 @@ Route::prefix('minecraftBeFlow')->middleware(['teams_permission', 'auth'])->name
     Route::delete('/player', 'PlayerController@destroy')->name('player.destroy');
 
     Route::resource('/servers', 'ServerController');
+    Route::resource('/groups', 'GroupController');
 
     // Route::prefix('/servers')->name('servers.')->group(function () {
     //     // Route::resource('')

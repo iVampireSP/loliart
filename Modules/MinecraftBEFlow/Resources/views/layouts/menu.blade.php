@@ -7,6 +7,11 @@
                 <div class="mdui-list-item-content">Bedrock Server Flow</div>
             </a>
 
+            <a class="mdui-list-item mdui-ripple" href="{{ route('minecraftBeFlow.groups.index') }}">
+                <span class="mdui-list-item-icon mdui-icon material-icons-outlined">groups</span>
+                <div class="mdui-list-item-content">{{ tr('Groups') }}</div>
+            </a>
+
             <a class="mdui-list-item mdui-ripple" href="{{ route('minecraftBeFlow.servers.index') }}">
                 <span class="mdui-list-item-icon mdui-icon material-icons-outlined">view_list</span>
                 <div class="mdui-list-item-content">{{ tr('All Servers') }}</div>
