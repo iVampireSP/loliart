@@ -14,7 +14,7 @@ class AddServersToMcbeFlowGroupsTable extends Migration
     public function up()
     {
         Schema::table('mcbe_flow_groups', function (Blueprint $table) {
-            $table->unsignedBigInteger('servers')->nullable();
+            $table->unsignedBigInteger('servers')->default(0);
         });
     }
 
