@@ -1999,7 +1999,7 @@ colorette@^2.0.10, colorette@^2.0.14:
   resolved "https://registry.npmmirror.com/colorette/download/colorette-2.0.16.tgz?cache=0&sync_timestamp=1633673060735&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fcolorette%2Fdownload%2Fcolorette-2.0.16.tgz"
   integrity sha1-cTua+E/bAAE58EVGvUqT9ipQhdo=
 
-colors@^1.1.2, colors@^1.4.0:
+colors@1.4.0, colors@^1.1.2:
   version "1.4.0"
   resolved "https://registry.nlark.com/colors/download/colors-1.4.0.tgz"
   integrity sha1-xQSRR51MG9rtLJztMs98fcI2D3g=
@@ -3991,12 +3991,12 @@ klona@^2.0.4:
   resolved "https://registry.npmmirror.com/klona/download/klona-2.0.5.tgz?cache=0&sync_timestamp=1635385383825&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fklona%2Fdownload%2Fklona-2.0.5.tgz"
   integrity sha1-0WZXTZAHY5XZljqnqSj6u412r7w=
 
-laravel-echo-server@^1.6.2:
-  version "1.6.2"
-  resolved "https://registry.npmjs.org/laravel-echo-server/-/laravel-echo-server-1.6.2.tgz"
-  integrity sha512-KMDTd286p+dzTy+gh5MrG3VqZERljLnNppKY5eqRPpWYB0lT56SXjMztwQWYju0E9yR7guMAt9Ud0EQTPQtBZw==
+laravel-echo-server@1.6.3:
+  version "1.6.3"
+  resolved "https://registry.npmjs.org/laravel-echo-server/-/laravel-echo-server-1.6.3.tgz"
+  integrity sha512-ZKsTV9210mkXpTKvW6P1L3qu+ZmwjXtcLlpQEZg/DaJB8bMPfgPCX0LjgTQEpEpX1UOA4+NPZxIAJr3ZUdBd3Q==
   dependencies:
-    colors "^1.4.0"
+    colors "1.4.0"
     dotenv "^8.2.0"
     express "^4.17.1"
     inquirer "^7.1.0"
