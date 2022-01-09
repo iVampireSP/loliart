@@ -11,6 +11,12 @@
 
     <div class="mdui-row mdui-p-b-2 mdui-p-l-1 mdui-m-t-2">
         <a class="mdui-btn mdui-btn-outlined mdui-ripple" onclick="m.create()">{{ tr('Create Group') }}</a>
+
+        <a class="mdui-btn mdui-btn-outlined mdui-ripple"
+            href="{{ route('minecraftBeFlow.servers.index') }}">{{ tr('All Servers') }}</a>
+
+        <a class="mdui-btn mdui-btn-outlined mdui-ripple"
+            href="{{ route('minecraftBeFlow.servers.no_group') }}">{{ tr('No Group Servers') }}</a>
     </div>
 
     <div class="pages">
@@ -21,7 +27,6 @@
                         <tr>
                             <th>ID</th>
                             <th>{{ tr('Name') }}</th>
-                            <th>{{ tr('Servers') }}</th>
                             <th>{{ tr('Delete') }}</th>
                         </tr>
                     </thead>
@@ -29,8 +34,10 @@
                         @foreach ($groups as $group)
                             <tr id="group-{{ $group->id }}">
                                 <td nowrap>{{ $group->id }}</td>
-                                <td nowrap><a href="{{ route('minecraftBeFlow.groups.show', $group->id) }}">{{ $group->name }}</a></td>
-                                <td nowrap>{{ $group->servers }}</td>
+                                <td nowrap><a
+                                        href="{{ route('minecraftBeFlow.groups.show', $group->id) }}">{{ $group->name }}</a>
+                                </td>
+                                {{-- <td nowrap>{{ $group->servers }}</td> --}}
                                 <td nowrap>
                                     <button onclick="m.delete({{ $group->id }})" class="mdui-btn mdui-btn-icon">
                                         <i class="material-icons mdui-icon">delete</i>

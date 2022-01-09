@@ -14,7 +14,7 @@
             href="{{ route('minecraftBeFlow.servers.create') }}">{{ tr('Create Server') }}</a>
 
         <a class="mdui-btn mdui-btn-outlined mdui-ripple"
-            href="{{ route('minecraftBeFlow.servers.no_group') }}">{{ tr('No Group Servers') }}</a>
+            href="{{ route('minecraftBeFlow.servers.index') }}">{{ tr('All Servers') }}</a>
     </div>
 
     <div class="pages">

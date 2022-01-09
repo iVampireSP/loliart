@@ -12,6 +12,9 @@
     <div class="mdui-row mdui-p-b-2 mdui-p-l-1 mdui-m-t-2">
         <a class="mdui-btn mdui-btn-outlined mdui-ripple"
             href="{{ route('minecraftBeFlow.servers.create') }}">{{ tr('Create Server') }}</a>
+
+        <a class="mdui-btn mdui-btn-outlined mdui-ripple"
+            href="{{ route('minecraftBeFlow.servers.no_group') }}">{{ tr('No Group Servers') }}</a>
     </div>
 
     <div class="pages">
