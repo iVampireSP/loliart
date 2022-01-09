@@ -69,7 +69,23 @@ class ServerController extends Controller
             }
         }
 
+        $can_connect = false;
+        $connection = @fsockopen($request->ip, $request->port, $errno, $errstr, 5);
+
+
+        if (is_resource($connection)) {
+            $can_connect = true;
+            fclose($connection);
+        }
+
+        if (!$can_connect) {
+            write('Unable connect to the server.');
+            return fail();
+        }
+
         $req = $request->toArray();
+
+
         $req['team_id'] = session('team_id');
         $req['token'] = Str::random(10);
 
@@ -120,6 +136,19 @@ class ServerController extends Controller
         ]);
 
         userInTeamFail($server->team_id);
+
+        $can_connect = false;
+        $connection = @fsockopen($request->ip, $request->port, $errno, $errstr, 5);
+
+        if (is_resource($connection)) {
+            $can_connect = true;
+            fclose($connection);
+        }
+
+        if (!$can_connect) {
+            write('Unable connect to the server.');
+            return fail();
+        }
 
         $req = $request->toArray();
 
