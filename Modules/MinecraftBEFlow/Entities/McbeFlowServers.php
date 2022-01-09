@@ -12,4 +12,8 @@ class McbeFlowServers extends Model
     protected $fillable = [
         'name', 'ip', 'port', 'token', 'status', 'team_id', 'motd', 'group_id'
     ];
+
+    public function group() {
+        return $this->belongsTo(ServerGroup::class);
+    }
 }

@@ -27,6 +27,7 @@
                             <th>{{ tr('Name') }}</th>
                             <th>IP Port</th>
                             <th>{{ tr('Online Players') }}</th>
+                            <th>{{ tr('Group') }}</th>
                             <th>{{ tr('Status') }}</th>
                         </tr>
                     </thead>
@@ -42,6 +43,17 @@
                                 </td>
                                 @php($cache = cache('mcbe_flow_server_' . $server->id, 0))
                                 <td nowrap>{{ $cache['players_count'] ?? 0 }}</td>
+                                <td nowrap>
+                                    @if (is_null($server->group))
+                                        <a
+                                            href="{{ route('minecraftBeFlow.servers.no_group') }}">{{ tr('No goverment server') }}</a>
+
+                                    @else
+                                        <a
+                                            href="{{ route('minecraftBeFlow.groups.show', $server->group->id) }}">{{ $server->group->name }}</a>
+
+                                    @endif
+                                </td>
                                 <td nowrap>
                                     @if ($cache)
                                         <i class="mdui-icon material-icons mdui-text-color-green">done</i>
