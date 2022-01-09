@@ -17,6 +17,7 @@
         <a href="#players" class="mdui-ripple">{{ tr('Online Players') }}</a>
         @if ($in_team)
             <a href="#configuration" class="mdui-ripple">{{ tr('Basic Configuration') }}</a>
+            <a href="#group" class="mdui-ripple">{{ tr('Group') }}</a>
             <a href="#delete" class="mdui-ripple">{{ tr('Delete') }}</a>
         @endif
     </div>
@@ -88,9 +89,9 @@
     </div>
 
     @if ($in_team)
+        <form onsubmit="event.preventDefault();m.update(this)">
 
-        <div id="configuration">
-            <form onsubmit="event.preventDefault();m.update(this)">
+            <div id="configuration">
                 <div class="mdui-textfield mdui-textfield-floating-label">
                     <label class="mdui-textfield-label">{{ tr('Server Name') }}</label>
                     <input class="mdui-textfield-input" type="text" name="name" value="{{ $server->name }}"
@@ -120,9 +121,19 @@
 
                 <button class="mdui-m-t-4 mdui-btn mdui-ripple mdui-btn-outlined"
                     type="submit">{{ tr('Update Server') }}</button>
-            </form>
 
-        </div>
+            </div>
+
+            <div id="group">
+                <select class="mdui-select" name="group_id" mdui-select>
+                    <option value="0">{{ tr('No goverment server') }}</option>
+                    @foreach ($groups as $group)
+                        <option value="{{ $group->id }}" @if ($server->group_id === $group->id) selected @endif>{{ $group->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+        </form>
 
         <div id="delete">
             <button class="mdui-m-t-4 mdui-btn mdui-ripple mdui-btn-outlined"

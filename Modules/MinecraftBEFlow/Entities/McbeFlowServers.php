@@ -10,6 +10,6 @@ class McbeFlowServers extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 'ip', 'port', 'token', 'status', 'team_id', 'motd'
+        'name', 'ip', 'port', 'token', 'status', 'team_id', 'motd', 'group_id'
     ];
 }

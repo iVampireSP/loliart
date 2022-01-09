@@ -188,6 +188,7 @@ class PlayerController extends Controller
             $server = McbeFlowServers::where('id', '!=', $request->mcbe_server->id)
                 ->where('status', 'active')
                 ->where('version', $request->mcbe_server->version)
+                ->where('group_id', $request->mcbe_server->group_id)
                 ->select(['id', 'name', 'ip', 'port', 'motd', 'version'])
                 ->first();
 

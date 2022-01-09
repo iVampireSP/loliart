@@ -5,8 +5,9 @@ namespace Modules\MinecraftBEFlow\Http\Controllers;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Contracts\Support\Renderable;
+use Modules\MinecraftBEFlow\Entities\ServerGroup;
 use Modules\MinecraftBEFlow\Entities\McbeFlowPlayers;
 use Modules\MinecraftBEFlow\Entities\McbeFlowServers;
 
@@ -69,19 +70,19 @@ class ServerController extends Controller
             }
         }
 
-        $can_connect = false;
-        $connection = @fsockopen($request->ip, $request->port, $errno, $errstr, 5);
+        // $can_connect = false;
+        // $connection = @fsockopen($request->ip, $request->port, $errno, $errstr, 5);
 
 
-        if (is_resource($connection)) {
-            $can_connect = true;
-            fclose($connection);
-        }
+        // if (is_resource($connection)) {
+        //     $can_connect = true;
+        //     fclose($connection);
+        // }
 
-        if (!$can_connect) {
-            write('Unable connect to the server.');
-            return fail();
-        }
+        // if (!$can_connect) {
+        //     write('Unable connect to the server.');
+        //     return fail();
+        // }
 
         $req = $request->toArray();
 
@@ -107,7 +108,9 @@ class ServerController extends Controller
     {
         $cache = cache('mcbe_flow_server_' . $server->id, 0);
 
-        return view('minecraftbeflow::servers.show', compact('server', 'cache'));
+        $groups = ServerGroup::where('team_id', session('team_id'))->get();
+
+        return view('minecraftbeflow::servers.show', compact('server', 'cache', 'groups'));
     }
 
     /**
@@ -137,22 +140,30 @@ class ServerController extends Controller
 
         userInTeamFail($server->team_id);
 
-        $can_connect = false;
-        $connection = @fsockopen($request->ip, $request->port, $errno, $errstr, 5);
-
-        if (is_resource($connection)) {
-            $can_connect = true;
-            fclose($connection);
-        }
-
-        if (!$can_connect) {
-            write('Unable connect to the server.');
-            return fail();
-        }
+        // $connection = @fsockopen('udp://' . $request->ip, $request->port);
+        // dd($connection);
+        // if (!$connection) {
+        //     write('Unable connect to the server.');
+        //     return fail();
+        // }
 
         $req = $request->toArray();
 
         $req['team_id'] = session('team_id');
+
+        if (!$request->group_id) {
+            $req['group_id'] = null;
+        } else {
+            $group = ServerGroup::find($req['group_id']);
+            if (is_null($group)) {
+                write('Group not found.');
+                return fail();
+            } else {
+                if (!userInTeam($group->team_id)) {
+                    return fail();
+                }
+            }
+        }
 
         $server->update($req);
 
