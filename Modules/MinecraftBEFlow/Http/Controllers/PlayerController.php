@@ -26,6 +26,8 @@ class PlayerController extends Controller
             $cache_key = 'mcbe_flow_player_' . $player->xuid;
             $cache = cache($cache_key);
 
+            session(['mcbe_flow_player_name' => $player->name]);
+
             return view('minecraftbeflow::player.index', compact('player', 'cache'));
         } else {
             $cache_key = 'mcbe_flow_player_bind_' . auth()->id();
