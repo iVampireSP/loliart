@@ -42,7 +42,9 @@ class ServerController extends Controller
      */
     public function create()
     {
-        return view('minecraftbeflow::servers.create');
+        $groups = ServerGroup::where('team_id', session('team_id'))->get();
+
+        return view('minecraftbeflow::servers.create', compact('groups'));
     }
 
     /**
@@ -58,6 +60,20 @@ class ServerController extends Controller
             'port' => 'integer|max:65535|min:1024',
         ]);
 
+        if (!$request->group_id) {
+            $request->group_id = null;
+        } else {
+            $group = ServerGroup::find($request->group_id);
+            if (is_null($group)) {
+                write('Group not found.');
+                return fail();
+            } else {
+                if (!userInTeam($group->team_id)) {
+                    return fail();
+                }
+            }
+        }
+
         // 检测服务器是否存在
         $found = McbeFlowServers::where('ip', $request->ip)->where('port', $request->port)->first();
         if (!is_null($found)) {
@@ -65,7 +81,8 @@ class ServerController extends Controller
                 $found->query()->update([
                     'status' => 'pending',
                     'team_id' => session('team_id'),
-                    'token' => Str::random(20)
+                    'token' => Str::random(20),
+                    'group_id' => $request->group_id
                 ]);
 
                 write('Server restored.');
@@ -96,6 +113,7 @@ class ServerController extends Controller
 
         $req['team_id'] = session('team_id');
         $req['token'] = Str::random(10);
+        $req['group_id'] = $request->group_id;
 
         McbeFlowServers::create($req);
 

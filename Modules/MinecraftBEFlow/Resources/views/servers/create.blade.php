@@ -27,6 +27,16 @@
             <input class="mdui-textfield-input" type="text" name="port" />
         </div>
 
+        <div class="mdui-typo-display-1">{{ tr('Group') }}</div>
+        <select class="mdui-select" name="group_id" mdui-select>
+            <option value="0">{{ tr('No goverment server') }}</option>
+            @foreach ($groups as $group)
+                <option value="{{ $group->id }}">{{ $group->name }}</option>
+            @endforeach
+        </select>
+
+        <br />
+        
         <button class="mdui-m-t-4 mdui-btn mdui-ripple mdui-btn-outlined" type="submit">{{ tr('Create Server') }}</button>
     </form>
 
