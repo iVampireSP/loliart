@@ -28,6 +28,8 @@
                 }
             }
         }
+
+        util.m()
     </script>
 
 @endsection
