@@ -164,6 +164,8 @@ class PlayerController extends Controller
     {
         McbeFlowPlayers::where('user_id', auth()->id())->delete();
 
+        session()->forget('mcbe_flow_player_name');
+
         write('Your MCBE account is deleted');
         write(route('minecraftBeFlow.player'));
 
