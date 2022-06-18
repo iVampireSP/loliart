@@ -1,0 +1,8 @@
+/vendor
+composer.phar
+.DS_Store
+tests/_output/*
+coverage
+node_modules/
+.phpunit.result.cache
+composer.lock
