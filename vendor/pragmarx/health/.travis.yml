@@ -1,0 +1,33 @@
+dist: trusty
+language: php
+
+php:
+  - 7.1
+  - 7.2
+  - 7.3
+  - 7.4
+  - nightly
+
+sudo: false
+
+cache:
+  directories:
+    - $HOME/.composer/cache
+
+install:
+  - |
+    if [[ "$TRAVIS_PHP_VERSION" == 'nightly' ]]; then
+      travis_retry composer update ${COMPOSER_FLAGS} --no-interaction --prefer-dist --ignore-platform-reqs
+    else
+      travis_retry composer update ${COMPOSER_FLAGS} --no-interaction --prefer-dist
+    fi
+
+script:
+  - vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover
+
+after_script:
+  - |
+    if [[ "$TRAVIS_PHP_VERSION" != 'nightly' ]]; then
+      wget https://scrutinizer-ci.com/ocular.phar
+      php ocular.phar code-coverage:upload --format=php-clover coverage.clover
+    fi
