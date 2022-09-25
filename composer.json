@@ -14,7 +14,7 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "jenssegers/agent": "^2.6",
         "laravel/cashier": "^13.6",
-        "laravel/framework": "^8.65",
+        "laravel/framework": "8.83.24",
         "laravel/horizon": "5.7.17",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
