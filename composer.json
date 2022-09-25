@@ -16,7 +16,7 @@
         "laravel/cashier": "^13.6",
         "laravel/framework": "^8.65",
         "laravel/horizon": "5.7.17",
-        "laravel/sanctum": "^2.11",
+        "laravel/sanctum": "2.15.1",
         "laravel/tinker": "^2.5",
         "nwidart/laravel-modules": "^8.2",
         "orangehill/iseed": "^3.0",
