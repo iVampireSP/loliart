@@ -1333,10 +1333,10 @@ alphanum-sort@^1.0.2:
   resolved "https://registry.nlark.com/alphanum-sort/download/alphanum-sort-1.0.2.tgz"
   integrity sha1-l6ERlkmyEa0zaR2fn0hqjsn74KM=
 
-alpinejs@3.7.1:
-  version "3.7.1"
-  resolved "https://registry.npmjs.org/alpinejs/-/alpinejs-3.7.1.tgz"
-  integrity sha512-OJDlhOT50+9REa4cpGHr4WlGBE9ysJEZ+IfN2xwmotUANxp1VSrYgBNBfUWJr9uQ1INhodzvi6UfIWoqQqYOnA==
+alpinejs@3.13.7:
+  version "3.13.7"
+  resolved "https://registry.npmjs.org/alpinejs/-/alpinejs-3.13.7.tgz"
+  integrity sha512-rcTyjTANbsePq1hb7eSekt3qjI94HLGeO6JaRjCssCVbIIc+qBrc7pO5S/+2JB6oojIibjM6FA+xRI3zhGPZIg==
   dependencies:
     "@vue/reactivity" "~3.1.1"
 
