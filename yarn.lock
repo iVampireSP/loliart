@@ -4006,10 +4006,10 @@ laravel-echo-server@^1.6.2:
     socket.io "^2.3.0"
     yargs "^15.3.1"
 
-laravel-echo@^1.11.3:
-  version "1.11.3"
-  resolved "https://registry.npmmirror.com/laravel-echo/download/laravel-echo-1.11.3.tgz"
-  integrity sha1-9ZbwXLHYNyjJVbp2IiPl4oCj69c=
+laravel-echo@^1.19.0:
+  version "1.19.0"
+  resolved "https://registry.yarnpkg.com/laravel-echo/-/laravel-echo-1.19.0.tgz#5a1a24bd44d14994a08088cf7e65b2912aa20b4d"
+  integrity sha512-o/X4XH8BIRwij66PSjtotZfM88Z8g/4P3gzxQf2BTcZBKmGqucvI5JYYLprR2OZQ9XlGsmJ2v+hDpPGEbXwUWw==
 
 laravel-mix@^6.0.39:
   version "6.0.39"
