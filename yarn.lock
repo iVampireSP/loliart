@@ -5651,10 +5651,10 @@ slash@^3.0.0:
   resolved "https://registry.nlark.com/slash/download/slash-3.0.0.tgz"
   integrity sha1-ZTm+hwwWWtvVJAIg2+Nh8bxNRjQ=
 
-smooth-corners@^1.0.8:
-  version "1.0.8"
-  resolved "https://registry.npmmirror.com/smooth-corners/download/smooth-corners-1.0.8.tgz"
-  integrity sha1-6PLZ0lCSJJROGpYnNSBKl2iHhnk=
+smooth-corners@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/smooth-corners/-/smooth-corners-1.1.0.tgz#c9faf33d481797669aa5fecd663b94c338c55f40"
+  integrity sha512-ugdNZe/w4dHs7gNj1KvfatEGtvcH3BqsVfqJAfDbilta2puqu/95ncgOom7y10JwBTyMH+8vOOz7wdPcrZlJdw==
 
 socket.io-adapter@~1.1.0:
   version "1.1.2"
