@@ -1093,17 +1093,17 @@
   resolved "https://registry.npmmirror.com/@types/validator/download/@types/validator-13.7.0.tgz"
   integrity sha512-+jBxVvXVuggZOrm04NR8z+5+bgoW4VZyLzUO+hmPPW1mVFL/HaitLAkizfv4yg9TbG8lkfHWVMQ11yDqrVVCzA==
 
-"@vue/reactivity@~3.1.1":
-  version "3.1.5"
-  resolved "https://registry.npmjs.org/@vue/reactivity/-/reactivity-3.1.5.tgz"
-  integrity sha512-1tdfLmNjWG6t/CsPldh+foumYFo3cpyCHgBYQ34ylaMsJ+SNHQ1kApMIa8jN+i593zQuaw3AdWH0nJTARzCFhg==
+"@vue/reactivity@~3.5.40":
+  version "3.5.43"
+  resolved "https://registry.npmjs.org/@vue/reactivity/-/reactivity-3.5.43.tgz"
+  integrity sha512-G/c9GyOZNI2jVaaS6OX1EF1SSFSv7H0ERqNTl4+DTFMlZmB5eVAB53aLQNam/7NL2NPtaDD7RdVrzf8uJzMuOA==
   dependencies:
-    "@vue/shared" "3.1.5"
+    "@vue/shared" "3.5.43"
 
-"@vue/shared@3.1.5":
-  version "3.1.5"
-  resolved "https://registry.npmjs.org/@vue/shared/-/shared-3.1.5.tgz"
-  integrity sha512-oJ4F3TnvpXaQwZJNF3ZK+kLPHKarDmJjJ6jyzVNDKH9md1dptjC7lWR//jrGuLdek/U6iltWxqAnYOu8gCiOvA==
+"@vue/shared@3.5.43":
+  version "3.5.43"
+  resolved "https://registry.npmjs.org/@vue/shared/-/shared-3.5.43.tgz"
+  integrity sha512-uksS7YGMR5NZyr4JNq0Rp+QyLns0ueaz20KwzIPW9R0LH1Vnt4E+XUM29PNseEbf1www2gOuhuDi5AKOIXag9Q==
 
 "@webassemblyjs/ast@1.11.1":
   version "1.11.1"
@@ -1333,12 +1333,12 @@ alphanum-sort@^1.0.2:
   resolved "https://registry.nlark.com/alphanum-sort/download/alphanum-sort-1.0.2.tgz"
   integrity sha1-l6ERlkmyEa0zaR2fn0hqjsn74KM=
 
-alpinejs@3.7.1:
-  version "3.7.1"
-  resolved "https://registry.npmjs.org/alpinejs/-/alpinejs-3.7.1.tgz"
-  integrity sha512-OJDlhOT50+9REa4cpGHr4WlGBE9ysJEZ+IfN2xwmotUANxp1VSrYgBNBfUWJr9uQ1INhodzvi6UfIWoqQqYOnA==
+alpinejs@3.17.4:
+  version "3.17.4"
+  resolved "https://registry.npmjs.org/alpinejs/-/alpinejs-3.17.4.tgz"
+  integrity sha512-N2gsr+58XVUt7OAPKnUGiKPDtkd+xbSGTae8C8IJxeRdkkhBJPIautkJ+qcwb7lcjJ/QK3/CPVIbN20JPvtK7A==
   dependencies:
-    "@vue/reactivity" "~3.1.1"
+    "@vue/reactivity" "~3.5.40"
 
 ansi-escapes@^4.2.1:
   version "4.3.2"
