@@ -3883,10 +3883,10 @@ jquery-pjax@^2.0.1:
   resolved "https://registry.npmmirror.com/jquery-pjax/download/jquery-pjax-2.0.1.tgz"
   integrity sha1-azoboW5kTmJL3P5y62s9lqhG9fI=
 
-jquery@^3.6.0:
-  version "3.6.0"
-  resolved "https://registry.npm.taobao.org/jquery/download/jquery-3.6.0.tgz?cache=0&sync_timestamp=1614705838607&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fjquery%2Fdownload%2Fjquery-3.6.0.tgz"
-  integrity sha1-xyoJ8Vwb3OFC9J2/EXC9+K2sJHA=
+jquery@^3.8.0:
+  version "3.8.0"
+  resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.8.0.tgz#3bf83324052cc9e7148718e9d6ea3cde1b2b9f5a"
+  integrity sha512-AOYt0viqPysMUTq45O8gF9DuOnBT3Il/8WtM/TT8z/2QeGsZ70ImwSJtNFxznn2R71v8yIgaEunOGo82OY/f0g==
 
 js-string-escape@1.0.1:
   version "1.0.1"
